@@ -11,6 +11,20 @@ const _layout = () => {
       <Stack.Screen
         name="login"
         options={{ title: "Login", headerShown: false }}></Stack.Screen>
+
+      <Stack.Screen
+        name="forgotpassword"
+        options={{
+          title: "Forgot Password",
+          headerShown: false,
+        }}></Stack.Screen>
+
+      <Stack.Screen
+        name="verifyotp"
+        options={{
+          title: "Verify OTP",
+          headerShown: false,
+        }}></Stack.Screen>
     </Stack>
   );
 };

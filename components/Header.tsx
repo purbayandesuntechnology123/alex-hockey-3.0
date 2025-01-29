@@ -1,8 +1,12 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import PrevArrows from "./PrevArrows";
+import { useFonts } from "expo-font";
 
 const Header = ({ text, style = {} }: any) => {
+  const [fontsLoaded] = useFonts({
+    "league-Regular": require("../assets/fonts/Bebas_Neue,GFS_Neohellenic,League_Spartan/League_Spartan/static/LeagueSpartan-Regular.ttf"),
+  });
   return (
     <View style={styles.headerCon}>
       <Text style={[style, styles.headerText]}>{text}</Text>
@@ -20,7 +24,8 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: "#FD8204",
-    fontWeight: "500",
+    // fontWeight: "500",
     fontSize: 20,
+    fontFamily: "league-Regular",
   },
 });

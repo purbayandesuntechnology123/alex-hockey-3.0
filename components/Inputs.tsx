@@ -1,15 +1,23 @@
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
+import { useFonts } from "expo-font";
 
 const Inputs = ({
   value,
   onChangeText,
+
   placeholder,
   secureTextEntry = false,
   keyboardType = "default",
   style = {},
 }: any) => {
   const [isFocused, setIsFocused] = useState(false);
+
+  const [fontsLoaded] = useFonts({
+    "poppins-Regular": require("../assets/fonts/Poppins (2)/Poppins-Regular.ttf"),
+    "poppins-Semibold": require("../assets/fonts/Poppins (2)/Poppins-SemiBold.ttf"),
+    "poppins-bold": require("../assets/fonts/Poppins (2)/Poppins-Bold.ttf"),
+  });
 
   return (
     <View style={styles.inputContainer}>
@@ -40,9 +48,10 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginBottom: 20,
+    fontFamily: "poppins-Regular",
   },
   focusedInput: {
     borderWidth: 1,
-    borderColor: "orange",
+    borderColor: "#FD8204",
   },
 });

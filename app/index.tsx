@@ -9,6 +9,7 @@ import Allcheckbox from "@/components/checkbox";
 import Checkbox from "expo-checkbox";
 import SocialSignup from "@/components/SocialSignup";
 import { Link } from "expo-router";
+import { useFonts } from "expo-font";
 
 const index = () => {
   const [formData, setFormData] = useState({
@@ -17,9 +18,16 @@ const index = () => {
     password: "",
     confirmPassword: "",
   });
+
+  const [fontsLoaded] = useFonts({
+    "poppins-Regular": require("../assets/fonts/Poppins (2)/Poppins-Regular.ttf"),
+    "poppins-Semibold": require("../assets/fonts/Poppins (2)/Poppins-SemiBold.ttf"),
+    "poppins-bold": require("../assets/fonts/Poppins (2)/Poppins-Bold.ttf"),
+    "league-Regular": require("../assets/fonts/Bebas_Neue,GFS_Neohellenic,League_Spartan/League_Spartan/static/LeagueSpartan-Regular.ttf"),
+  });
   return (
     <View style={styles.main}>
-      <PrevArrows />
+      {/* <PrevArrows /> */}
       <Header text="Registration" />
       <Link href={"/login"} style={{ textAlign: "center" }}>
         Login
@@ -61,15 +69,22 @@ const index = () => {
         />
         <View style={styles.checkboxCon}>
           <Checkbox />
-          <Text>
-            I agree <Text>Terms & Conditions</Text>
+          <Text style={styles.terms}>
+            I Agree <Text style={{ color: "#FD8204" }}>Terms & Conditions</Text>
           </Text>
         </View>
         <Button text="Sign Up" />
         <SocialSignup />
-        <Text style={{ marginTop: 20 }}>
+        <Text style={{ marginTop: 20, fontFamily: "poppins-Regular" }}>
           Don't have an account?{" "}
-          <Text style={{ color: "#FD8204", fontWeight: "500" }}>Sign Up</Text>{" "}
+          <Text
+            style={{
+              color: "#FD8204",
+              fontWeight: "500",
+              fontFamily: "poppins-Regular",
+            }}>
+            Sign Up
+          </Text>{" "}
         </Text>
       </View>
     </View>
@@ -94,5 +109,8 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     gap: 5,
     marginStart: 10,
+  },
+  terms: {
+    fontFamily: "poppins-Regular",
   },
 });
