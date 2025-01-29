@@ -20,8 +20,10 @@ const login = () => {
       </View>
       <Link href={"/forgotpassword"}>Forgot Password</Link>
       <View style={styles.textContainer}>
-        <Text>Welcome</Text>
-        <Text>Lorem ipsum dolor sit amet dolor sit amet dolor sit amet </Text>
+        <Text style={styles.welcomeText}>Welcome</Text>
+        <Text>
+          Lorem ipsum dolor sit amet dolor sit amet dolor sit amet...{" "}
+        </Text>
       </View>
       {/* <Image source={loginSVG} style={styles.loginSVG} /> */}
       <View style={styles.container}>
@@ -73,5 +75,10 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 20,
     left: 70,
+  },
+  welcomeText: {
+    fontFamily: "league-Semibold",
+    fontSize: 18,
+    marginBottom: 10,
   },
 });

@@ -6,6 +6,12 @@ const _layout = () => {
   return (
     <Stack>
       <Stack.Screen
+        name="splashscreen"
+        options={{
+          title: "Splash Screen",
+          headerShown: false,
+        }}></Stack.Screen>
+      <Stack.Screen
         name="index"
         options={{ title: "Registration", headerShown: false }}></Stack.Screen>
       <Stack.Screen

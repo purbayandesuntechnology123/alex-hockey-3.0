@@ -25,5 +25,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     fontWeight: "400",
     fontFamily: "league-Semibold",
+    fontSize: 16,
   },
 });

@@ -21,7 +21,7 @@ export default Button;
 
 const styles = StyleSheet.create({
   buttonDesign: {
-    backgroundColor: "orange",
+    backgroundColor: "#FD8204",
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 30,
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   btnTxt: {
     color: "white",
     textAlign: "center",
-    fontSize: 15,
+    fontSize: 16,
     fontFamily: "poppins-Semibold",
   },
 });

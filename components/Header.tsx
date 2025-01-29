@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   headerText: {
     color: "#FD8204",
     // fontWeight: "500",
-    fontSize: 20,
+    fontSize: 23,
     fontFamily: "league-Regular",
   },
 });

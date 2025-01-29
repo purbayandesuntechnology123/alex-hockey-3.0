@@ -32,7 +32,10 @@ const verifyotp = () => {
       </View>
       <Text style={styles.timer}>00:00</Text>
       <Text style={styles.resendOtp}>
-        Don't Send OTP? <Text>Send OTP</Text>
+        Didn't Send OTP?{" "}
+        <Text style={{ color: "#FD8204", fontFamily: "poppins-Semibold" }}>
+          Send OTP
+        </Text>
       </Text>
       <Button text="Continue" />
     </View>
@@ -72,6 +75,7 @@ const styles = StyleSheet.create({
   resendOtp: {
     marginTop: 20,
     marginBottom: 30,
+    fontFamily: "poppins-Regular",
   },
   confirmMail: {
     fontFamily: "poppins-Regular",

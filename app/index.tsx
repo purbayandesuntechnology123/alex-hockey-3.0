@@ -27,7 +27,7 @@ const index = () => {
   });
   return (
     <View style={styles.main}>
-      {/* <PrevArrows /> */}
+      <PrevArrows href={"/splashscreen"} />
       <Header text="Registration" />
       <Link href={"/login"} style={{ textAlign: "center" }}>
         Login
