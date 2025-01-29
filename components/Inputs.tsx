@@ -25,6 +25,7 @@ const Inputs = ({
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
+        secureTextEntry={secureTextEntry}
         keyboardType={keyboardType}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
     height: 50,
     outlineColor: "orange",
     borderWidth: 1,
-    borderColor: "black",
+    borderColor: "#E9E9E9",
     borderRadius: 5,
     padding: 10,
     marginBottom: 20,

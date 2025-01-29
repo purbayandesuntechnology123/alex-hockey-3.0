@@ -12,11 +12,17 @@ import { Link } from "expo-router";
 
 const login = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
+
+  //Login Handle
+
+  const loginHandle = () => {
+    console.log(credentials);
+  };
   return (
     <View style={styles.main}>
       <View style={{ position: "relative" }}>
         <Header text="Login" />
-        <PrevArrows href={"/"} />
+        <PrevArrows href={"/registration"} />
       </View>
       <Link href={"/forgotpassword"}>Forgot Password</Link>
       <View style={styles.textContainer}>
@@ -44,7 +50,7 @@ const login = () => {
             setCredentials({ ...credentials, email: text })
           }
         />
-        <Button text="Log In" />
+        <Button text="Log In" onPress={loginHandle} />
         <SocialSignup />
       </View>
       <Text style={styles.signupText}>

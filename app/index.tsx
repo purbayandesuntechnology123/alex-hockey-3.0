@@ -1,116 +1,56 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
-import Inputs from "@/components/Inputs";
-import Button from "@/components/Button";
-import Labels from "@/components/Labels";
-import Header from "@/components/Header";
-import PrevArrows from "@/components/PrevArrows";
-import Allcheckbox from "@/components/checkbox";
-import Checkbox from "expo-checkbox";
-import SocialSignup from "@/components/SocialSignup";
+import React from "react";
+import { LinearGradient } from "expo-linear-gradient";
+import { Image } from "expo-image";
+import nextArrowSvg from "../assets/images/next_arrow.svg";
 import { Link } from "expo-router";
-import { useFonts } from "expo-font";
 
-const index = () => {
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  const [fontsLoaded] = useFonts({
-    "poppins-Regular": require("../assets/fonts/Poppins (2)/Poppins-Regular.ttf"),
-    "poppins-Semibold": require("../assets/fonts/Poppins (2)/Poppins-SemiBold.ttf"),
-    "poppins-bold": require("../assets/fonts/Poppins (2)/Poppins-Bold.ttf"),
-    "league-Regular": require("../assets/fonts/Bebas_Neue,GFS_Neohellenic,League_Spartan/League_Spartan/static/LeagueSpartan-Regular.ttf"),
-  });
+const splashscreen = () => {
   return (
-    <View style={styles.main}>
-      <PrevArrows href={"/splashscreen"} />
-      <Header text="Registration" />
-      <Link href={"/login"} style={{ textAlign: "center" }}>
-        Login
+    <LinearGradient colors={["#FFFFFF", "#FFD9A5"]} style={styles.container}>
+      <Image
+        source={require("../assets/images/fyre.png")}
+        style={styles.logo}
+      />
+      <Image
+        source={require("../assets/images/fyrebg.png")}
+        style={styles.fyreBg}
+      />
+      <Link href={"/registration"} style={styles.nextArrowLink}>
+        <Image source={nextArrowSvg} style={styles.nextArrow} />
       </Link>
-      <View style={styles.container}>
-        <Labels labels="Full Name" />
-        <Inputs
-          placeholder="Enter Your Name"
-          value={formData.fullName}
-          onChangeText={(text: any) =>
-            setFormData({ ...formData, fullName: text })
-          }
-        />
-        <Labels labels="Email" />
-        <Inputs
-          value={formData.email}
-          keyboardType="email-address"
-          placeholder="Enter Your Email Address"
-          onChangeText={(text: any) =>
-            setFormData({ ...formData, email: text })
-          }
-        />
-        <Labels labels="Password" />
-        <Inputs
-          value={formData.password}
-          placeholder="Enter Your Password"
-          onChangeText={(text: any) =>
-            setFormData({ ...formData, email: text })
-          }
-        />
-        <Labels labels="Confirm Password" />
-        <Inputs
-          value={formData.confirmPassword}
-          secureTextEntry
-          placeholder="Confirm password"
-          onChangeText={(text: any) =>
-            setFormData({ ...formData, email: text })
-          }
-        />
-        <View style={styles.checkboxCon}>
-          <Checkbox />
-          <Text style={styles.terms}>
-            I Agree <Text style={{ color: "#FD8204" }}>Terms & Conditions</Text>
-          </Text>
-        </View>
-        <Button text="Sign Up" />
-        <SocialSignup />
-        <Text style={{ marginTop: 20, fontFamily: "poppins-Regular" }}>
-          Don't have an account?{" "}
-          <Text
-            style={{
-              color: "#FD8204",
-              fontWeight: "500",
-              fontFamily: "poppins-Regular",
-            }}>
-            Sign Up
-          </Text>{" "}
-        </Text>
-      </View>
-    </View>
+    </LinearGradient>
   );
 };
 
-export default index;
+export default splashscreen;
 
 const styles = StyleSheet.create({
-  main: {
-    position: "relative",
-  },
   container: {
-    marginTop: 30,
+    flex: 1,
+    padding: 20,
     justifyContent: "center",
     alignItems: "center",
-    padding: 20,
+    position: "relative",
   },
-  checkboxCon: {
-    flexDirection: "row",
-    marginBottom: 30,
-    alignSelf: "flex-start",
-    gap: 5,
-    marginStart: 10,
+  logo: {
+    width: 250,
+    height: 130,
   },
-  terms: {
-    fontFamily: "poppins-Regular",
+  fyreBg: {
+    width: 400,
+    height: 300,
+    position: "absolute",
+    bottom: 0,
+  },
+  nextArrowLink: {
+    bottom: 30,
+    position: "absolute",
+    right: 30,
+    zIndex: 2,
+  },
+  nextArrow: {
+    width: 50,
+    height: 50,
   },
 });

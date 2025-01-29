@@ -2,7 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { useFonts } from "expo-font";
 
-const Button = ({ text, onPress }: any) => {
+const Button = ({ text, onPress, style = {} }: any) => {
   const [fontsLoaded] = useFonts({
     "poppins-Regular": require("../assets/fonts/Poppins (2)/Poppins-Regular.ttf"),
     "poppins-Semibold": require("../assets/fonts/Poppins (2)/Poppins-SemiBold.ttf"),
@@ -11,7 +11,7 @@ const Button = ({ text, onPress }: any) => {
   return (
     <View>
       <TouchableOpacity onPress={onPress} style={styles.buttonDesign}>
-        <Text style={styles.btnTxt}>{text}</Text>
+        <Text style={[styles.btnTxt, style]}>{text}</Text>
       </TouchableOpacity>
     </View>
   );
