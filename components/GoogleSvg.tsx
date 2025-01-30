@@ -1,6 +1,17 @@
 import * as React from "react"
+import { View } from "react-native"
 import Svg, { SvgProps, G, Path, Defs, ClipPath } from "react-native-svg"
 const GoogleSvg = (props: SvgProps) => (
+  <View
+  style={{
+    width: 40,  // Adjust based on your design
+    height: 40, // Adjust based on your design
+    backgroundColor: "white", // Light blue background (change as needed)
+    borderRadius: 50, // Fully rounded (half of width/height)
+    justifyContent: "center",
+    alignItems: "center",
+  }}
+>
   <Svg
     
     width={22}
@@ -32,5 +43,6 @@ const GoogleSvg = (props: SvgProps) => (
       </ClipPath>
     </Defs>
   </Svg>
+  </View>
 )
 export default GoogleSvg

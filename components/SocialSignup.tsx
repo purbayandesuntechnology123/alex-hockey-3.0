@@ -15,9 +15,12 @@ const SocialSignup = () => {
     <View style={styles.svgDivContainer}>
       <Text style={{ fontFamily: "league-Regular" }}>Or sign Up with</Text>
       <View style={styles.svgContainer}>
-       <FBSvg/>
-       <GoogleSvg/>
-       <AppleSvg/>
+
+      <FBSvg/> 
+      <GoogleSvg/>
+        <AppleSvg/>
+       
+     
        
       </View>
     </View>
@@ -34,7 +37,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     flexDirection: "row",
     alignItems: "center",
-    gap: 30,
+    gap: 20,
   },
   svgFB: {
     width: 10,
@@ -57,4 +60,13 @@ const styles = StyleSheet.create({
     width: 20,
     height: 18,
   },
+
+  Svg:{
+    width: 40,  
+      height: 40, 
+      backgroundColor: "black", 
+      borderRadius: 20,
+      justifyContent: "center",
+      alignItems: "center",
+  }
 });

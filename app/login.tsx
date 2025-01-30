@@ -20,16 +20,16 @@ const login = () => {
 
   const validateLogin = () => {
     
-    let newErrorMessage={email:'',password:''}
+    let newErrorMessage={email:'', password:''}
     
     if(credentials.email===''){
       newErrorMessage.email="Please provide yor email"
      
     }
-    else if(!emailRegex.test(credentials.email)){
+     else if(!emailRegex.test(credentials.email)){
       newErrorMessage.email="Not an email"
     }
-   else if(credentials.password===""){
+    if(credentials.password===""){
     newErrorMessage.password="password does not match"
    }
    setError(newErrorMessage)
@@ -61,7 +61,7 @@ const login = () => {
         <Labels labels="Email" />
         <Inputs
           value={credentials.email}
-      style={error.email ? styles.errorInput:null}
+          style={error.email ? styles.errorInput:null}
           keyboardType="email-address"
           autoCapitalize="none"
           autoComplete="email"

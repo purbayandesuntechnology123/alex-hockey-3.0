@@ -1,6 +1,17 @@
 import * as React from "react"
+import { View } from "react-native"
 import Svg, { SvgProps, Path } from "react-native-svg"
 const AppleSvg = (props: SvgProps) => (
+  <View
+  style={{
+    width: 40,  // Adjust based on your design
+    height: 40, // Adjust based on your design
+    backgroundColor: "white", // Light blue background (change as needed)
+    borderRadius: 50, // Fully rounded (half of width/height)
+    justifyContent: "center",
+    alignItems: "center",
+  }}
+>
   <Svg
 
     width={22}
@@ -17,5 +28,6 @@ const AppleSvg = (props: SvgProps) => (
       d="M14.581 4.358c.84-1.078 1.477-2.6 1.246-4.156-1.372.095-2.978.968-3.914 2.106-.85 1.032-1.552 2.564-1.28 4.053 1.499.046 3.049-.849 3.948-2.003Z"
     />
   </Svg>
+  </View>
 )
 export default AppleSvg

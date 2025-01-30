@@ -62,7 +62,7 @@ const index = () => {
       newErrors.fullName='Full Name is Required'
     }
     
-    if(formData.email.trim()===''){
+     if(formData.email.trim()===''){
       newErrors.email='Email is Required'
     }
     if(formData.email.trim()!==''&& !emailRegex.test(formData.email)){
@@ -78,7 +78,7 @@ const index = () => {
     if(formData.confirmPassword.trim()===''){
       newErrors.confirmPassword='Confirm password is Required'
     }
-    else if (formData.password !== formData.confirmPassword)
+     if (formData.password !== formData.confirmPassword)
       newErrors.confirmPassword = "Passwords do not match";
 
    else 
@@ -98,7 +98,7 @@ const index = () => {
       console.log({...formData, isChecked})
       navigation.navigate('login'); 
     }
- 
+   
 
   }
 
