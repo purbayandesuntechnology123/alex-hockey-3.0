@@ -9,6 +9,8 @@ const Inputs = ({
   placeholder,
   secureTextEntry = false,
   keyboardType = "default",
+  autoCapitalize,
+  autoComplete,
   style = {},
 }: any) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -25,10 +27,12 @@ const Inputs = ({
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
+        autoCapitalize={autoCapitalize}
         secureTextEntry={secureTextEntry}
         keyboardType={keyboardType}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
+        autoComplete={autoComplete}
         style={[styles.input, isFocused && styles.focusedInput, style]}
       />
     </View>

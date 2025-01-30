@@ -37,6 +37,8 @@ const login = () => {
         <Inputs
           value={credentials.email}
           keyboardType="email-address"
+          autoCapitalize="none"
+          autoComplete="email"
           placeholder="Enter Your Email Address"
           onChangeText={(text: any) =>
             setCredentials({ ...credentials, email: text })
@@ -81,6 +83,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 20,
     left: 70,
+    
+    // alignSelf:'flex-end'
   },
   welcomeText: {
     fontFamily: "league-Semibold",

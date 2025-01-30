@@ -67,6 +67,8 @@ const index = () => {
         <Inputs
           value={formData.email}
           keyboardType="email-address"
+          autoCapitalize="none"
+          autoComplete="email"
           placeholder="Enter Your Email Address"
           onChangeText={(text: any) =>
             setFormData({ ...formData, email: text })
