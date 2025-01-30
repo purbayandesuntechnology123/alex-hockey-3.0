@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Image } from "expo-image";
-import fbSVG from "../assets/images/fb.svg";
-import appleSVG from "../assets/images/apple.svg";
-import googleSVG from "../assets/images/google.svg";
+
 import { useFonts } from "expo-font";
+import FBSvg from "./FbSvg";
+import GoogleSvg from "./GoogleSvg";
+import AppleSvg from "./AppleSvg";
 
 const SocialSignup = () => {
   const [fontsLoaded] = useFonts({
@@ -14,9 +15,10 @@ const SocialSignup = () => {
     <View style={styles.svgDivContainer}>
       <Text style={{ fontFamily: "league-Regular" }}>Or sign Up with</Text>
       <View style={styles.svgContainer}>
-        <Image source={fbSVG} style={styles.svgFB} />
-        <Image source={googleSVG} style={styles.svgGoogle} />
-        <Image source={appleSVG} style={styles.svgApple} />
+       <FBSvg/>
+       <GoogleSvg/>
+       <AppleSvg/>
+       
       </View>
     </View>
   );

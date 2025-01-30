@@ -27,7 +27,7 @@ const login = () => {
       <Link href={"/forgotpassword"}>Forgot Password</Link>
       <View style={styles.textContainer}>
         <Text style={styles.welcomeText}>Welcome</Text>
-        <Text>
+        <Text style={styles.lorems}>
           Lorem ipsum dolor sit amet dolor sit amet dolor sit amet...{" "}
         </Text>
       </View>
@@ -91,4 +91,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 10,
   },
+  lorems:{
+    fontSize:14,
+    fontFamily:'poppins-Regular',
+  }
 });
