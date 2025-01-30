@@ -8,9 +8,9 @@ const Labels = ({ labels, style = {} }: any) => {
     "league-Semibold": require("../assets/fonts/Bebas_Neue,GFS_Neohellenic,League_Spartan/League_Spartan/static/LeagueSpartan-SemiBold.ttf"),
   });
   return (
-    <View style={styles.container}>
+   
       <Text style={[styles.text]}>{labels}</Text>
-    </View>
+
   );
 };
 
@@ -18,11 +18,14 @@ export default Labels;
 
 const styles = StyleSheet.create({
   container: {
-    alignSelf: "flex-start",
-    marginBottom: 10,
+   
   },
   text: {
+    alignSelf: "flex-start",
+    marginBottom: 10,
     marginHorizontal: 10,
+    color:'#383838',
+   
     fontWeight: "400",
     fontFamily: "league-Semibold",
     fontSize: 16,

@@ -14,10 +14,35 @@ const login = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
 
   //Login Handle
+  const [error, setError]=useState({email:'', password:''})
 
-  const loginHandle = () => {
-    console.log(credentials);
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const validateLogin = () => {
+    
+    let newErrorMessage={email:'',password:''}
+    
+    if(credentials.email===''){
+      newErrorMessage.email="Please provide yor email"
+     
+    }
+    else if(!emailRegex.test(credentials.email)){
+      newErrorMessage.email="Not an email"
+    }
+   else if(credentials.password===""){
+    newErrorMessage.password="password does not match"
+   }
+   setError(newErrorMessage)
+   return !Object.values(newErrorMessage).some(error => error !== '');
+   
   };
+
+  const loginHandle=()=>{
+    if(validateLogin()){
+      console.log(credentials)
+    }
+  }
+
   return (
     <View style={styles.main}>
       <View style={{ position: "relative" }}>
@@ -36,6 +61,7 @@ const login = () => {
         <Labels labels="Email" />
         <Inputs
           value={credentials.email}
+      style={error.email ? styles.errorInput:null}
           keyboardType="email-address"
           autoCapitalize="none"
           autoComplete="email"
@@ -44,14 +70,17 @@ const login = () => {
             setCredentials({ ...credentials, email: text })
           }
         />
+        {error.email&& <Text style={styles.errorValue}>{error.email}</Text>}
         <Labels labels="Password" />
         <Inputs
           value={credentials.password}
+          style={error.password ? styles.errorInput:null}
           placeholder="Enter Your Password"
           onChangeText={(text: any) =>
-            setCredentials({ ...credentials, email: text })
+            setCredentials({ ...credentials, password: text })
           }
         />
+        {error.password && <Text style={styles.errorValue}>{error.password}</Text>}
         <Button text="Log In" onPress={loginHandle} />
         <SocialSignup />
       </View>
@@ -94,5 +123,12 @@ const styles = StyleSheet.create({
   lorems:{
     fontSize:14,
     fontFamily:'poppins-Regular',
+  },
+  errorInput:{
+    borderWidth:2,
+    borderColor:'red'
+  },
+  errorValue:{
+    color:'red'
   }
 });

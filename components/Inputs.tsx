@@ -5,12 +5,14 @@ import { useFonts } from "expo-font";
 const Inputs = ({
   value,
   onChangeText,
-
+name,
   placeholder,
   secureTextEntry = false,
   keyboardType = "default",
   autoCapitalize,
   autoComplete,
+  hasError = false,
+  
   style = {},
 }: any) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -22,8 +24,9 @@ const Inputs = ({
   });
 
   return (
-    <View style={styles.inputContainer}>
+
       <TextInput
+    accessibilityLabel={name} 
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
@@ -33,17 +36,16 @@ const Inputs = ({
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         autoComplete={autoComplete}
-        style={[styles.input, isFocused && styles.focusedInput, style]}
+        style={[styles.input, isFocused && styles.focusedInput, style, hasError&& styles.errorInput]}
       />
-    </View>
+    
   );
 };
 
 export default Inputs;
 
 const styles = StyleSheet.create({
-  inputContainer: {},
-
+ 
   input: {
     width: 300,
     height: 50,
@@ -54,9 +56,14 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 20,
     fontFamily: "poppins-Regular",
+    backgroundColor:'#FCFCFC'
   },
   focusedInput: {
     borderWidth: 1,
     borderColor: "#FD8204",
   },
+  errorInput:{
+    borderWidth:2, 
+    borderColor:'red'
+  }
 });

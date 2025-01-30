@@ -1,19 +1,19 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
-import { Entypo } from "@expo/vector-icons";
+import { Entypo, Feather } from "@expo/vector-icons";
 
 const Eye = ({ onPress, isHidden, style = {} }: any) => {
   return (
     <View style={[styles.eyeContainer, style]}>
       {isHidden ? (
-        <Entypo
-          name="eye-with-line"
-          size={24}
-          color="black"
+        <Feather
+          name="eye-off"
+          size={20}
+          color="#777777"
           onPress={onPress}
         />
       ) : (
-        <Entypo name="eye" size={24} color="black" onPress={onPress} />
+        <Feather name="eye" color="#777777" size={20}  onPress={onPress} />
       )}
     </View>
   );
