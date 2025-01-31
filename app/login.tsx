@@ -50,7 +50,7 @@ const login = () => {
   return (
     <View style={styles.mainContainer}>
       
-      <PrevArrows href={"/registration"} style={styles.prevBtn} />
+      <PrevArrows href={"/registration"}  />
         <Header text="Login" />
         
      
@@ -68,7 +68,7 @@ const login = () => {
           </View>
 
           <View style={styles.inputContainer}>
-            <View>
+            <View style={{marginBottom:20}}>
               <Labels labels="Email" />
               <Inputs
                 value={credentials.email}
@@ -113,6 +113,8 @@ const login = () => {
           </View>
         </View>
 
+
+<View style={{width:'100%'}}>
         <Text style={styles.signupText}>
           Don't have an account?{" "}
           <Link
@@ -123,6 +125,7 @@ const login = () => {
             Sign Up
           </Link>
         </Text>
+        </View>
       </ScrollView>
       {/* </View> */}
     </View>
@@ -135,7 +138,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: "#FFFFFF",
     flex: 1,
-    paddingHorizontal: 20,
+    padding: 20,
 
     // backgroundColor:'white',
   },
@@ -145,7 +148,8 @@ const styles = StyleSheet.create({
 
   prevBtn:{
     position:'absolute',
- top:10
+ top:10,
+ left:20
   },
 
   body: {
@@ -185,12 +189,14 @@ const styles = StyleSheet.create({
     fontFamily: "poppins-Regular",
   },
   btnCon: {
-    marginTop: 20,
+    marginTop: 15,
   },
 
   forgotPass: {
-    
+  
     alignSelf:'flex-end',
+    marginTop:10,
+   
     fontFamily: "league-Regular",
     color: "#FD8204",
   },

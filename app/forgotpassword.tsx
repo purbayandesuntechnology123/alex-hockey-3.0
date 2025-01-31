@@ -23,7 +23,7 @@ const forgotpassword = () => {
         source={require("../assets/images/forgot.png")}
         style={styles.forgotSVG}
       />
-
+<View style={styles.inputCon}> 
       <Labels labels="Email" />
       <Inputs
         placeholder="Enter Your Email Id"
@@ -32,7 +32,7 @@ const forgotpassword = () => {
         value={email}
         onChangeText={setEmail}
       />
-
+</View>
       <Button text="Continue" onPress={handleSubmit} />
       <Link href={"/verifyotp"}>Verify OTP</Link>
     </View>
@@ -47,11 +47,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
-    paddingHorizontal: 20,
+    padding: 20,
   },
   forgotSVG: {
     width: 300,
     height: 200,
-    margin:20
+    margin:20,
   },
+  inputCon:{
+    width:320,
+    marginBottom:33
+  },
+
 });

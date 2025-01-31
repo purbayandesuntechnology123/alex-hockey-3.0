@@ -111,9 +111,9 @@ const index = () => {
   return (
   
      
-   <ScrollView style={styles.mainContainer}>
+   <ScrollView contentContainerStyle={styles.mainContainer} >
       {/* <View > */}
-      <PrevArrows href={"/"} style={styles.prevBtn}/>
+      <PrevArrows href={"/"} />
       <Header text="Registration" />
 
       <View style={styles.inputMain}> 
@@ -203,8 +203,9 @@ const index = () => {
         <Button text="Sign Up" onPress={handleSubmit} />
 
         <View style={{alignSelf:'center'}}>  <SocialSignup /></View>
-      
-        <Text style={{ marginTop: 11, fontFamily: "poppins-Regular", color:'#070707', alignSelf:'center'}}>
+
+        <View style={{width:'100%', marginTop:11}}>
+        <Text style={{ marginTop: 11, color:'#070707', alignSelf:'center'}}>
           Have an account?
           <Link
             href={"/login"}
@@ -218,6 +219,10 @@ const index = () => {
             Sign In
           </Link>
         </Text>
+
+        </View>
+      
+   
       {/* </View> */}
       </ScrollView>
    
@@ -229,17 +234,21 @@ export default index;
 const styles = StyleSheet.create({
   
   mainContainer: {
-    flex:1,
+  
+    flexGrow:1,
     backgroundColor:'#FFFFFF',
+    alignItems:'center',
     // paddingVertical: 15,
     // justifyContent: "space-between",
    
     // padding: 20,
-    paddingHorizontal:20,
+   padding:20,
+
   
   },
   inputCon:{
-    marginBottom:20
+    marginBottom:20,
+    width:320
   },
   checkboxCon: {
     flexDirection: "row",
@@ -266,7 +275,7 @@ const styles = StyleSheet.create({
   },
   prevBtn:{
     position:'absolute',
- top:10
+ top:10, left:20
   },
   errorMessage: {
     fontSize: 11,

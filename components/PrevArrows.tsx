@@ -5,11 +5,11 @@ import { Link } from "expo-router";
 
 const PrevArrows = ({ href , style={}}: any) => {
   return (
-    <View style={styles.prevArrow}>
-      <Link href={href} style={style}>
+  
+      <Link href={href} style={styles.prevArrow}>
         <MaterialIcons name="arrow-back-ios" size={20} color={`#FD8204`} />
       </Link>
-    </View>
+   
   );
 };
 
@@ -17,6 +17,9 @@ export default PrevArrows;
 
 const styles = StyleSheet.create({
   prevArrow: {
+    position:'absolute',
+    top:30,
+    left:20
   
   },
 });
