@@ -2,8 +2,8 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { Image } from "expo-image";
-import nextArrowSvg from "../assets/images/next_arrow.svg";
 import { Link } from "expo-router";
+import NextArrowSvg from "@/components/NextArrowSvg";
 
 const splashscreen = () => {
   return (
@@ -17,7 +17,7 @@ const splashscreen = () => {
         style={styles.fyreBg}
       />
       <Link href={"/registration"} style={styles.nextArrowLink}>
-        <Image source={nextArrowSvg} style={styles.nextArrow} />
+       <NextArrowSvg/>
       </Link>
     </LinearGradient>
   );

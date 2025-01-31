@@ -1,15 +1,29 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Image } from "expo-image";
 
-import verifySVG from "../assets/images/verify.svg";
+// import verifySVG from "../assets/images/verify.svg";
 import Header from "@/components/Header";
 import Inputs from "@/components/Inputs";
 import Button from "@/components/Button";
 import PrevArrows from "@/components/PrevArrows";
+import NextArrowSvg from "@/components/NextArrowSvg";
 import { useFonts } from "expo-font";
+import LockSvg from "@/components/LockSvg";
 
 const verifyotp = () => {
+  const [inputValue, setInputValue] = useState(["", "", "", ""]);
+
+  const handleChange = (text: string, index: number) => {
+    const newInputValue = [...inputValue];
+    newInputValue[index] = text;
+    setInputValue(newInputValue)
+  };
+
+   const isSubmitOtp=()=>{
+    console.log(inputValue.join(''))
+   }
+  
   const [fontsLoaded] = useFonts({
     "poppins-Regular": require("../assets/fonts/Poppins (2)/Poppins-Regular.ttf"),
     "poppins-Semibold": require("../assets/fonts/Poppins (2)/Poppins-SemiBold.ttf"),
@@ -19,16 +33,17 @@ const verifyotp = () => {
     <View style={styles.main}>
       <Header text="OTP Verification" />
       <PrevArrows href={"/forgotpassword"} />
-      <Image source={verifySVG} style={styles.verifySvg} />
+      <LockSvg />
       <Text style={styles.confirmMail}>
         We will send you one time password on the mail Id
       </Text>
       <Text style={{ fontFamily: "poppins-bold" }}>admin@gmail.com</Text>
       <View style={styles.inputCon}>
-        <Inputs style={styles.input} keyboardType="numeric" />
-        <Inputs style={styles.input} keyboardType="numeric" />
-        <Inputs style={styles.input} keyboardType="numeric" />
-        <Inputs style={styles.input} keyboardType="numeric" />
+        {inputValue.map((inputs, index) => {
+          return (
+            <Inputs style={styles.input} key={index} keyboardType='numeric' value={inputValue[index]}  onChangeText={(text:string)=>handleChange(text,index)}/>
+          );
+        })}
       </View>
       <Text style={styles.timer}>00:00</Text>
       <Text style={styles.resendOtp}>
@@ -37,7 +52,7 @@ const verifyotp = () => {
           Send OTP
         </Text>
       </Text>
-      <Button text="Continue" />
+      <Button text="Continue" onPress={isSubmitOtp} />
     </View>
   );
 };
@@ -66,9 +81,9 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 15,
-    fontSize:24,
-    textAlign:'center',
-    color:'#757575'
+    fontSize: 24,
+    textAlign: "center",
+    color: "#757575",
   },
   timer: {
     marginTop: 10,
