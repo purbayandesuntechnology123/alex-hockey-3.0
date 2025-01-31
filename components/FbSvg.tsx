@@ -4,12 +4,21 @@ import Svg, { SvgProps, Path } from "react-native-svg"
 const FBSvg = (props: SvgProps) => (
   <View
   style={{
-    width: 40,  // Adjust based on your design
-    height: 40, // Adjust based on your design
+    width: 50,  // Adjust based on your design
+    height: 50, // Adjust based on your design
     backgroundColor: "white", // Light blue background (change as needed)
     borderRadius: 50, // Fully rounded (half of width/height)
+    
     justifyContent: "center",
     alignItems: "center",
+    shadowColor: "#000", // Shadow color
+    shadowOffset: { width: 0, height: 2 }, // Shadow position
+    shadowOpacity: 0.25, // Shadow transparency
+    shadowRadius: 3.84, // Blur effect
+    elevation: 5,
+
+    
+  
   }}
 >
   <Svg

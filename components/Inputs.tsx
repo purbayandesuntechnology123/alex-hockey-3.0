@@ -47,14 +47,14 @@ export default Inputs;
 const styles = StyleSheet.create({
  
   input: {
-    width: 300,
+    width: 320,
     height: 50,
     outlineColor: "orange",
     borderWidth: 1,
     borderColor: "#E9E9E9",
     borderRadius: 8,
-    padding: 10,
-    marginBottom: 20,
+    padding: 12,
+     
     fontFamily: "poppins-Regular",
     backgroundColor:'#FCFCFC'
   },

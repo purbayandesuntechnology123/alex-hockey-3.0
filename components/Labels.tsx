@@ -22,8 +22,8 @@ const styles = StyleSheet.create({
   },
   text: {
     alignSelf: "flex-start",
-    marginBottom: 10,
-    marginHorizontal: 10,
+    marginBottom: 9,
+   
     color:'#383838',
    
     fontWeight: "400",

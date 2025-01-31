@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import Header from "@/components/Header";
 import PrevArrows from "@/components/PrevArrows";
@@ -22,86 +22,109 @@ const login = () => {
   });
 
   //Login Handle
-  const [error, setError]=useState({email:'', password:''})
+  const [error, setError] = useState({ email: "", password: "" });
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const validateLogin = () => {
-    
-    let newErrorMessage={email:'', password:''}
-    
-    if(credentials.email===''){
-      newErrorMessage.email="Please provide your email"
-     
+    let newErrorMessage = { email: "", password: "" };
+
+    if (credentials.email === "") {
+      newErrorMessage.email = "Please provide your email";
+    } else if (!emailRegex.test(credentials.email)) {
+      newErrorMessage.email = "Not an email";
     }
-     else if(!emailRegex.test(credentials.email)){
-      newErrorMessage.email="Not an email"
+    if (credentials.password === "") {
+      newErrorMessage.password = "password does not match";
     }
-    if(credentials.password===""){
-    newErrorMessage.password="password does not match"
-   }
-   setError(newErrorMessage)
-   return !Object.values(newErrorMessage).some(error => error !== '');
-   
+    setError(newErrorMessage);
+    return !Object.values(newErrorMessage).some((error) => error !== "");
   };
 
-  const loginHandle=()=>{
-    if(validateLogin()){
-      console.log(credentials)
+  const loginHandle = () => {
+    if (validateLogin()) {
+      console.log(credentials);
     }
-  }
+  };
 
   return (
-    <View style={styles.main}>
-      <View style={{ position: "relative" }}>
+    <View style={styles.mainContainer}>
+      
+      <PrevArrows href={"/registration"} style={styles.prevBtn} />
         <Header text="Login" />
-        <PrevArrows href={"/registration"} />
-      </View>
-      {/* <Link href={"/forgotpassword"}>Forgot Password</Link> */}
-      <View style={styles.textContainer}>
-        <Text style={styles.welcomeText}>Welcome</Text>
-        <Text style={styles.lorems}>
-          Lorem ipsum dolor sit amet dolor sit amet dolor sit amet...{" "}
-        </Text>
-      </View>
-      {/* <Image source={loginSVG} style={styles.loginSVG} /> */}
-      <View style={styles.container}>
-        <Labels labels="Email" />
+        
+     
+      {/* <View style={styles.body}> */}
+      <ScrollView
+        contentContainerStyle={[styles.scrollContent, styles.body]}
+        showsVerticalScrollIndicator={false}
+      >
         <View>
-        <Inputs
-          value={credentials.email}
-          style={error.email ? styles.errorInput:null}
-          keyboardType="email-address"
-          autoCapitalize="none"
-          autoComplete="email"
-          placeholder="Enter Your Email Address"
-          onChangeText={(text: any) =>
-            setCredentials({ ...credentials, email: text })
-          }
-        />
-        {error.email&& <Text style={styles.errorValue}>{error.email}</Text>}
+          <View>
+            <Text style={styles.welcomeText}>Welcome</Text>
+            <Text style={styles.lorems}>
+              Lorem ipsum dolor sit amet dolor sit amet dolor sit amet...{" "}
+            </Text>
+          </View>
+
+          <View style={styles.inputContainer}>
+            <View>
+              <Labels labels="Email" />
+              <Inputs
+                value={credentials.email}
+                style={error.email ? styles.errorInput : null}
+                keyboardType="email-address"
+                autoCapitalize="none"
+                autoComplete="email"
+                placeholder="Enter Your Email Address"
+                onChangeText={(text: any) =>
+                  setCredentials({ ...credentials, email: text })
+                }
+              />
+              {error.email && (
+                <Text style={styles.errorValue}>{error.email}</Text>
+              )}
+            </View>
+            <View>
+              <Labels labels="Password" />
+              <Inputs
+                value={credentials.password}
+                style={error.password ? styles.errorInput : null}
+                placeholder="Enter Your Password"
+                onChangeText={(text: any) =>
+                  setCredentials({ ...credentials, password: text })
+                }
+              />
+              {error.password && (
+                <Text style={styles.errorValue}>{error.password}</Text>
+              )}
+              <Link href={"/forgotpassword"} style={styles.forgotPass}>
+                Forgot Password
+              </Link>
+            </View>
+
+            <View style={styles.btnCon}>
+              <Button text="Log In" onPress={loginHandle} />
+            </View>
+            <View style={{ alignSelf: "center", marginTop: 24 }}>
+              {" "}
+              <SocialSignup />{" "}
+            </View>
+          </View>
         </View>
-        <Labels labels="Password" />
-        <View> 
-        <Inputs
-          value={credentials.password}
-          style={error.password ? styles.errorInput:null}
-          placeholder="Enter Your Password"
-          onChangeText={(text: any) =>
-            setCredentials({ ...credentials, password: text })
-          }
-        />
-        {error.password && <Text style={styles.errorValue}>{error.password}</Text>}
-        <Link href={'/forgotpassword'} style={styles.forgotPass}>Forgot Password</Link>
-        </View>
-        <View style={styles.btnCon}> 
-        <Button text="Log In" onPress={loginHandle} />
-        </View>
-        <SocialSignup />
-      </View>
-      <Text style={styles.signupText}>
-        Don't have an account? <Text style={{color:'#FD8204', fontFamily:'poppins-Semibold'}}> Sign Up</Text>
-      </Text>
+
+        <Text style={styles.signupText}>
+          Don't have an account?{" "}
+          <Link
+            href={"/registration"}
+            style={{ color: "#FD8204", fontFamily: "poppins-Semibold" }}
+          >
+            {" "}
+            Sign Up
+          </Link>
+        </Text>
+      </ScrollView>
+      {/* </View> */}
     </View>
   );
 };
@@ -109,58 +132,66 @@ const login = () => {
 export default login;
 
 const styles = StyleSheet.create({
-  main: {
+  mainContainer: {
+    backgroundColor: "#FFFFFF",
     flex: 1,
-    position: "relative",
-  },
-  container: {
-    marginTop: 30,
-    justifyContent: "center",
-    alignItems: "center",
     paddingHorizontal: 20,
+
+    // backgroundColor:'white',
   },
-  textContainer: {
-    paddingHorizontal: 25,
-    marginTop: 20,
+  scrollContent: {
+    flexGrow: 1,
+  },
+
+  prevBtn:{
+    position:'absolute',
+ top:10
+  },
+
+  body: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+  },
+
+  inputContainer: {
+    marginTop: 30,
   },
   signupText: {
-    position: "absolute",
-    fontFamily:'poppins-Regular',
-    bottom: 20,
-    left: 70,
-    
+    fontFamily: "poppins-Regular",
+    alignSelf: "center",
+    marginBottom: 15,
     // alignSelf:'flex-end'
   },
   welcomeText: {
     fontFamily: "league-Semibold",
     fontSize: 18,
+    marginTop: 25,
     marginBottom: 10,
   },
-  lorems:{
-    fontSize:14,
-    fontFamily:'poppins-Regular',
+  lorems: {
+    fontSize: 14,
+    fontFamily: "poppins-Regular",
   },
-  errorInput:{
-    borderWidth:2,
-    borderColor:'red'
+  errorInput: {
+    borderWidth: 2,
+    borderColor: "red",
   },
-  errorValue:{
-    color:'red',
-    position:'absolute',
-    bottom:2,
-    fontSize:12,
-    fontFamily:'poppins-Regular',
+  errorValue: {
+    color: "red",
+    position: "absolute",
+    bottom: 2,
+    fontSize: 12,
+    fontFamily: "poppins-Regular",
   },
-  btnCon:{
-  marginTop:20
+  btnCon: {
+    marginTop: 20,
   },
 
-  forgotPass:{
-    position:'absolute',
-    bottom:1,
-    right:1,
-    fontSize:12,
-    fontFamily:'league-Regular',
-    color:'#FD8204'
-  }
+  forgotPass: {
+    
+    alignSelf:'flex-end',
+    fontFamily: "league-Regular",
+    color: "#FD8204",
+  },
 });

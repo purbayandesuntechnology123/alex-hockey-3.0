@@ -18,8 +18,8 @@ export default Header;
 
 const styles = StyleSheet.create({
   headerCon: {
-    marginTop: 20,
-    justifyContent: "center",
+   
+    justifyContent: "flex-start",
     alignItems: "center",
   },
   headerText: {

@@ -61,6 +61,7 @@ export default verifyotp;
 
 const styles = StyleSheet.create({
   main: {
+    backgroundColor:'#FFFFFF',
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",

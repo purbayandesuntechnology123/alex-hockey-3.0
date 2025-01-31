@@ -12,8 +12,8 @@ const SocialSignup = () => {
     "league-Regular": require("../assets/fonts/Bebas_Neue,GFS_Neohellenic,League_Spartan/League_Spartan/static/LeagueSpartan-Regular.ttf"),
   });
   return (
-    <View style={styles.svgDivContainer}>
-      <Text style={{ fontFamily: "league-Regular", alignSelf:'center' }}>Or sign Up with</Text>
+    <View style={styles.divContainer}>
+      <Text style={{ fontFamily: "league-Regular", alignSelf:'center', color:'#070707' }}>Or sign Up with</Text>
       <View style={styles.svgContainer}>
 
       <FBSvg/> 
@@ -30,18 +30,19 @@ const SocialSignup = () => {
 export default SocialSignup;
 
 const styles = StyleSheet.create({
-  svgDivContainer: {
+  divContainer: {
     marginTop: 15,
    
   },
   svgContainer: {
     marginTop: 20,
+   
     flexDirection: "row",
     alignItems: "center",
     gap: 20,
   },
   svgFB: {
-    width: 10,
+    width: 22,
     height: 22,
     // backgroundColor: "white",
     // borderRadius: 20,

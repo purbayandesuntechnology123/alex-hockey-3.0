@@ -43,6 +43,7 @@ export default forgotpassword;
 
 const styles = StyleSheet.create({
   main: {
+    backgroundColor:'#FFFFFF',
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
@@ -51,5 +52,6 @@ const styles = StyleSheet.create({
   forgotSVG: {
     width: 300,
     height: 200,
+    margin:20
   },
 });
