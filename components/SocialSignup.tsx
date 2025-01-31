@@ -13,7 +13,7 @@ const SocialSignup = () => {
   });
   return (
     <View style={styles.svgDivContainer}>
-      <Text style={{ fontFamily: "league-Regular" }}>Or sign Up with</Text>
+      <Text style={{ fontFamily: "league-Regular", alignSelf:'center' }}>Or sign Up with</Text>
       <View style={styles.svgContainer}>
 
       <FBSvg/> 
@@ -31,7 +31,8 @@ export default SocialSignup;
 
 const styles = StyleSheet.create({
   svgDivContainer: {
-    marginTop: 20,
+    marginTop: 15,
+   
   },
   svgContainer: {
     marginTop: 20,

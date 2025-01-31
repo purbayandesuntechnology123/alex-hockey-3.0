@@ -11,9 +11,9 @@ import { Link } from "expo-router";
 
 const forgotpassword = () => {
   const [email, setEmail] = useState("");
-   const handleSubmit=()=>{
-    console.log(email)
-   }
+  const handleSubmit = () => {
+    console.log(email);
+  };
   return (
     <View style={styles.main}>
       <PrevArrows href={"/login"} />
@@ -32,6 +32,7 @@ const forgotpassword = () => {
         value={email}
         onChangeText={setEmail}
       />
+
       <Button text="Continue" onPress={handleSubmit} />
       <Link href={"/verifyotp"}>Verify OTP</Link>
     </View>

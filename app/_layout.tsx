@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { Stack } from "expo-router";
+import { Navigator, Stack } from "expo-router";
 
 const _layout = () => {
   return (
+   
     <Stack>
       <Stack.Screen
         name="registration"
@@ -13,7 +14,7 @@ const _layout = () => {
         }}></Stack.Screen>
       <Stack.Screen
         name="index"
-        options={{ title: "Registration", headerShown: false }}></Stack.Screen>
+        options={{ title: "Splash", headerShown: false }}></Stack.Screen>
       <Stack.Screen
         name="login"
         options={{ title: "Login", headerShown: false }}></Stack.Screen>
@@ -32,6 +33,7 @@ const _layout = () => {
           headerShown: false,
         }}></Stack.Screen>
     </Stack>
+   
   );
 };
 

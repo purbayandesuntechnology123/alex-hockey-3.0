@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     outlineColor: "orange",
     borderWidth: 1,
     borderColor: "#E9E9E9",
-    borderRadius: 5,
+    borderRadius: 8,
     padding: 10,
     marginBottom: 20,
     fontFamily: "poppins-Regular",

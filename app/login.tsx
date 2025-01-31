@@ -8,10 +8,18 @@ import Button from "@/components/Button";
 import { Image } from "expo-image";
 import SocialSignup from "@/components/SocialSignup";
 import { Link } from "expo-router";
+import { useFonts } from "expo-font";
 // import loginSVG from "../assets/images/login.svg";
 
 const login = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
+
+  const [fontsLoaded] = useFonts({
+    "poppins-Regular": require("../assets/fonts/Poppins (2)/Poppins-Regular.ttf"),
+    "poppins-Semibold": require("../assets/fonts/Poppins (2)/Poppins-SemiBold.ttf"),
+    "poppins-bold": require("../assets/fonts/Poppins (2)/Poppins-Bold.ttf"),
+    "league-Regular": require("../assets/fonts/Bebas_Neue,GFS_Neohellenic,League_Spartan/League_Spartan/static/LeagueSpartan-Regular.ttf"),
+  });
 
   //Login Handle
   const [error, setError]=useState({email:'', password:''})
@@ -23,7 +31,7 @@ const login = () => {
     let newErrorMessage={email:'', password:''}
     
     if(credentials.email===''){
-      newErrorMessage.email="Please provide yor email"
+      newErrorMessage.email="Please provide your email"
      
     }
      else if(!emailRegex.test(credentials.email)){
@@ -49,7 +57,7 @@ const login = () => {
         <Header text="Login" />
         <PrevArrows href={"/registration"} />
       </View>
-      <Link href={"/forgotpassword"}>Forgot Password</Link>
+      {/* <Link href={"/forgotpassword"}>Forgot Password</Link> */}
       <View style={styles.textContainer}>
         <Text style={styles.welcomeText}>Welcome</Text>
         <Text style={styles.lorems}>
@@ -59,6 +67,7 @@ const login = () => {
       {/* <Image source={loginSVG} style={styles.loginSVG} /> */}
       <View style={styles.container}>
         <Labels labels="Email" />
+        <View>
         <Inputs
           value={credentials.email}
           style={error.email ? styles.errorInput:null}
@@ -71,7 +80,9 @@ const login = () => {
           }
         />
         {error.email&& <Text style={styles.errorValue}>{error.email}</Text>}
+        </View>
         <Labels labels="Password" />
+        <View> 
         <Inputs
           value={credentials.password}
           style={error.password ? styles.errorInput:null}
@@ -81,11 +92,15 @@ const login = () => {
           }
         />
         {error.password && <Text style={styles.errorValue}>{error.password}</Text>}
+        <Link href={'/forgotpassword'} style={styles.forgotPass}>Forgot Password</Link>
+        </View>
+        <View style={styles.btnCon}> 
         <Button text="Log In" onPress={loginHandle} />
+        </View>
         <SocialSignup />
       </View>
       <Text style={styles.signupText}>
-        Don't have an account? <Text> Sign Up</Text>
+        Don't have an account? <Text style={{color:'#FD8204', fontFamily:'poppins-Semibold'}}> Sign Up</Text>
       </Text>
     </View>
   );
@@ -110,6 +125,7 @@ const styles = StyleSheet.create({
   },
   signupText: {
     position: "absolute",
+    fontFamily:'poppins-Regular',
     bottom: 20,
     left: 70,
     
@@ -129,6 +145,22 @@ const styles = StyleSheet.create({
     borderColor:'red'
   },
   errorValue:{
-    color:'red'
+    color:'red',
+    position:'absolute',
+    bottom:2,
+    fontSize:12,
+    fontFamily:'poppins-Regular',
+  },
+  btnCon:{
+  marginTop:20
+  },
+
+  forgotPass:{
+    position:'absolute',
+    bottom:1,
+    right:1,
+    fontSize:12,
+    fontFamily:'league-Regular',
+    color:'#FD8204'
   }
 });
