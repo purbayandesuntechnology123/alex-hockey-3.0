@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   headerCon: {
     justifyContent: "flex-start",
     alignItems: "center",
-    marginTop: 10,
+    marginTop: 20,
   },
   headerText: {
     color: "#FD8204",

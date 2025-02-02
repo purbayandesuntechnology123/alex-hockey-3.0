@@ -21,8 +21,17 @@ const verifyotp = () => {
     setInputValue(newInputValue);
   };
 
+  const [error, setError] = useState([false, false, false, false]);
+
   const isSubmitOtp = () => {
-    console.log(inputValue.join(""));
+    const newError = inputValue.map((value) => value === "");
+    setError(newError);
+
+    if (newError.includes(true)) {
+      return;
+    } else {
+      console.log(inputValue.join(""));
+    }
   };
 
   const [fontsLoaded] = useFonts({
@@ -43,7 +52,7 @@ const verifyotp = () => {
         {inputValue.map((inputs, index) => {
           return (
             <Inputs
-              style={styles.input}
+              style={[styles.input, error[index] ? styles.error : null]}
               key={index}
               keyboardType="numeric"
               maxLength={1}
@@ -116,5 +125,9 @@ const styles = StyleSheet.create({
   admin: {
     fontFamily: "poppins-bold",
     textAlign: "center",
+  },
+  error: {
+    borderWidth: 2,
+    borderColor: "red",
   },
 });

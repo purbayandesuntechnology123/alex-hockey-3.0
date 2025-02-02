@@ -96,11 +96,6 @@ const index = () => {
       newErrors.contact = "Please provide your contact number";
       isValid = false;
     }
-    // if (formData.confirmPassword.trim() === "") {
-    //   newErrors.confirmPassword = "Confirm password is Required";
-    // }
-    // if (formData.password !== formData.confirmPassword)
-    //   newErrors.confirmPassword = "Passwords do not match";
 
     if (
       !newErrors.fullName &&
@@ -130,13 +125,13 @@ const index = () => {
     <SafeAreaView style={styles.mainContainer}>
       {/*  */}
 
-      <LinearGradient colors={["#FD8204", "#FF5733"]} style={styles.gradient} />
+      <LinearGradient colors={["#FFDFBE", "#FFFFFF"]} style={styles.gradient} />
 
       {/* Transparent Status Bar */}
       <StatusBar
         translucent
         backgroundColor="transparent"
-        barStyle="light-content"
+        barStyle="dark-content"
       />
 
       <PrevArrows href={"/"} />
@@ -225,7 +220,9 @@ const index = () => {
           />
           <Text style={styles.terms}>
             I Agree{" "}
-            <Text style={{ color: "#FD8204" }}>Terms And Conditions</Text>
+            <Text style={{ color: "#FD8204" }}>
+              Terms And Conditions {"     "}
+            </Text>
           </Text>
         </View>
         <Button text="Sign Up" onPress={handleSubmit} />
@@ -246,7 +243,7 @@ const index = () => {
                 fontWeight: "500",
                 fontFamily: "poppins-Semibold",
               }}>
-              <Text> Sign In</Text>
+              <Text> Sign In {"    "}</Text>
             </Link>
           </Text>
         </View>
@@ -286,6 +283,7 @@ const styles = StyleSheet.create({
   terms: {
     fontFamily: "poppins-Regular",
     color: "#6B6B6B",
+    width: "100%",
   },
 
   inputMain: { marginTop: 45 },
@@ -312,7 +310,7 @@ const styles = StyleSheet.create({
   gradient: {
     position: "absolute",
     minWidth: "120%",
-    minHeight: 30, // Height of status bar (adjust if needed)
+    minHeight: 40, // Height of status bar (adjust if needed)
     top: 0,
     left: 0,
   },

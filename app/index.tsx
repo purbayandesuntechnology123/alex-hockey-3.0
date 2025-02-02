@@ -17,7 +17,7 @@ const splashscreen = () => {
         style={styles.fyreBg}
       />
       <Link href={"/registration"} style={styles.nextArrowLink}>
-       <NextArrowSvg/>
+        <NextArrowSvg />
       </Link>
     </LinearGradient>
   );
@@ -34,11 +34,11 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   logo: {
-    width: 250,
+    minWidth: 250,
     height: 130,
   },
   fyreBg: {
-    width: 400,
+    width: "120%",
     height: 300,
     position: "absolute",
     bottom: 0,

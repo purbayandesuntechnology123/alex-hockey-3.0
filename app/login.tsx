@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import Header from "@/components/Header";
 import PrevArrows from "@/components/PrevArrows";
@@ -9,6 +9,7 @@ import { Image } from "expo-image";
 import SocialSignup from "@/components/SocialSignup";
 import { Link, useNavigation } from "expo-router";
 import { useFonts } from "expo-font";
+import { LinearGradient } from "expo-linear-gradient";
 // import loginSVG from "../assets/images/login.svg";
 
 const login = () => {
@@ -55,6 +56,14 @@ const login = () => {
 
   return (
     <View style={styles.mainContainer}>
+      <LinearGradient colors={["#FFDFBE", "#FFFFFF"]} style={styles.gradient} />
+
+      {/* Transparent Status Bar */}
+      <StatusBar
+        translucent
+        backgroundColor="transparent"
+        barStyle="dark-content"
+      />
       <PrevArrows href={"/registration"} />
       <Header text="Login" />
 
@@ -198,5 +207,12 @@ const styles = StyleSheet.create({
 
     fontFamily: "league-Regular",
     color: "#FD8204",
+  },
+  gradient: {
+    position: "absolute",
+    minWidth: "120%",
+    minHeight: 40, // Height of status bar (adjust if needed)
+    top: 0,
+    left: 0,
   },
 });
