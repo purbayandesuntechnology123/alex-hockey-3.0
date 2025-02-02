@@ -7,12 +7,30 @@ import { Image } from "expo-image";
 import Labels from "@/components/Labels";
 import Inputs from "@/components/Inputs";
 import Button from "@/components/Button";
-import { Link } from "expo-router";
+import { Link, useNavigation } from "expo-router";
+import SocialSignup from "@/components/SocialSignup";
 
 const forgotpassword = () => {
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+
+  const navigation: any = useNavigation();
+
+  const isValidate = () => {
+    let newErrorMessage = "";
+    let isValid = true;
+    if (!email) {
+      newErrorMessage = "Email is required";
+      isValid = false;
+      setError(newErrorMessage);
+    }
+    return isValid;
+  };
   const handleSubmit = () => {
-    console.log(email);
+    if (isValidate()) {
+      console.log(email);
+      navigation.navigate("verifyotp");
+    }
   };
   return (
     <View style={styles.main}>
@@ -23,18 +41,19 @@ const forgotpassword = () => {
         source={require("../assets/images/forgot.png")}
         style={styles.forgotSVG}
       />
-<View style={styles.inputCon}> 
-      <Labels labels="Email" />
-      <Inputs
-        placeholder="Enter Your Email Id"
-        autoCapitalize="none"
-        autoComplete="email"
-        value={email}
-        onChangeText={setEmail}
-      />
-</View>
+      <View style={styles.inputCon}>
+        <Labels labels="Email" />
+        <Inputs
+          placeholder="Enter Your Email Id"
+          autoCapitalize="none"
+          autoComplete="email"
+          value={email}
+          style={error ? styles.errorMessage : null}
+          onChangeText={setEmail}
+        />
+        {error && <Text style={styles.errorMessage}>{error}</Text>}
+      </View>
       <Button text="Continue" onPress={handleSubmit} />
-      <Link href={"/verifyotp"}>Verify OTP</Link>
     </View>
   );
 };
@@ -43,20 +62,22 @@ export default forgotpassword;
 
 const styles = StyleSheet.create({
   main: {
-    backgroundColor:'#FFFFFF',
+    backgroundColor: "#FFFFFF",
     flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
+
     padding: 20,
   },
   forgotSVG: {
     width: 300,
     height: 200,
-    margin:20,
+    margin: 20,
   },
-  inputCon:{
-    width:320,
-    marginBottom:33
+  inputCon: {
+    marginBottom: 25,
   },
-
+  errorMessage: {
+    fontSize: 11,
+    color: "red",
+    borderColor: "red",
+  },
 });

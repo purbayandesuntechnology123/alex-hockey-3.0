@@ -3,13 +3,11 @@ import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Link } from "expo-router";
 
-const PrevArrows = ({ href , style={}}: any) => {
+const PrevArrows = ({ href, style = {} }: any) => {
   return (
-  
-      <Link href={href} style={styles.prevArrow}>
-        <MaterialIcons name="arrow-back-ios" size={20} color={`#FD8204`} />
-      </Link>
-   
+    <Link href={href} style={styles.prevArrow}>
+      <MaterialIcons name="arrow-back-ios" size={20} color={`#FD8204`} />
+    </Link>
   );
 };
 
@@ -17,9 +15,8 @@ export default PrevArrows;
 
 const styles = StyleSheet.create({
   prevArrow: {
-    position:'absolute',
-    top:30,
-    left:20
-  
+    position: "absolute",
+    top: 40,
+    left: 20,
   },
 });

@@ -6,14 +6,9 @@ const Eye = ({ onPress, isHidden, style = {} }: any) => {
   return (
     <View style={[styles.eyeContainer, style]}>
       {isHidden ? (
-        <Feather
-          name="eye-off"
-          size={20}
-          color="#777777"
-          onPress={onPress}
-        />
+        <Feather name="eye-off" size={20} color="#777777" onPress={onPress} />
       ) : (
-        <Feather name="eye" color="#777777" size={20}  onPress={onPress} />
+        <Feather name="eye" color="#777777" size={20} onPress={onPress} />
       )}
     </View>
   );
@@ -25,6 +20,6 @@ const styles = StyleSheet.create({
   eyeContainer: {
     position: "absolute",
     right: 10,
-    top: 10,
+    top: 13,
   },
 });

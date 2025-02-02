@@ -5,14 +5,14 @@ import { useFonts } from "expo-font";
 const Inputs = ({
   value,
   onChangeText,
-name,
+  name,
   placeholder,
   secureTextEntry = false,
   keyboardType = "default",
   autoCapitalize,
   autoComplete,
-  hasError = false,
-  
+  maxLength,
+
   style = {},
 }: any) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -21,49 +21,42 @@ name,
     "poppins-Regular": require("../assets/fonts/Poppins (2)/Poppins-Regular.ttf"),
     "poppins-Semibold": require("../assets/fonts/Poppins (2)/Poppins-SemiBold.ttf"),
     "poppins-bold": require("../assets/fonts/Poppins (2)/Poppins-Bold.ttf"),
+    "poppins-light": require("../assets/fonts/Poppins (2)/Poppins-Light.ttf"),
   });
 
   return (
-
-      <TextInput
-    accessibilityLabel={name} 
-        value={value}
-        onChangeText={onChangeText}
-        placeholder={placeholder}
-        autoCapitalize={autoCapitalize}
-        secureTextEntry={secureTextEntry}
-        keyboardType={keyboardType}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        autoComplete={autoComplete}
-        style={[styles.input, isFocused && styles.focusedInput, style, hasError&& styles.errorInput]}
-      />
-    
+    <TextInput
+      accessibilityLabel={name}
+      value={value}
+      onChangeText={onChangeText}
+      placeholder={placeholder}
+      autoCapitalize={autoCapitalize}
+      secureTextEntry={secureTextEntry}
+      keyboardType={keyboardType}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
+      autoComplete={autoComplete}
+      maxLength={maxLength}
+      style={[styles.input, isFocused && styles.focusedInput, style]}
+    />
   );
 };
 
 export default Inputs;
 
 const styles = StyleSheet.create({
- 
   input: {
-  
-   height:45,
-    outlineColor: "orange",
+    // outlineColor: "orange",
     borderWidth: 1,
     borderColor: "#E9E9E9",
     borderRadius: 8,
-    padding: 10,
-     
-    fontFamily: "poppins-Regular",
-    backgroundColor:'#FCFCFC'
+    paddingHorizontal: 10,
+
+    fontFamily: "poppins-light",
+    backgroundColor: "#FCFCFC",
   },
   focusedInput: {
     borderWidth: 1,
     borderColor: "#FD8204",
   },
-  errorInput:{
-    borderWidth:2, 
-    borderColor:'red'
-  }
 });

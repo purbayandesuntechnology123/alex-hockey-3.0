@@ -23,13 +23,14 @@ const styles = StyleSheet.create({
   buttonDesign: {
     backgroundColor: "#FD8204",
     paddingHorizontal: 20,
-    paddingVertical: 10,
+    padding: 10,
     borderRadius: 30,
-    width: 320,
   },
   btnTxt: {
     color: "white",
     textAlign: "center",
+    alignSelf: "center",
+
     fontSize: 16,
     fontFamily: "poppins-Semibold",
   },

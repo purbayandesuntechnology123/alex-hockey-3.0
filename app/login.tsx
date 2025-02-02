@@ -7,12 +7,14 @@ import Inputs from "@/components/Inputs";
 import Button from "@/components/Button";
 import { Image } from "expo-image";
 import SocialSignup from "@/components/SocialSignup";
-import { Link } from "expo-router";
+import { Link, useNavigation } from "expo-router";
 import { useFonts } from "expo-font";
 // import loginSVG from "../assets/images/login.svg";
 
 const login = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
+
+  const navigation: any = useNavigation();
 
   const [fontsLoaded] = useFonts({
     "poppins-Regular": require("../assets/fonts/Poppins (2)/Poppins-Regular.ttf"),
@@ -28,47 +30,48 @@ const login = () => {
 
   const validateLogin = () => {
     let newErrorMessage = { email: "", password: "" };
+    let isValid = true;
 
     if (credentials.email === "") {
       newErrorMessage.email = "Please provide your email";
     } else if (!emailRegex.test(credentials.email)) {
       newErrorMessage.email = "Not an email";
+      isValid = false;
     }
     if (credentials.password === "") {
       newErrorMessage.password = "password does not match";
+      isValid = false;
     }
     setError(newErrorMessage);
-    return !Object.values(newErrorMessage).some((error) => error !== "");
+    return isValid;
   };
 
   const loginHandle = () => {
     if (validateLogin()) {
       console.log(credentials);
+      navigation.navigate("forgotpassword");
     }
   };
 
   return (
     <View style={styles.mainContainer}>
-      
-      <PrevArrows href={"/registration"}  />
-        <Header text="Login" />
-        
-     
+      <PrevArrows href={"/registration"} />
+      <Header text="Login" />
+
       {/* <View style={styles.body}> */}
       <ScrollView
         contentContainerStyle={[styles.scrollContent, styles.body]}
-        showsVerticalScrollIndicator={false}
-      >
+        showsVerticalScrollIndicator={false}>
         <View>
           <View>
             <Text style={styles.welcomeText}>Welcome</Text>
             <Text style={styles.lorems}>
-              Lorem ipsum dolor sit amet dolor sit amet dolor sit amet...{" "}
+              Lorem ipsum dolor sit amet dolor sit amet dolor sit amet...
             </Text>
           </View>
 
           <View style={styles.inputContainer}>
-            <View style={{marginBottom:20}}>
+            <View style={{ marginBottom: 20 }}>
               <Labels labels="Email" />
               <Inputs
                 value={credentials.email}
@@ -113,18 +116,16 @@ const login = () => {
           </View>
         </View>
 
-
-<View style={{width:'100%'}}>
-        <Text style={styles.signupText}>
-          Don't have an account?{" "}
-          <Link
-            href={"/registration"}
-            style={{ color: "#FD8204", fontFamily: "poppins-Semibold" }}
-          >
-            {" "}
-            Sign Up
-          </Link>
-        </Text>
+        <View style={{ width: "100%" }}>
+          <Text style={styles.signupText}>
+            Don't have an account?{" "}
+            <Link
+              href={"/registration"}
+              style={{ color: "#FD8204", fontFamily: "poppins-Semibold" }}>
+              {" "}
+              Sign Up
+            </Link>
+          </Text>
         </View>
       </ScrollView>
       {/* </View> */}
@@ -139,6 +140,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     flex: 1,
     padding: 20,
+    // alignItems: "center",
 
     // backgroundColor:'white',
   },
@@ -146,10 +148,10 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 
-  prevBtn:{
-    position:'absolute',
- top:10,
- left:20
+  prevBtn: {
+    position: "absolute",
+    top: 10,
+    left: 20,
   },
 
   body: {
@@ -164,7 +166,7 @@ const styles = StyleSheet.create({
   signupText: {
     fontFamily: "poppins-Regular",
     alignSelf: "center",
-    marginBottom: 15,
+    // marginBottom: 15,
     // alignSelf:'flex-end'
   },
   welcomeText: {
@@ -183,9 +185,7 @@ const styles = StyleSheet.create({
   },
   errorValue: {
     color: "red",
-    position: "absolute",
-    bottom: 2,
-    fontSize: 12,
+    fontSize: 11,
     fontFamily: "poppins-Regular",
   },
   btnCon: {
@@ -193,10 +193,9 @@ const styles = StyleSheet.create({
   },
 
   forgotPass: {
-  
-    alignSelf:'flex-end',
-    marginTop:10,
-   
+    alignSelf: "flex-end",
+    marginTop: 10,
+
     fontFamily: "league-Regular",
     color: "#FD8204",
   },
