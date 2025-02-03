@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StatusBar, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import Header from "@/components/Header";
 import NewPasswordSvg from "@/components/NewPassworSvg";
@@ -8,6 +8,8 @@ import Labels from "@/components/Labels";
 import Button from "@/components/Button";
 import { useNavigation } from "expo-router";
 import PrevArrows from "@/components/PrevArrows";
+import { LinearGradient } from "expo-linear-gradient";
+
 
 const ChangePassword = () => {
   const navigation: any = useNavigation();
@@ -60,6 +62,14 @@ const ChangePassword = () => {
 
   return (
     <View style={styles.mainContainer}>
+       <LinearGradient colors={["#FFDFBE", "#FFFFFF"]} style={styles.gradient} />
+
+{/* Transparent Status Bar */}
+<StatusBar
+  translucent
+  backgroundColor="transparent"
+  barStyle="dark-content"
+/>
       <Header text="Change Password" style={styles.header} />
       <PrevArrows href={"/verifyotp"} />
       <NewPasswordSvg />
@@ -138,4 +148,11 @@ const styles = StyleSheet.create({
     borderColor: "red",
   },
   header: { color: "#FD8204" },
+  gradient:{
+    position: "absolute",
+    minWidth: "120%",
+    minHeight: 40, // Height of status bar (adjust if needed)
+    top: 0,
+    left: 0,
+  }
 });

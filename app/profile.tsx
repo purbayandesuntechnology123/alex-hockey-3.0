@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet, Text, View } from "react-native";
+import { Dimensions, StatusBar, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Header from "@/components/Header";
 import PrevArrows from "@/components/PrevArrows";
@@ -9,6 +9,7 @@ import Inputs from "@/components/Inputs";
 import { useFonts } from "expo-font";
 import Button from "@/components/Button";
 import { useNavigation } from "expo-router";
+import { LinearGradient } from "expo-linear-gradient";
 
 const profile = () => {
   const { width } = Dimensions.get("window");
@@ -26,6 +27,15 @@ navigation.navigate('productoptions')
   }
   return (
     <View style={styles.mainContainer}>
+        <LinearGradient colors={["#FFDFBE", "#FFFFFF"]} style={styles.gradient} />
+
+{/* Transparent Status Bar */}
+<StatusBar
+  translucent
+  backgroundColor="transparent"
+  barStyle="dark-content"
+/>
+
       <Header text="Profile" />
       <PrevArrows href={"/success"} />
 
@@ -103,5 +113,12 @@ const styles = StyleSheet.create({
   },
   buttonCon: {
     marginTop: 20,
+  },
+  gradient: {
+    position: "absolute",
+    minWidth: "120%",
+    minHeight: 40, // Height of status bar (adjust if needed)
+    top: 0,
+    left: 0,
   },
 });

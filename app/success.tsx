@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StatusBar, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Header from "@/components/Header";
 import PrevArrows from "@/components/PrevArrows";
@@ -6,6 +6,7 @@ import CheckSvg from "@/components/CheckSvg";
 import Button from "@/components/Button";
 import { useFonts } from "expo-font";
 import { useNavigation } from "expo-router";
+import { LinearGradient } from "expo-linear-gradient";
 
 const success = () => {
      const navigation:any= useNavigation()
@@ -20,6 +21,14 @@ const success = () => {
   }
   return (
     <View style={styles.mainContainer}>
+          <LinearGradient colors={["#FFDFBE", "#FFFFFF"]} style={styles.gradient} />
+
+{/* Transparent Status Bar */}
+<StatusBar
+  translucent
+  backgroundColor="transparent"
+  barStyle="dark-content"
+/>
       <Header text="Success" />
       <PrevArrows href={"/changepassword"} />
       <View style={styles.container}>
@@ -63,5 +72,12 @@ const styles = StyleSheet.create({
     fontSize:14,
     fontFamily:'poppins-Regular',
     textAlign:'center'
-  }
+  },
+  gradient: {
+    position: "absolute",
+    minWidth: "120%",
+    minHeight: 40, // Height of status bar (adjust if needed)
+    top: 0,
+    left: 0,
+  },
 });

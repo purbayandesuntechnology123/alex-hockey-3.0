@@ -5,10 +5,10 @@ import { Link } from 'expo-router'
 
 const PrevArrow2 = ({ href }: { href: any }) => {
   return (
-    <Link href={href} asChild>
-      <TouchableOpacity style={styles.arrow}>
+    <Link href={href} >
+      
         <AntDesign name="arrowleft" size={24} color="#666666" />
-      </TouchableOpacity>
+
     </Link>
   )
 }

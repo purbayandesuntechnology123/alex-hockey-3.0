@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   headerCon: {
     display:'flex',
     alignItems: "center",
-    marginTop: 20,
+   marginTop:20
   },
   headerText: {
     color: "#FD8204",
