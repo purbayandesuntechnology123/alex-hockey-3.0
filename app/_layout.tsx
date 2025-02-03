@@ -4,36 +4,54 @@ import { Navigator, Stack } from "expo-router";
 
 const _layout = () => {
   return (
-   
     <Stack>
       <Stack.Screen
         name="registration"
         options={{
           title: "Registration",
           headerShown: false,
-        }}></Stack.Screen>
+        }}
+      ></Stack.Screen>
       <Stack.Screen
         name="index"
-        options={{ title: "Splash", headerShown: false }}></Stack.Screen>
+        options={{ title: "Splash", headerShown: false }}
+      ></Stack.Screen>
       <Stack.Screen
         name="login"
-        options={{ title: "Login", headerShown: false }}></Stack.Screen>
+        options={{ title: "Login", headerShown: false }}
+      ></Stack.Screen>
 
       <Stack.Screen
         name="forgotpassword"
         options={{
           title: "Forgot Password",
           headerShown: false,
-        }}></Stack.Screen>
+        }}
+      ></Stack.Screen>
 
       <Stack.Screen
         name="verifyotp"
         options={{
           title: "Verify OTP",
           headerShown: false,
-        }}></Stack.Screen>
+        }}
+      ></Stack.Screen>
+      <Stack.Screen
+        name="changepassword"
+        options={{
+          title: "Change Password",
+          headerShown: false,
+        }}
+      ></Stack.Screen>
+    
+      <Stack.Screen
+        name="success"
+        options={{
+          title: "Success Page",
+          headerShown: false,
+        }}
+      ></Stack.Screen>
     </Stack>
-   
   );
 };
 

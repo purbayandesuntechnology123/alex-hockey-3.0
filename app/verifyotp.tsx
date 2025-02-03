@@ -11,8 +11,11 @@ import NextArrowSvg from "@/components/NextArrowSvg";
 import { useFonts } from "expo-font";
 import LockSvg from "@/components/LockSvg";
 import SocialSignup from "@/components/SocialSignup";
+import { useNavigation } from "expo-router";
 
 const verifyotp = () => {
+
+   const navigation:any= useNavigation()
   const [inputValue, setInputValue] = useState(["", "", "", ""]);
 
   const handleChange = (text: string, index: number) => {
@@ -31,6 +34,7 @@ const verifyotp = () => {
       return;
     } else {
       console.log(inputValue.join(""));
+      navigation.navigate('changepassword')
     }
   };
 
