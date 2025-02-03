@@ -5,13 +5,19 @@ import PrevArrows from "@/components/PrevArrows";
 import CheckSvg from "@/components/CheckSvg";
 import Button from "@/components/Button";
 import { useFonts } from "expo-font";
+import { useNavigation } from "expo-router";
 
 const success = () => {
+     const navigation:any= useNavigation()
   const [fontsLoaded] = useFonts({
     "poppins-Regular": require("../assets/fonts/Poppins (2)/Poppins-Regular.ttf"),
     "poppins-Semibold": require("../assets/fonts/Poppins (2)/Poppins-SemiBold.ttf"),
     "poppins-bold": require("../assets/fonts/Poppins (2)/Poppins-Bold.ttf"),
   });
+
+  const handleSubmit=()=>{
+    navigation.navigate('profile')
+  }
   return (
     <View style={styles.mainContainer}>
       <Header text="Success" />
@@ -26,7 +32,7 @@ const success = () => {
       </View>
 
       <View>
-        <Button text="Continue" />
+        <Button text="Continue" onPress={handleSubmit}/>
       </View>
     </View>
   );
@@ -50,7 +56,8 @@ const styles = StyleSheet.create({
     fontFamily: "poppins-Semibold",
     color:'#71AE3A',
     alignSelf:'center',
-    marginTop:50
+    marginTop:50,
+    marginBottom:20
   },
   message:{
     fontSize:14,

@@ -12,6 +12,7 @@ import { useFonts } from "expo-font";
 import LockSvg from "@/components/LockSvg";
 import SocialSignup from "@/components/SocialSignup";
 import { useNavigation } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const verifyotp = () => {
 
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     flex: 1,
 
-    padding: 20,
+   padding:20
   },
   verifySvg: {
     width: 150,

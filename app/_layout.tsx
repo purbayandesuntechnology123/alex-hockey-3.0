@@ -43,11 +43,25 @@ const _layout = () => {
           headerShown: false,
         }}
       ></Stack.Screen>
-    
+
       <Stack.Screen
         name="success"
         options={{
           title: "Success Page",
+          headerShown: false,
+        }}
+      ></Stack.Screen>
+      <Stack.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          headerShown: false,
+        }}
+      ></Stack.Screen>
+      <Stack.Screen
+        name="productoptions"
+        options={{
+          title: "Product Options",
           headerShown: false,
         }}
       ></Stack.Screen>

@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import PrevArrows from "./PrevArrows";
 import { useFonts } from "expo-font";
+import PrevSvg from "./PrevArrowSvg";
 
 const Header = ({ text, style = {} }: any) => {
   const [fontsLoaded] = useFonts({
@@ -13,7 +14,8 @@ const Header = ({ text, style = {} }: any) => {
 
   return (
     <View style={styles.headerCon}>
-      <Text style={[style, styles.headerText]}>{text}</Text>
+    
+      <Text style={[styles.headerText, style]}>{text}</Text>
     </View>
   );
 };
@@ -22,7 +24,7 @@ export default Header;
 
 const styles = StyleSheet.create({
   headerCon: {
-    justifyContent: "flex-start",
+    display:'flex',
     alignItems: "center",
     marginTop: 20,
   },

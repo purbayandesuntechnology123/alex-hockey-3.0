@@ -10,8 +10,7 @@ import { useNavigation } from "expo-router";
 import PrevArrows from "@/components/PrevArrows";
 
 const ChangePassword = () => {
-
-   const navigation:any= useNavigation()
+  const navigation: any = useNavigation();
   const [password, setPassword] = useState({
     newPassword: "",
     confirmPassword: "",
@@ -55,15 +54,14 @@ const ChangePassword = () => {
   const handleSubmit = () => {
     if (validationCheck()) {
       console.log("ok");
-      navigation.navigate('success')
-
+      navigation.navigate("success");
     }
   };
 
   return (
     <View style={styles.mainContainer}>
-      <Header text="Change Password" />
-      <PrevArrows href={"/verifyotp"}/>
+      <Header text="Change Password" style={styles.header} />
+      <PrevArrows href={"/verifyotp"} />
       <NewPasswordSvg />
       <View>
         <View style={styles.inputCon}>
@@ -84,12 +82,12 @@ const ChangePassword = () => {
           />
           {error.newPassword && (
             <Text style={styles.errorMessage}>{error.newPassword}</Text>
-          ) }
+          )}
         </View>
         <View style={styles.inputCon}>
           <Labels labels="Confirm Password" />
           <Inputs
-          value={password.confirmPassword}
+            value={password.confirmPassword}
             secureTextEntry={isHidden.confirmPassword}
             placeholder="Confirm Password"
             style={error.confirmPassword ? styles.errorInput : null}
@@ -104,7 +102,7 @@ const ChangePassword = () => {
           />
           {error.confirmPassword && (
             <Text style={styles.errorMessage}>{error.confirmPassword}</Text>
-          ) }
+          )}
         </View>
         <View style={styles.btnContainer}>
           <Button text="Submit" onPress={handleSubmit} />
@@ -139,4 +137,5 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "red",
   },
+  header: { color: "#FD8204" },
 });
