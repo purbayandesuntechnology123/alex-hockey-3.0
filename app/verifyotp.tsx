@@ -10,7 +10,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "expo-router";
 
 const VerifyOtp = () => {
-   const navigation:any= useNavigation()
+  const navigation: any = useNavigation();
   const [inputValue, setInputValue] = useState(["", "", "", ""]);
   const [error, setError] = useState([false, false, false, false]);
 
@@ -23,7 +23,7 @@ const VerifyOtp = () => {
   const isSubmitOtp = () => {
     const newError = inputValue.map((value) => value === "");
     setError(newError);
-  
+
     if (newError.includes(true)) {
       return;
     } else {
@@ -33,11 +33,19 @@ const VerifyOtp = () => {
   };
 
   return (
-    <LinearGradient colors={["#FFDFBE", "#FFFFFF"]} style={styles.gradient}>
-      <SafeAreaView style={styles.safeArea}>
-        {/* Transparent Status Bar */}
-        <StatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
+    <LinearGradient
+      colors={["#FFDFBE", "#FFFFFF"]}
+      locations={[0, 0.06]}
+      style={styles.gradient}>
+      {/* Transparent Status Bar */}
+      <StatusBar
+        translucent
+        backgroundColor="transparent"
+        barStyle="dark-content"
+      />
 
+      {/* Ensure SafeAreaView includes "top" edge to extend the gradient */}
+      <SafeAreaView style={styles.safeArea} edges={["top"]}>
         <View style={styles.main}>
           <Header text="OTP Verification" />
           <PrevArrows href={"/forgotpassword"} />
@@ -63,8 +71,7 @@ const VerifyOtp = () => {
 
           <Text style={styles.timer}>00:00</Text>
           <Text style={styles.resendOtp}>
-            Didn't receive OTP?{" "}
-            <Text style={styles.sendOtp}>Send OTP</Text>
+            Didn't receive OTP? <Text style={styles.sendOtp}>Send OTP</Text>
           </Text>
 
           <Button text="Continue" onPress={isSubmitOtp} />
@@ -75,9 +82,11 @@ const VerifyOtp = () => {
 };
 
 export default VerifyOtp;
+
 const styles = StyleSheet.create({
   gradient: {
-    flex: 1, // Ensure full-screen gradient
+    flex: 1,
+    // Ensure full-screen gradient
   },
   safeArea: {
     flex: 1,
@@ -87,8 +96,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
-    padding: 20,
-   // Moves the rounded white box down slightly
+    paddingHorizontal: 20,
   },
   inputCon: {
     flexDirection: "row",

@@ -1,5 +1,6 @@
 import {
   Alert,
+  Platform,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -122,149 +123,161 @@ const index = () => {
 
   return (
     // <ScrollView contentContainerStyle=>
-    <SafeAreaView style={styles.mainContainer}>
-      {/*  */}
-
-      <LinearGradient colors={["#FFDFBE", "#FFFFFF"]} style={styles.gradient} />
-
-      {/* Transparent Status Bar */}
+    <LinearGradient
+      colors={["#FFDFBE", "#FFFFFF"]}
+      locations={[0, 0.06]}
+      style={styles.gradient}>
       <StatusBar
         translucent
         backgroundColor="transparent"
         barStyle="dark-content"
       />
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.mainCon}>
+          <PrevArrows href={"/"} />
+          <Header text="Registration" />
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ flexGrow: 1 }}>
+            <View style={styles.inputMain}>
+              <View style={styles.inputCon}>
+                <Labels labels="Full Name" />
+                <Inputs
+                  style={errors.fullName ? styles.errorInput : null}
+                  name="fullname"
+                  placeholder="Enter Your Name"
+                  value={formData.fullName}
+                  onChangeText={(text: string) =>
+                    setFormData({ ...formData, fullName: text })
+                  }
+                />
+                {errors.fullName ? (
+                  <Text style={styles.errorMessage}>{errors.fullName}</Text>
+                ) : null}
+              </View>
 
-      <PrevArrows href={"/"} />
-      <Header text="Registration" />
-      <ScrollView showsVerticalScrollIndicator={false} style={{ flexGrow: 1 }}>
-        <View style={styles.inputMain}>
-          <View style={styles.inputCon}>
-            <Labels labels="Full Name" />
-            <Inputs
-              style={errors.fullName ? styles.errorInput : null}
-              name="fullname"
-              placeholder="Enter Your Name"
-              value={formData.fullName}
-              onChangeText={(text: string) =>
-                setFormData({ ...formData, fullName: text })
-              }
-            />
-            {errors.fullName ? (
-              <Text style={styles.errorMessage}>{errors.fullName}</Text>
-            ) : null}
-          </View>
+              <View style={styles.inputCon}>
+                <Labels labels="Email" />
+                <Inputs
+                  style={errors.email ? styles.errorInput : null}
+                  name="email"
+                  value={formData.email}
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  autoComplete="email"
+                  placeholder="Enter Your Email Id"
+                  onChangeText={(text: string) =>
+                    setFormData({ ...formData, email: text })
+                  }
+                />
+                {errors.email ? (
+                  <Text style={styles.errorMessage}>{errors.email}</Text>
+                ) : null}
+              </View>
 
-          <View style={styles.inputCon}>
-            <Labels labels="Email" />
-            <Inputs
-              style={errors.email ? styles.errorInput : null}
-              name="email"
-              value={formData.email}
-              keyboardType="email-address"
-              autoCapitalize="none"
-              autoComplete="email"
-              placeholder="Enter Your Email Id"
-              onChangeText={(text: string) =>
-                setFormData({ ...formData, email: text })
-              }
-            />
-            {errors.email ? (
-              <Text style={styles.errorMessage}>{errors.email}</Text>
-            ) : null}
-          </View>
+              <View style={styles.inputCon}>
+                <Labels labels="Contact Number" />
+                <Inputs
+                  style={errors.contact ? styles.errorInput : null}
+                  name="contact_number"
+                  keyboardType="numeric"
+                  value={formData.contact}
+                  placeholder="Enter Your Contact Number"
+                  onChangeText={(text: string) =>
+                    setFormData({ ...formData, contact: text })
+                  }
+                />
 
-          <View style={styles.inputCon}>
-            <Labels labels="Contact Number" />
-            <Inputs
-              style={errors.contact ? styles.errorInput : null}
-              name="contact_number"
-              keyboardType="numeric"
-              value={formData.contact}
-              placeholder="Enter Your Contact Number"
-              onChangeText={(text: string) =>
-                setFormData({ ...formData, contact: text })
-              }
-            />
+                {errors.contact ? (
+                  <Text style={styles.errorMessage}>{errors.contact}</Text>
+                ) : null}
+              </View>
+              <Labels labels="Password" />
+              <View style={styles.inputCon}>
+                <Inputs
+                  style={errors.password ? styles.errorInput : null}
+                  name="password"
+                  value={formData.password}
+                  placeholder="Enter Your Password"
+                  secureTextEntry={isHidden.password}
+                  onChangeText={(text: string) =>
+                    setFormData({ ...formData, password: text })
+                  }
+                />
+                <Eye
+                  onPress={() => toggleVisibility("password")}
+                  isHidden={isHidden.password}
+                />
+                {errors.password ? (
+                  <Text style={styles.errorMessage}>{errors.password}</Text>
+                ) : null}
+              </View>
+            </View>
+            <View style={styles.checkboxCon}>
+              <Checkbox
+                value={isChecked}
+                onValueChange={setChecked}
+                color={isChecked ? "#FD8204" : ""}
+                style={styles.checkboxColor}
+              />
+              <Text style={styles.terms}>
+                I Agree{" "}
+                <Text style={{ color: "#FD8204" }}>
+                  Terms And Conditions {"     "}
+                </Text>
+              </Text>
+            </View>
+            <Button text="Sign Up" onPress={handleSubmit} />
 
-            {errors.contact ? (
-              <Text style={styles.errorMessage}>{errors.contact}</Text>
-            ) : null}
-          </View>
-          <Labels labels="Password" />
-          <View style={styles.inputCon}>
-            <Inputs
-              style={errors.password ? styles.errorInput : null}
-              name="password"
-              value={formData.password}
-              placeholder="Enter Your Password"
-              secureTextEntry={isHidden.password}
-              onChangeText={(text: string) =>
-                setFormData({ ...formData, password: text })
-              }
-            />
-            <Eye
-              onPress={() => toggleVisibility("password")}
-              isHidden={isHidden.password}
-            />
-            {errors.password ? (
-              <Text style={styles.errorMessage}>{errors.password}</Text>
-            ) : null}
-          </View>
+            <View style={{ alignSelf: "center" }}>
+              {" "}
+              <SocialSignup />
+            </View>
+
+            <View style={{ width: "100%", marginTop: 11 }}>
+              <Text
+                style={{
+                  marginTop: 11,
+                  color: "#070707",
+                  alignSelf: "center",
+                }}>
+                Have an account?
+                <Link
+                  href={"/login"}
+                  style={{
+                    color: "#FD8204",
+                    fontWeight: "500",
+                    fontFamily: "poppins-Semibold",
+                  }}>
+                  <Text> Sign In {"    "}</Text>
+                </Link>
+              </Text>
+            </View>
+          </ScrollView>
         </View>
-        <View style={styles.checkboxCon}>
-          <Checkbox
-            value={isChecked}
-            onValueChange={setChecked}
-            color={isChecked ? "#FD8204" : ""}
-            style={styles.checkboxColor}
-          />
-          <Text style={styles.terms}>
-            I Agree{" "}
-            <Text style={{ color: "#FD8204" }}>
-              Terms And Conditions {"     "}
-            </Text>
-          </Text>
-        </View>
-        <Button text="Sign Up" onPress={handleSubmit} />
-
-        <View style={{ alignSelf: "center" }}>
-          {" "}
-          <SocialSignup />
-        </View>
-
-        <View style={{ width: "100%", marginTop: 11 }}>
-          <Text
-            style={{ marginTop: 11, color: "#070707", alignSelf: "center" }}>
-            Have an account?
-            <Link
-              href={"/login"}
-              style={{
-                color: "#FD8204",
-                fontWeight: "500",
-                fontFamily: "poppins-Semibold",
-              }}>
-              <Text> Sign In {"    "}</Text>
-            </Link>
-          </Text>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+      </SafeAreaView>
+    </LinearGradient>
   );
 };
 
 export default index;
 
 const styles = StyleSheet.create({
-  mainContainer: {
+  gradient: {
     flex: 1,
+  },
+  safeArea: {
+    flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight || 0 : 0,
+  },
 
+  mainCon: {
+    flex: 1,
     backgroundColor: "#FFFFFF",
-
-    // paddingVertical: 15,
-    // justifyContent: "space-between",
-
-    // padding: 20,
-    padding: 20,
+    paddingHorizontal: 20,
+    // marginTop: 20,
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
   },
   inputCon: {
     marginBottom: 20,
@@ -305,13 +318,5 @@ const styles = StyleSheet.create({
     bottom: 0,
 
     fontFamily: "poppins-Regular",
-  },
-
-  gradient: {
-    position: "absolute",
-    minWidth: "120%",
-    minHeight: 40, // Height of status bar (adjust if needed)
-    top: 0,
-    left: 0,
   },
 });

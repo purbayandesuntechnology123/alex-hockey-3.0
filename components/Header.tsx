@@ -14,7 +14,6 @@ const Header = ({ text, style = {} }: any) => {
 
   return (
     <View style={styles.headerCon}>
-    
       <Text style={[styles.headerText, style]}>{text}</Text>
     </View>
   );
@@ -24,13 +23,12 @@ export default Header;
 
 const styles = StyleSheet.create({
   headerCon: {
-    display:'flex',
+    display: "flex",
     alignItems: "center",
-   marginTop:20
   },
   headerText: {
     color: "#FD8204",
-    // fontWeight: "500",
+
     fontSize: 23,
     fontFamily: "league-Regular",
   },

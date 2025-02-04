@@ -10,6 +10,7 @@ import SocialSignup from "@/components/SocialSignup";
 import { Link, useNavigation } from "expo-router";
 import { useFonts } from "expo-font";
 import { LinearGradient } from "expo-linear-gradient";
+import { SafeAreaView } from "react-native-safe-area-context";
 // import loginSVG from "../assets/images/login.svg";
 
 const login = () => {
@@ -55,100 +56,114 @@ const login = () => {
   };
 
   return (
-    <View style={styles.mainContainer}>
-      <LinearGradient colors={["#FFDFBE", "#FFFFFF"]} style={styles.gradient} />
-
-      {/* Transparent Status Bar */}
+    <LinearGradient
+      style={styles.gradient}
+      colors={["#FFDFBE", "#FFFFFF"]}
+      locations={[0, 0.06]}>
       <StatusBar
         translucent
         backgroundColor="transparent"
         barStyle="dark-content"
       />
-      <PrevArrows href={"/registration"} />
-      <Header text="Login" />
+      {/* <View style={styles.mainContainer}> */}
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.mainCon}>
+          <PrevArrows href={"/registration"} />
+          <Header text="Login" />
 
-      {/* <View style={styles.body}> */}
-      <ScrollView
-        contentContainerStyle={[styles.scrollContent, styles.body]}
-        showsVerticalScrollIndicator={false}>
-        <View>
-          <View>
-            <Text style={styles.welcomeText}>Welcome</Text>
-            <Text style={styles.lorems}>
-              Lorem ipsum dolor sit amet dolor sit amet dolor sit amet...
-            </Text>
-          </View>
-
-          <View style={styles.inputContainer}>
-            <View style={{ marginBottom: 20 }}>
-              <Labels labels="Email" />
-              <Inputs
-                value={credentials.email}
-                style={error.email ? styles.errorInput : null}
-                keyboardType="email-address"
-                autoCapitalize="none"
-                autoComplete="email"
-                placeholder="Enter Your Email Address"
-                onChangeText={(text: any) =>
-                  setCredentials({ ...credentials, email: text })
-                }
-              />
-              {error.email && (
-                <Text style={styles.errorValue}>{error.email}</Text>
-              )}
-            </View>
+          {/* <View style={styles.body}> */}
+          <ScrollView
+            contentContainerStyle={[styles.scrollContent, styles.body]}
+            showsVerticalScrollIndicator={false}>
             <View>
-              <Labels labels="Password" />
-              <Inputs
-                value={credentials.password}
-                style={error.password ? styles.errorInput : null}
-                placeholder="Enter Your Password"
-                onChangeText={(text: any) =>
-                  setCredentials({ ...credentials, password: text })
-                }
-              />
-              {error.password && (
-                <Text style={styles.errorValue}>{error.password}</Text>
-              )}
-              <Link href={"/forgotpassword"} style={styles.forgotPass}>
-                Forgot Password
-              </Link>
+              <View>
+                <Text style={styles.welcomeText}>Welcome</Text>
+                <Text style={styles.lorems}>
+                  Lorem ipsum dolor sit amet dolor sit amet dolor sit amet...
+                </Text>
+              </View>
+
+              <View style={styles.inputContainer}>
+                <View style={{ marginBottom: 20 }}>
+                  <Labels labels="Email" />
+                  <Inputs
+                    value={credentials.email}
+                    style={error.email ? styles.errorInput : null}
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    autoComplete="email"
+                    placeholder="Enter Your Email Address"
+                    onChangeText={(text: any) =>
+                      setCredentials({ ...credentials, email: text })
+                    }
+                  />
+                  {error.email && (
+                    <Text style={styles.errorValue}>{error.email}</Text>
+                  )}
+                </View>
+                <View>
+                  <Labels labels="Password" />
+                  <Inputs
+                    value={credentials.password}
+                    style={error.password ? styles.errorInput : null}
+                    placeholder="Enter Your Password"
+                    onChangeText={(text: any) =>
+                      setCredentials({ ...credentials, password: text })
+                    }
+                  />
+                  {error.password && (
+                    <Text style={styles.errorValue}>{error.password}</Text>
+                  )}
+                  <Link href={"/forgotpassword"} style={styles.forgotPass}>
+                    Forgot Password
+                  </Link>
+                </View>
+
+                <View style={styles.btnCon}>
+                  <Button text="Log In" onPress={loginHandle} />
+                </View>
+                <View style={{ alignSelf: "center", marginTop: 24 }}>
+                  {" "}
+                  <SocialSignup />{" "}
+                </View>
+              </View>
             </View>
 
-            <View style={styles.btnCon}>
-              <Button text="Log In" onPress={loginHandle} />
+            <View style={{ width: "100%" }}>
+              <Text style={styles.signupText}>
+                Don't have an account?{" "}
+                <Link
+                  href={"/registration"}
+                  style={{ color: "#FD8204", fontFamily: "poppins-Semibold" }}>
+                  {" "}
+                  Sign Up
+                </Link>
+              </Text>
             </View>
-            <View style={{ alignSelf: "center", marginTop: 24 }}>
-              {" "}
-              <SocialSignup />{" "}
-            </View>
-          </View>
+          </ScrollView>
+          {/* </View> */}
         </View>
-
-        <View style={{ width: "100%" }}>
-          <Text style={styles.signupText}>
-            Don't have an account?{" "}
-            <Link
-              href={"/registration"}
-              style={{ color: "#FD8204", fontFamily: "poppins-Semibold" }}>
-              {" "}
-              Sign Up
-            </Link>
-          </Text>
-        </View>
-      </ScrollView>
-      {/* </View> */}
-    </View>
+      </SafeAreaView>
+    </LinearGradient>
   );
 };
 
 export default login;
 
 const styles = StyleSheet.create({
-  mainContainer: {
+  gradient: {
+    flex: 1,
+  },
+
+  safeArea: {
+    flex: 1,
+  },
+  mainCon: {
     backgroundColor: "#FFFFFF",
     flex: 1,
-    padding: 20,
+    paddingHorizontal: 20,
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
     // alignItems: "center",
 
     // backgroundColor:'white',
@@ -207,12 +222,5 @@ const styles = StyleSheet.create({
 
     fontFamily: "league-Regular",
     color: "#FD8204",
-  },
-  gradient: {
-    position: "absolute",
-    minWidth: "120%",
-    minHeight: 40, // Height of status bar (adjust if needed)
-    top: 0,
-    left: 0,
   },
 });

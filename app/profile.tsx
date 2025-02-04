@@ -1,4 +1,12 @@
-import { Dimensions, StatusBar, StyleSheet, Text, View } from "react-native";
+import {
+  Dimensions,
+  Platform,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React from "react";
 import Header from "@/components/Header";
 import PrevArrows from "@/components/PrevArrows";
@@ -13,93 +21,101 @@ import { LinearGradient } from "expo-linear-gradient";
 
 const profile = () => {
   const { width } = Dimensions.get("window");
-   const navigation:any= useNavigation()
-
+  const navigation: any = useNavigation();
 
   const imageWidth = width * 0.4;
   const [fontLoaded] = useFonts({
     "poppins-Regular": require("../assets/fonts/Poppins (2)/Poppins-Regular.ttf"),
   });
 
-
-  const isUpdateProfile=()=>{
-navigation.navigate('productoptions')
-  }
+  const isUpdateProfile = () => {
+    navigation.navigate("productoptions");
+  };
   return (
-    <View style={styles.mainContainer}>
-        <LinearGradient colors={["#FFDFBE", "#FFFFFF"]} style={styles.gradient} />
+    <LinearGradient
+      colors={["#FFDFBE", "#FFFFFF"]}
+      style={styles.gradient}
+      locations={[0, 0.06]}>
+      <StatusBar
+        translucent
+        backgroundColor="transparent"
+        barStyle="dark-content"
+      />
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.mainContainer}>
+          <Header text="Profile" />
+          <PrevArrows href={"/success"} />
 
-{/* Transparent Status Bar */}
-<StatusBar
-  translucent
-  backgroundColor="transparent"
-  barStyle="dark-content"
-/>
+          <View style={styles.profileCon}>
+            <View style={styles.profileImgCon}>
+              <Image
+                style={[
+                  styles.profileImg,
+                  { width: imageWidth, height: imageWidth },
+                ]}
+                source={require("../assets/images/profile_pic.png")}
+              />
 
-      <Header text="Profile" />
-      <PrevArrows href={"/success"} />
+              <View
+                style={{
+                  width: 40, // Adjust based on your design
+                  height: 40, // Adjust based on your design
+                  backgroundColor: "#FD8204", // Light blue background (change as needed)
+                  borderRadius: 50,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  position: "absolute",
+                  bottom: imageWidth * 0.05,
+                  left: imageWidth * 1.37,
+                }}>
+                <PencilSvg />
+              </View>
+            </View>
 
-      <View style={styles.profileCon}>
-        <View style={styles.profileImgCon}>
-          <Image
-            style={[styles.profileImg,{width:imageWidth, height:imageWidth}]}
-            source={require("../assets/images/profile_pic.png")}
-          />
+            <View style={styles.inputCon}>
+              <Labels labels="Full Name" />
+              <Inputs value="John Doe" style={styles.input} />
+            </View>
 
-<View style={{
-    width: 40,  // Adjust based on your design
-    height: 40, // Adjust based on your design
-    backgroundColor: "#FD8204", // Light blue background (change as needed)
-    borderRadius: 50,
-    alignItems: "center",
-    justifyContent:'center',
-    position:'absolute',
-    bottom:imageWidth*0.05,
-    left:imageWidth*1.37
-  }}>
-            
-       
-          <PencilSvg />
+            <View style={styles.inputCon}>
+              <Labels labels="Email" />
+              <Inputs value="info@alexhockey.com" style={styles.input} />
+            </View>
+            <View style={styles.inputCon}>
+              <Labels labels="Contact Number" />
+              <Inputs value="+1 1234 546 789" style={styles.input} />
+            </View>
+
+            <View style={styles.buttonCon}>
+              <Button text="Update Profile" onPress={isUpdateProfile} />
+            </View>
           </View>
         </View>
-
-        <View style={styles.inputCon}>
-          <Labels labels="Full Name" />
-          <Inputs value="John Doe" style={styles.input} />
-        </View>
-
-        <View style={styles.inputCon}>
-          <Labels labels="Email" />
-          <Inputs value="info@alexhockey.com" style={styles.input} />
-        </View>
-        <View style={styles.inputCon}>
-          <Labels labels="Contact Number" />
-          <Inputs value="+1 1234 546 789" style={styles.input} />
-        </View>
-
-        <View style={styles.buttonCon}>
-          <Button text="Update Profile" onPress={isUpdateProfile}/>
-        </View>
-      </View>
-    </View>
+      </SafeAreaView>
+    </LinearGradient>
   );
 };
 
 export default profile;
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight || 0 : 0,
+  },
   mainContainer: {
-    padding: 20,
+    paddingHorizontal: 20,
     flex: 1,
     backgroundColor: "#FFFFFF",
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
   },
   profileImgCon: {
     position: "relative",
     marginTop: 30,
-    marginBottom:20
+    marginBottom: 20,
   },
   profileImg: {
-  
     borderRadius: 100,
     alignSelf: "center",
   },
@@ -115,10 +131,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   gradient: {
-    position: "absolute",
-    minWidth: "120%",
-    minHeight: 40, // Height of status bar (adjust if needed)
-    top: 0,
-    left: 0,
+    flex: 1,
   },
 });
