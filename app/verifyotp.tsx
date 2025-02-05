@@ -1,27 +1,24 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { useEffect, useState } from "react";
-import { Image } from "expo-image";
-
-// import verifySVG from "../assets/images/verify.svg";
+import { StatusBar, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { LinearGradient } from "expo-linear-gradient";
 import Header from "@/components/Header";
 import Inputs from "@/components/Inputs";
 import Button from "@/components/Button";
 import PrevArrows from "@/components/PrevArrows";
-import NextArrowSvg from "@/components/NextArrowSvg";
-import { useFonts } from "expo-font";
 import LockSvg from "@/components/LockSvg";
-import SocialSignup from "@/components/SocialSignup";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "expo-router";
 
-const verifyotp = () => {
+const VerifyOtp = () => {
+  const navigation: any = useNavigation();
   const [inputValue, setInputValue] = useState(["", "", "", ""]);
+  const [error, setError] = useState([false, false, false, false]);
 
   const handleChange = (text: string, index: number) => {
     const newInputValue = [...inputValue];
     newInputValue[index] = text;
     setInputValue(newInputValue);
   };
-
-  const [error, setError] = useState([false, false, false, false]);
 
   const isSubmitOtp = () => {
     const newError = inputValue.map((value) => value === "");
@@ -30,68 +27,79 @@ const verifyotp = () => {
     if (newError.includes(true)) {
       return;
     } else {
-      console.log(inputValue.join(""));
+      console.log("Entered OTP:", inputValue.join("")); // Logs the OTP when submitted
+      navigation.navigate("changepassword");
     }
   };
 
-  const [fontsLoaded] = useFonts({
-    "poppins-Regular": require("../assets/fonts/Poppins (2)/Poppins-Regular.ttf"),
-    "poppins-Semibold": require("../assets/fonts/Poppins (2)/Poppins-SemiBold.ttf"),
-    "poppins-bold": require("../assets/fonts/Poppins (2)/Poppins-Bold.ttf"),
-  });
   return (
-    <View style={styles.main}>
-      <Header text="OTP Verification" />
-      <PrevArrows href={"/forgotpassword"} />
-      <LockSvg />
-      <Text style={styles.confirmMail}>
-        We will send you one time password on the mail Id
-      </Text>
-      <Text style={styles.admin}>admin@gmail.com</Text>
-      <View style={styles.inputCon}>
-        {inputValue.map((inputs, index) => {
-          return (
-            <Inputs
-              style={[styles.input, error[index] ? styles.error : null]}
-              key={index}
-              keyboardType="numeric"
-              maxLength={1}
-              value={inputValue[index]}
-              onChangeText={(text: string) => handleChange(text, index)}
-            />
-          );
-        })}
-      </View>
-      <Text style={styles.timer}>00:00</Text>
-      <Text style={styles.resendOtp}>
-        Didn't Send OTP?{" "}
-        <Text style={{ color: "#FD8204", fontFamily: "poppins-Semibold" }}>
-          Send OTP
-        </Text>
-      </Text>
-      <Button text="Continue" onPress={isSubmitOtp} />
-    </View>
+    <LinearGradient
+      colors={["#FFDFBE", "#FFFFFF"]}
+      locations={[0, 0.06]}
+      style={styles.gradient}>
+      {/* Transparent Status Bar */}
+      <StatusBar
+        translucent
+        backgroundColor="transparent"
+        barStyle="dark-content"
+      />
+
+      {/* Ensure SafeAreaView includes "top" edge to extend the gradient */}
+      <SafeAreaView style={styles.safeArea} edges={["top"]}>
+        <View style={styles.main}>
+          <Header text="OTP Verification" />
+          <PrevArrows href={"/forgotpassword"} />
+          <LockSvg />
+          <Text style={styles.confirmMail}>
+            We will send you a one-time password on your mail ID
+          </Text>
+          <Text style={styles.admin}>admin@gmail.com</Text>
+
+          {/* OTP Input Fields */}
+          <View style={styles.inputCon}>
+            {inputValue.map((inputs, index) => (
+              <Inputs
+                key={index}
+                style={[styles.input, error[index] ? styles.error : null]}
+                keyboardType="numeric"
+                maxLength={1}
+                value={inputValue[index]}
+                onChangeText={(text: string) => handleChange(text, index)}
+              />
+            ))}
+          </View>
+
+          <Text style={styles.timer}>00:00</Text>
+          <Text style={styles.resendOtp}>
+            Didn't receive OTP? <Text style={styles.sendOtp}>Send OTP</Text>
+          </Text>
+
+          <Button text="Continue" onPress={isSubmitOtp} />
+        </View>
+      </SafeAreaView>
+    </LinearGradient>
   );
 };
 
-export default verifyotp;
+export default VerifyOtp;
 
 const styles = StyleSheet.create({
-  main: {
-    backgroundColor: "#FFFFFF",
+  gradient: {
     flex: 1,
-
-    padding: 20,
+    // Ensure full-screen gradient
   },
-  verifySvg: {
-    width: 150,
-    height: 150,
-    marginTop: 60,
-    alignSelf: "center",
+  safeArea: {
+    flex: 1,
+  },
+  main: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
+    paddingHorizontal: 20,
   },
   inputCon: {
     flexDirection: "row",
-    flexWrap: "wrap",
     alignSelf: "center",
     gap: 25,
     marginTop: 30,
@@ -112,9 +120,12 @@ const styles = StyleSheet.create({
   },
   resendOtp: {
     marginTop: 20,
-    marginBottom: 30,
     fontFamily: "poppins-Regular",
     alignSelf: "center",
+  },
+  sendOtp: {
+    color: "#FD8204",
+    fontFamily: "poppins-Semibold",
   },
   confirmMail: {
     fontFamily: "poppins-Regular",

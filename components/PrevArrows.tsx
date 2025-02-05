@@ -16,7 +16,7 @@ export default PrevArrows;
 const styles = StyleSheet.create({
   prevArrow: {
     position: "absolute",
-    top: 50,
+    top: 10,
     left: 20,
   },
 });

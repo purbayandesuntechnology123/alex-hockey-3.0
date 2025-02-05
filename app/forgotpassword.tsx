@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View } from "react-native";
+import {
+  Platform,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React, { useState } from "react";
 import PrevArrows from "@/components/PrevArrows";
 import Header from "@/components/Header";
@@ -9,6 +16,7 @@ import Inputs from "@/components/Inputs";
 import Button from "@/components/Button";
 import { Link, useNavigation } from "expo-router";
 import SocialSignup from "@/components/SocialSignup";
+import { LinearGradient } from "expo-linear-gradient";
 
 const forgotpassword = () => {
   const [email, setEmail] = useState("");
@@ -33,39 +41,59 @@ const forgotpassword = () => {
     }
   };
   return (
-    <View style={styles.main}>
-      <PrevArrows href={"/login"} />
-      <Header text="Forgot Password" />
-
-      <Image
-        source={require("../assets/images/forgot.png")}
-        style={styles.forgotSVG}
+    <LinearGradient
+      colors={["#FFDFBE", "#FFFFFF"]}
+      style={styles.gradient}
+      locations={[0, 0.06]}>
+      <StatusBar
+        translucent
+        backgroundColor="transparent"
+        barStyle="dark-content"
       />
-      <View style={styles.inputCon}>
-        <Labels labels="Email" />
-        <Inputs
-          placeholder="Enter Your Email Id"
-          autoCapitalize="none"
-          autoComplete="email"
-          value={email}
-          style={error ? styles.errorMessage : null}
-          onChangeText={setEmail}
-        />
-        {error && <Text style={styles.errorMessage}>{error}</Text>}
-      </View>
-      <Button text="Continue" onPress={handleSubmit} />
-    </View>
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.main}>
+          <PrevArrows href={"/login"} />
+          <Header text="Forgot Password" />
+
+          <Image
+            source={require("../assets/images/forgot.png")}
+            style={styles.forgotSVG}
+          />
+          <View style={styles.inputCon}>
+            <Labels labels="Email" />
+            <Inputs
+              placeholder="Enter Your Email Id"
+              autoCapitalize="none"
+              autoComplete="email"
+              value={email}
+              style={error ? styles.errorMessage : null}
+              onChangeText={setEmail}
+            />
+            {error && <Text style={styles.errorMessage}>{error}</Text>}
+          </View>
+          <Button text="Continue" onPress={handleSubmit} />
+        </View>
+      </SafeAreaView>
+    </LinearGradient>
   );
 };
 
 export default forgotpassword;
 
 const styles = StyleSheet.create({
-  main: {
-    backgroundColor: "#FFFFFF",
+  gradient: {
     flex: 1,
-
-    padding: 20,
+  },
+  safeArea: {
+    flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight || 0 : 0,
+  },
+  main: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
+    paddingHorizontal: 20,
   },
   forgotSVG: {
     width: 300,
