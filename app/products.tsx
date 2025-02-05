@@ -278,7 +278,7 @@ const styles = StyleSheet.create({
     accordion: {
         backgroundColor: '#F6F6F6',
         borderRadius: 4,
-        marginBottom: 10,
+        marginBottom: 15,
         borderWidth: 1,
         borderColor: '#ddd',
         overflow: 'hidden',
@@ -290,7 +290,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingVertical: 4,
+        paddingVertical: 8,
         paddingHorizontal: 15,
     },
     accordionTitle: {
