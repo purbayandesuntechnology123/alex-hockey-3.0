@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useState } from "react";
+import React, { forwardRef, useCallback, useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import {
   GestureHandlerRootView,
@@ -10,13 +10,24 @@ import BottomSheetHeader from "./BottomSheetComponent/BottomSheetHeader";
 import TshirtMenuCard from "./BottomSheetComponent/TshirtMenuCard";
 
 const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
-  const [tshirtType, setTshirtType] = useState<string>();
+  const [tshirtType, setTshirtType] = useState<{ tshirtType: string } | null>(
+    null
+  );
+  const [isTemplateOpened, setIsTempllateOpened] = useState<boolean>(false);
 
   // Callbacks
   const handleSheetChanges = useCallback((index: number) => {
     console.log("handleSheetChanges", index);
   }, []);
-  //   console.log("tshirtType", tshirtType);
+  useEffect(() => {
+    if (tshirtType?.tshirtType === "Template") {
+      setIsTempllateOpened(true);
+    } else {
+      console.log("====>");
+    }
+  }, [tshirtType]);
+  console.log("tshirtType", tshirtType);
+  console.log("isTemplateOpened", isTemplateOpened);
   return (
     <GestureHandlerRootView style={styles.container}>
       <BottomSheet
@@ -30,7 +41,9 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
             leftIconName={iconLink.sideMenu}
             rightIconName={iconLink.setting}
           />
-          <TshirtMenuCard setTshirtType={setTshirtType} />
+          {!isTemplateOpened ? (
+            <TshirtMenuCard setTshirtType={setTshirtType} />
+          ) : null}
         </BottomSheetView>
       </BottomSheet>
     </GestureHandlerRootView>
