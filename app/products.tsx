@@ -20,9 +20,22 @@ const products: React.FC = () => {
     });
 
     const options = [
-        { id: "addName", label: "Add Name on Shirt", label1: "$5" },
-        { id: "addNumber", label: "Add Number on Shirt", label1: "$3" },
-        { id: "premiumFabric", label: "Upgrade to Premium Fabric", label1: "$7" },
+        { id: "proWeightFabric", label: "Pro Weight Fabric -", label1: "$5" },
+        { id: "doubleShoulder", label: "Double Shoulder -", label1: "$3" },
+        { id: "doubleElbow", label: "Double Elbow -", label1: "$7" },
+        { id: "reversibleDoubleJercy", label: "Reversible : Double Jersey Price ",  },
+        { id: "homeAndAway", label: "Home and Away ",  },
+        { id: "shell", label: "Shell -", label1: "$7" },
+        { id: "sock", label: "Sock -", label1: "$7" },
+        { id: "proSock", label: "Pro Sock -", label1: "$7" },
+    ];
+    const customProducts = [
+        { id: "hoodie", label: "Hoodie", label1: "$29.99" },
+        { id: "hockeyLaceHoodie", label: "Hockey Lace Hoodie ", label1: "$39.99" },
+        { id: "fullyZipHoodie", label: "Fully Zip Hoodie   ", label1: "$39.99" },
+        { id: "ssDryFitTee", label: "SS Dry Fit Tee  ", label1: "$19.99" },
+        { id: "lsDryFitTee", label: "LS Dry Fit Tee   ", label1: "$24.99" },
+        { id: "dryFitShort", label: "Dry Fit Short  ", label1: "$19.99" },
     ];
 
     const toggleAccordion = (section: string) => {
@@ -33,23 +46,35 @@ const products: React.FC = () => {
         setCheckedItems((prev) => ({ ...prev, [id]: !prev[id] }));
     };
 
+    const handleContinue = () => {
+        const selectedOptions = options.filter(option => checkedItems[option.id]);
+        const selectedCustomProducts = customProducts.filter(customProduct => checkedItems[customProduct.id]);
+        const selectedData = {
+            selectedFabric,
+            selectedOptions,
+            selectedCustomProducts,
+        };
+
+        // Log the data (you can replace this with an API call or state update)
+        console.log("Selected Data:", selectedData);
+
+        // Navigate to the next screen or perform other actions
+        // navigation.navigate('NextScreen');
+    };
+
     return (
         <View style={styles.mainContainer}>
-            {/* <LinearGradient colors={["#FFDFBE", "#FFFFFF00"]} style={styles.gradient} /> */}
             <StatusBar
                 translucent
                 backgroundColor="transparent"
                 barStyle="dark-content"
             />
 
-
             <View style={styles.container}>
-            <View style={styles.headerCon}>
-    <TouchableOpacity onPress={() => navigation.goBack()}>
-        <AntDesign name="arrowleft" size={24} color="#666666" />
-    </TouchableOpacity>
-    <Header text="Product Options" style={styles.header} />
-</View>
+                <TouchableOpacity onPress={() => navigation.goBack()} style={styles.headerCon}>
+                    <AntDesign name="arrowleft" size={24} color="#666666" />
+                    <Header text="Product Options" style={styles.header} />
+                </TouchableOpacity>
 
                 {/* Custom Image Slider */}
                 <ImageBackground source={require('../assets/images/productsBG.png')} style={styles.sliderContainer}>
@@ -99,7 +124,7 @@ const products: React.FC = () => {
                                         onPress={() => handleCheckboxChange(option.id)}
                                     />
                                     <Text style={styles.optionText}>{option.label}</Text>
-                                    <Text style={styles.optionText1}>- {option.label1}</Text>
+                                    <Text style={styles.optionText1}>{option.label1}</Text>
                                 </View>
                             </>
                         ))}
@@ -110,23 +135,23 @@ const products: React.FC = () => {
                         isActive={activeAccordion === 'Matching Custom Product'}
                         onPress={() => toggleAccordion('Matching Custom Product')}
                     >
-                        {options.map((option) => (
+                        {customProducts.map((customProduct) => (
                             <>
                                 <View style={styles.divider} />
-                                <View key={option.id} style={styles.optionRow}>
+                                <View key={customProduct.id} style={styles.optionRow}>
                                     <CustomCheckbox
-                                        checked={checkedItems[option.id]}
-                                        onPress={() => handleCheckboxChange(option.id)}
+                                        checked={checkedItems[customProduct.id]}
+                                        onPress={() => handleCheckboxChange(customProduct.id)}
                                     />
-                                    <Text style={styles.optionText}>{option.label}</Text>
-                                    <Text style={styles.optionText1}>- {option.label1}</Text>
+                                    <Text style={styles.optionText}>{customProduct.label}</Text>
+                                    <Text style={styles.optionText1}>- {customProduct.label1}</Text>
                                 </View>
                             </>
                         ))}
                     </Accordion>
 
                     {/* Continue Button */}
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button} onPress={handleContinue}>
                         <Text style={styles.buttonText}>Continue</Text>
                     </TouchableOpacity>
                 </ScrollView>
@@ -170,7 +195,9 @@ const CustomImageSlider: React.FC<{ images: any[] }> = ({ images }) => {
             {/* Dots Indicator */}
             <View style={styles.dotContainer}>
                 {images.map((_, index) => (
-                    <View key={index} style={[styles.dot, currentIndex === index && styles.activeDot]} />
+                    <View key={index} style={currentIndex === index ? styles.activeDot : styles.dot}>
+                        {currentIndex === index && <View style={styles.activeDotInner} />}
+                    </View>
                 ))}
             </View>
         </View>
@@ -200,7 +227,6 @@ const Accordion: React.FC<{ title: string; isActive: boolean; onPress: () => voi
     </View>
 );
 
-
 const CustomCheckbox: React.FC<{ checked: boolean; onPress: () => void }> = ({ checked, onPress }) => {
     return (
         <TouchableOpacity onPress={onPress} style={[styles.checkbox, checked && styles.checked]}>
@@ -213,7 +239,7 @@ const CustomCheckbox: React.FC<{ checked: boolean; onPress: () => void }> = ({ c
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: '#FFDFBE',
+        backgroundColor: '#FD8204',
         paddingTop: 50,
     },
     container: {
@@ -264,15 +290,29 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 10,
         alignSelf: 'center',
+        alignItems: 'center',
     },
     dot: {
-        width: 8,
-        height: 8,
+        width: 7,
+        height: 7,
         borderRadius: 4,
         backgroundColor: '#C4C4C4',
-        marginHorizontal: 4,
+        marginHorizontal: 8,
     },
     activeDot: {
+        width: 15, 
+        height: 15,
+        borderRadius: 10,
+        borderWidth: 1, 
+        borderColor: '#FFA500',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    activeDotInner: {
+        width: 7, 
+        height: 7,
+        borderRadius: 4,
         backgroundColor: '#FFA500',
     },
     accordion: {
@@ -303,11 +343,11 @@ const styles = StyleSheet.create({
     accordionContent: {
         fontSize: 14,
         paddingVertical: 1,
-        color: '#333', // Default text color
+        color: '#333',
         paddingHorizontal: 15,
     },
     activeText: {
-        color: '#FFA500', // Orange color for selected item
+        color: '#FFA500',
         fontWeight: 'bold',
     },
     button: {
@@ -324,7 +364,7 @@ const styles = StyleSheet.create({
     },
     divider: {
         height: 1,
-        backgroundColor: "#D3D3D3", // Light gray divider
+        backgroundColor: "#D3D3D3",
         marginVertical: 10,
     },
     optionRow: {
@@ -364,7 +404,7 @@ const styles = StyleSheet.create({
     gradient: {
         position: "absolute",
         minWidth: "120%",
-        minHeight: 60, // Height of status bar (adjust if needed)
+        minHeight: 60, 
         top: 2,
         left: 0,
     },
