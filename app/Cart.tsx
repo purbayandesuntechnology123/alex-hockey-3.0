@@ -1,4 +1,3 @@
-// Cart.tsx
 import Header from '@/components/Header';
 import { AntDesign } from '@expo/vector-icons';
 import React from 'react';
@@ -10,7 +9,6 @@ import {
     StyleSheet,
     ScrollView,
     Animated,
-    Dimensions,
     Image,
     StatusBar,
 } from 'react-native';
@@ -76,8 +74,8 @@ const Cart: React.FC = () => {
             id: '1',
             name: 'Hockey Polo T-Shirt',
             size: 'M',
-            price: 200,
-            quantity: 10,
+            price: 195,
+            quantity: 15,
         },
         {
             id: '2',
@@ -217,15 +215,10 @@ const styles = StyleSheet.create({
     container1: {
         // flex: 1,
         backgroundColor: '#fff',
-        // paddingHorizontal: 20,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
     },
     scrollView: {
-        // flex: 1,
-        // padding: 16,
-        // borderTopLeftRadius: 20,
-        // borderTopRightRadius: 20,
     },
     stepper: {
         flexDirection: 'row',
@@ -242,8 +235,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        // paddingVertical: 8,
-        // paddingHorizontal: 16,
     },
     itemDetails: {
         flex: 1,
@@ -256,13 +247,15 @@ const styles = StyleSheet.create({
         paddingRight: 20,
         height: 80,
         justifyContent: "center",
+        backgroundColor: "#fff"
     },
     deleteButton: {
-        width: 50,
+        width: 70,
         height: "100%",
         backgroundColor: '#FD8204',
         justifyContent: 'center',
         alignItems: 'center',
+        marginLeft: -15
     },
     deleteButtonInner: {
         width: '100%',
@@ -347,7 +340,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     addressSection: {
-        // marginBottom: 100,
         padding: 20,
     },
     input: {
@@ -377,7 +369,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         marginVertical: 16,
-        // paddingHorizontal: 16,
         paddingHorizontal: 20,
     },
     stepItem: {
@@ -403,14 +394,12 @@ const styles = StyleSheet.create({
         fontSize: 12,
         color: '#108F32',
         fontWeight: 'bold',
-        // marginTop: 4,
         marginHorizontal: 4
     },
     stepLine: {
         flex: 1,
         height: 1.7,
         backgroundColor: '#108F32',
-        // marginHorizontal: 4,
     },
     sectionTitle: {
         fontSize: 16,
@@ -444,19 +433,16 @@ const styles = StyleSheet.create({
         fontSize: 12,
         color: '#C3C3C3',
         fontWeight: 'bold',
-        // marginTop: 4,
         marginHorizontal: 4
     },
     disablestepLine: {
         flex: 1,
         height: 1.7,
         backgroundColor: '#C3C3C3',
-        // marginHorizontal: 4,
     },
     divider: {
         height: 1,
         backgroundColor: "#D3D3D3",
-        // marginVertical: 10,
     },
 });
 
