@@ -1,6 +1,6 @@
 import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Image, Dimensions, Animated, StatusBar, FlatList, ImageBackground } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Image, Dimensions, Animated, StatusBar, FlatList, ImageBackground, TextInput } from 'react-native';
 import Header from '@/components/Header';
 import { useNavigation } from '@react-navigation/native';
 
@@ -128,19 +128,28 @@ const rosterbuilder: React.FC = () => {
                                 { label: '6 to 24', price: '$49.99' },
                                 { label: '25 to 75', price: '$38.99' },
                                 { label: '75 to 150', price: '$29.99' },
-                                { label: 'Above 150+', price: '$24.99 ' }
+                                { label: 'Above 150+', price: '$24.99' }
                             ].map((item, index) => (
-                                <TouchableOpacity key={index} onPress={() => {
-                                    setSelectedFabric(item.label);
-                                    setSelectedQuantity(item.label);
-                                    setSelectedQuantityPrice(item.price);
-                                }}>
-                                    <View style={styles.divider} />
-                                    <View style={styles.row}>
-                                        <Text style={[styles.accordionContent, selectedFabric === item.label && styles.activeText]}>
+                                <TouchableOpacity
+                                    key={index}
+                                    onPress={() => {
+                                        setSelectedFabric(item.label);
+                                        setSelectedQuantity(item.label);
+                                        setSelectedQuantityPrice(item.price);
+                                    }}
+                                >
+                                    <View style={[
+                                        styles.row,
+                                        selectedFabric === item.label && styles.selectedRow 
+                                    ]}>
+                                        <Text style={[styles.accordionContent,
+                                            //  selectedFabric === item.label && styles.activeText
+                                             ]}>
                                             {item.label}
                                         </Text>
-                                        <Text style={[styles.priceText, selectedFabric === item.label && styles.activeText]}>
+                                        <Text style={[styles.priceText, 
+                                            // selectedFabric === item.label && styles.activeText
+                                            ]}>
                                             {item.price}
                                         </Text>
                                     </View>
@@ -148,8 +157,10 @@ const rosterbuilder: React.FC = () => {
                             ))}
                         </Accordion>
                     </View>
-
-                    <Text style={styles.title}>Similar Jersey</Text>
+                    
+                    <Text style={styles.titleQuantity}>Enter Quantity</Text>
+                    <TextInput style={styles.input} />
+                    {/* <Text style={styles.title}>Similar Jersey</Text>
                     <FlatList
                         data={jerseys}
                         horizontal
@@ -164,7 +175,7 @@ const rosterbuilder: React.FC = () => {
                             </View>
                         )}
                         ItemSeparatorComponent={() => <View style={styles.separator} />}
-                    />
+                    /> */}
                     {/* Add to Cart Button */}
                     <TouchableOpacity style={styles.button} onPress={handleAddToCart}>
                         <Text style={styles.buttonText}>Add to Cart</Text>
@@ -355,7 +366,7 @@ const styles = StyleSheet.create({
         // fontWeight: 'bold',
     },
     accordionBody: {
-        paddingBottom: 10,
+        // paddingBottom: 10,
     },
     accordionContent: {
         fontSize: 14,
@@ -372,7 +383,19 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingHorizontal: 15,
-        paddingVertical: 5,
+        paddingVertical: 9,
+        borderTopWidth: 1,       
+        borderBottomWidth: 0,    
+        borderLeftWidth: 0,      
+        borderRightWidth: 0,    
+        borderColor: "#DDDDDD",
+    },
+    selectedRow: {
+        borderColor: "#FFA500",
+        backgroundColor: "#FD820412",
+        borderLeftWidth: 1,      
+        borderRightWidth: 1, 
+        borderBottomWidth: 1,
     },
     priceText: {
         fontSize: 14,
@@ -380,7 +403,7 @@ const styles = StyleSheet.create({
         fontWeight: '700',
     },
     button: {
-        backgroundColor: '#FFA500',
+        backgroundColor: '#FD8204',
         padding: 15,
         borderRadius: 10,
         alignItems: 'center',
@@ -473,6 +496,21 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         marginBottom: 16,
+    },
+    titleQuantity: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginBottom: 8,
+    },
+    input: {
+        backgroundColor: "#FCFCFC",
+        padding: 10,
+        borderRadius: 4,
+        marginTop: 2,
+        borderColor: "#D3D3D3",
+        borderWidth: 1,
+        height: 45,
+        marginBottom: 10,
     },
     card: {
         padding: 16,

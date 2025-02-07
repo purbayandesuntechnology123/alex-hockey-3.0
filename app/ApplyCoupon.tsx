@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     },
     discountBadge: {
         backgroundColor: "#C3C3C3",
-        paddingVertical: 52,
+        paddingVertical: 54,
         // paddingHorizontal: 10,
         // borderRadius: 5,
         alignItems: "center",

@@ -16,7 +16,7 @@ const splashscreen = () => {
         source={require("../assets/images/fyrebg.png")}
         style={styles.fyreBg}
       />
-      <Link href={"/paymentIntegration"} style={styles.nextArrowLink}>
+      <Link href={"/ApplyCoupon"} style={styles.nextArrowLink}>
         <NextArrowSvg />
       </Link>
     </LinearGradient>
