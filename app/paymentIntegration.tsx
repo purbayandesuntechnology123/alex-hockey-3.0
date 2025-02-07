@@ -222,6 +222,8 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         elevation: 30,
         paddingBottom: 40,
+        borderTopLeftRadius: 24,
+        borderTopRightRadius: 24,
     },
     methodeContainer: {
         backgroundColor: '#FCFCFC',
