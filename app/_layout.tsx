@@ -59,6 +59,13 @@ const _layout = () => {
         }}
       ></Stack.Screen>
       <Stack.Screen
+        name="HomePage"
+        options={{
+          title: "Product Options",
+          headerShown: false,
+        }}
+      ></Stack.Screen>
+      <Stack.Screen
         name="productoptions"
         options={{
           title: "Product Options",
@@ -73,9 +80,23 @@ const _layout = () => {
         }}
       ></Stack.Screen>
       <Stack.Screen
-        name="HomePage"
+        name="rosterbuilder"
         options={{
-          title: "Product Options",
+          title: "Roster Builder",
+          headerShown: false,
+        }}
+      ></Stack.Screen>
+      <Stack.Screen
+        name="paymentIntegration"
+        options={{
+          title: "Payment Integration",
+          headerShown: false,
+        }}
+      ></Stack.Screen>
+      <Stack.Screen
+        name="orderConfirmation"
+        options={{
+          title: "Order Confirmation",
           headerShown: false,
         }}
       ></Stack.Screen>
