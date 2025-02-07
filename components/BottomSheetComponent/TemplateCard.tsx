@@ -73,22 +73,20 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
         </View>
       ))}
       {isTemplateFilterOpen ? (
-        <ScrollView style={{backgroundColor: "red", width: "50%"}} horizontal>
-          <View style={{ flexDirection: "row", gap: 5, marginTop: 10 }}>
-            <View style={styles.filterHead}>
-              <Text style={{ color: "#fff", fontSize: 12 }}>Standard</Text>
-            </View>
-            <View style={styles.filterHead}>
-              <Text style={{ color: "#fff", fontSize: 12 }}>Gradient</Text>
-            </View>
-            <View style={styles.filterHead}>
-              <Text style={{ color: "#fff", fontSize: 12 }}>Special</Text>
-            </View>
-            <View style={styles.filterHead}>
-              <Text style={{ color: "#fff", fontSize: 12 }}>Standard</Text>
-            </View>
+        <View style={{ flexDirection: "row", gap: 5, marginTop: 10 }}>
+          <View style={styles.filterHead}>
+            <Text style={{ color: "#fff", fontSize: 12 }}>Standard</Text>
           </View>
-        </ScrollView>
+          <View style={styles.filterHead}>
+            <Text style={{ color: "#fff", fontSize: 12 }}>Gradient</Text>
+          </View>
+          <View style={styles.filterHead}>
+            <Text style={{ color: "#fff", fontSize: 12 }}>Special</Text>
+          </View>
+          <View style={styles.filterHead}>
+            <Text style={{ color: "#fff", fontSize: 12 }}>Standard</Text>
+          </View>
+        </View>
       ) : null}
     </View>
   );

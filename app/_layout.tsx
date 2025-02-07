@@ -72,6 +72,13 @@ const _layout = () => {
           headerShown: false,
         }}
       ></Stack.Screen>
+      <Stack.Screen
+        name="HomePage"
+        options={{
+          title: "Product Options",
+          headerShown: false,
+        }}
+      ></Stack.Screen>
     </Stack>
   );
 };
