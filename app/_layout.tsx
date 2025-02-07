@@ -72,6 +72,27 @@ const _layout = () => {
           headerShown: false,
         }}
       ></Stack.Screen>
+      <Stack.Screen
+        name="rosterbuilder"
+        options={{
+          title: "Roster Builder",
+          headerShown: false,
+        }}
+      ></Stack.Screen>
+      <Stack.Screen
+        name="paymentIntegration"
+        options={{
+          title: "Payment Integration",
+          headerShown: false,
+        }}
+      ></Stack.Screen>
+      <Stack.Screen
+        name="orderConfirmation"
+        options={{
+          title: "Order Confirmation",
+          headerShown: false,
+        }}
+      ></Stack.Screen>
     </Stack>
   );
 };
