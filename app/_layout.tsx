@@ -59,6 +59,13 @@ const _layout = () => {
         }}
       ></Stack.Screen>
       <Stack.Screen
+        name="HomePage"
+        options={{
+          title: "Product Options",
+          headerShown: false,
+        }}
+      ></Stack.Screen>
+      <Stack.Screen
         name="productoptions"
         options={{
           title: "Product Options",
