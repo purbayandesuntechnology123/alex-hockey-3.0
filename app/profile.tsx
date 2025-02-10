@@ -29,13 +29,10 @@ const profile = () => {
   });
 
   const isUpdateProfile = () => {
-    navigation.navigate("productoptions");
+    navigation.navigate("products");
   };
   return (
-    <LinearGradient
-      colors={["#FFDFBE", "#FFFFFF"]}
-      style={styles.gradient}
-      locations={[0, 0.06]}>
+    <View style={styles.topContainer}>
       <StatusBar
         translucent
         backgroundColor="transparent"
@@ -92,13 +89,18 @@ const profile = () => {
           </View>
         </View>
       </SafeAreaView>
-    </LinearGradient>
+    </View>
   );
 };
 
 export default profile;
 
 const styles = StyleSheet.create({
+  topContainer: {
+    flex: 1,
+    backgroundColor: '#FD8204',
+    paddingTop: 10,
+},
   safeArea: {
     flex: 1,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight || 0 : 0,
@@ -109,6 +111,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
+    paddingTop: 10,
   },
   profileImgCon: {
     position: "relative",
