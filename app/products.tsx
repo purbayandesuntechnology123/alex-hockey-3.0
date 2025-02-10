@@ -230,7 +230,7 @@ const Accordion: React.FC<{ title: string; isActive: boolean; onPress: () => voi
 const CustomCheckbox: React.FC<{ checked: boolean; onPress: () => void }> = ({ checked, onPress }) => {
     return (
         <TouchableOpacity onPress={onPress} style={[styles.checkbox, checked && styles.checked]}>
-            {checked && <MaterialIcons name="check" size={18} color="#FFA500" />}
+            {checked && <MaterialIcons name="check" size={18} color="#FD8204" />}
         </TouchableOpacity>
     );
 };
@@ -263,6 +263,7 @@ const styles = StyleSheet.create({
     productTitle: {
         fontSize: 20,
         fontWeight: 'bold',
+        marginBottom: 5,
     },
     productSubTitle: {
         fontSize: 18,
@@ -271,8 +272,9 @@ const styles = StyleSheet.create({
     },
     price: {
         fontSize: 18,
-        color: '#FFA500',
-        marginBottom: 10,
+        color: '#FD8204',
+        marginBottom: 14,
+        fontWeight: 'bold',
     },
     imageWrapper: {
         width: width,
@@ -304,7 +306,7 @@ const styles = StyleSheet.create({
         height: 15,
         borderRadius: 10,
         borderWidth: 1, 
-        borderColor: '#FFA500',
+        borderColor: '#FD8204',
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -313,7 +315,7 @@ const styles = StyleSheet.create({
         width: 7, 
         height: 7,
         borderRadius: 4,
-        backgroundColor: '#FFA500',
+        backgroundColor: '#FD8204',
     },
     accordion: {
         backgroundColor: '#F6F6F6',
@@ -347,11 +349,11 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
     },
     activeText: {
-        color: '#FFA500',
+        color: '#FD8204',
         fontWeight: 'bold',
     },
     button: {
-        backgroundColor: '#FFA500',
+        backgroundColor: '#FD8204',
         padding: 15,
         borderRadius: 10,
         alignItems: 'center',
@@ -396,7 +398,7 @@ const styles = StyleSheet.create({
     },
     checked: {
         backgroundColor: "#FFF",
-        borderColor: "#FFA500",
+        borderColor: "#FD8204",
     },
     boldTitle: {
         fontWeight: 700,

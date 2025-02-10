@@ -291,6 +291,7 @@ const styles = StyleSheet.create({
     productTitle: {
         fontSize: 20,
         fontWeight: 'bold',
+        marginBottom: 5,
     },
     productSubTitle: {
         fontSize: 18,
@@ -299,8 +300,9 @@ const styles = StyleSheet.create({
     },
     price: {
         fontSize: 18,
-        color: '#FFA500',
-        marginBottom: 10,
+        color: '#FD8204',
+        marginBottom: 15,
+        fontWeight: 'bold',
     },
     imageWrapper: {
         width: width,
@@ -332,7 +334,7 @@ const styles = StyleSheet.create({
         height: 15,
         borderRadius: 10,
         borderWidth: 1,
-        borderColor: '#FFA500',
+        borderColor: '#FD8204',
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -341,7 +343,7 @@ const styles = StyleSheet.create({
         width: 7,
         height: 7,
         borderRadius: 4,
-        backgroundColor: '#FFA500',
+        backgroundColor: '#FD8204',
     },
     accordion: {
         backgroundColor: '#F6F6F6',
@@ -375,7 +377,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
     },
     activeText: {
-        color: '#FFA500',
+        color: '#FD8204',
         fontWeight: 'bold',
     },
     row: {
@@ -391,7 +393,7 @@ const styles = StyleSheet.create({
         borderColor: "#DDDDDD",
     },
     selectedRow: {
-        borderColor: "#FFA500",
+        borderColor: "#FD8204",
         backgroundColor: "#FD820412",
         borderLeftWidth: 1,      
         borderRightWidth: 1, 
@@ -478,7 +480,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     selectedButton: {
-        borderColor: "#FFA500",
+        borderColor: "#FD8204",
         backgroundColor: "#fff",
     },
     sizebuttonText: {
@@ -486,7 +488,7 @@ const styles = StyleSheet.create({
         color: "#888",
     },
     selectedText: {
-        color: "#FFA500",
+        color: "#FD8204",
         fontWeight: "bold",
     },
     separator: {
