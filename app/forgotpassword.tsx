@@ -41,10 +41,7 @@ const forgotpassword = () => {
     }
   };
   return (
-    <LinearGradient
-      colors={["#FFDFBE", "#FFFFFF"]}
-      style={styles.gradient}
-      locations={[0, 0.06]}>
+    <View style={styles.mainContainer}>
       <StatusBar
         translucent
         backgroundColor="transparent"
@@ -74,13 +71,18 @@ const forgotpassword = () => {
           <Button text="Continue" onPress={handleSubmit} />
         </View>
       </SafeAreaView>
-    </LinearGradient>
+    </View>
   );
 };
 
 export default forgotpassword;
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#FD8204',
+    paddingTop: 10,
+},
   gradient: {
     flex: 1,
   },
@@ -94,6 +96,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
     paddingHorizontal: 20,
+    paddingTop: 10,
   },
   forgotSVG: {
     width: 300,

@@ -33,10 +33,7 @@ const VerifyOtp = () => {
   };
 
   return (
-    <LinearGradient
-      colors={["#FFDFBE", "#FFFFFF"]}
-      locations={[0, 0.06]}
-      style={styles.gradient}>
+    <View style={styles.mainContainer}>
       {/* Transparent Status Bar */}
       <StatusBar
         translucent
@@ -77,13 +74,18 @@ const VerifyOtp = () => {
           <Button text="Continue" onPress={isSubmitOtp} />
         </View>
       </SafeAreaView>
-    </LinearGradient>
+    </View>
   );
 };
 
 export default VerifyOtp;
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#FD8204',
+    paddingTop: 10,
+},
   gradient: {
     flex: 1,
     // Ensure full-screen gradient
@@ -97,6 +99,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
     paddingHorizontal: 20,
+    paddingTop: 10,
   },
   inputCon: {
     flexDirection: "row",

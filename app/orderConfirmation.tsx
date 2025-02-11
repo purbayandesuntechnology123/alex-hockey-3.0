@@ -18,7 +18,7 @@ const orderConfirmation: React.FC = () => {
             <View style={styles.container}>
                 <TouchableOpacity onPress={() => navigation.goBack()} style={styles.headerCon} >
                     <AntDesign name="arrowleft" size={24} color="#666666" />
-                    <Header text="Payment" style={styles.header} />
+                    <Header text="Payment Successful" style={styles.header} />
                 </TouchableOpacity>
                 <View style={{ alignItems: "center", justifyContent: "center", flex: 1 }}>
                     <Image source={require('../assets/images/paymentSuccess.png')} />

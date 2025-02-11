@@ -100,6 +100,20 @@ const _layout = () => {
           headerShown: false,
         }}
       ></Stack.Screen>
+      <Stack.Screen
+        name="ApplyCoupon"
+        options={{
+          title: "Apply Coupon",
+          headerShown: false,
+        }}
+      ></Stack.Screen>
+      <Stack.Screen
+        name="Cart"
+        options={{
+          title: "Cart",
+          headerShown: false,
+        }}
+      ></Stack.Screen>
     </Stack>
   );
 };
