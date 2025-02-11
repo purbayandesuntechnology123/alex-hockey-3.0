@@ -40,7 +40,7 @@ const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
         <TouchableOpacity onPress={onPressFirst}>
           <Image
             source={leftIconName ? leftIconName : iconLink.sideMenu}
-            style={{ height: 25, width: 25, resizeMode: "contain" }}
+            style={{ height: 20, width: 20, resizeMode: "contain" }}
           />
         </TouchableOpacity>
       ) : null}
@@ -51,7 +51,7 @@ const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
         <TouchableOpacity onPress={onPressSecond}>
           <Image
             source={rightIconName ? rightIconName : iconLink.setting}
-            style={[{ height: 25, width: 25, resizeMode: "contain" }, {...rightIconStyle}]}
+            style={[{ height: 20, width: 20, resizeMode: "contain" }, {...rightIconStyle}]}
           />
         </TouchableOpacity>
       ) : null}
@@ -61,7 +61,7 @@ const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
 
 const styles = StyleSheet.create({
   menu: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "bold",
     color: "#fff",
     textAlign: "center",

@@ -14,12 +14,17 @@ import TshirtMenuCard from "./BottomSheetComponent/TshirtMenuCard";
 import TemplateCard from "./BottomSheetComponent/TemplateCard";
 import TshirtButtonColor from "./BottomSheetComponent/TshirtButtonColor";
 import ChestStripingCard from "./BottomSheetComponent/ChestStripingCard";
+import MenuSettingCard from "./BottomSheetComponent/MenuSettingCard";
+// import CrestSettingCard from "./BottomSheetComponent/CrestSettingCard";
+// import WordmarkSettingCard from "./BottomSheetComponent/WordmarkSettingCard";
 
 const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
   const [tshirtType, setTshirtType] = useState<{ tshirtType: string } | null>(
     null
   );
   const [isTemplateOpened, setIsTemplateOpened] = useState<boolean>(false);
+  const [createdBy, setCreatedBy] = useState<string>("");
+  const [isMenuSettingOpen, setIsMenuSettingOpen] = useState<boolean>(false);
   const [isTemplateFilterOpen, setIsTemplateFilterOpen] =
     useState<boolean>(false);
   const [IsChestStriping, setIsChestStriping] = useState<boolean>(false);
@@ -49,13 +54,23 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
   const handleChestStripingBackClick = () => {
     setIsChestStriping(false);
   };
+
+  const handlemenuLeftIconPress = () => {
+    setIsMenuSettingOpen(false);
+  };
+  const handlemenuSeting = () => {
+    setIsMenuSettingOpen(true);
+  };
   console.log("tshirtType", tshirtType);
   console.log("isTemplateOpened", isTemplateOpened);
   return (
-    <GestureHandlerRootView style={styles.container}>
+    <GestureHandlerRootView
+      style={[styles.container, isMenuSettingOpen && { flex: 0.5 }]}
+    >
       <BottomSheet
         ref={ref}
         snapPoints={["95%", "95%"]}
+        // snapPoints={isMenuSettingOpen ? ["95%", "95%"] : ["95%", "95%"]}
         backgroundStyle={{ backgroundColor: "#1D1F24" }}
         onChange={handleSheetChanges}
       >
@@ -104,15 +119,58 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
           </View>
         ) : (
           <View style={{ flex: 1 }}>
-            <BottomSheetHeader
-              title="Menu"
-              leftIconName={iconLink.sideMenu}
-              rightIconName={iconLink.setting}
-              containerStyle={{ marginHorizontal: 10, marginBottom: 5 }}
-            />
-            <BottomSheetView style={styles.contentContainer}>
-              <TshirtMenuCard setTshirtType={setTshirtType} />
-            </BottomSheetView>
+            {!isMenuSettingOpen ? (
+              <>
+                <BottomSheetHeader
+                  title="Menu"
+                  leftIconName={iconLink.sideMenu}
+                  rightIconName={iconLink.setting}
+                  onPressSecond={handlemenuSeting}
+                  containerStyle={{ marginHorizontal: 10, marginBottom: 5 }}
+                />
+                <BottomSheetView style={styles.contentContainer}>
+                  <TshirtMenuCard setTshirtType={setTshirtType} />
+                </BottomSheetView>
+              </>
+            ) : (
+              <>
+                {/* jersey Option start */}
+                <BottomSheetHeader
+                  title="Jersey Options"
+                  leftIconName={iconLink.leftIcon}
+                  onPressFirst={handlemenuLeftIconPress}
+                  containerStyle={{ marginHorizontal: 10, marginBottom: 5 }}
+                />
+                <BottomSheetView style={styles.contentContainer}>
+                  <MenuSettingCard />
+                </BottomSheetView>
+                {/* jersey Option end */}
+
+                {/* Crest Setting start */}
+                {/* <BottomSheetHeader
+                  title="Crest Setting"
+                  leftIconName={iconLink.leftIcon}
+                  onPressFirst={handlemenuLeftIconPress}
+                  containerStyle={{ marginHorizontal: 10, marginBottom: 5 }}
+                />
+                <BottomSheetView style={styles.contentContainer}>
+                  <CrestSettingCard />
+                </BottomSheetView> */}
+                {/* Crest Setting end */}
+
+                {/* Wordmark Setting start */}
+                {/* <BottomSheetHeader
+                  title="Wordmark Setting"
+                  leftIconName={iconLink.leftIcon}
+                  onPressFirst={handlemenuLeftIconPress}
+                  containerStyle={{ marginHorizontal: 10, marginBottom: 5 }}
+                />
+                <BottomSheetView style={styles.contentContainer}>
+                  <WordmarkSettingCard />
+                </BottomSheetView> */}
+                {/* Wordmark Setting end */}
+              </>
+            )}
           </View>
         )}
       </BottomSheet>
