@@ -21,10 +21,7 @@ const success = () => {
     navigation.navigate("profile");
   };
   return (
-    <LinearGradient
-      colors={["#FFDFBE", "#FFFFFF"]}
-      style={styles.gradient}
-      locations={[0, 0.06]}>
+    <View style={styles.topContainer}>
       <StatusBar
         translucent
         backgroundColor="transparent"
@@ -50,13 +47,18 @@ const success = () => {
           </View>
         </View>
       </SafeAreaView>
-    </LinearGradient>
+    </View>
   );
 };
 
 export default success;
 
 const styles = StyleSheet.create({
+  topContainer: {
+    flex: 1,
+    backgroundColor: '#FD8204',
+    paddingTop: 10,
+},
   gradient: {
     flex: 1,
   },
@@ -70,6 +72,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F8FAF7",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
+    paddingTop: 10,
   },
   container: {
     display: "flex",

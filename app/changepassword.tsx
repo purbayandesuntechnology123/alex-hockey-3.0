@@ -67,10 +67,7 @@ const ChangePassword = () => {
   };
 
   return (
-    <LinearGradient
-      colors={["#FFDFBE", "#FFFFFF"]}
-      style={styles.gradient}
-      locations={[0, 0.06]}>
+    <View style={styles.mainContainer}>
       <StatusBar
         translucent
         backgroundColor="transparent"
@@ -79,7 +76,7 @@ const ChangePassword = () => {
       {/**/}
       {/* Transparent Status Bar */}
       <SafeAreaView style={styles.safeArea}>
-        <View style={styles.mainContainer}>
+        <View style={styles.container}>
           <Header text="Change Password" style={styles.header} />
           <PrevArrows href={"/verifyotp"} />
           <NewPasswordSvg />
@@ -130,7 +127,7 @@ const ChangePassword = () => {
           </View>
         </View>
       </SafeAreaView>
-    </LinearGradient>
+    </View>
   );
 };
 
@@ -146,10 +143,16 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     flex: 1,
+    backgroundColor: '#FD8204',
+    paddingTop: 10,
+},
+  container: {
+    flex: 1,
     backgroundColor: "#FFFFFF",
     paddingHorizontal: 20,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
+    paddingTop: 10,
   },
   inputCon: {
     marginBottom: 20,

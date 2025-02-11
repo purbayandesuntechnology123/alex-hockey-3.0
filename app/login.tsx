@@ -56,10 +56,7 @@ const login = () => {
   };
 
   return (
-    <LinearGradient
-      style={styles.gradient}
-      colors={["#FFDFBE", "#FFFFFF"]}
-      locations={[0, 0.06]}>
+    <View style={styles.mainContainer}>
       <StatusBar
         translucent
         backgroundColor="transparent"
@@ -144,13 +141,18 @@ const login = () => {
           {/* </View> */}
         </View>
       </SafeAreaView>
-    </LinearGradient>
+    </View>
   );
 };
 
 export default login;
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#FD8204',
+    paddingTop: 10,
+},
   gradient: {
     flex: 1,
   },
@@ -164,6 +166,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
+    paddingTop: 10,
     // alignItems: "center",
 
     // backgroundColor:'white',

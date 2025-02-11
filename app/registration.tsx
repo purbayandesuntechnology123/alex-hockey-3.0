@@ -123,10 +123,7 @@ const index = () => {
 
   return (
     // <ScrollView contentContainerStyle=>
-    <LinearGradient
-      colors={["#FFDFBE", "#FFFFFF"]}
-      locations={[0, 0.06]}
-      style={styles.gradient}>
+     <View style={styles.mainContainer}>
       <StatusBar
         translucent
         backgroundColor="transparent"
@@ -256,13 +253,18 @@ const index = () => {
           </ScrollView>
         </View>
       </SafeAreaView>
-    </LinearGradient>
+    </View>
   );
 };
 
 export default index;
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#FD8204',
+    paddingTop: 10,
+},
   gradient: {
     flex: 1,
   },
@@ -275,7 +277,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#FFFFFF",
     paddingHorizontal: 20,
-    // marginTop: 20,
+    paddingTop: 10,
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
   },
