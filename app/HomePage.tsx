@@ -1,3 +1,4 @@
+import ColorPickerModal from "@/components/ColorPickerModal";
 import TshirtBottomSheet from "@/components/TshirtBottomSheet";
 import TshirtButton from "@/components/TshirtButton";
 import { iconLink, imageLink } from "@/constants/image";
@@ -38,6 +39,7 @@ const HomePage = () => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
+        {/* <ColorPickerModal /> */}
       <ImageBackground source={imageLink.tshirtBG} style={styles.mainContainer}>
         <View style={{ zIndex: 1 }}>
           <TshirtButton
