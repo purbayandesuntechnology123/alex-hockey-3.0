@@ -1,23 +1,31 @@
 import React from "react";
-import { TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View, ViewStyle } from "react-native";
 
-const TshirtButtonColor = () => {
+interface TshirtButtonColorProps {
+  containerStyle?: ViewStyle;
+}
+const TshirtButtonColor: React.FC<TshirtButtonColorProps> = ({
+  containerStyle,
+}) => {
   return (
     <View
-      style={{
-        // flex: 1,
-        backgroundColor: "#4A4B60",
-        padding: 4,
-        flexDirection: "row",
-        height: 40,
-        gap: 5,
-        marginHorizontal: 10,
-        paddingHorizontal: 10,
-        borderBottomEndRadius: 10,
-        borderBottomStartRadius: 10,
-        alignItems: "center",
-        marginBottom: 10,
-      }}
+      style={[
+        {
+          // flex: 1,
+          backgroundColor: "#4A4B60",
+          padding: 4,
+          flexDirection: "row",
+          height: 40,
+          gap: 5,
+          marginHorizontal: 10,
+          paddingHorizontal: 10,
+          borderBottomEndRadius: 10,
+          borderBottomStartRadius: 10,
+          alignItems: "center",
+          marginBottom: 10,
+        },
+        { ...containerStyle },
+      ]}
     >
       <TouchableOpacity
         style={{ flex: 1, backgroundColor: "#202132", height: 20 }}

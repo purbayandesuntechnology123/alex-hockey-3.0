@@ -4,23 +4,27 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Image } from "expo-image";
 import { Link } from "expo-router";
 import NextArrowSvg from "@/components/NextArrowSvg";
+import { BottomSheetProvider } from "@/components/CustomBottomSheet";
+// import { BottomSheetProvider } from "../components/CustomBottomSheet";
 
 const splashscreen = () => {
   return (
-    <LinearGradient colors={["#FFFFFF", "#FFD9A5"]} style={styles.container}>
-      <Image
-        source={require("../assets/images/fyre.png")}
-        style={styles.logo}
-      />
-      <Image
-        source={require("../assets/images/fyrebg.png")}
-        style={styles.fyreBg}
-      />
-      {/* <Link href={"/HomePage"} style={styles.nextArrowLink}> */}
-      <Link href={"/registration"} style={styles.nextArrowLink}>
-        <NextArrowSvg />
-      </Link>
-    </LinearGradient>
+    // <BottomSheetProvider>
+      <LinearGradient colors={["#FFFFFF", "#FFD9A5"]} style={styles.container}>
+        <Image
+          source={require("../assets/images/fyre.png")}
+          style={styles.logo}
+        />
+        <Image
+          source={require("../assets/images/fyrebg.png")}
+          style={styles.fyreBg}
+        />
+        {/* <Link href={"/HomePage"} style={styles.nextArrowLink}> */}
+        <Link href={"/registration"} style={styles.nextArrowLink}>
+          <NextArrowSvg />
+        </Link>
+      </LinearGradient>
+    // </BottomSheetProvider>
   );
 };
 

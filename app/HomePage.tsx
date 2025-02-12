@@ -1,4 +1,5 @@
 import ColorPickerModal from "@/components/ColorPickerModal";
+// import { useBottomSheet } from "../components/CustomBottomSheet";
 import TshirtBottomSheet from "@/components/TshirtBottomSheet";
 import TshirtButton from "@/components/TshirtButton";
 import { iconLink, imageLink } from "@/constants/image";
@@ -37,9 +38,20 @@ const HomePage = () => {
     setIsFront(!isFront);
   };
 
+  //   commented because we don't want now
+
+  //   const { showBottomSheet } = useBottomSheet();
+  //   const openBottomSheet1 = () => {
+  //     showBottomSheet(
+  //       <View style={{ flex: 1 }}>
+  //         <Text>Hello from Home Screen!</Text>
+  //       </View>
+  //     );
+  //   };
+
   return (
     <SafeAreaView style={styles.mainContainer}>
-        {/* <ColorPickerModal /> */}
+      {/* <ColorPickerModal /> */}
       <ImageBackground source={imageLink.tshirtBG} style={styles.mainContainer}>
         <View style={{ zIndex: 1 }}>
           <TshirtButton
@@ -74,6 +86,10 @@ const HomePage = () => {
 
         {isSheetOpen && <TshirtBottomSheet ref={bottomSheetRef} />}
       </ImageBackground>
+
+      {/* custom bottom sheet */}
+      {/* <CustomBottomSheet /> */}
+      {/* <Button title="Open Bottom Sheet" onPress={openBottomSheet1} /> */}
     </SafeAreaView>
   );
 };

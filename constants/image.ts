@@ -25,4 +25,8 @@ export const iconLink = {
   appstore: require("../assets/images/icon/appstore.png"),
   sideMenu: require("../assets/images/icon/sideMenu.png"),
   setting: require("../assets/images/icon/setting.png"),
+  gallery: require("../assets/images/icon/gallery.png"),
+  patternFile: require("../assets/images/icon/patternFile.png"),
+  arrow_y: require("../assets/images/icon/arrow_y.png"),
+  arrow_z: require("../assets/images/icon/arrow_z.png"),
 };
