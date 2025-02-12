@@ -15,6 +15,14 @@ export const imageLink = {
   single1: require("../assets/images/chestStriping/single1.png"),
   double1: require("../assets/images/chestStriping/double1.png"),
   triple2: require("../assets/images/chestStriping/triple2.png"),
+  
+  //   pattern
+  felt: require("../assets/images/pattern/felt.png"),
+  hexagonsDark: require("../assets/images/pattern/hexagonsDark.png"),
+  hexagonsLight: require("../assets/images/pattern/hexagonsLight.png"),
+  pride1: require("../assets/images/pattern/pride1.png"),
+  pride2: require("../assets/images/pattern/pride2.png"),
+  patternNone: require("../assets/images/pattern/patternNone.png"),
 };
 export const iconLink = {
   handBag: require("../assets/images/icon/handBag.png"),
@@ -29,4 +37,5 @@ export const iconLink = {
   patternFile: require("../assets/images/icon/patternFile.png"),
   arrow_y: require("../assets/images/icon/arrow_y.png"),
   arrow_z: require("../assets/images/icon/arrow_z.png"),
+  vector: require("../assets/images/icon/vector.png"),
 };
