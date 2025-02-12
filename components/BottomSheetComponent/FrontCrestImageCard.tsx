@@ -1,16 +1,23 @@
 import { iconLink } from "@/constants/image";
 import Slider from "@react-native-community/slider";
 import React, { useState } from "react";
-import { Image, StyleSheet, Switch, Text, View } from "react-native";
+import { Image, StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
 import CustomSwitch from "../CustomSwitch";
 import TshirtButtonColor from "./TshirtButtonColor";
 
-const FrontCrestImageCard = () => {
+interface FrontCrestImageCardProps {
+    setFrontCrestPattern: (value: boolean) => void;
+}
+
+const FrontCrestImageCard: React.FC<FrontCrestImageCardProps> = ({setFrontCrestPattern}) => {
   const [scale, setScale] = useState(1.0);
   const [pattern, setPattern] = useState(1.0);
   //   const [isEnabled, setIsEnabled] = useState(false);
   //   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
+  const handleFrontCrestPatterClick = () => {
+    setFrontCrestPattern(true)
+  }
   return (
     <View style={styles.container}>
       {/* <Text style={{ color: "#fff" }}>front crest image card</Text> */}
@@ -80,12 +87,12 @@ const FrontCrestImageCard = () => {
             >
               <Text style={{ color: "#fff" }}>Pattern</Text>
               <View style={{ flexDirection: "row", gap: 5 }}>
-                <View style={styles.input}>
+                <TouchableOpacity style={styles.input} onPress={handleFrontCrestPatterClick}>
                   <Image
                     source={iconLink.patternFile}
                     style={{ height: 15, width: 15 }}
                   />
-                </View>
+                </TouchableOpacity>
                 <View style={styles.input}>
                   <Text
                     style={{ color: "#fff", textAlign: "center", fontSize: 12 }}

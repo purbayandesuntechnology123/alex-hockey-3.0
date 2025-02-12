@@ -17,6 +17,10 @@ import ChestStripingCard from "./BottomSheetComponent/ChestStripingCard";
 import MenuSettingCard from "./BottomSheetComponent/MenuSettingCard";
 import FrontCrestImageCard from "./BottomSheetComponent/FrontCrestImageCard";
 import FrontCrestWordmarkCard from "./BottomSheetComponent/FrontCrestWordmarkCard";
+import CrestSettingCard from "./BottomSheetComponent/CrestSettingCard";
+import WordmarkSettingCard from "./BottomSheetComponent/WordmarkSettingCard";
+import FrontCrestPatternCard from "./BottomSheetComponent/FrontCrestPatternCard";
+import SleeveNumberCard from "./BottomSheetComponent/SleeveNumberCard";
 // import CrestSettingCard from "./BottomSheetComponent/CrestSettingCard";
 // import WordmarkSettingCard from "./BottomSheetComponent/WordmarkSettingCard";
 
@@ -30,9 +34,13 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
   const [isTemplateFilterOpen, setIsTemplateFilterOpen] =
     useState<boolean>(false);
   const [frontCrestOpened, setFrontCrestOpened] = useState<boolean>(false);
+  const [isCrestSetting, SetIsCrestSetting] = useState<boolean>(false);
+  const [isWordmarkSetting, setIsWordmarkSetting] = useState<boolean>(false);
   const [isWordmark, setIsWordmark] = useState<boolean>(false);
-  const [frontCrestSetting, setFrontCrestSetting] = useState<boolean>(false);
+  const [frontCrestPattern, setFrontCrestPattern] = useState<boolean>(false);
   const [IsChestStriping, setIsChestStriping] = useState<boolean>(false);
+  const [isSleeveNumberOpened, setIsSleeveNumberOpened] =
+    useState<boolean>(false);
 
   // Callbacks
   const handleSheetChanges = useCallback((index: number) => {
@@ -45,6 +53,8 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
       setIsChestStriping(true);
     } else if (tshirtType?.tshirtType === "Front Crest") {
       setFrontCrestOpened(true);
+    } else if (tshirtType?.tshirtType === "Sleeve Numbers") {
+      setIsSleeveNumberOpened(true);
     } else {
       console.log("====>");
     }
@@ -74,10 +84,20 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
     setFrontCrestOpened(false);
   };
 
-  //   const handleFrontCrestSettingClick = () => {
-  //     setFrontCrestOpened(false);
-  //     setFrontCrestSetting(true);
-  //   }
+  const handleFrontCrestSettingClick = () => {
+    if (isWordmark) {
+      setIsWordmarkSetting(true);
+    } else {
+      SetIsCrestSetting(true);
+    }
+  };
+
+  const handleCrestSettingLeftClick = () => {
+    SetIsCrestSetting(false);
+  };
+  const handleWordMarkSettingLeftClick = () => {
+    setIsWordmarkSetting(false);
+  };
 
   const handleCrestImageClick = () => {
     setIsWordmark(false);
@@ -115,12 +135,12 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
                 isTemplateFilterOpen ? { tintColor: "#FD8204" } : {}
               }
             />
-            <BottomSheetView style={styles.contentContainer}>
+            <BottomSheetScrollView horizontal style={styles.contentContainer}>
               <TemplateCard
                 isTemplateFilterOpen={isTemplateFilterOpen}
                 setIsTemplateFilterOpen={setIsTemplateFilterOpen}
               />
-            </BottomSheetView>
+            </BottomSheetScrollView>
             {!isTemplateFilterOpen ? <TshirtButtonColor /> : null}
           </View>
         ) : IsChestStriping ? (
@@ -146,26 +166,66 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
           </View>
         ) : frontCrestOpened ? (
           <View style={{ flex: 1 }}>
-            <BottomSheetHeader
-              leftIconName={iconLink.leftIcon}
-              rightIconName={iconLink.setting}
-              title="front chest"
-              isTab
-              onPressFirst={handleFrontCrestBackClick}
-              //   onPressSecond={handleFrontCrestSettingClick}
-              isWordmark={isWordmark}
-              containerStyle={{ marginHorizontal: 10, marginBottom: 5 }}
-              onTabLeftPress={handleCrestImageClick}
-              onTabRightPress={handleFrontCrestWordmarkClick}
-            />
-            <BottomSheetView style={styles.contentContainer}>
-              {!isWordmark ? (
-                <FrontCrestImageCard />
-              ) : (
-                <FrontCrestWordmarkCard />
-              )}
-            </BottomSheetView>
+            {isCrestSetting ? (
+              <View style={{ flex: 1 }}>
+                <BottomSheetHeader
+                  title="Crest Setting"
+                  leftIconName={iconLink.leftIcon}
+                  onPressFirst={handleCrestSettingLeftClick}
+                  containerStyle={{ marginHorizontal: 10, marginBottom: 5 }}
+                />
+                <BottomSheetView style={styles.contentContainer}>
+                  <CrestSettingCard />
+                </BottomSheetView>
+              </View>
+            ) : isWordmarkSetting ? (
+              <View style={{ flex: 1 }}>
+                <BottomSheetHeader
+                  title="Wordmark Setting"
+                  leftIconName={iconLink.leftIcon}
+                  onPressFirst={handleWordMarkSettingLeftClick}
+                  containerStyle={{ marginHorizontal: 10, marginBottom: 5 }}
+                />
+                <BottomSheetView style={styles.contentContainer}>
+                  <WordmarkSettingCard />
+                </BottomSheetView>
+              </View>
+            ) : frontCrestPattern ? (
+              <View style={{ flex: 1 }}>
+                <FrontCrestPatternCard
+                  setFrontCrestPattern={setFrontCrestPattern}
+                />
+              </View>
+            ) : (
+              <View style={{ flex: 1 }}>
+                <BottomSheetHeader
+                  leftIconName={iconLink.leftIcon}
+                  rightIconName={iconLink.setting}
+                  title="front chest"
+                  isTab
+                  onPressFirst={handleFrontCrestBackClick}
+                  onPressSecond={handleFrontCrestSettingClick}
+                  isWordmark={isWordmark}
+                  containerStyle={{ marginHorizontal: 10, marginBottom: 5 }}
+                  onTabLeftPress={handleCrestImageClick}
+                  onTabRightPress={handleFrontCrestWordmarkClick}
+                />
+                <BottomSheetView style={styles.contentContainer}>
+                  {!isWordmark ? (
+                    <FrontCrestImageCard
+                      setFrontCrestPattern={setFrontCrestPattern}
+                    />
+                  ) : (
+                    <FrontCrestWordmarkCard />
+                  )}
+                </BottomSheetView>
+              </View>
+            )}
           </View>
+        ) : isSleeveNumberOpened ? (
+          <BottomSheetView style={{ flex: 1 }}>
+            <SleeveNumberCard setIsSleeveNumberOpened={setIsSleeveNumberOpened} />
+          </BottomSheetView>
         ) : (
           <View style={{ flex: 1 }}>
             {!isMenuSettingOpen ? (

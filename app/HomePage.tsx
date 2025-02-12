@@ -12,6 +12,7 @@ import {
   View,
   TouchableWithoutFeedback,
   SafeAreaView,
+  StatusBar,
 } from "react-native";
 
 const HomePage = () => {
@@ -52,7 +53,12 @@ const HomePage = () => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       {/* <ColorPickerModal /> */}
-      <ImageBackground source={imageLink.tshirtBG} style={styles.mainContainer}>
+      <StatusBar
+        translucent
+        backgroundColor="transparent"
+        barStyle="dark-content"
+      />
+      <ImageBackground source={imageLink.tshirtBG} style={styles.container}>
         <View style={{ zIndex: 1 }}>
           <TshirtButton
             leftIconName={iconLink.handBag}
@@ -97,7 +103,16 @@ const HomePage = () => {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    width: "100%",
+    // width: "100%",
+    backgroundColor: "#FD8204",
+    paddingTop: 30,
+  },
+  container: {
+    flex: 1,
+    // width: "100%",
+    backgroundColor: "#ffff",
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
   },
   tshirt: {
     width: "100%",
