@@ -15,6 +15,8 @@ import TemplateCard from "./BottomSheetComponent/TemplateCard";
 import TshirtButtonColor from "./BottomSheetComponent/TshirtButtonColor";
 import ChestStripingCard from "./BottomSheetComponent/ChestStripingCard";
 import MenuSettingCard from "./BottomSheetComponent/MenuSettingCard";
+import FrontCrestImageCard from "./BottomSheetComponent/FrontCrestImageCard";
+import FrontCrestWordmarkCard from "./BottomSheetComponent/FrontCrestWordmarkCard";
 // import CrestSettingCard from "./BottomSheetComponent/CrestSettingCard";
 // import WordmarkSettingCard from "./BottomSheetComponent/WordmarkSettingCard";
 
@@ -27,6 +29,9 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
   const [isMenuSettingOpen, setIsMenuSettingOpen] = useState<boolean>(false);
   const [isTemplateFilterOpen, setIsTemplateFilterOpen] =
     useState<boolean>(false);
+  const [frontCrestOpened, setFrontCrestOpened] = useState<boolean>(false);
+  const [isWordmark, setIsWordmark] = useState<boolean>(false);
+  const [frontCrestSetting, setFrontCrestSetting] = useState<boolean>(false);
   const [IsChestStriping, setIsChestStriping] = useState<boolean>(false);
 
   // Callbacks
@@ -38,6 +43,8 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
       setIsTemplateOpened(true);
     } else if (tshirtType?.tshirtType === "Chest Stripping") {
       setIsChestStriping(true);
+    } else if (tshirtType?.tshirtType === "Front Crest") {
+      setFrontCrestOpened(true);
     } else {
       console.log("====>");
     }
@@ -61,8 +68,28 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
   const handlemenuSeting = () => {
     setIsMenuSettingOpen(true);
   };
+
+  //   Front creat actions start
+  const handleFrontCrestBackClick = () => {
+    setFrontCrestOpened(false);
+  };
+
+  //   const handleFrontCrestSettingClick = () => {
+  //     setFrontCrestOpened(false);
+  //     setFrontCrestSetting(true);
+  //   }
+
+  const handleCrestImageClick = () => {
+    setIsWordmark(false);
+  };
+
+  const handleFrontCrestWordmarkClick = () => {
+    setIsWordmark(true);
+  };
+
+  //   Front crest action end
   console.log("tshirtType", tshirtType);
-  console.log("isTemplateOpened", isTemplateOpened);
+  //   console.log("isTemplateOpened", isTemplateOpened);
   return (
     <GestureHandlerRootView
       style={[styles.container, isMenuSettingOpen && { flex: 0.5 }]}
@@ -88,12 +115,12 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
                 isTemplateFilterOpen ? { tintColor: "#FD8204" } : {}
               }
             />
-            <BottomSheetScrollView horizontal style={styles.contentContainer}>
+            <BottomSheetView style={styles.contentContainer}>
               <TemplateCard
                 isTemplateFilterOpen={isTemplateFilterOpen}
                 setIsTemplateFilterOpen={setIsTemplateFilterOpen}
               />
-            </BottomSheetScrollView>
+            </BottomSheetView>
             {!isTemplateFilterOpen ? <TshirtButtonColor /> : null}
           </View>
         ) : IsChestStriping ? (
@@ -116,6 +143,28 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
               />
             </BottomSheetScrollView>
             <TshirtButtonColor />
+          </View>
+        ) : frontCrestOpened ? (
+          <View style={{ flex: 1 }}>
+            <BottomSheetHeader
+              leftIconName={iconLink.leftIcon}
+              rightIconName={iconLink.setting}
+              title="front chest"
+              isTab
+              onPressFirst={handleFrontCrestBackClick}
+              //   onPressSecond={handleFrontCrestSettingClick}
+              isWordmark={isWordmark}
+              containerStyle={{ marginHorizontal: 10, marginBottom: 5 }}
+              onTabLeftPress={handleCrestImageClick}
+              onTabRightPress={handleFrontCrestWordmarkClick}
+            />
+            <BottomSheetView style={styles.contentContainer}>
+              {!isWordmark ? (
+                <FrontCrestImageCard />
+              ) : (
+                <FrontCrestWordmarkCard />
+              )}
+            </BottomSheetView>
           </View>
         ) : (
           <View style={{ flex: 1 }}>

@@ -1,9 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Navigator, Stack } from "expo-router";
+// import { BottomSheetProvider } from "@/components/CustomBottomSheet";
 
 const _layout = () => {
   return (
+    // <BottomSheetProvider>
     <Stack>
       <Stack.Screen
         name="registration"
@@ -115,6 +117,7 @@ const _layout = () => {
         }}
       ></Stack.Screen>
     </Stack>
+    // </BottomSheetProvider>
   );
 };
 
