@@ -116,6 +116,20 @@ const _layout = () => {
           headerShown: false,
         }}
       ></Stack.Screen>
+      <Stack.Screen
+        name="ShoppingAddress"
+        options={{
+          title: "Cart",
+          headerShown: false,
+        }}
+      ></Stack.Screen>
+      <Stack.Screen
+        name="OrderDetails"
+        options={{
+          title: "Cart",
+          headerShown: false,
+        }}
+      ></Stack.Screen>
     </Stack>
     // </BottomSheetProvider>
   );

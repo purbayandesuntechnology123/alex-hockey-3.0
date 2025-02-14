@@ -1,20 +1,12 @@
+// Cart.tsx
+
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, StatusBar } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 import Header from '@/components/Header';
 import { AntDesign } from '@expo/vector-icons';
-import React from 'react';
-import {
-    View,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    StyleSheet,
-    ScrollView,
-    Animated,
-    Image,
-    StatusBar,
-} from 'react-native';
-import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
-
+import CartItemComponent from '@/components/CartItemComponent';
 
 interface CartItem {
     id: string;
@@ -24,51 +16,9 @@ interface CartItem {
     quantity: number;
 }
 
-const CartItemComponent: React.FC<{ item: CartItem; onDelete: () => void }> = ({ item, onDelete }) => {
-    const renderRightActions = (progress: Animated.AnimatedInterpolation<number>) => {
-        const translateX = progress.interpolate({
-            inputRange: [0, 10],
-            outputRange: [10, 0],
-        });
-
-        return (
-            <Animated.View
-                style={[styles.deleteButton, { transform: [{ translateX }] }]}
-            >
-                <TouchableOpacity onPress={onDelete} style={styles.deleteButtonInner}>
-                    <Image source={require("../assets/images/icon/deleteIcon.png")} />
-                </TouchableOpacity>
-            </Animated.View>
-        );
-    };
-
-    return (
-        <View>
-            <View style={{ paddingHorizontal: 20, }}>
-                <View style={styles.divider} />
-            </View>
-            <View style={styles.cartItemContainer}>
-                <View style={styles.cartItem}>
-                    <View style={styles.itemDetails}>
-                        <Text style={styles.itemName}>{item.name}</Text>
-                        <Text style={styles.itemSize}>Size {item.size}</Text>
-                        <View style={styles.priceContainer}>
-                            <Text style={styles.itemPrice}>${item.price}</Text>
-                            <Text style={styles.itemQuantity}>X {item.quantity}</Text>
-                        </View>
-                    </View>
-                    <Swipeable renderRightActions={renderRightActions}>
-                        <View style={styles.totalContainer}>
-                            <Text style={styles.itemTotal}>${item.price * item.quantity}</Text>
-                        </View>
-                    </Swipeable>
-                </View>
-            </View>
-        </View>
-    );
-};
-
 const Cart: React.FC = () => {
+    const [selected, setSelected] = useState(true);
+    const [selectedButton, setSelectedButton] = useState<"deliver" | "edit" | null>(null);
     const [cartItems, setCartItems] = React.useState<CartItem[]>([
         {
             id: '1',
@@ -91,7 +41,6 @@ const Cart: React.FC = () => {
     };
     const navigation = useNavigation();
 
-
     return (
         <View style={styles.mainContainer}>
             <StatusBar
@@ -100,8 +49,8 @@ const Cart: React.FC = () => {
                 barStyle="dark-content"
             />
             <View style={styles.container}>
-                <GestureHandlerRootView >
-                    <TouchableOpacity onPress={() => navigation.goBack()} style={styles.headerCon} >
+                <GestureHandlerRootView>
+                    <TouchableOpacity onPress={() => navigation.goBack()} style={styles.headerCon}>
                         <AntDesign name="arrowleft" size={24} color="#666666" />
                         <Header text="Cart" style={styles.header} />
                     </TouchableOpacity>
@@ -134,9 +83,8 @@ const Cart: React.FC = () => {
                             <Text style={styles.sectionTitle}>Product Details</Text>
 
                             {cartItems.map(item => (
-                                <View>
+                                <View key={item.id}>
                                     <CartItemComponent
-                                        key={item.id}
                                         item={item}
                                         onDelete={() => handleDeleteItem(item.id)}
                                     />
@@ -161,25 +109,74 @@ const Cart: React.FC = () => {
                                 </TouchableOpacity>
                             </View>
                         </View>
+                        <Text style={{
+                            fontSize: 15,
+                            fontWeight: 600,
+                            marginTop: 22,
+                            color: "#202020",
+                            paddingHorizontal: 19,
+                            marginBottom: 15,
+                        }}>Delivering to</Text>
+                        <View style={styles.container2}>
+                            <View style={styles.addressContainer}>
+                                <TouchableOpacity onPress={() => setSelected(true)} style={styles.radioContainer}>
+                                    <View style={[styles.radioOuter, selected && styles.radioOuterSelected]}>
+                                        {selected && <View style={styles.radioInner} />}
+                                    </View>
+                                </TouchableOpacity>
+                                <View>
+                                    <Text style={styles.name}>Rajdwip Dey</Text>
+                                    <Text style={styles.address}>
+                                        House, Near Amtala Maiden, Sonatikiri, West Bengal, 743 245, INDIA, Phone: 7894343423
+                                    </Text>
+                                </View>
+                            </View>
+                            <View style={styles.buttonGroup}>
+                                <TouchableOpacity
+                                    style={[
+                                        styles.button,
+                                        selectedButton === "deliver" ? styles.activeButton : styles.inactiveButton,
+                                    ]}
+                                    onPress={() => setSelectedButton("deliver")}
+                                >
+                                    <Text
+                                        style={[
+                                            styles.buttonText,
+                                            selectedButton === "deliver" ? styles.activeText : styles.inactiveText,
+                                        ]}
+                                    >
+                                        Deliver to this address
+                                    </Text>
+                                </TouchableOpacity>
 
-                        <View style={styles.addressSection}>
-                            <Text style={styles.sectionTitle}>Shipping Address</Text>
-                            <View style={styles.divider} />
-                            <View>
-                                <TextInput style={styles.input} placeholder="Address 1" />
-                                <TextInput style={styles.input} placeholder="Address 2" />
-                                <TextInput style={styles.input} placeholder="Landmark" />
-                                <TextInput style={styles.input} placeholder="Zipcode" />
+                                <TouchableOpacity
+                                    style={[
+                                        styles.button,
+                                        selectedButton === "edit" ? styles.activeButton : styles.inactiveButton,
+                                    ]}
+                                    onPress={() => setSelectedButton("edit")}
+                                >
+                                    <Text
+                                        style={[
+                                            styles.buttonText1,
+                                            selectedButton === "edit" ? styles.activeText : styles.inactiveText,
+                                        ]}
+                                    >
+                                        Edit Address
+                                    </Text>
+                                </TouchableOpacity>
                             </View>
 
+
+                            <TouchableOpacity style={styles.addNewButton}>
+                                <Text style={styles.addNewText}>Add a new delivery address</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity style={styles.continueButton}>
+                                <Text style={styles.continueButtonText}>Continue</Text>
+                            </TouchableOpacity>
                         </View>
                     </ScrollView>
-                    <View style={{ justifyContent: "center", alignItems: "center", padding: 20 }}>
-                        <TouchableOpacity style={styles.continueButton}>
-                            <Text style={styles.continueButtonText}>Continue</Text>
-                        </TouchableOpacity>
-                    </View>
-
                 </GestureHandlerRootView>
             </View>
         </View>
@@ -203,8 +200,8 @@ const styles = StyleSheet.create({
     },
     header: {
         color: '#6D6D6D',
-        fontSize: 20,
-        fontWeight: 'bold',
+        fontSize: 18,
+        fontWeight: 600,
     },
     container: {
         flex: 1,
@@ -213,7 +210,6 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 20,
     },
     container1: {
-        // flex: 1,
         backgroundColor: '#fff',
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
@@ -225,77 +221,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginBottom: 24,
-    },
-    cartItemContainer: {
-        backgroundColor: '#fff',
-        width: '100%',
-        height: 80,
-    },
-    cartItem: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-    itemDetails: {
-        flex: 1,
-        marginRight: 16,
-        paddingHorizontal: 20,
-    },
-    totalContainer: {
-        width: 200,
-        alignItems: 'flex-end',
-        paddingRight: 20,
-        height: 80,
-        justifyContent: "center",
-        backgroundColor: "#fff"
-    },
-    deleteButton: {
-        width: 70,
-        height: "100%",
-        backgroundColor: '#FD8204',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: -15
-    },
-    deleteButtonInner: {
-        width: '100%',
-        height: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    itemName: {
-        fontSize: 14,
-        fontWeight: 'bold',
-        color: "#000000",
-
-    },
-    itemSize: {
-        fontSize: 14,
-        color: '#666',
-        marginTop: 4,
-    },
-    priceContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginTop: 4,
-    },
-    itemPrice: {
-        fontSize: 14,
-        color: '#FD8204',
-        marginRight: 8,
-    },
-    itemQuantity: {
-        fontSize: 13,
-        fontWeight: 'bold',
-        color: "#000000",
-    },
-    itemTotal: {
-        fontSize: 16,
-        fontWeight: '600',
-    },
-    deleteButtonText: {
-        color: '#fff',
-        fontWeight: '600',
     },
     couponSection: {
         padding: 20,
@@ -319,45 +244,44 @@ const styles = StyleSheet.create({
         backgroundColor: "#ffffff",
         paddingRight: 100,
         width: 227,
+        fontSize: 14,
+        fontWeight: '600',
     },
     applyButton: {
         position: 'absolute',
-        right: 41,
+        left: 151,
         top: 6,
         backgroundColor: '#FD8204',
-        paddingHorizontal: 16,
-        paddingVertical: 10.5,
         borderRadius: 100,
         width: 70,
+        height: 37,
+        justifyContent: "center",
     },
     applyButtonText: {
         color: '#fff',
         fontWeight: '600',
         textAlign: "center",
+        fontSize: 14,
     },
     viewPromoText: {
         color: '#666',
-        fontSize: 16,
+        fontSize: 11,
     },
-    addressSection: {
+    deliverySection: {
+        flex: 1,
         padding: 20,
-    },
-    input: {
-        backgroundColor: "#F6F6F6",
-        padding: 10,
-        borderRadius: 4,
-        marginTop: 19,
-        borderColor: "#DDDDDD",
-        borderWidth: 1,
-        height: 35,
+        backgroundColor: "#E8E8E8",
+        borderTopLeftRadius: 24,
+        borderTopRightRadius: 24,
     },
     continueButton: {
-        backgroundColor: '#FF7F00',
+        backgroundColor: '#FD8204',
         paddingVertical: 14,
-        borderRadius: 10,
+        borderRadius: 8,
         alignItems: 'center',
-        marginVertical: 16,
+        marginVertical: 36,
         width: "100%",
+        height: 50
     },
     continueButtonText: {
         color: '#fff',
@@ -402,10 +326,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#108F32',
     },
     sectionTitle: {
-        fontSize: 16,
-        fontWeight: 'bold',
+        fontSize: 15,
+        fontWeight: 500,
         marginVertical: 13,
-        color: "#202020",
+        color: "#474747",
         textAlign: "center",
     },
     couponTitle: {
@@ -443,6 +367,111 @@ const styles = StyleSheet.create({
     divider: {
         height: 1,
         backgroundColor: "#D3D3D3",
+    },
+    container2: {
+        flex: 1,
+        padding: 20,
+        backgroundColor: "#E8E8E8",
+        borderTopLeftRadius: 24,
+        borderTopRightRadius: 24,
+        shadowColor: "#000",
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        shadowOffset: { width: 0, height: 2 },
+    },
+    addressContainer: {
+        marginBottom: 16,
+        flexDirection: "row",
+        gap: 10,
+    },
+    radioContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginBottom: 8,
+    },
+    radioOuter: {
+        width: 20,
+        height: 20,
+        borderRadius: 10,
+        borderWidth: 0.2,
+        borderColor: "#00000033",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#FCFCFC"
+    },
+    radioOuterSelected: {
+        borderColor: "#FD8204",
+    },
+    radioInner: {
+        width: 10,
+        height: 10,
+        borderRadius: 5,
+        backgroundColor: "#FD8204",
+    },
+    name: {
+        fontSize: 16,
+        fontWeight: "bold",
+        marginBottom: 5
+    },
+    address: {
+        fontSize: 10,
+        color: "#666",
+        lineHeight: 17.8,
+    },
+    buttonGroup: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginBottom: 20,
+        gap: 20,
+    },
+    activeButton: {
+        backgroundColor: "#FD8204",
+    },
+    inactiveButton: {
+        backgroundColor: "#FFFFFF",
+        borderWidth: 1,
+        borderColor: "#DDDDDD",
+    },
+    activeText: {
+        color: "#FFF",
+    },
+    inactiveText: {
+        color: "#646464",
+    },
+    button: {
+        flex: 1,
+        borderRadius: 4,
+        alignItems: "center",
+        height: 50,
+        justifyContent: "center",
+    },
+    buttonText: {
+        fontWeight: 600,
+        fontSize: 14,
+        width: 97,
+        textAlign: "center",
+    },
+    buttonText1: {
+        fontWeight: 600,
+        fontSize: 14,
+        width: 58,
+        textAlign: "center",
+    },
+    addNewButton: {
+        backgroundColor: "#FFFFFF",
+        padding: 12,
+        borderRadius: 4,
+        borderWidth: 1,
+        borderColor: "#DDDDDD",
+        marginBottom: 16,
+        height: 50,
+        justifyContent: "center",
+    },
+    addNewText: {
+        textAlign: "center",
+        fontWeight: 600,
+        fontSize: 14,
+        color: "#646464"
     },
 });
 
