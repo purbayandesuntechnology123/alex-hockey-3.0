@@ -4,6 +4,7 @@ import TshirtBottomSheet from "@/components/TshirtBottomSheet";
 import TshirtButton from "@/components/TshirtButton";
 import { iconLink, imageLink } from "@/constants/image";
 import BottomSheet from "@gorhom/bottom-sheet";
+import { useRouter } from "expo-router";
 import React, { useRef, useState } from "react";
 // import PlayerList from "@/components/BottomSheetComponent/PlayerList";
 import {
@@ -17,6 +18,7 @@ import {
 } from "react-native";
 
 const HomePage = () => {
+  const router = useRouter();
   const bottomSheetRef = useRef<BottomSheet>(null);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
@@ -39,6 +41,10 @@ const HomePage = () => {
   const handleFlip = () => {
     setIsFront(!isFront);
   };
+
+  const handleCart = () => {
+    router.push("/Cart")
+  }
 
   //   commented because we don't want now
 
@@ -64,6 +70,7 @@ const HomePage = () => {
           <TshirtButton
             leftIconName={iconLink.handBag}
             rightIconName={iconLink.reload}
+            onPressFirst={handleCart}
             onPressSecond={handleFlip}
             containerStyle={{ marginTop: 10 }}
           />

@@ -1,12 +1,21 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
-import { Navigator, Stack } from "expo-router";
+import React, { useEffect } from "react";
+import { Navigator, Stack, useRouter } from "expo-router";
 // import { BottomSheetProvider } from "@/components/CustomBottomSheet";
 
 const _layout = () => {
+    const router = useRouter();
+    useEffect(()=>{
+      // router.push("/HomePage")
+      setTimeout(()=>{
+        router.push("/HomePage")
+      },3000)
+    },[])
   return (
     // <BottomSheetProvider>
-    <Stack>
+    <Stack screenOptions={{
+      headerShown: false
+    }}>
       <Stack.Screen
         name="registration"
         options={{

@@ -8,22 +8,22 @@ interface TshirtMenuCardProps {
 const data = {
   rows: [
     [
-      { image: imageLink.tshirtFront, tshirtType: "Template" },
-      { image: imageLink.tshirtFront, tshirtType: "Chest Stripping" },
-      { image: imageLink.tshirtFront, tshirtType: "Front Crest" },
-      { image: imageLink.tshirtFront, tshirtType: "Sleeve Numbers" },
+      { image: imageLink.template, tshirtType: "Template" },
+      { image: imageLink.chestStripping, tshirtType: "Chest Stripping" },
+      { image: imageLink.frontCrest, tshirtType: "Front Crest" },
+      { image: imageLink.sleeveNumbers, tshirtType: "Sleeve Numbers" },
     ],
     [
-      { image: imageLink.tshirtFront, tshirtType: "Sleeve Striping" },
-      { image: imageLink.tshirtFront, tshirtType: "Shoulder Yoke" },
-      { image: imageLink.tshirtFront, tshirtType: "Shoulder Patch" },
-      { image: imageLink.tshirtFront, tshirtType: "Back Numbers" },
+      { image: imageLink.sleeveStriping, tshirtType: "Sleeve Striping" },
+      { image: imageLink.shoulderYoke, tshirtType: "Shoulder Yoke" },
+      { image: imageLink.shoulderPatch, tshirtType: "Shoulder Patch" },
+      { image: imageLink.backNumbers, tshirtType: "Back Numbers" },
     ],
     [
-      { image: imageLink.tshirtFront, tshirtType: "Waist Striping" },
-      { image: imageLink.tshirtFront, tshirtType: "Collar" },
-      { image: imageLink.tshirtFront, tshirtType: "Other Patches" },
-      { image: imageLink.tshirtFront, tshirtType: "Name Bar" },
+      { image: imageLink.waistStriping, tshirtType: "Waist Striping" },
+      { image: imageLink.collar, tshirtType: "Collar" },
+      { image: imageLink.otherPatches, tshirtType: "Other Patches" },
+      { image: imageLink.nameBar, tshirtType: "Name Bar" },
     ],
   ],
 };

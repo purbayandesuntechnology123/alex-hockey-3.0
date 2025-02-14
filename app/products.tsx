@@ -11,7 +11,7 @@ const { width, height } = Dimensions.get('window');
 const products: React.FC = () => {
     const [activeAccordion, setActiveAccordion] = useState<string | null>(null);
     const [selectedFabric, setSelectedFabric] = useState<string | null>(null);
-    const navigation = useNavigation();
+    const navigation = useNavigation<any>();
 
     const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>({
         addName: false,
@@ -56,7 +56,8 @@ const products: React.FC = () => {
         };
 
         // Log the data (you can replace this with an API call or state update)
-        console.log("Selected Data:", selectedData);
+        console.log("Selected Data:===>", selectedData);
+        navigation.navigate("rosterbuilder" as never);
 
         // Navigate to the next screen or perform other actions
         // navigation.navigate('NextScreen');

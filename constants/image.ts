@@ -15,7 +15,21 @@ export const imageLink = {
   single1: require("../assets/images/chestStriping/single1.png"),
   double1: require("../assets/images/chestStriping/double1.png"),
   triple2: require("../assets/images/chestStriping/triple2.png"),
-  
+
+  // menu
+  template: require("../assets/images/menu/template.png"),
+  chestStripping: require("../assets/images/menu/chestStripping.png"),
+  frontCrest: require("../assets/images/menu/frontCrest.png"),
+  sleeveNumbers: require("../assets/images/menu/sleeveNumbers.png"),
+  sleeveStriping: require("../assets/images/menu/sleeveStriping.png"),
+  shoulderYoke: require("../assets/images/menu/shoulderYoke.png"),
+  shoulderPatch: require("../assets/images/menu/shoulderPatch.png"),
+  backNumbers: require("../assets/images/menu/backNumbers.png"),
+  waistStriping: require("../assets/images/menu/waistStriping.png"),
+  collar: require("../assets/images/menu/collar.png"),
+  otherPatches: require("../assets/images/menu/otherPatches.png"),
+  nameBar: require("../assets/images/menu/nameBar.png"),
+
   //   pattern
   felt: require("../assets/images/pattern/felt.png"),
   hexagonsDark: require("../assets/images/pattern/hexagonsDark.png"),
@@ -37,5 +51,6 @@ export const iconLink = {
   patternFile: require("../assets/images/icon/patternFile.png"),
   arrow_y: require("../assets/images/icon/arrow_y.png"),
   arrow_z: require("../assets/images/icon/arrow_z.png"),
+  csv: require("../assets/images/icon/csv.png"),
   vector: require("../assets/images/icon/vector.png"),
 };

@@ -11,6 +11,8 @@ import {
 } from "react-native";
 import BottomSheetHeader from "./BottomSheetHeader";
 import TshirtButtonColor from "./TshirtButtonColor";
+import { useNavigation } from "@react-navigation/native";
+import { useRouter } from "expo-router";
 
 interface SleeveStripingCardProps {
   isTemplateFilterOpen?: boolean;
@@ -36,6 +38,7 @@ const SleeveStripingCard: React.FC<SleeveStripingCardProps> = ({
   isTemplateFilterOpen,
   setIsSleeveStripingOpened,
 }) => {
+  const router = useRouter();
   const [filterType, setFilterType] = useState<boolean>(false);
   const handleTshirtTypePress = () => {
     // setIsTemplateFilterOpen(true);
@@ -43,6 +46,15 @@ const SleeveStripingCard: React.FC<SleeveStripingCardProps> = ({
 
   const handleSleeveStripingBackClick = () => {
     setIsSleeveStripingOpened(false);
+  };
+
+  const handletemFilterClick = () => {
+    // navigation.navigate("products", {profile: "121212121"} )
+    // const data = { id: 123, name: "Product Name" };
+    router.push({
+      pathname: "/products",
+      // params: data,
+    });
   };
 
   return (
@@ -53,7 +65,7 @@ const SleeveStripingCard: React.FC<SleeveStripingCardProps> = ({
         rightIconName={iconLink.adjust}
         containerStyle={{ marginBottom: 5 }}
         onPressFirst={handleSleeveStripingBackClick}
-        // onPressSecond={handletemFilterClick}
+        onPressSecond={handletemFilterClick}
         // rightIconStyle={isTemplateFilterOpen ? { tintColor: "#FD8204" } : {}}
       />
       <BottomSheetScrollView horizontal>

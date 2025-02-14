@@ -64,7 +64,13 @@ const PlayerList = () => {
           nestedScrollEnabled={true}
         >
           {players.map((item, index) => (
-            <View key={item.id} style={styles.row}>
+            <View
+              key={item.id}
+              style={[
+                styles.row,
+                { marginBottom: openDropdownId === item.id ? 140 : 0 },
+              ]}
+            >
               <TextInput
                 style={styles.input}
                 value={item.id.toString()}
@@ -109,7 +115,7 @@ const PlayerList = () => {
 
                 {/* Dropdown List */}
                 {openDropdownId === item.id && (
-                  <View style={styles.dropdown}>
+                  <View style={[styles.dropdown]}>
                     <ScrollView>
                       {availableSizes.map((size) => (
                         <TouchableOpacity
@@ -217,6 +223,7 @@ const styles = StyleSheet.create({
     elevation: 5, // Shadow effect
     width: 40,
     height: 140,
+    // marginBottom: 150
   },
   dropdownItem: {
     padding: 2,
