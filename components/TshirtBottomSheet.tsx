@@ -21,6 +21,7 @@ import CrestSettingCard from "./BottomSheetComponent/CrestSettingCard";
 import WordmarkSettingCard from "./BottomSheetComponent/WordmarkSettingCard";
 import FrontCrestPatternCard from "./BottomSheetComponent/FrontCrestPatternCard";
 import SleeveNumberCard from "./BottomSheetComponent/SleeveNumberCard";
+import SleeveStripingCard from "./BottomSheetComponent/SleeveStripingCard";
 // import CrestSettingCard from "./BottomSheetComponent/CrestSettingCard";
 // import WordmarkSettingCard from "./BottomSheetComponent/WordmarkSettingCard";
 
@@ -41,6 +42,8 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
   const [IsChestStriping, setIsChestStriping] = useState<boolean>(false);
   const [isSleeveNumberOpened, setIsSleeveNumberOpened] =
     useState<boolean>(false);
+  const [isSleeveStripingOpened, setIsSleeveStripingOpened] =
+    useState<boolean>(false);
 
   // Callbacks
   const handleSheetChanges = useCallback((index: number) => {
@@ -55,6 +58,8 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
       setFrontCrestOpened(true);
     } else if (tshirtType?.tshirtType === "Sleeve Numbers") {
       setIsSleeveNumberOpened(true);
+    } else if (tshirtType?.tshirtType === "Sleeve Striping") {
+      setIsSleeveStripingOpened(true);
     } else {
       console.log("====>");
     }
@@ -224,7 +229,15 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
           </View>
         ) : isSleeveNumberOpened ? (
           <BottomSheetView style={{ flex: 1 }}>
-            <SleeveNumberCard setIsSleeveNumberOpened={setIsSleeveNumberOpened} />
+            <SleeveNumberCard
+              setIsSleeveNumberOpened={setIsSleeveNumberOpened}
+            />
+          </BottomSheetView>
+        ) : isSleeveStripingOpened ? (
+          <BottomSheetView style={{ flex: 1 }}>
+            <SleeveStripingCard
+              setIsSleeveStripingOpened={setIsSleeveStripingOpened}
+            />
           </BottomSheetView>
         ) : (
           <View style={{ flex: 1 }}>
