@@ -5,6 +5,7 @@ import TshirtButton from "@/components/TshirtButton";
 import { iconLink, imageLink } from "@/constants/image";
 import BottomSheet from "@gorhom/bottom-sheet";
 import React, { useRef, useState } from "react";
+// import PlayerList from "@/components/BottomSheetComponent/PlayerList";
 import {
   Image,
   ImageBackground,
@@ -90,6 +91,7 @@ const HomePage = () => {
           <View style={styles.overlay} />
         </TouchableWithoutFeedback>
 
+      {/* {isSheetOpen && <PlayerList />} */}
         {isSheetOpen && <TshirtBottomSheet ref={bottomSheetRef} />}
       </ImageBackground>
 

@@ -12,15 +12,15 @@ const TshirtButtonColor: React.FC<TshirtButtonColorProps> = ({
       style={[
         {
           // flex: 1,
-          backgroundColor: "#4A4B60",
+          backgroundColor: "#3E3E3E",
           padding: 4,
           flexDirection: "row",
           height: 40,
           gap: 5,
           marginHorizontal: 10,
           paddingHorizontal: 10,
-          borderBottomEndRadius: 10,
-          borderBottomStartRadius: 10,
+          borderBottomEndRadius: 8,
+          borderBottomStartRadius: 8,
           alignItems: "center",
           marginBottom: 10,
         },
