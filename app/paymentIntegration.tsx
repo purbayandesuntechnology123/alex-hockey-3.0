@@ -28,7 +28,7 @@ const PaymentIntegration: React.FC = () => {
                 <View style={styles.paymentContainer}>
                     <TouchableOpacity onPress={() => navigation.goBack()} style={styles.headerCon}>
                         <AntDesign name="arrowleft" size={24} color="#666666" />
-                        <Header text="Cart" style={styles.header} />
+                        <Header text="Payment" style={styles.header} />
                     </TouchableOpacity>
                     {/* Steps Indicator */}
                     <View style={styles.stepperContainer}>
@@ -46,10 +46,10 @@ const PaymentIntegration: React.FC = () => {
                             </View>
                             <Text style={styles.activeStepText}>Address</Text>
                         </View>
-                        <View style={styles.disablestepLine} />
+                        <View style={styles.stepLine} />
                         <View style={styles.stepItem}>
-                            <View style={styles.stepCircleInner}>
-                                <View style={styles.disableStepCircle} />
+                            <View style={styles.stepCircle}>
+                                <View style={styles.activeStepCircle} />
                             </View>
                             <Text style={styles.disableStepText}>Payment</Text>
                         </View>
@@ -78,7 +78,7 @@ const PaymentIntegration: React.FC = () => {
                         </View>
                     </View>
                     {/* Payment Methods */}
-                    <View style={{ padding: 20 }}>
+                    <View style={{ padding: 20, flex: 1 }}>
                         <Text style={styles.sectionTitle}>Payment Methods</Text>
                         <FlatList
                             data={paymentMethods}
@@ -96,6 +96,11 @@ const PaymentIntegration: React.FC = () => {
                                 </TouchableOpacity>
                             )}
                         />
+                    </View>
+                    <View style={{ padding: 20 }}>
+                        <TouchableOpacity style={styles.continueButton}>
+                            <Text style={styles.continueButtonText}>Continue</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -175,24 +180,24 @@ const styles = StyleSheet.create({
         height: 4,
         borderRadius: 6,
         backgroundColor: '#C3C3C3',
-    },  
-    disableStepText: {  
-        fontSize: 12,  
-        color: '#C3C3C3',  
-        fontWeight: 'bold',  
-        marginHorizontal: 4  
-    },  
-    disablestepLine: {  
-        flex: 1,  
-        height: 1.7,  
-        backgroundColor: '#C3C3C3',  
-    },  
-    sectionTitle: {  
-        fontSize: 16,  
-        fontWeight: 'bold',  
-        marginVertical: 23,  
-        color: "#202020"  
-    },  
+    },
+    disableStepText: {
+        fontSize: 12,
+        color: '#C3C3C3',
+        fontWeight: 'bold',
+        marginHorizontal: 4
+    },
+    disablestepLine: {
+        flex: 1,
+        height: 1.7,
+        backgroundColor: '#C3C3C3',
+    },
+    sectionTitle: {
+        fontSize: 14,
+        fontWeight: '500',
+        marginVertical: 23,
+        color: "#202020"
+    },
     paymentMethod: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -221,7 +226,7 @@ const styles = StyleSheet.create({
         shadowRadius: 1,
         shadowOffset: { width: 0, height: 2 },
         elevation: 30,
-        paddingBottom: 40,
+        // paddingBottom: 40,
         borderTopLeftRadius: 24,
         borderTopRightRadius: 24,
     },
@@ -236,8 +241,8 @@ const styles = StyleSheet.create({
         borderRadius: 24,
     },
     priceTitle: {
-        fontSize: 14,
-        fontWeight: 'bold',
+        fontSize: 13,
+        fontWeight: '500',
         marginBottom: 8,
         paddingHorizontal: 20,
     },
@@ -247,9 +252,9 @@ const styles = StyleSheet.create({
         marginVertical: 10,
     },
     priceLabel: {
-        fontSize: 16,
+        fontSize: 13,
         color: '#1D1F24',
-        fontWeight: 'bold',
+        fontWeight: 500,
     },
     headerCon: {
         display: 'flex',
@@ -258,8 +263,22 @@ const styles = StyleSheet.create({
     },
     header: {
         color: '#6D6D6D',
-        fontSize: 20,
-        fontWeight: 'bold',
+        fontSize: 18,
+        fontWeight: '600',
         paddingLeft: 10,
+    },
+    continueButton: {
+        backgroundColor: '#FD8204',
+        paddingVertical: 14,
+        borderRadius: 8,
+        alignItems: 'center',
+        marginVertical: 26,
+        width: "100%",
+        height: 50
+    },
+    continueButtonText: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '600',
     },
 });
