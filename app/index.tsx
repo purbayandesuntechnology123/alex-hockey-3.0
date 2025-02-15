@@ -1,29 +1,34 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import React, { useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { Image } from "expo-image";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import NextArrowSvg from "@/components/NextArrowSvg";
 import { BottomSheetProvider } from "@/components/CustomBottomSheet";
 // import { BottomSheetProvider } from "../components/CustomBottomSheet";
 
 const splashscreen = () => {
   return (
+    <ImageBackground
+      source={require("../assets/images/splashScreen.png")}
+      style={{ flex: 1, width: "100%" }}
+      // resizeMethod="scale"
+    />
     // <BottomSheetProvider>
-      <LinearGradient colors={["#FFFFFF", "#FFD9A5"]} style={styles.container}>
-        <Image
-          source={require("../assets/images/fyre.png")}
-          style={styles.logo}
-        />
-        <Image
-          source={require("../assets/images/fyrebg.png")}
-          style={styles.fyreBg}
-        />
-        {/* <Link href={"/HomePage"} style={styles.nextArrowLink}> */}
-        <Link href={"/registration"} style={styles.nextArrowLink}>
-          <NextArrowSvg />
-        </Link>
-      </LinearGradient>
+    // <LinearGradient colors={["#FFFFFF", "#FFD9A5"]} style={styles.container}>
+    //   <Image
+    //     source={require("../assets/images/fyre.png")}
+    //     style={styles.logo}
+    //   />
+    //   <Image
+    //     source={require("../assets/images/fyrebg.png")}
+    //     style={styles.fyreBg}
+    //   />
+    //   <Link href={"/HomePage"} style={styles.nextArrowLink}>
+    //   {/* <Link href={"/registration"} style={styles.nextArrowLink}> */}
+    //     <NextArrowSvg />
+    //   </Link>
+    // </LinearGradient>
     // </BottomSheetProvider>
   );
 };

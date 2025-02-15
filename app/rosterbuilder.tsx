@@ -1,8 +1,10 @@
-import { AntDesign, MaterialIcons } from '@expo/vector-icons';
+import { AntDesign, Feather, MaterialIcons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Image, Dimensions, Animated, StatusBar, FlatList, ImageBackground, TextInput } from 'react-native';
 import Header from '@/components/Header';
 import { useNavigation } from '@react-navigation/native';
+import PlayerList from '@/components/BottomSheetComponent/PlayerList';
+import { useRouter } from 'expo-router';
 
 const { width, height } = Dimensions.get('window');
 
@@ -31,6 +33,7 @@ const jerseys: Jersey[] = [
 ];
 
 const rosterbuilder: React.FC = () => {
+    const router = useRouter()
     const [activeAccordion, setActiveAccordion] = useState<string | null>(null);
     const [selectedFabric, setSelectedFabric] = useState<string | null>(null);
     const [selectedSize, setSelectedSize] = useState<string | null>(null);
@@ -62,7 +65,12 @@ const rosterbuilder: React.FC = () => {
         };
 
         console.log('Added to Cart:', cartItem);
+        router.push("/Cart")
     };
+
+    const handleUploadFile = () => {
+        router.push("/rosterBuilderImport")
+    }
 
     return (
         <View style={styles.mainContainer}>
@@ -78,7 +86,7 @@ const rosterbuilder: React.FC = () => {
                 </TouchableOpacity>
 
                 {/* Custom Image Slider */}
-                <View style={styles.sliderContainer}>
+                {/* <View style={styles.sliderContainer}>
                     <CustomImageSlider
                         images={[
                             require('../assets/images/tshirt/HOCKEY_JERSEY_EDGE.png'),
@@ -86,13 +94,13 @@ const rosterbuilder: React.FC = () => {
                             require('../assets/images/tshirt/HOCKEY_JERSEY_EDGE.png'),
                         ]}
                     />
-                </View>
+                </View> */}
 
                 {/* Product Details */}
                 <ScrollView style={styles.productDetails} contentContainerStyle={{ paddingBottom: 50 }}>
                     <Text style={styles.productTitle}>Hockey Polo T-Shirt</Text>
                     <Text style={styles.price}>$195.00</Text>
-                    <Text style={styles.productSubTitle}>Size</Text>
+                    <Text style={styles.productSubTitle}>Available Size</Text>
 
                     <View style={styles.buttonContainer}>
                         {sizes.map((size) => (
@@ -116,10 +124,10 @@ const rosterbuilder: React.FC = () => {
                         ))}
                     </View>
                     {/* Accordion Sections */}
-                    <View style={{ marginTop: 28 }}>
+                    <View style={{ marginTop: 20 }}>
                         <Accordion
                             title="Select Quantity"
-                            activeTitle="Choose Your Quantity"
+                            activeTitle="Choose Your Quantity Range"
                             isActive={activeAccordion === 'Select Quantity'}
                             onPress={() => toggleAccordion('Select Quantity')}
                         >
@@ -159,7 +167,20 @@ const rosterbuilder: React.FC = () => {
                     </View>
                     
                     <Text style={styles.titleQuantity}>Enter Quantity</Text>
-                    <TextInput style={styles.input} />
+                    <TextInput style={styles.input} keyboardType='numeric' />
+
+                    <View style={{flexDirection: "row", marginBottom: 10}}>
+                        <View style={{flex: 1, justifyContent: "center"}}>
+                            <Text>Selected Quantity: 20</Text>
+                        </View>
+                        <TouchableOpacity activeOpacity={.5} style={{flexDirection: "row", alignItems: "center", gap: 5, backgroundColor: "#4E4E4F", padding: 5, borderRadius: 2, paddingHorizontal: 10}}
+                        onPress={handleUploadFile}
+                        >
+                            <Feather name="upload" size={18} color="#fff" />
+                            <Text style={{color: "#fff", fontSize: 10}}>Upload Roster File</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <PlayerList />
                     {/* <Text style={styles.title}>Similar Jersey</Text>
                     <FlatList
                         data={jerseys}
@@ -268,7 +289,7 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         backgroundColor: '#FD8204',
-        paddingTop: 50,
+        paddingTop: 30,
     },
     container: {
         flex: 1,
@@ -285,24 +306,27 @@ const styles = StyleSheet.create({
     },
     productDetails: {
         flex: 1,
-        padding: 20,
+        // padding: 20,
+        paddingHorizontal: 20,
         backgroundColor: '#FFF',
     },
     productTitle: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginBottom: 5,
+        fontSize: 18,
+        fontWeight: '600',
     },
     productSubTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
+        fontSize: 12,
+        lineHeight: 18,
+        fontWeight: '700',
+        color: "#646464",
         paddingBottom: 10,
     },
     price: {
-        fontSize: 18,
+        fontSize: 14,
         color: '#FD8204',
-        marginBottom: 15,
-        fontWeight: 'bold',
+        lineHeight: 29,
+        marginBottom: 5,
+        fontWeight: '700',
     },
     imageWrapper: {
         width: width,
@@ -360,11 +384,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingVertical: 8,
-        paddingHorizontal: 15,
+        paddingVertical: 4,
+        paddingHorizontal: 10,
     },
     accordionTitle: {
-        fontSize: 16,
+        fontSize: 12,
+        lineHeight: 18,
+        fontWeight: '700',
+        color: "#646464",
         // fontWeight: 'bold',
     },
     accordionBody: {
@@ -374,7 +401,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         paddingVertical: 1,
         color: '#333',
-        paddingHorizontal: 15,
+        // paddingHorizontal: 10,
     },
     activeText: {
         color: '#FD8204',
@@ -384,8 +411,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingHorizontal: 15,
-        paddingVertical: 9,
+        paddingHorizontal: 10,
+        paddingVertical: 4,
         borderTopWidth: 1,       
         borderBottomWidth: 0,    
         borderLeftWidth: 0,      
@@ -453,12 +480,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         gap: 10,
-        padding: 20,
-        width: 200,
+        paddingHorizontal: 10,
+        paddingVertical: 10
     },
     header: {
         color: '#6D6D6D',
-        fontSize: 20,
+        fontSize: 18,
+        lineHeight: 37,
         fontWeight: 900,
     },
     label: {
@@ -471,8 +499,8 @@ const styles = StyleSheet.create({
         gap: 15,
     },
     sizebutton: {
-        width: 50,
-        height: 50,
+        width: 40,
+        height: 40,
         borderRadius: 25,
         borderWidth: 2,
         borderColor: "#ccc",
@@ -480,16 +508,18 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     selectedButton: {
-        borderColor: "#FD8204",
-        backgroundColor: "#fff",
+        borderColor: "#000",
+        backgroundColor: "#000",
     },
     sizebuttonText: {
-        fontSize: 16,
-        color: "#888",
+        fontSize: 14,
+        lineHeight: 21,
+        fontWeight: '600',
+        color: "#888888",
     },
     selectedText: {
-        color: "#FD8204",
-        fontWeight: "bold",
+        color: "#fff",
+        fontWeight: "600",
     },
     separator: {
         width: 29,
@@ -501,8 +531,9 @@ const styles = StyleSheet.create({
     },
     titleQuantity: {
         fontSize: 16,
-        fontWeight: 'bold',
-        marginBottom: 8,
+        fontWeight: '500',
+        color: "#383838",
+        marginBottom: 4,
     },
     input: {
         backgroundColor: "#FCFCFC",

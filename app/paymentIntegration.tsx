@@ -3,8 +3,11 @@ import { View, Text, TouchableOpacity, StyleSheet, FlatList, Image, StatusBar } 
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
 import Header from '@/components/Header';
+import { useRouter } from 'expo-router';
 
 const PaymentIntegration: React.FC = () => {
+
+    const router = useRouter();
     const navigation = useNavigation();
     const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
 
@@ -16,6 +19,10 @@ const PaymentIntegration: React.FC = () => {
     const handlePaymentMethodPress = (id: string) => {
         setSelectedMethod(id);
     };
+    
+    const handleContinue = () => {
+        router.push('/success')
+    }
 
     return (
         <View style={styles.mainContainer}>
@@ -98,7 +105,7 @@ const PaymentIntegration: React.FC = () => {
                         />
                     </View>
                     <View style={{ padding: 20 }}>
-                        <TouchableOpacity style={styles.continueButton}>
+                        <TouchableOpacity style={styles.continueButton} onPress={handleContinue}>
                             <Text style={styles.continueButtonText}>Continue</Text>
                         </TouchableOpacity>
                     </View>
