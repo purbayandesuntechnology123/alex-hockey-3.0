@@ -8,6 +8,7 @@ import Header from '@/components/Header';
 import { AntDesign } from '@expo/vector-icons';
 import CartItemComponent from '@/components/CartItemComponent';
 import RNPickerSelect from "react-native-picker-select";
+import { useRouter } from 'expo-router';
 
 interface CartItem {
     id: string;
@@ -18,10 +19,15 @@ interface CartItem {
 }
 
 const ShoppingAddress: React.FC = () => {
+    const router = useRouter();
     const [country, setCountry] = useState("India");
     const [fullName, setFullName] = useState("");
     const [mobileNumber, setMobileNumber] = useState("");
     const navigation = useNavigation();
+
+    const handleSaveAddress = () => {
+        router.back();
+    }
 
     return (
         <View style={styles.mainContainer}>
@@ -102,7 +108,7 @@ const ShoppingAddress: React.FC = () => {
                                     <TextInput style={styles.input} placeholder="Zipcode" />
                                 </View>
                             </View>
-                                <TouchableOpacity style={styles.continueButton}>
+                                <TouchableOpacity style={styles.continueButton} onPress={handleSaveAddress}>
                                     <Text style={styles.continueButtonText}>Save this Address</Text>
                                 </TouchableOpacity>
                         </View>

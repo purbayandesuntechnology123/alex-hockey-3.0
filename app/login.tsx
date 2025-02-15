@@ -11,9 +11,11 @@ import { Link, useNavigation } from "expo-router";
 import { useFonts } from "expo-font";
 import { LinearGradient } from "expo-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useRouter } from "expo-router";
 // import loginSVG from "../assets/images/login.svg";
 
 const login = () => {
+  const router = useRouter();
   const [credentials, setCredentials] = useState({ email: "", password: "" });
 
   const navigation: any = useNavigation();
@@ -51,7 +53,8 @@ const login = () => {
   const loginHandle = () => {
     if (validateLogin()) {
       console.log(credentials);
-      navigation.navigate("forgotpassword");
+      router.push('/Cart')
+      // navigation.navigate("forgotpassword");
     }
   };
 

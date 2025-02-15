@@ -2,13 +2,19 @@ import Button from "@/components/Button";
 import HeaderNav from "@/components/HeaderNav";
 import { iconLink } from "@/constants/image";
 import { AntDesign, Feather, FontAwesome } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import React from "react";
 import { Image, StatusBar, StyleSheet, TouchableOpacity } from "react-native";
 import { Text } from "react-native";
 import { View } from "react-native";
 
 const RosterBuilderImport = () => {
+    const router = useRouter();
   const handleBrowse = () => {};
+  const handleImport = () => {
+    router.push('/login')
+  };
+  
   return (
     <View style={styles.mainContainer}>
       <StatusBar
@@ -66,7 +72,7 @@ const RosterBuilderImport = () => {
           </View>
           <Button
             text="Import"
-            onPress={handleBrowse}
+            onPress={handleImport}
             containerStyle={{
               borderRadius: 8,
               marginVertical: 10,

@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import Header from '@/components/Header';
 import { AntDesign } from '@expo/vector-icons';
 import CartItemComponent from '@/components/CartItemComponent';
+import { useRouter } from 'expo-router';
 
 interface CartItem {
     id: string;
@@ -17,6 +18,7 @@ interface CartItem {
 }
 
 const Cart: React.FC = () => {
+      const router = useRouter();
     const [selected, setSelected] = useState(true);
     const [selectedButton, setSelectedButton] = useState<"deliver" | "edit" | null>(null);
     const [cartItems, setCartItems] = React.useState<CartItem[]>([
@@ -40,6 +42,23 @@ const Cart: React.FC = () => {
         setCartItems(items => items.filter(item => item.id !== id));
     };
     const navigation = useNavigation();
+
+    const handleContinue = () => {
+        router.push('/paymentIntegration')
+    }
+
+    const handleViewPromoCode = () => {
+        router.push('/ApplyCoupon')
+    }
+
+    const handleEditAddredd = () => {
+        setSelectedButton("edit")
+        router.push('/ShoppingAddress')
+    }
+
+    const handleAddNewAddredd = () => {
+        router.push('/ShoppingAddress')
+    }
 
     return (
         <View style={styles.mainContainer}>
@@ -104,7 +123,7 @@ const Cart: React.FC = () => {
                                         <Text style={styles.applyButtonText}>Apply</Text>
                                     </TouchableOpacity>
                                 </View>
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={handleViewPromoCode}>
                                     <Text style={styles.viewPromoText}>View Promo Code</Text>
                                 </TouchableOpacity>
                             </View>
@@ -154,7 +173,7 @@ const Cart: React.FC = () => {
                                         styles.button,
                                         selectedButton === "edit" ? styles.activeButton : styles.inactiveButton,
                                     ]}
-                                    onPress={() => setSelectedButton("edit")}
+                                    onPress={() => handleEditAddredd()}
                                 >
                                     <Text
                                         style={[
@@ -168,11 +187,11 @@ const Cart: React.FC = () => {
                             </View>
 
 
-                            <TouchableOpacity style={styles.addNewButton}>
+                            <TouchableOpacity style={styles.addNewButton} onPress={handleAddNewAddredd}>
                                 <Text style={styles.addNewText}>Add a new delivery address</Text>
                             </TouchableOpacity>
 
-                            <TouchableOpacity style={styles.continueButton}>
+                            <TouchableOpacity style={styles.continueButton} onPress={handleContinue}>
                                 <Text style={styles.continueButtonText}>Continue</Text>
                             </TouchableOpacity>
                         </View>
