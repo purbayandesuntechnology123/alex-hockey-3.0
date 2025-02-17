@@ -1,12 +1,13 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { useFonts } from "expo-font";
+import { fontFamily } from "@/constants/fontFamily";
 
 const Button = ({ text, onPress, style = {}, containerStyle }: any) => {
   const [fontsLoaded] = useFonts({
-    "poppins-Regular": require("../assets/fonts/Poppins (2)/Poppins-Regular.ttf"),
-    "poppins-Semibold": require("../assets/fonts/Poppins (2)/Poppins-SemiBold.ttf"),
-    "poppins-bold": require("../assets/fonts/Poppins (2)/Poppins-Bold.ttf"),
+    "poppins-Regular": require("../assets/fonts/Poppins/Poppins-Regular.ttf"),
+    "poppins-Semibold": require("../assets/fonts/Poppins/Poppins-SemiBold.ttf"),
+    "poppins-bold": require("../assets/fonts/Poppins/Poppins-Bold.ttf"),
   });
   return (
     <View>
@@ -33,7 +34,8 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     alignSelf: "center",
-    fontSize: 16,
-    fontFamily: "poppins-Semibold",
+    fontSize: 15,
+    fontFamily: fontFamily[500]
+    // fontFamily: "poppins-Semibold",
   },
 });

@@ -18,10 +18,10 @@ const Inputs = ({
   const [isFocused, setIsFocused] = useState(false);
 
   const [fontsLoaded] = useFonts({
-    "poppins-Regular": require("../assets/fonts/Poppins (2)/Poppins-Regular.ttf"),
-    "poppins-Semibold": require("../assets/fonts/Poppins (2)/Poppins-SemiBold.ttf"),
-    "poppins-bold": require("../assets/fonts/Poppins (2)/Poppins-Bold.ttf"),
-    "poppins-light": require("../assets/fonts/Poppins (2)/Poppins-Light.ttf"),
+    "poppins-Regular": require("../assets/fonts/Poppins/Poppins-Regular.ttf"),
+    "poppins-Semibold": require("../assets/fonts/Poppins/Poppins-SemiBold.ttf"),
+    "poppins-bold": require("../assets/fonts/Poppins/Poppins-Bold.ttf"),
+    "poppins-light": require("../assets/fonts/Poppins/Poppins-Light.ttf"),
   });
 
   return (

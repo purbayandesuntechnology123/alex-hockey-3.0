@@ -12,9 +12,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const success = () => {
   const navigation: any = useNavigation();
   const [fontsLoaded] = useFonts({
-    "poppins-Regular": require("../assets/fonts/Poppins (2)/Poppins-Regular.ttf"),
-    "poppins-Semibold": require("../assets/fonts/Poppins (2)/Poppins-SemiBold.ttf"),
-    "poppins-bold": require("../assets/fonts/Poppins (2)/Poppins-Bold.ttf"),
+    "poppins-Regular": require("../assets/fonts/Poppins/Poppins-Regular.ttf"),
+    "poppins-Semibold": require("../assets/fonts/Poppins/Poppins-SemiBold.ttf"),
+    "poppins-bold": require("../assets/fonts/Poppins/Poppins-Bold.ttf"),
   });
 
   const handleSubmit = () => {
@@ -56,9 +56,9 @@ export default success;
 const styles = StyleSheet.create({
   topContainer: {
     flex: 1,
-    backgroundColor: '#FD8204',
+    backgroundColor: "#FD8204",
     paddingTop: 10,
-},
+  },
   gradient: {
     flex: 1,
   },

@@ -25,7 +25,7 @@ const profile = () => {
 
   const imageWidth = width * 0.4;
   const [fontLoaded] = useFonts({
-    "poppins-Regular": require("../assets/fonts/Poppins (2)/Poppins-Regular.ttf"),
+    "poppins-Regular": require("../assets/fonts/Poppins/Poppins-Regular.ttf"),
   });
 
   const isUpdateProfile = () => {
