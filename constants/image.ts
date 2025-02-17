@@ -53,4 +53,7 @@ export const iconLink = {
   arrow_z: require("../assets/images/icon/arrow_z.png"),
   csv: require("../assets/images/icon/csv.png"),
   vector: require("../assets/images/icon/vector.png"),
+  cross: require("../assets/images/icon/cross.png"),
+  fyre: require("../assets/images/fyre.png"),
+  welcomeTshirt: require("../assets/images/welcomeTshirt.png"),
 };

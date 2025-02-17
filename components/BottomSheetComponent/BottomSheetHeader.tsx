@@ -22,6 +22,7 @@ interface BottomSheetHeaderProps {
   isWordmark?: boolean;
   onTabLeftPress?: () => void;
   onTabRightPress?: () => void;
+  children?: any;
 }
 
 const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
@@ -36,6 +37,7 @@ const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
   isTab = false,
   onTabLeftPress,
   onTabRightPress,
+  children,
 }) => {
   console.log("isWordmark", isWordmark);
   return (
@@ -103,6 +105,7 @@ const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
           />
         </TouchableOpacity>
       ) : null}
+      {children ? children : null}
     </View>
   );
 };

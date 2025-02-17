@@ -8,7 +8,8 @@ const _layout = () => {
     useEffect(()=>{
       // router.push("/HomePage")
       setTimeout(()=>{
-        router.push("/HomePage")
+        router.push("/welcome")
+        // router.push("/HomePage")
       },3000)
     },[])
   return (

@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         backgroundColor: '#FD8204',
-        paddingTop: 50,
+        paddingTop: 40,
     },
     headerCon: {
         display: 'flex',
