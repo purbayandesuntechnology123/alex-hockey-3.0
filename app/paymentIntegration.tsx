@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
 import Header from '@/components/Header';
 import { useRouter } from 'expo-router';
+import HeaderNav from '@/components/HeaderNav';
 
 const PaymentIntegration: React.FC = () => {
 
@@ -33,10 +34,7 @@ const PaymentIntegration: React.FC = () => {
             />
             <View style={styles.container}>
                 <View style={styles.paymentContainer}>
-                    <TouchableOpacity onPress={() => navigation.goBack()} style={styles.headerCon}>
-                        <AntDesign name="arrowleft" size={24} color="#666666" />
-                        <Header text="Payment" style={styles.header} />
-                    </TouchableOpacity>
+                <HeaderNav title="Payment"/>
                     {/* Steps Indicator */}
                     <View style={styles.stepperContainer}>
                         <View style={styles.stepLine} />

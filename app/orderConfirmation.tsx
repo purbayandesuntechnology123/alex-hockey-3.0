@@ -4,6 +4,7 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image, StatusBar } from "react-native";
 import Svg, { Circle, Path } from "react-native-svg";
 import { useNavigation } from '@react-navigation/native';
+import HeaderNav from "@/components/HeaderNav";
 
 
 const orderConfirmation: React.FC = () => {
@@ -16,15 +17,16 @@ const orderConfirmation: React.FC = () => {
                 barStyle="dark-content"
             />
             <View style={styles.container}>
-                <TouchableOpacity onPress={() => navigation.goBack()} style={styles.headerCon} >
-                    <AntDesign name="arrowleft" size={24} color="#666666" />
-                    <Header text="Payment Successful" style={styles.header} />
-                </TouchableOpacity>
+                <HeaderNav title="Payment Successful"/>
                 <View style={{ alignItems: "center", justifyContent: "center", flex: 1 }}>
                     <Image source={require('../assets/images/paymentSuccess.png')} />
 
-                    <Text style={styles.successText}>Payment Successful!</Text>
-                    <Text style={styles.description}>Thank you for your purchase.</Text>
+                    <Text style={styles.successText}>Order Placed Successfully</Text>
+                    <Text style={styles.orderText}>Your order number is 00000010.</Text>
+                    <Text style={styles.description}>We’ll email you an order confirmation with{'\n'} details and tracking info.</Text>
+                    <TouchableOpacity style={styles.OrderButton}>
+                        <Text style={styles.OrderText}>View Order</Text>
+                    </TouchableOpacity>
 
                 </View>
                     <View style={{justifyContent: "center", alignItems: "center"}}>
@@ -72,19 +74,28 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     successText: {
-        fontSize: 18,
-        fontWeight: "bold",
+        fontSize: 16,
+        fontWeight: 500,
         color: "#FD8204",
         marginTop: 10,
     },
-    description: {
-        fontSize: 14,
+    orderText: {
+        fontSize: 13,
         color: "#1D1F24",
-        marginBottom: 30,
-        fontWeight: '500',
+        // marginBottom: 30,
+        fontWeight: 700,
+        marginBottom: 6,
+        marginTop: 2,
+    },
+    description: {
+        fontSize: 12,
+        color: "#7A7A7A",
+        marginBottom: 52,
+        fontWeight: 400,
+        textAlign: "center"
     },
     button: {
-        backgroundColor: '#FF7F00',
+        backgroundColor: '#FD8204',
         paddingVertical: 14,
         borderRadius: 10,
         alignItems: 'center',
@@ -96,6 +107,18 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         color: "#FFF",
     },
+    OrderText: {
+        fontSize: 16,
+        fontWeight: 600,
+        color: "#070707",
+    },
+    OrderButton: {
+        borderColor: "#0000001A",
+        borderWidth: 1,
+        borderRadius: 8,
+        paddingHorizontal: 30,
+        paddingVertical: 17,
+    }
 });
 
 export default orderConfirmation;

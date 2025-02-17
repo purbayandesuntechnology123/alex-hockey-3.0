@@ -15,6 +15,7 @@ export const imageLink = {
   single1: require("../assets/images/chestStriping/single1.png"),
   double1: require("../assets/images/chestStriping/double1.png"),
   triple2: require("../assets/images/chestStriping/triple2.png"),
+  tshirtCardBG: require('../assets/images/rosterCardBG.png'),
 
   // menu
   template: require("../assets/images/menu/template.png"),
@@ -30,6 +31,7 @@ export const imageLink = {
   otherPatches: require("../assets/images/menu/otherPatches.png"),
   nameBar: require("../assets/images/menu/nameBar.png"),
 
+  
   //   pattern
   felt: require("../assets/images/pattern/felt.png"),
   hexagonsDark: require("../assets/images/pattern/hexagonsDark.png"),
