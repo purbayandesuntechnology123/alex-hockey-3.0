@@ -65,14 +65,12 @@ const ApplyCoupon: React.FC = () => {
                     <AntDesign name="arrowleft" size={24} color="#666666" />
                 </TouchableOpacity>
                 <Text style={styles.header}>Apply Coupon</Text>
-                <ScrollView contentContainerStyle={{ paddingBottom: 30 }}>
                     <FlatList
                         data={coupons}
                         keyExtractor={(item) => item.id}
                         renderItem={renderItem}
                         showsVerticalScrollIndicator={false}
                     />
-                </ScrollView>
             </View>
         </View>
     );
@@ -91,6 +89,7 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         borderTopRightRadius: 20,
         borderTopLeftRadius: 20,
+        // paddingBottom: 20,
     },
     header: {
         fontSize: 20,
@@ -132,13 +131,13 @@ const styles = StyleSheet.create({
         color: "#fff"
     },
     discountText: {
-        fontSize: 14,
+        fontSize: 15,
         fontWeight: "bold",
         color: "#000",
         transform: [{ rotate: "-90deg" }],
-        flexShrink: 1,
+        // flexShrink: 1,
         textAlign: "center",
-        width: 40
+        width: 57
     },
     content: {
         flex: 1,

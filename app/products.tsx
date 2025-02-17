@@ -5,6 +5,7 @@ import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Image, Dimensions
 import { LinearGradient } from 'expo-linear-gradient'
 import Header from '@/components/Header';
 import { useNavigation } from '@react-navigation/native';
+import HeaderNav from '@/components/HeaderNav';
 
 const { width, height } = Dimensions.get('window');
 
@@ -72,10 +73,7 @@ const products: React.FC = () => {
             />
 
             <View style={styles.container}>
-                <TouchableOpacity onPress={() => navigation.goBack()} style={styles.headerCon}>
-                    <AntDesign name="arrowleft" size={24} color="#666666" />
-                    <Header text="Product Options" style={styles.header} />
-                </TouchableOpacity>
+            <HeaderNav title="Product Options"/>
 
                 {/* Custom Image Slider */}
                 <ImageBackground source={require('../assets/images/productsBG.png')} style={styles.sliderContainer}>
