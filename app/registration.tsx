@@ -44,9 +44,9 @@ const index = () => {
   };
 
   const [fontsLoaded] = useFonts({
-    "poppins-Regular": require("../assets/fonts/Poppins (2)/Poppins-Regular.ttf"),
-    "poppins-Semibold": require("../assets/fonts/Poppins (2)/Poppins-SemiBold.ttf"),
-    "poppins-bold": require("../assets/fonts/Poppins (2)/Poppins-Bold.ttf"),
+    "poppins-Regular": require("../assets/fonts/Poppins/Poppins-Regular.ttf"),
+    "poppins-Semibold": require("../assets/fonts/Poppins/Poppins-SemiBold.ttf"),
+    "poppins-bold": require("../assets/fonts/Poppins/Poppins-Bold.ttf"),
     "league-Regular": require("../assets/fonts/Bebas_Neue,GFS_Neohellenic,League_Spartan/League_Spartan/static/LeagueSpartan-Regular.ttf"),
   });
 

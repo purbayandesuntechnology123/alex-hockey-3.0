@@ -1,4 +1,6 @@
 import Button from "@/components/Button";
+import { themeColor } from "@/constants/colors";
+import { fontFamily } from "@/constants/fontFamily";
 import { iconLink } from "@/constants/image";
 import { useRouter } from "expo-router";
 import React from "react";
@@ -78,7 +80,7 @@ const Welcome = () => {
             }
           />
         </View>
-        <View style={{ marginHorizontal: 28, marginBottom: 10 }}>
+        <View style={{ marginHorizontal: 20, marginBottom: 10 }}>
           <Text style={styles.description}>
             Drag colors in the order you want them to appear on your jersey.
             Farthest to the left is your primary base color. After that is your
@@ -102,12 +104,12 @@ const Welcome = () => {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: "#FD8204",
+    backgroundColor: themeColor.primary,
     paddingTop: 30,
   },
   container: {
     flex: 1,
-    backgroundColor: "#000",
+    backgroundColor: themeColor.textPrimary,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     paddingTop: 10,
@@ -123,16 +125,18 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   lable: {
-    color: "#fff",
+    color: themeColor.white,
     textAlign: "center",
     fontSize: 17,
     lineHeight: 22,
-    fontFamily: "Poppins",
+    fontFamily: fontFamily[500],
   },
   description: {
-    color: "#fff",
+    color: themeColor.white,
     lineHeight: 20,
     textAlign: "center",
+    fontSize: 13,
+    fontFamily: fontFamily[500],
   },
 });
 

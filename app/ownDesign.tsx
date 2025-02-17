@@ -1,6 +1,7 @@
 import BottomSheetHeader from "@/components/BottomSheetComponent/BottomSheetHeader";
 import Button from "@/components/Button";
 import ChooseYourColor from "@/components/ChooseYourColor";
+import ColorPickerModal from "@/components/ColorPickerModal";
 import { iconLink, imageLink } from "@/constants/image";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
@@ -14,12 +15,19 @@ import { TextInput } from "react-native";
 import { StatusBar } from "react-native";
 import { Text, View } from "react-native";
 
+const defaultColor = ["#9BB8D3", "#69B3E7", "#0C2340", "#FFFF"];
+
 const OwnDesign = () => {
   const router = useRouter();
   const [name, setName] = useState<string>("");
   const [startFrom, setStartFrom] = useState<string>("blank");
   const [startColor, setStartColor] = useState<string>("");
   const [colorOption, setColorOption] = useState<boolean>(false);
+  const [isModalShow, setIsModalShow] = useState<boolean>(false);
+  const [colorFromPicker, setColorFromPicker] = useState<string>("");
+  const [currentColorIndex, setCurrectColorIndex] = useState<number>();
+  const [selectedColor, setSelectedColor] =
+    useState<Array<string>>(defaultColor);
 
   const handleBackClick = () => {
     router.back();
@@ -30,8 +38,49 @@ const OwnDesign = () => {
     setColorOption(true);
   };
 
+  const handleRandomPress = () => {
+    setStartColor("random");
+    setSelectedColor(generateColorPalette(3));
+  };
+
   const handleCreate = () => {
     router.push("/HomePage");
+  };
+
+  const getRandomColor = () => {
+    return `#${Math.floor(Math.random() * 16777215)
+      .toString(16)
+      .padStart(6, "0")}`;
+  };
+
+  const generateColorPalette = (numRandomColors: number) => {
+    const staticColor = defaultColor[3]; // Static color
+    const randomColors = Array.from({ length: numRandomColors }, () =>
+      getRandomColor()
+    );
+    return [...randomColors, staticColor];
+  };
+
+  const handleColorChange = (index: number) => {
+    setIsModalShow(true);
+    setCurrectColorIndex(index);
+    // setSelectedColor(
+    //   selectedColor.map((color, i) =>
+    //     i === index? colorFromPicker : color
+    //   )
+    // );
+    // setSelectedColor(selectedColor)
+    console.log(index);
+    console.log("colorFromPicker", colorFromPicker);
+  };
+
+  const onPressWork = () => {
+    setIsModalShow(false);
+    setSelectedColor(
+      selectedColor.map((color, i) =>
+        i === currentColorIndex ? colorFromPicker : color
+      )
+    );
   };
   return (
     <View style={styles.mainContainer}>
@@ -52,7 +101,10 @@ const OwnDesign = () => {
           }}
         >
           {colorOption ? (
-            <ChooseYourColor setColorOption={setColorOption} />
+            <ChooseYourColor
+              setColorOption={setColorOption}
+              setSelectedColor={setSelectedColor}
+            />
           ) : (
             <View>
               <BottomSheetHeader
@@ -147,7 +199,7 @@ const OwnDesign = () => {
                         backgroundColor:
                           startColor === "random" ? "#FD8204" : "#8B8888",
                       }}
-                      onPress={() => setStartColor("random")}
+                      onPress={handleRandomPress}
                     >
                       <Text style={[styles.Lable, { textAlign: "center" }]}>
                         Random
@@ -171,7 +223,36 @@ const OwnDesign = () => {
                   },
                 ]}
               >
-                <TouchableOpacity
+                {selectedColor.map((item, index) => (
+                  <TouchableOpacity
+                    key={index}
+                    style={{
+                      flex: 1,
+                      backgroundColor: item,
+                      height: 35,
+                      borderRadius: 3,
+                      marginHorizontal: 5,
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    children={
+                      index === 3 ? (
+                        <Image
+                          source={iconLink.cross}
+                          style={{
+                            resizeMode: "contain",
+                            width: 25,
+                            height: 25,
+                          }}
+                        />
+                      ) : null
+                    }
+                    onPress={() => {
+                      handleColorChange(index);
+                    }}
+                  />
+                ))}
+                {/* <TouchableOpacity
                   style={{
                     flex: 1,
                     backgroundColor: "#9BB8D3",
@@ -210,7 +291,7 @@ const OwnDesign = () => {
                       style={{ resizeMode: "contain", width: 25, height: 25 }}
                     />
                   }
-                />
+                /> */}
               </View>
               <Button
                 text={"Create"}
@@ -228,6 +309,12 @@ const OwnDesign = () => {
           )}
         </View>
       </ImageBackground>
+      <ColorPickerModal
+        isModalShow={isModalShow}
+        setIsModalShow={setIsModalShow}
+        setColorFromPicker={setColorFromPicker}
+        onPressWork={onPressWork}
+      />
     </View>
   );
 };

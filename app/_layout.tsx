@@ -1,22 +1,45 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useEffect } from "react";
-import { Navigator, Stack, useRouter } from "expo-router";
+import { Navigator, Slot, Stack, useRouter } from "expo-router";
+import { useFonts } from "expo-font";
 // import { BottomSheetProvider } from "@/components/CustomBottomSheet";
 
 const _layout = () => {
-    const router = useRouter();
-    useEffect(()=>{
-      // router.push("/HomePage")
-      setTimeout(()=>{
-        router.push("/welcome")
+  const router = useRouter();
+  const [loaded, error] = useFonts({
+    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    "Poppins-Black": require("../assets/fonts/Poppins/Poppins-Black.ttf"),
+    "Poppins-Bold": require("../assets/fonts/Poppins/Poppins-Bold.ttf"),
+    "Poppins-ExtraBold": require("../assets/fonts/Poppins/Poppins-ExtraBold.ttf"),
+    "Poppins-Light": require("../assets/fonts/Poppins/Poppins-Light.ttf"),
+    "Poppins-Medium": require("../assets/fonts/Poppins/Poppins-Medium.ttf"),
+    "Poppins-Regular": require("../assets/fonts/Poppins/Poppins-Regular.ttf"),
+    "Poppins-SemiBold": require("../assets/fonts/Poppins/Poppins-SemiBold.ttf"),
+    "Poppins-ExtraLight": require("../assets/fonts/Poppins/Poppins-ExtraLight.ttf"),
+    "Poppins-Thin": require("../assets/fonts/Poppins/Poppins-Thin.ttf"),
+  });
+
+  console.log("loaded=====>", loaded);
+  useEffect(() => {
+    // router.push("/HomePage")
+    if (loaded) {
+      setTimeout(() => {
+        router.push("/welcome");
         // router.push("/HomePage")
-      },3000)
-    },[])
+      }, 3000);
+    }
+  }, [loaded]);
+
+  if (!loaded) {
+    return <Slot />;
+  }
   return (
     // <BottomSheetProvider>
-    <Stack screenOptions={{
-      headerShown: false
-    }}>
+    <Stack
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Stack.Screen
         name="registration"
         options={{
