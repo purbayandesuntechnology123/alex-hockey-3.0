@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, StyleSheet, Text, View } from "react-native";
+import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import ColorPicker, {
   Panel1,
@@ -41,7 +41,7 @@ const ColorPickerModal: React.FC<ColorPickerModalProps> = ({
   onPressWork,
 }) => {
   // const [showModal, setShowModal] = useState(false);
-  const [tabType, setTabType] = useState();
+  const [tabType, setTabType] = useState("Grid");
 
   // Note: This can be a `worklet` function.
   const onSelectColor = ({ hex }: { hex: string }) => {
@@ -68,11 +68,18 @@ const ColorPickerModal: React.FC<ColorPickerModalProps> = ({
             }}
           >
             {tabTypeData.map((item) => (
-              <View
+              <TouchableOpacity
                 style={{
                   flex: 1,
-                  // backgroundColor: themeColor.darkGray,
+                  backgroundColor:
+                    tabType === item.tabName
+                      ? themeColor.lightGray
+                      : themeColor.darkGray,
                   padding: 6,
+                  borderRadius: 6,
+                }}
+                onPress={() => {
+                  setTabType(item.tabName);
                 }}
               >
                 <Text
@@ -86,20 +93,27 @@ const ColorPickerModal: React.FC<ColorPickerModalProps> = ({
                 >
                   {item.tabName}
                 </Text>
-              </View>
+              </TouchableOpacity>
             ))}
           </View>
           <ColorPicker
             style={{ width: "100%" }}
-            value="red"
+            value="blue"
             onComplete={onSelectColor}
           >
+            {tabType === "Grid" ? (
+              <Panel5 />
+            ) : tabType === "Spectrum" ? (
+              <></>
+            ) : (
+              // <Panel1 />
+              <View style={{ gap: 15 }}>
+                <HueSlider />
+                <OpacitySlider />
+              </View>
+            )}
             {/* <Preview /> */}
-            {/* <Panel1 /> */}
-            {/* <HueSlider /> */}
             {/* <Swatches /> */}
-            <Panel5 />
-            {/* <OpacitySlider /> */}
             {/* <ExampleColor /> */}
             {/* <Panel1Example /> */}
           </ColorPicker>
