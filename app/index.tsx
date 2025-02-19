@@ -5,15 +5,18 @@ import { Image } from "expo-image";
 import { Link, useRouter } from "expo-router";
 import NextArrowSvg from "@/components/NextArrowSvg";
 import { BottomSheetProvider } from "@/components/CustomBottomSheet";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 // import { BottomSheetProvider } from "../components/CustomBottomSheet";
 
 const splashscreen = () => {
   return (
-    <ImageBackground
-      source={require("../assets/images/splashScreen.png")}
-      style={{ flex: 1, width: "100%" }}
-      // resizeMethod="scale"
-    />
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ImageBackground
+        source={require("../assets/images/splashScreen.png")}
+        style={{ flex: 1, width: "100%" }}
+        // resizeMethod="scale"
+      />
+    </GestureHandlerRootView>
     // <BottomSheetProvider>
     // <LinearGradient colors={["#FFFFFF", "#FFD9A5"]} style={styles.container}>
     //   <Image

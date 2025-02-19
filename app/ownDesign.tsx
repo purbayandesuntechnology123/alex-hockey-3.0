@@ -2,6 +2,11 @@ import BottomSheetHeader from "@/components/BottomSheetComponent/BottomSheetHead
 import Button from "@/components/Button";
 import ChooseYourColor from "@/components/ChooseYourColor";
 import ColorPickerModal from "@/components/ColorPickerModal";
+import DraggableButtonList, {
+  ButtonItem,
+} from "@/components/DragButton/DraggableButtonList";
+// import DraggableButtonList, { ButtonItem } from "@/components/DraggableButton";
+// import DraggableButton from "@/components/DraggableButton";
 import { iconLink, imageLink } from "@/constants/image";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
@@ -15,7 +20,12 @@ import { TextInput } from "react-native";
 import { StatusBar } from "react-native";
 import { Text, View } from "react-native";
 
-const defaultColor = ["#9BB8D3", "#69B3E7", "#0C2340", "#FFFF"];
+const defaultColor = [
+  { id: "1", color: "#9BB8D3", canChange: true },
+  { id: "2", color: "#69B3E7", canChange: true },
+  { id: "3", color: "#0C2340", canChange: true },
+  { id: "4", color: "#FFFF", canChange: false },
+];
 
 const OwnDesign = () => {
   const router = useRouter();
@@ -27,7 +37,9 @@ const OwnDesign = () => {
   const [colorFromPicker, setColorFromPicker] = useState<string>("");
   const [currentColorIndex, setCurrectColorIndex] = useState<number>();
   const [selectedColor, setSelectedColor] =
-    useState<Array<string>>(defaultColor);
+    useState<Array<{ id: string; color: string }>>(defaultColor);
+
+  //   console.log("selectedColor======>", selectedColor);
 
   const handleBackClick = () => {
     router.back();
@@ -55,32 +67,30 @@ const OwnDesign = () => {
 
   const generateColorPalette = (numRandomColors: number) => {
     const staticColor = defaultColor[3]; // Static color
-    const randomColors = Array.from({ length: numRandomColors }, () =>
-      getRandomColor()
+    const randomColors = Array.from(
+      { length: numRandomColors },
+      (_, index) => ({
+        id: (index + 1).toString(),
+        color: getRandomColor(),
+      })
     );
     return [...randomColors, staticColor];
   };
 
   const handleColorChange = (index: number) => {
     setIsModalShow(true);
-    setCurrectColorIndex(index);
-    // setSelectedColor(
-    //   selectedColor.map((color, i) =>
-    //     i === index? colorFromPicker : color
-    //   )
-    // );
-    // setSelectedColor(selectedColor)
+    // setCurrectColorIndex(index);
     console.log(index);
     console.log("colorFromPicker", colorFromPicker);
   };
 
   const onPressWork = () => {
     setIsModalShow(false);
-    setSelectedColor(
-      selectedColor.map((color, i) =>
-        i === currentColorIndex ? colorFromPicker : color
-      )
-    );
+    // setSelectedColor(
+    //   selectedColor.map((color, i) =>
+    //     i === currentColorIndex ? { ...color, color: colorFromPicker } : color
+    //   )
+    // );
   };
   return (
     <View style={styles.mainContainer}>
@@ -228,7 +238,7 @@ const OwnDesign = () => {
                     key={index}
                     style={{
                       flex: 1,
-                      backgroundColor: item,
+                      backgroundColor: item.color,
                       height: 35,
                       borderRadius: 3,
                       marginHorizontal: 5,

@@ -13,12 +13,12 @@ import { themeColor } from "@/constants/colors";
 
 interface ChooseYourColorProps {
   setColorOption: (value: boolean) => void;
-  setSelectedColor: (value: Array<string>) => void;
+  setSelectedColor: (value: Array<{ id: string; color: string }>) => void;
 }
 
 interface ColorItem {
   colorName: string;
-  color: string[];
+  color: { id: string; color: string }[];
 }
 
 interface DataStructure {
@@ -30,71 +30,146 @@ const data: DataStructure = {
     [
       {
         colorName: "Anaheim",
-        color: ["#010101", "#B9975B", "#FD8204", "#FFFFFF"],
+        color: [
+          { id: "1", color: "#010101" },
+          { id: "2", color: "#B9975B" },
+          { id: "3", color: "#FD8204" },
+          { id: "4", color: "#FFFFFF" },
+        ],
       },
       {
         colorName: "Anaheim RR2",
-        color: ["#FFFFFF", "#FC4C02", "#010101", "#010101"],
+        color: [
+          { id: "1", color: "#FFFFFF" },
+          { id: "2", color: "#FC4C02" },
+          { id: "3", color: "#010101" },
+          { id: "4", color: "#010101" },
+        ],
       },
       {
         colorName: "Atlanta",
-        color: ["#041E42", "#862633", "#FD8204", "#FFFFFF"],
+        color: [
+          { id: "1", color: "#041E42" },
+          { id: "2", color: "#862633" },
+          { id: "3", color: "#FD8204" },
+          { id: "4", color: "#FFFFFF" },
+        ],
       },
     ],
     [
       {
         colorName: "Anaheim Alt",
-        color: ["#FC4C02", "#010101", "#B9975B", "#FFFFFF"],
+        color: [
+          { id: "1", color: "#FC4C02" },
+          { id: "2", color: "#010101" },
+          { id: "3", color: "#B9975B" },
+          { id: "4", color: "#FFFFFF" },
+        ],
       },
       {
         colorName: "Arizona",
-        color: ["#862633", "#010101", "#DDCBA4", "#FFFFFF"],
+        color: [
+          { id: "1", color: "#862633" },
+          { id: "2", color: "#010101" },
+          { id: "3", color: "#DDCBA4" },
+          { id: "4", color: "#FFFFFF" },
+        ],
       },
       {
         colorName: "Atlanta Alt",
-        color: ["#010101", "#FFB81C", "#FFFFFF", "#FFFFFF"],
+        color: [
+          { id: "1", color: "#010101" },
+          { id: "2", color: "#FFB81C" },
+          { id: "3", color: "#FFFFFF" },
+          { id: "4", color: "#FFFFFF" },
+        ],
       },
     ],
     [
       {
         colorName: "Anaheim Alt 2",
-        color: ["#512A44", "#00685E", "#A2AAAD", "#FFFFFF"],
+        color: [
+          { id: "1", color: "#512A44" },
+          { id: "2", color: "#00685E" },
+          { id: "3", color: "#A2AAAD" },
+          { id: "4", color: "#FFFFFF" },
+        ],
       },
       {
         colorName: "Arizona Alt",
-        color: ["#010101", "#6F263D", "#154734", "#DDCBA4"],
+        color: [
+          { id: "1", color: "#010101" },
+          { id: "2", color: "#6F263D" },
+          { id: "3", color: "#154734" },
+          { id: "4", color: "#DDCBA4" },
+        ],
       },
       {
         colorName: "Boston",
-        color: ["#041E42", "#5C88DA", "#862633", "#FFFFFF"],
+        color: [
+          { id: "1", color: "#041E42" },
+          { id: "2", color: "#5C88DA" },
+          { id: "3", color: "#862633" },
+          { id: "4", color: "#FFFFFF" },
+        ],
       },
     ],
     [
       {
         colorName: "Anaheim Retro",
-        color: ["#00685E", "#4B3048", "#A2AAAD", "#FFFFFF"],
+        color: [
+          { id: "1", color: "#00685E" },
+          { id: "2", color: "#4B3048" },
+          { id: "3", color: "#A2AAAD" },
+          { id: "4", color: "#FFFFFF" },
+        ],
       },
       {
         colorName: "Arizona RR",
-        color: ["#010101", "#B9975B", "#FD8204", "#FFFFFF"],
+        color: [
+          { id: "1", color: "#010101" },
+          { id: "2", color: "#B9975B" },
+          { id: "3", color: "#FD8204" },
+          { id: "4", color: "#FFFFFF" },
+        ],
       },
       {
         colorName: "Boston RR",
-        color: ["#FFB81C", "#010101", "#FFFFFF", "#FFFFFF"],
+        color: [
+          { id: "1", color: "#FFB81C" },
+          { id: "2", color: "#010101" },
+          { id: "3", color: "#FFFFFF" },
+          { id: "4", color: "#FFFFFF" },
+        ],
       },
     ],
     [
       {
         colorName: "Anaheim RR",
-        color: ["#FFFFFF", "#00685E", "#4B3048", "#00685E"],
+        color: [
+          { id: "1", color: "#FFFFFF" },
+          { id: "2", color: "#00685E" },
+          { id: "3", color: "#4B3048" },
+          { id: "4", color: "#00685E" },
+        ],
       },
       {
         colorName: "Arizona RR2",
-        color: ["#A9431E", "#010101", "#6F263D", "#DDCBA4"],
+        color: [
+          { id: "1", color: "#A9431E" },
+          { id: "2", color: "#010101" },
+          { id: "3", color: "#6F263D" },
+          { id: "4", color: "#DDCBA4" },
+        ],
       },
       {
         colorName: "Boston RR2",
-        color: ["#FFFFFF", "#010101", "#FFC72C", "#010101"],
+        color: [
+          { id: "1", color: "#FFFFFF" },
+          { id: "2", color: "#010101" },
+          { id: "3", color: "#FFC72C" },
+          { id: "4", color: "#010101" },
+        ],
       },
     ],
   ],
@@ -140,7 +215,12 @@ const ChooseYourColor: React.FC<ChooseYourColorProps> = ({
 
   const handleColorPress = (item: ColorItem) => {
     // console.log("item===>", item);
-    setSelectedColor(item.color);
+    setSelectedColor(
+      item.color.map((colorObj, index) => ({
+        id: `${item.colorName}-${index}`,
+        color: colorObj.color as string,
+      }))
+    );
     setColorOption(false);
   };
   return (
@@ -199,8 +279,9 @@ const ChooseYourColor: React.FC<ChooseYourColorProps> = ({
                   {item.color &&
                     item.color.map((itemColor) => (
                       <View
+                        key={itemColor.id}
                         style={{
-                          backgroundColor: itemColor,
+                          backgroundColor: itemColor.color,
                           flex: 1,
                           padding: 10,
                         }}

@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React, { useEffect } from "react";
 import { Navigator, Slot, Stack, useRouter } from "expo-router";
 import { useFonts } from "expo-font";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 // import { BottomSheetProvider } from "@/components/CustomBottomSheet";
 
 const _layout = () => {
@@ -35,6 +36,7 @@ const _layout = () => {
   }
   return (
     // <BottomSheetProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
     <Stack
       screenOptions={{
         headerShown: false,
@@ -164,6 +166,7 @@ const _layout = () => {
         }}
       ></Stack.Screen>
     </Stack>
+    </GestureHandlerRootView>
     // </BottomSheetProvider>
   );
 };
