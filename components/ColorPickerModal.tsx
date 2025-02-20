@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import ColorPicker, {
@@ -18,6 +18,7 @@ interface ColorPickerModalProps {
   setIsModalShow: (value: boolean) => void;
   setColorFromPicker: (value: string) => void;
   onPressWork: () => void;
+  selectedColor: string | undefined;
 }
 
 const tabTypeData = [
@@ -39,14 +40,26 @@ const ColorPickerModal: React.FC<ColorPickerModalProps> = ({
   setIsModalShow,
   setColorFromPicker,
   onPressWork,
+  selectedColor,
 }) => {
   // const [showModal, setShowModal] = useState(false);
   const [tabType, setTabType] = useState("Grid");
+  const [pageBtnColor, setPageBtnColor] = useState<string | undefined>("");
+
+  useEffect(() => {
+    if (selectedColor) {
+      setPageBtnColor(selectedColor);
+      setColorFromPicker(selectedColor)
+    } else {
+      setPageBtnColor(themeColor.primary);
+    }
+  }, [selectedColor]);
 
   // Note: This can be a `worklet` function.
   const onSelectColor = ({ hex }: { hex: string }) => {
     // do something with the selected color.
-    console.log(hex);
+    setPageBtnColor(hex);
+    // console.log("hex", hex);
     setColorFromPicker(hex);
     return hex;
   };
@@ -98,15 +111,17 @@ const ColorPickerModal: React.FC<ColorPickerModalProps> = ({
           </View>
           <ColorPicker
             style={{ width: "100%" }}
-            value="blue"
+            value={pageBtnColor}
             onComplete={onSelectColor}
           >
             {tabType === "Grid" ? (
               <Panel5 />
             ) : tabType === "Spectrum" ? (
-              <></>
+              <View style={{ gap: 15 }}>
+                <HueSlider />
+                <Panel1 />
+              </View>
             ) : (
-              // <Panel1 />
               <View style={{ gap: 15 }}>
                 <HueSlider />
                 <OpacitySlider />
@@ -121,7 +136,11 @@ const ColorPickerModal: React.FC<ColorPickerModalProps> = ({
           <Button
             text="Ok"
             onPress={onPressWork}
-            containerStyle={{ marginVertical: 10 }}
+            containerStyle={{
+              marginVertical: 10,
+              backgroundColor: pageBtnColor,
+              borderWidth: 1,
+            }}
           />
         </View>
       </Modal>

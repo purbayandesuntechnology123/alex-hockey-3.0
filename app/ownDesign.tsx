@@ -5,6 +5,7 @@ import ColorPickerModal from "@/components/ColorPickerModal";
 import DraggableButtonList, {
   ButtonItem,
 } from "@/components/DragButton/DraggableButtonList";
+import { themeColor } from "@/constants/colors";
 // import DraggableButtonList, { ButtonItem } from "@/components/DraggableButton";
 // import DraggableButton from "@/components/DraggableButton";
 import { iconLink, imageLink } from "@/constants/image";
@@ -79,18 +80,18 @@ const OwnDesign = () => {
 
   const handleColorChange = (index: number) => {
     setIsModalShow(true);
-    // setCurrectColorIndex(index);
+    setCurrectColorIndex(index);
     console.log(index);
     console.log("colorFromPicker", colorFromPicker);
   };
 
   const onPressWork = () => {
     setIsModalShow(false);
-    // setSelectedColor(
-    //   selectedColor.map((color, i) =>
-    //     i === currentColorIndex ? { ...color, color: colorFromPicker } : color
-    //   )
-    // );
+    setSelectedColor(
+      selectedColor.map((color, i) =>
+        i === currentColorIndex ? { ...color, color: colorFromPicker } : color
+      )
+    );
   };
   return (
     <View style={styles.mainContainer}>
@@ -244,6 +245,8 @@ const OwnDesign = () => {
                       marginHorizontal: 5,
                       alignItems: "center",
                       justifyContent: "center",
+                      borderWidth: 1,
+                      borderColor: themeColor.lightGray,
                     }}
                     children={
                       index === 3 ? (
@@ -303,6 +306,10 @@ const OwnDesign = () => {
                   }
                 /> */}
               </View>
+              {/* <View style={{ backgroundColor: themeColor.lightGray }}>
+                <SvgTextWithStroke text="Hello" />
+                <StrokeText text="H" />
+              </View> */}
               <Button
                 text={"Create"}
                 containerStyle={{
@@ -324,6 +331,11 @@ const OwnDesign = () => {
         setIsModalShow={setIsModalShow}
         setColorFromPicker={setColorFromPicker}
         onPressWork={onPressWork}
+        selectedColor={
+          currentColorIndex !== undefined
+            ? selectedColor[currentColorIndex].color
+            : undefined
+        }
       />
     </View>
   );

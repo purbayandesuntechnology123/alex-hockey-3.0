@@ -1,31 +1,36 @@
 import { iconLink } from "@/constants/image";
 import Slider from "@react-native-community/slider";
 import React, { useState } from "react";
-import { Image, StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import CustomSwitch from "../CustomSwitch";
 import TshirtButtonColor from "./TshirtButtonColor";
+import { themeColor } from "@/constants/colors";
 
 interface FrontCrestImageCardProps {
-    setFrontCrestPattern: (value: boolean) => void;
+  setFrontCrestPattern: (value: boolean) => void;
 }
 
-const FrontCrestImageCard: React.FC<FrontCrestImageCardProps> = ({setFrontCrestPattern}) => {
+const FrontCrestImageCard: React.FC<FrontCrestImageCardProps> = ({
+  setFrontCrestPattern,
+}) => {
   const [scale, setScale] = useState(1.0);
   const [pattern, setPattern] = useState(1.0);
   //   const [isEnabled, setIsEnabled] = useState(false);
   //   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
   const handleFrontCrestPatterClick = () => {
-    setFrontCrestPattern(true)
-  }
+    setFrontCrestPattern(true);
+  };
   return (
     <View style={styles.container}>
       {/* <Text style={{ color: "#fff" }}>front crest image card</Text> */}
-      <View style={{ flexDirection: "row", borderRadius: 8, marginTop: 8 }}>
+      <View
+        style={{ flexDirection: "row", borderRadius: 8, marginTop: 8, gap: 2 }}
+      >
         <View
           style={{
             flex: 1,
-            backgroundColor: "#3E3E3E",
+            backgroundColor: themeColor.gray,
             justifyContent: "center",
             alignItems: "center",
             borderTopLeftRadius: 6,
@@ -40,7 +45,7 @@ const FrontCrestImageCard: React.FC<FrontCrestImageCardProps> = ({setFrontCrestP
         <View
           style={{
             flex: 2,
-            backgroundColor: "#7B7C8A",
+            backgroundColor: themeColor.gray,
             paddingHorizontal: 10,
             paddingVertical: 10,
             gap: 20,
@@ -87,7 +92,10 @@ const FrontCrestImageCard: React.FC<FrontCrestImageCardProps> = ({setFrontCrestP
             >
               <Text style={{ color: "#fff" }}>Pattern</Text>
               <View style={{ flexDirection: "row", gap: 5 }}>
-                <TouchableOpacity style={styles.input} onPress={handleFrontCrestPatterClick}>
+                <TouchableOpacity
+                  style={styles.input}
+                  onPress={handleFrontCrestPatterClick}
+                >
                   <Image
                     source={iconLink.patternFile}
                     style={{ height: 15, width: 15 }}
