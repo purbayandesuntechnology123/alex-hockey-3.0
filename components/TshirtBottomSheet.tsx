@@ -140,13 +140,15 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
                 isTemplateFilterOpen ? { tintColor: "#FD8204" } : {}
               }
             />
-            <BottomSheetScrollView horizontal style={styles.contentContainer}>
+            <BottomSheetView style={styles.contentContainer}>
               <TemplateCard
                 isTemplateFilterOpen={isTemplateFilterOpen}
                 setIsTemplateFilterOpen={setIsTemplateFilterOpen}
               />
-            </BottomSheetScrollView>
-            {!isTemplateFilterOpen ? <TshirtButtonColor /> : null}
+              {!isTemplateFilterOpen ? (
+                <TshirtButtonColor containerStyle={{ marginHorizontal: 0 }} />
+              ) : null}
+            </BottomSheetView>
           </View>
         ) : IsChestStriping ? (
           <View style={{ flex: 1 }}>
