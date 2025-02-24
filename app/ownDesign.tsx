@@ -5,6 +5,7 @@ import ColorPickerModal from "@/components/ColorPickerModal";
 import DraggableButtonList, {
   ButtonItem,
 } from "@/components/DragButton/DraggableButtonList";
+import TextStroke from "@/components/Text/TextStroke";
 import { themeColor } from "@/constants/colors";
 // import DraggableButtonList, { ButtonItem } from "@/components/DraggableButton";
 // import DraggableButton from "@/components/DraggableButton";
@@ -20,6 +21,10 @@ import {
 import { TextInput } from "react-native";
 import { StatusBar } from "react-native";
 import { Text, View } from "react-native";
+import ArcText from "@/components/Text/ArcText";
+import Slider from "@react-native-community/slider";
+import MyCurvedText from "@/components/Text/MyCurvedText";
+import CurvedSvgText from "@/components/Text/CurvedSvgText";
 
 const defaultColor = [
   { id: "1", color: "#9BB8D3", canChange: true },
@@ -39,6 +44,7 @@ const OwnDesign = () => {
   const [currentColorIndex, setCurrectColorIndex] = useState<number>();
   const [selectedColor, setSelectedColor] =
     useState<Array<{ id: string; color: string }>>(defaultColor);
+  const [arcHeight, setArcHeight] = useState(70);
 
   //   console.log("selectedColor======>", selectedColor);
 
@@ -93,6 +99,12 @@ const OwnDesign = () => {
       )
     );
   };
+
+  const handleDraggableColorChange = (index: any) => {
+    console.log("item===>",index)
+    setIsModalShow(true);
+    setCurrectColorIndex(Number(index));
+  }
   return (
     <View style={styles.mainContainer}>
       <StatusBar backgroundColor="transparent" translucent />
@@ -306,10 +318,45 @@ const OwnDesign = () => {
                   }
                 /> */}
               </View>
-              {/* <View style={{ backgroundColor: themeColor.lightGray }}>
-                <SvgTextWithStroke text="Hello" />
-                <StrokeText text="H" />
-              </View> */}
+              {/* <CurvedSvgText /> */}
+
+              <View
+                style={{
+                  backgroundColor: themeColor.lightGray,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                {/* <SvgTextWithStroke text="Hello" /> */}
+                {/* <StrokeText text="H" /> */}
+                {/* <TextStroke stroke={3} color={"#000000"}>
+                  <Text
+                    style={{
+                      fontSize: 25,
+                      color: "#FFFFFF",
+                    //   textAlign: "center",
+                    }}
+                  >
+                    Sample Text
+                  </Text>
+                </TextStroke> */}
+                {/* <OutlinedText
+                  text={"Hello World"}
+                  color={"#000"}
+                  fontSize={50}
+                  fontWeight={"500"}
+                  outlineColor={"#fff"}
+                  shadowLine={1}
+                /> */}
+                {/* <ArcText
+                  text="Outlined"
+                  setArcHeight={setArcHeight}
+                  arcHeight={arcHeight}
+                /> */}
+                {/* <ReactCurvedText /> */}
+                {/* <MyCurvedText /> */} 
+              </View>
+                <DraggableButtonList data={selectedColor} onReorder={setSelectedColor} onPress={handleDraggableColorChange} />
               <Button
                 text={"Create"}
                 containerStyle={{
@@ -321,6 +368,17 @@ const OwnDesign = () => {
                 }}
                 style={{ fontSize: 15 }}
                 onPress={handleCreate}
+              />
+              <Slider
+                style={{ flex: 1 }}
+                minimumValue={20}
+                maximumValue={300}
+                step={1}
+                value={arcHeight}
+                onValueChange={setArcHeight}
+                thumbTintColor="#fff"
+                minimumTrackTintColor="#FFFFFF"
+                maximumTrackTintColor="#999999"
               />
             </View>
           )}
