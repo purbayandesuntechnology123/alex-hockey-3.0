@@ -15,11 +15,13 @@ export interface ButtonItem {
 interface DraggableButtonListProps {
   data: ButtonItem[];
   onReorder: (newData: ButtonItem[]) => void;
+  onPress: (id: string) => void;
 }
 
 const DraggableButtonList: React.FC<DraggableButtonListProps> = ({
   data,
   onReorder,
+  onPress,
 }) => {
   // console.log("color===>",data)
 
@@ -33,6 +35,7 @@ const DraggableButtonList: React.FC<DraggableButtonListProps> = ({
     item,
     drag,
     isActive,
+    getIndex,
   }: RenderItemParams<ButtonItem>) => (
     <TouchableOpacity
       style={[
@@ -40,10 +43,18 @@ const DraggableButtonList: React.FC<DraggableButtonListProps> = ({
         { backgroundColor: item.color },
         isActive && styles.activeButton,
       ]}
+      onPress={() => {
+        const index = getIndex();
+        if (index !== undefined) {
+            onPress(index.toString());
+        }
+      }}
       onLongPress={drag}
       activeOpacity={0.8}
     >
-      <Text style={styles.buttonText}>{item?.label}</Text>
+      <Text style={styles.buttonText}>
+        {item?.label} {getIndex()}
+      </Text>
     </TouchableOpacity>
   );
 
@@ -82,7 +93,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
-    width: 70,
+    width: 70,  
   },
   activeButton: {
     backgroundColor: "#0056b3",
