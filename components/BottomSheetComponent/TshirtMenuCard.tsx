@@ -1,6 +1,13 @@
 import { imageLink } from "@/constants/image";
 import React from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 interface TshirtMenuCardProps {
   setTshirtType?: any;
@@ -28,9 +35,10 @@ const data = {
   ],
 };
 const TshirtMenuCard: React.FC<TshirtMenuCardProps> = ({ setTshirtType }) => {
+  // const platform = Platform.OS;
   const handleTshirtTypePress = (item: object) => {
     setTshirtType(item);
-  };
+  };  
   return (
     <View style={{ gap: 10 }}>
       {data.rows.map((row, rowIndex) => (
@@ -53,7 +61,7 @@ const TshirtMenuCard: React.FC<TshirtMenuCardProps> = ({ setTshirtType }) => {
                 >
                   {item.tshirtType}
                 </Text>
-              )}
+              )}        
             </TouchableOpacity>
           ))}
         </View>
@@ -81,7 +89,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
-  imageStyle: { height: 45, width: 50, resizeMode: "contain" },
+  imageStyle: {
+    height: Platform.OS === "android" ? 65 : 80,
+    width: 50,
+    resizeMode: "contain",
+  },
 });
 
 export default TshirtMenuCard;

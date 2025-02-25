@@ -65,12 +65,18 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
     }
   }, [tshirtType]);
 
+  const commonBack = () => {
+    setTshirtType("");
+  };
+
   const handletemFilterClick = () => {
     setIsTemplateFilterOpen(!isTemplateFilterOpen);
+    setTshirtType();
   };
   const handleTemplateBackClick = () => {
     setIsTemplateFilterOpen(false);
     setIsTemplateOpened(false);
+    setTshirtType();
   };
 
   const handleChestStripingBackClick = () => {
@@ -125,10 +131,11 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
         // snapPoints={isMenuSettingOpen ? ["95%", "95%"] : ["95%", "95%"]}
         backgroundStyle={{ backgroundColor: "#1D1F24" }}
         onChange={handleSheetChanges}
+        enableContentPanningGesture={false}
       >
         {isTemplateOpened ? (
           //   <BottomSheetView style={styles.contentContainer}>
-          <View style={{ flex: 1 }}>
+          <BottomSheetView style={{ flex: 1 }}>
             <BottomSheetHeader
               title="Template"
               leftIconName={iconLink.leftIcon}
@@ -149,7 +156,7 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
                 <TshirtButtonColor containerStyle={{ marginHorizontal: 0 }} />
               ) : null}
             </BottomSheetView>
-          </View>
+          </BottomSheetView>
         ) : IsChestStriping ? (
           <View style={{ flex: 1 }}>
             <BottomSheetHeader
