@@ -5,10 +5,14 @@ import React from "react";
 import { Text, View } from "react-native";
 import ArcText from "./ArcText";
 
-const MyCurvedText = () => {
+interface MyCurvedTextProps {
+  item: number;
+}
+
+const MyCurvedText: React.FC<MyCurvedTextProps> = ({item}) => {
   return (
     <View>
-        <Text style={{color: themeColor.white}}>Hello</Text>
+        <Text style={{color: themeColor.white}}>{item}</Text>
         {/* <ArcText /> */}
         {/* <ReactCurvedText
           width={300}

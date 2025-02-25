@@ -11,7 +11,7 @@ import { themeColor } from "@/constants/colors";
 // import DraggableButton from "@/components/DraggableButton";
 import { iconLink, imageLink } from "@/constants/image";
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import {
   Image,
   ImageBackground,
@@ -25,6 +25,9 @@ import ArcText from "@/components/Text/ArcText";
 import Slider from "@react-native-community/slider";
 import MyCurvedText from "@/components/Text/MyCurvedText";
 import CurvedSvgText from "@/components/Text/CurvedSvgText";
+import CustomTextC from "@/components/Text/CustomTextC";
+import { RNText } from "@/components/Text/RNText";
+import { fontFamily } from "@/constants/fontFamily";
 
 const defaultColor = [
   { id: "1", color: "#9BB8D3", canChange: true },
@@ -46,6 +49,12 @@ const OwnDesign = () => {
     useState<Array<{ id: string; color: string }>>(defaultColor);
   const [arcHeight, setArcHeight] = useState(70);
 
+  const arcHeightRef = useRef(arcHeight);
+  const handleValueChange = useCallback((value: any) => {
+    arcHeightRef.current = value;
+    setArcHeight(value); // Update state immediately, but efficiently
+  }, []);
+
   //   console.log("selectedColor======>", selectedColor);
 
   const handleBackClick = () => {
@@ -60,17 +69,18 @@ const OwnDesign = () => {
   const handleRandomPress = () => {
     setStartColor("random");
     setSelectedColor(generateColorPalette(3));
-  };
+  };    
 
   const handleCreate = () => {
-    router.push("/HomePage");
+    printNumbers(1000000);
+    // router.push("/HomePage");
   };
 
   const getRandomColor = () => {
     return `#${Math.floor(Math.random() * 16777215)
       .toString(16)
       .padStart(6, "0")}`;
-  };
+  };   
 
   const generateColorPalette = (numRandomColors: number) => {
     const staticColor = defaultColor[3]; // Static color
@@ -101,10 +111,10 @@ const OwnDesign = () => {
   };
 
   const handleDraggableColorChange = (index: any) => {
-    console.log("item===>",index)
+    console.log("item===>", index);
     setIsModalShow(true);
     setCurrectColorIndex(Number(index));
-  }
+  };
   return (
     <View style={styles.mainContainer}>
       <StatusBar backgroundColor="transparent" translucent />
@@ -136,7 +146,7 @@ const OwnDesign = () => {
                 title="New"
               />
               <View style={{ marginVertical: 20 }}>
-                <Text style={styles.Lable}>Name:</Text>
+                <RNText style={styles.Lable}>Name:</RNText>
               </View>
               <TextInput
                 style={styles.smallInput}
@@ -148,7 +158,7 @@ const OwnDesign = () => {
               <View style={{ flexDirection: "row", gap: 10 }}>
                 <View style={{ flex: 1 }}>
                   <View style={{ marginVertical: 20 }}>
-                    <Text style={styles.Lable}>Staff From:</Text>
+                    <RNText style={styles.Lable}>Staff From:</RNText>
                   </View>
                   <View
                     style={{
@@ -168,9 +178,9 @@ const OwnDesign = () => {
                       }}
                       onPress={() => setStartFrom("blank")}
                     >
-                      <Text style={[styles.Lable, { textAlign: "center" }]}>
+                      <RNText style={[styles.Lable, { textAlign: "center" }]}>
                         Blank
-                      </Text>
+                      </RNText>
                     </TouchableOpacity>
                     <TouchableOpacity
                       style={{
@@ -182,15 +192,15 @@ const OwnDesign = () => {
                       }}
                       onPress={() => setStartFrom("randomized")}
                     >
-                      <Text style={[styles.Lable, { textAlign: "center" }]}>
+                      <RNText style={[styles.Lable, { textAlign: "center" }]}>
                         Randomized
-                      </Text>
+                      </RNText>
                     </TouchableOpacity>
                   </View>
                 </View>
                 <View style={{ flex: 1 }}>
                   <View style={{ marginVertical: 20 }}>
-                    <Text style={styles.Lable}>Starting Colors:</Text>
+                    <RNText style={styles.Lable}>Starting Colors:</RNText>
                   </View>
                   <View
                     style={{
@@ -210,9 +220,9 @@ const OwnDesign = () => {
                       }}
                       onPress={handleBrowse}
                     >
-                      <Text style={[styles.Lable, { textAlign: "center" }]}>
+                      <RNText style={[styles.Lable, { textAlign: "center" }]}>
                         Browse
-                      </Text>
+                      </RNText>
                     </TouchableOpacity>
                     <TouchableOpacity
                       style={{
@@ -224,9 +234,9 @@ const OwnDesign = () => {
                       }}
                       onPress={handleRandomPress}
                     >
-                      <Text style={[styles.Lable, { textAlign: "center" }]}>
+                      <RNText style={[styles.Lable, { textAlign: "center" }]}>
                         Random
-                      </Text>
+                      </RNText>
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -339,7 +349,7 @@ const OwnDesign = () => {
                   >
                     Sample Text
                   </Text>
-                </TextStroke> */}
+                </TextStroke> */}   
                 {/* <OutlinedText
                   text={"Hello World"}
                   color={"#000"}
@@ -354,9 +364,15 @@ const OwnDesign = () => {
                   arcHeight={arcHeight}
                 /> */}
                 {/* <ReactCurvedText /> */}
-                {/* <MyCurvedText /> */} 
+                {/* <MyCurvedText item={arcHeight} /> */}
+                <RNText style={{fontFamily: fontFamily[700]}}>Hello{arcHeight}</RNText>
+                <CustomTextC text="heeees" direction="diagonal" />
               </View>
-                <DraggableButtonList data={selectedColor} onReorder={setSelectedColor} onPress={handleDraggableColorChange} />
+              <DraggableButtonList
+                data={selectedColor}
+                onReorder={setSelectedColor}
+                onPress={handleDraggableColorChange}         
+              />
               <Button
                 text={"Create"}
                 containerStyle={{
@@ -369,17 +385,31 @@ const OwnDesign = () => {
                 style={{ fontSize: 15 }}
                 onPress={handleCreate}
               />
-              <Slider
+              {/* <Slider
                 style={{ flex: 1 }}
                 minimumValue={20}
                 maximumValue={300}
-                step={1}
+                // step={1}
                 value={arcHeight}
                 onValueChange={setArcHeight}
                 thumbTintColor="#fff"
                 minimumTrackTintColor="#FFFFFF"
                 maximumTrackTintColor="#999999"
-              />
+              /> */}
+              {/* <Slider
+                style={{ flex: 1 }}
+                minimumValue={20}
+                maximumValue={300}
+                value={arcHeight}
+                value={arcHeightRef.current}
+                onValueChange={handleValueChange}
+                onSlidingComplete={(value) => {
+                  setArcHeight(value); // Update state only when user stops sliding
+                }}    
+                thumbTintColor="#fff"
+                minimumTrackTintColor="#FFFFFF"
+                maximumTrackTintColor="#999999"
+              /> */}
             </View>
           )}
         </View>
@@ -426,7 +456,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     backgroundColor: "#8B8888",
   },
-  Lable: { color: "#fff", fontSize: 13, lineHeight: 13 },
+  Lable: { color: "#fff", fontSize: 13, lineHeight: 13.8 },
 });
 
 export default OwnDesign;
