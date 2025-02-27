@@ -210,14 +210,14 @@ const ChooseYourColor: React.FC<ChooseYourColorProps> = ({
 
   //   console.log("filteredData====>", filteredData);
   const handleColorback = () => {
-    setColorOption(false);
+    setColorOption(false);     
   };
 
   const handleColorPress = (item: ColorItem) => {
     // console.log("item===>", item);
     setSelectedColor(
       item.color.map((colorObj, index) => ({
-        id: `${item.colorName}-${index}`,
+        id: colorObj.id,
         color: colorObj.color as string,
       }))
     );

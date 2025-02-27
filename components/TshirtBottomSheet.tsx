@@ -66,17 +66,17 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
   }, [tshirtType]);
 
   const commonBack = () => {
-    setTshirtType("");
+    setTshirtType(null);
   };
 
   const handletemFilterClick = () => {
     setIsTemplateFilterOpen(!isTemplateFilterOpen);
-    setTshirtType();
+    setTshirtType(null);
   };
   const handleTemplateBackClick = () => {
     setIsTemplateFilterOpen(false);
     setIsTemplateOpened(false);
-    setTshirtType();
+    setTshirtType(null);
   };
 
   const handleChestStripingBackClick = () => {
@@ -100,7 +100,7 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
       setIsWordmarkSetting(true);
     } else {
       SetIsCrestSetting(true);
-    }
+    }    
   };
 
   const handleCrestSettingLeftClick = () => {
@@ -177,7 +177,7 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
               />
             </BottomSheetScrollView>
             <TshirtButtonColor />
-          </View>
+          </View>    
         ) : frontCrestOpened ? (
           <View style={{ flex: 1 }}>
             {isCrestSetting ? (

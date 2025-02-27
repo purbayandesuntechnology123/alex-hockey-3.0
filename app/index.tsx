@@ -6,9 +6,22 @@ import { Link, useRouter } from "expo-router";
 import NextArrowSvg from "@/components/NextArrowSvg";
 import { BottomSheetProvider } from "@/components/CustomBottomSheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { useIsFocused } from '@react-navigation/native';
 // import { BottomSheetProvider } from "../components/CustomBottomSheet";
 
 const splashscreen = () => {
+  const router = useRouter();   
+
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    if(isFocused){
+      setTimeout(() => {
+        router.push("/welcome"); // Redirect to home or another screen
+      }, 1000);
+    }
+  }, [isFocused]);
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ImageBackground
