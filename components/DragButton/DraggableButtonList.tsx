@@ -53,7 +53,7 @@ const DraggableButtonList: React.FC<DraggableButtonListProps> = ({
       activeOpacity={0.8}
     >
       <Text style={styles.buttonText}>
-        {item?.label} {getIndex()}
+        {item?.id}
       </Text>
     </TouchableOpacity>
   );
@@ -63,7 +63,7 @@ const DraggableButtonList: React.FC<DraggableButtonListProps> = ({
     <View style={styles.container}>
       <DraggableFlatList
         data={listData}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id}   
         renderItem={renderItem}
         onDragEnd={({ data }) => {
           setListData(data);
@@ -72,7 +72,7 @@ const DraggableButtonList: React.FC<DraggableButtonListProps> = ({
         horizontal={true}
         contentContainerStyle={styles.listContent}
       />
-    </View>
+    </View>    
     // </GestureHandlerRootView>
   );
 };
@@ -82,9 +82,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff00",
   },
   listContent: {
-    flexDirection: "row",
-    alignItems: "center",
-    // paddingHorizontal: 10,
+    flexDirection: "row",  
+    alignItems: "center",    
+    // paddingHorizontal: 10,     
   },
   button: {
     padding: 10,

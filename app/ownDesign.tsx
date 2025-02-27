@@ -6,7 +6,7 @@ import DraggableButtonList, {
   ButtonItem,
 } from "@/components/DragButton/DraggableButtonList";
 import TextStroke from "@/components/Text/TextStroke";
-import { themeColor } from "@/constants/colors";
+// import { themeColor } from "@/constants/colors";
 // import DraggableButtonList, { ButtonItem } from "@/components/DraggableButton";
 // import DraggableButton from "@/components/DraggableButton";
 import { iconLink, imageLink } from "@/constants/image";
@@ -28,6 +28,9 @@ import CurvedSvgText from "@/components/Text/CurvedSvgText";
 import CustomTextC from "@/components/Text/CustomTextC";
 import { RNText } from "@/components/Text/RNText";
 import { fontFamily } from "@/constants/fontFamily";
+import { setButtonColor } from "./../redux/slices/tshirtSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { themeColor } from "@/constants/colors";
 
 const defaultColor = [
   { id: "1", color: "#9BB8D3", canChange: true },
@@ -38,6 +41,13 @@ const defaultColor = [
 
 const OwnDesign = () => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  const { value } = useAppSelector((state) => state.counter);
+  const { buttonColor } = useAppSelector<any>(
+    (state) => state.tshirtCustomizer
+  );
+
   const [name, setName] = useState<string>("");
   const [startFrom, setStartFrom] = useState<string>("blank");
   const [startColor, setStartColor] = useState<string>("");
@@ -46,7 +56,7 @@ const OwnDesign = () => {
   const [colorFromPicker, setColorFromPicker] = useState<string>("");
   const [currentColorIndex, setCurrectColorIndex] = useState<number>();
   const [selectedColor, setSelectedColor] =
-    useState<Array<{ id: string; color: string }>>(defaultColor);
+    useState<Array<{ id: string; color: string }>>(buttonColor);
   const [arcHeight, setArcHeight] = useState(70);
 
   const arcHeightRef = useRef(arcHeight);
@@ -69,18 +79,18 @@ const OwnDesign = () => {
   const handleRandomPress = () => {
     setStartColor("random");
     setSelectedColor(generateColorPalette(3));
-  };    
+    dispatch(setButtonColor(generateColorPalette(3)));
+  };
 
   const handleCreate = () => {
-    printNumbers(1000000);
-    // router.push("/HomePage");
+    router.push("/HomePage");
   };
 
   const getRandomColor = () => {
     return `#${Math.floor(Math.random() * 16777215)
       .toString(16)
       .padStart(6, "0")}`;
-  };   
+  };
 
   const generateColorPalette = (numRandomColors: number) => {
     const staticColor = defaultColor[3]; // Static color
@@ -115,6 +125,18 @@ const OwnDesign = () => {
     setIsModalShow(true);
     setCurrectColorIndex(Number(index));
   };
+
+  // const newColorSet = (data) => {
+  //   dispatch(setButtonColor(data));
+  // };
+  const handleNewDataChange = (retData: any[]) => {
+    setSelectedColor(retData);
+    // newColorSet(retData);
+  };
+
+  // console.log("selectedColor====+++++++===>", selectedColor);
+  // console.log("buttonColor====+++++++===>", buttonColor);
+
   return (
     <View style={styles.mainContainer}>
       <StatusBar backgroundColor="transparent" translucent />
@@ -287,46 +309,6 @@ const OwnDesign = () => {
                     }}
                   />
                 ))}
-                {/* <TouchableOpacity
-                  style={{
-                    flex: 1,
-                    backgroundColor: "#9BB8D3",
-                    height: 35,
-                    borderRadius: 3,
-                  }}
-                />
-                <TouchableOpacity
-                  style={{
-                    flex: 1,
-                    backgroundColor: "#0C2340",
-                    height: 35,
-                    borderRadius: 3,
-                  }}
-                />
-                <TouchableOpacity
-                  style={{
-                    flex: 1,
-                    backgroundColor: "#69B3E7",
-                    height: 35,
-                    borderRadius: 3,
-                  }}
-                />
-                <TouchableOpacity
-                  style={{
-                    flex: 1,
-                    backgroundColor: "#FFFFFF",
-                    height: 35,
-                    borderRadius: 3,
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                  children={
-                    <Image
-                      source={iconLink.cross}
-                      style={{ resizeMode: "contain", width: 25, height: 25 }}
-                    />
-                  }
-                /> */}
               </View>
               {/* <CurvedSvgText /> */}
 
@@ -365,14 +347,19 @@ const OwnDesign = () => {
                 /> */}
                 {/* <ReactCurvedText /> */}
                 {/* <MyCurvedText item={arcHeight} /> */}
-                <RNText style={{fontFamily: fontFamily[700]}}>Hello{arcHeight}</RNText>
-                <CustomTextC text="heeees" direction="diagonal" />
+                {/* <RNText style={{ fontFamily: fontFamily[700] }}>
+                  Hello{arcHeight}
+                </RNText> */}
+                {/* <CustomTextC text="heeees" direction="horizontal" /> */}
               </View>
-              <DraggableButtonList
+              {/* <DraggableButtonList
+                // data={useAppSelector((state) => state.tshirtCustomizer.buttonColor)}
                 data={selectedColor}
-                onReorder={setSelectedColor}
-                onPress={handleDraggableColorChange}         
-              />
+                onReorder={handleNewDataChange}
+                onPress={handleDraggableColorChange}
+                // data={selectedColor}
+                // onReorder={setSelectedColor}
+              /> */}
               <Button
                 text={"Create"}
                 containerStyle={{
