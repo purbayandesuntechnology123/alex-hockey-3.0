@@ -1,4 +1,9 @@
+import { themeColor } from "@/constants/colors";
+import { getchestStriping } from "@/constants/commonFunction";
 import { imageLink } from "@/constants/image";
+import { useAppDispatch } from "@/redux/hooks";
+import { setChestStripingTypeFront } from "@/redux/slices/tshirtDataSlice";
+import { RootState } from "@/redux/store";
 import React, { useState } from "react";
 import {
   Image,
@@ -8,6 +13,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useSelector } from "react-redux";
 
 interface ChestStripingCardProps {
   isTemplateFilterOpen: boolean;
@@ -19,13 +25,13 @@ const data = {
       { image: imageLink.none, tshirtType: "None" },
       { image: imageLink.single2, tshirtType: "Single 2" },
       { image: imageLink.triple1, tshirtType: "Triple 1" },
-    //   { image: imageLink.tshirtFront, tshirtType: "Sleeve Numbers" },
+      //   { image: imageLink.tshirtFront, tshirtType: "Sleeve Numbers" },
     ],
     [
       { image: imageLink.single2, tshirtType: "Single1" },
       { image: imageLink.double1, tshirtType: "Double 1" },
       { image: imageLink.triple2, tshirtType: "Triple 2" },
-    //   { image: imageLink.tshirtFront, tshirtType: "Back Numbers" },
+      //   { image: imageLink.tshirtFront, tshirtType: "Back Numbers" },
     ],
     // [
     //   { image: imageLink.tshirtFront, tshirtType: "Waist Striping" },
@@ -39,9 +45,19 @@ const ChestStripingCard: React.FC<ChestStripingCardProps> = ({
   isTemplateFilterOpen,
   setIsTemplateFilterOpen,
 }) => {
+  const dispatch = useAppDispatch();
+
+  const { tshirtData, tshirtId } = useSelector(
+    (state: RootState) => state.tshirtStoreValue
+  );
   const [filterType, setFilterType] = useState<boolean>(false);
-  const handleTshirtTypePress = () => {
-    setIsTemplateFilterOpen(true);
+  const handleTshirtTypePress = (item: string) => {
+    const payload = {
+      tshirtId: tshirtId,
+      data: item,
+    };
+    dispatch(setChestStripingTypeFront(payload));
+    // setIsTemplateFilterOpen(true);
   };
 
   //   console.log("data", data);
@@ -52,8 +68,12 @@ const ChestStripingCard: React.FC<ChestStripingCardProps> = ({
           {row.map((item, index) => (
             <TouchableOpacity
               key={index}
-              style={styles.menuImgHeader}
-              //   onPress={() => handleTshirtTypePress(item)}
+              style={[
+                styles.menuImgHeader,
+                item.tshirtType === getchestStriping(tshirtData, tshirtId) &&
+                  styles.activeTemplateType,
+              ]}
+              onPress={() => handleTshirtTypePress(item.tshirtType)}
             >
               <Image source={item.image} style={styles.imageStyle} />
               {item.tshirtType && (
@@ -88,7 +108,7 @@ const ChestStripingCard: React.FC<ChestStripingCardProps> = ({
           </View>
         </View>
       ) : null}
-        {/* <TshirtButtonColor /> */}
+      {/* <TshirtButtonColor /> */}
     </View>
   );
 };
@@ -120,6 +140,10 @@ const styles = StyleSheet.create({
     padding: 4,
     borderRadius: 4,
     paddingHorizontal: 25,
+  },
+  activeTemplateType: {
+    borderWidth: 1,
+    borderColor: themeColor.primary,
   },
 });
 

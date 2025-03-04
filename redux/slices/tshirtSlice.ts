@@ -1,16 +1,29 @@
+import { imageLink } from "@/constants/image";
+import { colorObj, TshirtState } from "@/interface/tshirtinterface";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface CounterState {
-  value: number;
-  buttonColor: colorObj[];
-}
+// interface CounterState {
+//   value: number;
+//   buttonColor: colorObj[];
+//   tshirtData: tshirtDataObj[];
+// }
 
-interface colorObj {
+// interface colorObj {
+//   id?: string;
+//   color: string;
+// }
+
+interface tshirtDataObj {
   id?: string;
-  color: string;
+  frontImage: string;
+  backImage: string;
+  tshirtFrontOption: {
+    template: string;
+  };
 }
 
-const initialState: CounterState = {
+const initialState: TshirtState = {
+  countNum: 5,
   value: 0,
   buttonColor: [
     { id: "1", color: "#9BB8D3" },
@@ -35,10 +48,15 @@ const tshirtSlice = createSlice({
     },
     setButtonColor: (state, action: PayloadAction<colorObj[]>) => {
       state.buttonColor = action.payload;
+      console.log("state.tshirtData", state);
     },
-  },
+    setTemplateType: (state, action: PayloadAction<string>) => {
+      console.log("action.payload", action.payload);
+      // state.tshirtData[0].tshirtFrontOption.template = "Plain";
+    }
+  },  
 });
 
-export const { increment, decrement, incrementByAmount, setButtonColor } =
+export const { increment, decrement, incrementByAmount, setButtonColor, setTemplateType } =
   tshirtSlice.actions;
 export default tshirtSlice.reducer;

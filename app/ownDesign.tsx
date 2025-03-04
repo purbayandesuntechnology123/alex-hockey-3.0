@@ -31,6 +31,9 @@ import { fontFamily } from "@/constants/fontFamily";
 import { setButtonColor } from "./../redux/slices/tshirtSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { themeColor } from "@/constants/colors";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 const defaultColor = [
   { id: "1", color: "#9BB8D3", canChange: true },
@@ -44,8 +47,9 @@ const OwnDesign = () => {
   const dispatch = useAppDispatch();
 
   const { value } = useAppSelector((state) => state.counter);
-  const { buttonColor } = useAppSelector<any>(
-    (state) => state.tshirtCustomizer
+
+  const { buttonColor } = useSelector(
+    (state: RootState) => state.tshirtStoreValue
   );
 
   const [name, setName] = useState<string>("");
@@ -55,8 +59,10 @@ const OwnDesign = () => {
   const [isModalShow, setIsModalShow] = useState<boolean>(false);
   const [colorFromPicker, setColorFromPicker] = useState<string>("");
   const [currentColorIndex, setCurrectColorIndex] = useState<number>();
+  // const [selectedColor, setSelectedColor] =
+  //   useState<Array<{ id: string; color: string }>>(buttonColor);
   const [selectedColor, setSelectedColor] =
-    useState<Array<{ id: string; color: string }>>(buttonColor);
+    useState<Array<{ id?: string; color: string }>>(buttonColor);
   const [arcHeight, setArcHeight] = useState(70);
 
   const arcHeightRef = useRef(arcHeight);
@@ -90,7 +96,7 @@ const OwnDesign = () => {
     return `#${Math.floor(Math.random() * 16777215)
       .toString(16)
       .padStart(6, "0")}`;
-  };
+  };  
 
   const generateColorPalette = (numRandomColors: number) => {
     const staticColor = defaultColor[3]; // Static color
@@ -129,13 +135,37 @@ const OwnDesign = () => {
   // const newColorSet = (data) => {
   //   dispatch(setButtonColor(data));
   // };
+
+  // color stored in a localstorage
+  const storeData = async (colorData: any) => {
+    try {
+      const jsonValue = JSON.stringify(colorData);
+      await AsyncStorage.setItem("colors", jsonValue);
+      console.log("Data stored successfully!");
+    } catch (e) {
+      console.error("Error storing data:", e);
+    }
+  };
   const handleNewDataChange = (retData: any[]) => {
+    // console.log("retData===>", retData);
     setSelectedColor(retData);
+    // storeData(retData);
+    // dispatch(setTshirtcolor(retData))
     // newColorSet(retData);
   };
 
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("colors");
+      return jsonValue ? JSON.parse(jsonValue) : null;
+    } catch (e) {
+      console.error("Error retrieving data:", e);
+    }
+  };
   // console.log("selectedColor====+++++++===>", selectedColor);
   // console.log("buttonColor====+++++++===>", buttonColor);
+
+  // getData().then(data => console.log('Retrieved data:', data));
 
   return (
     <View style={styles.mainContainer}>
@@ -331,7 +361,7 @@ const OwnDesign = () => {
                   >
                     Sample Text
                   </Text>
-                </TextStroke> */}   
+                </TextStroke> */}
                 {/* <OutlinedText
                   text={"Hello World"}
                   color={"#000"}
