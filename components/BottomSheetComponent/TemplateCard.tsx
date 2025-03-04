@@ -1,5 +1,9 @@
 import { themeColor } from "@/constants/colors";
+import { getName } from "@/constants/commonFunction";
 import { imageLink } from "@/constants/image";
+import { useAppDispatch } from "@/redux/hooks";
+import { setTemplateTypeFront, setTshirtcolor } from "@/redux/slices/tshirtDataSlice";
+import { RootState } from "@/redux/store";
 import { BottomSheetScrollView, BottomSheetView } from "@gorhom/bottom-sheet";
 import React, { useMemo, useState } from "react";
 import {
@@ -10,6 +14,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useSelector } from "react-redux";
 
 interface TemplateCardProps {
   isTemplateFilterOpen: boolean;
@@ -81,23 +86,36 @@ const filterTypes = [
 const TemplateCard: React.FC<TemplateCardProps> = ({
   isTemplateFilterOpen,
   setIsTemplateFilterOpen,
-}) => {
+}) => {   
+
+  const dispatch = useAppDispatch();
+
+  const { tshirtData, tshirtId, buttonColor } = useSelector((state: RootState )=> state.tshirtStoreValue)
+
   const [filterType, setFilterType] = useState<string>("");
-  const [templateTshirtType, seTemplateTshirtType] = useState<string>("");
+   const [currentColorIndex, setCurrectColorIndex] = useState<number>();
+  const [templateTshirtType, seTemplateTshirtType] = useState<string>(getName(tshirtData, tshirtId));
   const handleTshirtTypePress = (item: string) => {
-    seTemplateTshirtType(item);
+    // seTemplateTshirtType(item);
+    const payload = {
+      tshirtId: tshirtId,
+      data: item
+    }
+    dispatch(setTemplateTypeFront(payload));
   };
 
   const handleCategoryFilter = (type: string) => {
     // console.log("type", type);
     if (type !== filterType) {
       setFilterType(type);
-      filterByColorName(type);
+      filterByColorName(type);    
     } else {
       setFilterType("");
-      filterByColorName("");
+      filterByColorName("");   
     }
   };
+
+  // console.log("tshirtData form store",tshirtData)
 
   const filterByColorName = (query: any) => {
     if (!query) return data; // Return original data if query is empty
@@ -140,8 +158,8 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
                       key={index}
                       style={[
                         styles.menuImgHeader,
-                        item.tshirtType === templateTshirtType &&
-                          styles.activeTemplateType,
+                        item.tshirtType === getName(tshirtData, tshirtId) &&
+                          styles.activeTemplateType,   
                       ]}
                       onPress={() => handleTshirtTypePress(item.tshirtType)}
                     >

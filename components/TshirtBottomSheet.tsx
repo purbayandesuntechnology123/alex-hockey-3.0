@@ -22,6 +22,7 @@ import WordmarkSettingCard from "./BottomSheetComponent/WordmarkSettingCard";
 import FrontCrestPatternCard from "./BottomSheetComponent/FrontCrestPatternCard";
 import SleeveNumberCard from "./BottomSheetComponent/SleeveNumberCard";
 import SleeveStripingCard from "./BottomSheetComponent/SleeveStripingCard";
+import AllTshirt from "./Alltshirt";
 // import CrestSettingCard from "./BottomSheetComponent/CrestSettingCard";
 // import WordmarkSettingCard from "./BottomSheetComponent/WordmarkSettingCard";
 
@@ -44,6 +45,8 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
     useState<boolean>(false);
   const [isSleeveStripingOpened, setIsSleeveStripingOpened] =
     useState<boolean>(false);
+
+  const [isOpenAlltshirt, setIsOpenAlltshirt] = useState<boolean>(false);
 
   // Callbacks
   const handleSheetChanges = useCallback((index: number) => {
@@ -69,6 +72,16 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
     setTshirtType(null);
   };
 
+  const handleMenuLeftPress = () => {
+    setIsMenuSettingOpen(false);
+    setIsOpenAlltshirt(true);
+  };
+
+  const handleAllTshirtLeftPress = () => {
+    // setIsMenuSettingOpen(true);
+    setIsOpenAlltshirt(false);
+  };
+
   const handletemFilterClick = () => {
     setIsTemplateFilterOpen(!isTemplateFilterOpen);
     setTshirtType(null);
@@ -83,7 +96,7 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
     setIsChestStriping(false);
   };
 
-  const handlemenuLeftIconPress = () => {
+  const handleMenuSettingLeftIconPress = () => {
     setIsMenuSettingOpen(false);
   };
   const handlemenuSeting = () => {
@@ -100,7 +113,7 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
       setIsWordmarkSetting(true);
     } else {
       SetIsCrestSetting(true);
-    }    
+    }
   };
 
   const handleCrestSettingLeftClick = () => {
@@ -127,7 +140,7 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
     >
       <BottomSheet
         ref={ref}
-        snapPoints={["95%", "95%"]}
+        snapPoints={["85%", "85%"]}
         // snapPoints={isMenuSettingOpen ? ["95%", "95%"] : ["95%", "95%"]}
         backgroundStyle={{ backgroundColor: "#1D1F24" }}
         onChange={handleSheetChanges}
@@ -135,7 +148,7 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
       >
         {isTemplateOpened ? (
           //   <BottomSheetView style={styles.contentContainer}>
-          <BottomSheetView style={{ flex: 1 }}>
+          <BottomSheetView style={styles.contentContainer}>
             <BottomSheetHeader
               title="Template"
               leftIconName={iconLink.leftIcon}
@@ -177,7 +190,7 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
               />
             </BottomSheetScrollView>
             <TshirtButtonColor />
-          </View>    
+          </View>
         ) : frontCrestOpened ? (
           <View style={{ flex: 1 }}>
             {isCrestSetting ? (
@@ -250,12 +263,25 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
           </BottomSheetView>
         ) : (
           <View style={{ flex: 1 }}>
-            {!isMenuSettingOpen ? (
+            {isOpenAlltshirt ? (
+              <View>
+                <BottomSheetHeader
+                  title="Select Tshirt"
+                  leftIconName={iconLink.leftIcon}
+                  // rightIconName={iconLink.setting}
+                  onPressFirst={handleAllTshirtLeftPress}
+                  onPressSecond={handlemenuSeting}
+                  containerStyle={{ marginHorizontal: 10, marginBottom: 5 }}
+                />
+                <AllTshirt />
+              </View>
+            ) : !isMenuSettingOpen ? (
               <>
                 <BottomSheetHeader
                   title="Menu"
                   leftIconName={iconLink.sideMenu}
                   rightIconName={iconLink.setting}
+                  onPressFirst={handleMenuLeftPress}
                   onPressSecond={handlemenuSeting}
                   containerStyle={{ marginHorizontal: 10, marginBottom: 5 }}
                 />
@@ -269,7 +295,7 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
                 <BottomSheetHeader
                   title="Jersey Options"
                   leftIconName={iconLink.leftIcon}
-                  onPressFirst={handlemenuLeftIconPress}
+                  onPressFirst={handleMenuSettingLeftIconPress}
                   containerStyle={{ marginHorizontal: 10, marginBottom: 5 }}
                 />
                 <BottomSheetView style={styles.contentContainer}>

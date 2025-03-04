@@ -1,4 +1,5 @@
 import ColorPickerModal from "@/components/ColorPickerModal";
+import SetedData from "@/components/SetedData";
 // import { useBottomSheet } from "../components/CustomBottomSheet";
 import TshirtBottomSheet from "@/components/TshirtBottomSheet";
 import TshirtButton from "@/components/TshirtButton";
@@ -16,10 +17,12 @@ import {
   SafeAreaView,
   StatusBar,
 } from "react-native";
+import { useSelector } from "react-redux";
 
 const HomePage = () => {
   const router = useRouter();
   const bottomSheetRef = useRef<BottomSheet>(null);
+  const { tshirtData } = useSelector((state: any) => state.tshirtStoreValue);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   const openBottomSheet = () => {
@@ -35,7 +38,7 @@ const HomePage = () => {
       setIsSheetOpen(true);
       bottomSheetRef.current?.expand();
     }
-  };
+  };                                    
 
   const [isFront, setIsFront] = useState(true);
   const handleFlip = () => {
@@ -43,8 +46,8 @@ const HomePage = () => {
   };
 
   const handleCart = () => {
-    router.push("/Cart")
-  }
+    router.push("/Cart");
+  };
 
   //   commented because we don't want now
 
@@ -60,7 +63,7 @@ const HomePage = () => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       {/* <ColorPickerModal /> */}
-      <StatusBar
+      <StatusBar    
         translucent
         backgroundColor="transparent"
         barStyle="dark-content"
@@ -95,10 +98,11 @@ const HomePage = () => {
 
         {/* Overlay to close on outside click */}
         <TouchableWithoutFeedback onPress={handleCloseSheet}>
-          <View style={styles.overlay} />
+          {/* <View style={styles.overlay} /> */}
+          <View style={styles.overlay} children={<SetedData />} />
         </TouchableWithoutFeedback>
 
-      {/* {isSheetOpen && <PlayerList />} */}
+        {/* {isSheetOpen && <PlayerList />} */}
         {isSheetOpen && <TshirtBottomSheet ref={bottomSheetRef} />}
       </ImageBackground>
 
@@ -114,7 +118,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // width: "100%",
     backgroundColor: "#FD8204",
-    paddingTop: 30,
+    paddingTop: 40,
   },
   container: {
     flex: 1,

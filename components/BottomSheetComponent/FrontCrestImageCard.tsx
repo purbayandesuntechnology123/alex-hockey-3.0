@@ -5,6 +5,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import CustomSwitch from "../CustomSwitch";
 import TshirtButtonColor from "./TshirtButtonColor";
 import { themeColor } from "@/constants/colors";
+import * as ImagePicker from 'expo-image-picker';
 
 interface FrontCrestImageCardProps {
   setFrontCrestPattern: (value: boolean) => void;
@@ -13,6 +14,26 @@ interface FrontCrestImageCardProps {
 const FrontCrestImageCard: React.FC<FrontCrestImageCardProps> = ({
   setFrontCrestPattern,
 }) => {
+
+  const [image, setImage] = useState<string | null>(null);
+
+  console.log("image",image)
+
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ['images', 'videos'],
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
   const [scale, setScale] = useState(1.0);
   const [pattern, setPattern] = useState(1.0);
   //   const [isEnabled, setIsEnabled] = useState(false);
@@ -21,13 +42,14 @@ const FrontCrestImageCard: React.FC<FrontCrestImageCardProps> = ({
   const handleFrontCrestPatterClick = () => {
     setFrontCrestPattern(true);
   };
-  return (
+  return (  
     <View style={styles.container}>
       {/* <Text style={{ color: "#fff" }}>front crest image card</Text> */}
+      {/* {image && <Image source={{uri: image}} style={{height: 100, width: 100}} />} */}
       <View
         style={{ flexDirection: "row", borderRadius: 8, marginTop: 8, gap: 2 }}
       >
-        <View
+        <TouchableOpacity
           style={{
             flex: 1,
             backgroundColor: themeColor.gray,
@@ -36,12 +58,13 @@ const FrontCrestImageCard: React.FC<FrontCrestImageCardProps> = ({
             borderTopLeftRadius: 6,
             borderBottomLeftRadius: 6,
           }}
+          onPress={pickImage}
         >
           <Image
             source={iconLink.gallery}
             style={{ height: 70, width: 70, resizeMode: "contain" }}
           />
-        </View>
+        </TouchableOpacity>
         <View
           style={{
             flex: 2,
