@@ -145,6 +145,8 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
         backgroundStyle={{ backgroundColor: "#1D1F24" }}
         onChange={handleSheetChanges}
         enableContentPanningGesture={false}
+        enablePanDownToClose={false}  
+        enableDynamicSizing={false}
       >
         {isTemplateOpened ? (
           //   <BottomSheetView style={styles.contentContainer}>
@@ -264,7 +266,7 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
         ) : (
           <View style={{ flex: 1 }}>
             {isOpenAlltshirt ? (
-              <View>
+              <View style={{flex: 1}}>
                 <BottomSheetHeader
                   title="Select Tshirt"
                   leftIconName={iconLink.leftIcon}

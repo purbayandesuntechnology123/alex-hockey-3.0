@@ -6,6 +6,10 @@ import CustomSwitch from "../CustomSwitch";
 import TshirtButtonColor from "./TshirtButtonColor";
 import { themeColor } from "@/constants/colors";
 import * as ImagePicker from 'expo-image-picker';
+import { useAppDispatch } from "@/redux/hooks";
+import { setFrontChestImage } from "@/redux/slices/tshirtDataSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 interface FrontCrestImageCardProps {
   setFrontCrestPattern: (value: boolean) => void;
@@ -14,6 +18,10 @@ interface FrontCrestImageCardProps {
 const FrontCrestImageCard: React.FC<FrontCrestImageCardProps> = ({
   setFrontCrestPattern,
 }) => {
+
+  const dispatch = useAppDispatch();
+
+  const { tshirtId } = useSelector((state: RootState) => state.tshirtStoreValue)
 
   const [image, setImage] = useState<string | null>(null);
 
@@ -32,6 +40,12 @@ const FrontCrestImageCard: React.FC<FrontCrestImageCardProps> = ({
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
+
+      const payload = {
+        tshirtId: tshirtId,
+        data: result.assets[0].uri
+      }
+      dispatch(setFrontChestImage(payload));
     }
   };
   const [scale, setScale] = useState(1.0);

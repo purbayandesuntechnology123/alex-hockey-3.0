@@ -4,6 +4,7 @@ import SetedData from "@/components/SetedData";
 import TshirtBottomSheet from "@/components/TshirtBottomSheet";
 import TshirtButton from "@/components/TshirtButton";
 import { iconLink, imageLink } from "@/constants/image";
+import { RootState } from "@/redux/store";
 import BottomSheet from "@gorhom/bottom-sheet";
 import { useRouter } from "expo-router";
 import React, { useRef, useState } from "react";
@@ -22,8 +23,12 @@ import { useSelector } from "react-redux";
 const HomePage = () => {
   const router = useRouter();
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const { tshirtData } = useSelector((state: any) => state.tshirtStoreValue);
+  const { tshirtData, tshirtId } = useSelector(
+    (state: RootState) => state.tshirtStoreValue
+  );
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+
+  const selectedItem = tshirtData.find((item) => item.id === tshirtId);
 
   const openBottomSheet = () => {
     setIsSheetOpen(true);
@@ -38,7 +43,7 @@ const HomePage = () => {
       setIsSheetOpen(true);
       bottomSheetRef.current?.expand();
     }
-  };                                    
+  };
 
   const [isFront, setIsFront] = useState(true);
   const handleFlip = () => {
@@ -76,13 +81,37 @@ const HomePage = () => {
             onPressFirst={handleCart}
             onPressSecond={handleFlip}
             containerStyle={{ marginTop: 10 }}
-          />
+          />   
         </View>
-        <View
+        <View      
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
           {isFront ? (
-            <Image source={imageLink.tshirtFront} style={styles.tshirt} />
+            <View style={{ height: 300, width: "100%" }}>
+              <Image source={imageLink.tshirtFront} style={styles.tshirt} />
+              {/* commented because of development in progress */}
+              {/* {
+                selectedItem?.tshirtFrontOption?.frontChest.frontChestImage? 
+              <View
+                style={{
+                  position: "absolute",
+                  height: 300,
+                  width: "100%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Image
+                  source={{
+                    uri: selectedItem?.tshirtFrontOption?.frontChest
+                      ?.frontChestImage,
+                  }}
+                  style={styles.imageStyle}
+                />
+              </View>
+              : null
+              }   */}
+            </View>
           ) : (
             <Image source={imageLink.tshirtBack} style={styles.tshirt} />
           )}
@@ -98,8 +127,8 @@ const HomePage = () => {
 
         {/* Overlay to close on outside click */}
         <TouchableWithoutFeedback onPress={handleCloseSheet}>
-          {/* <View style={styles.overlay} /> */}
-          <View style={styles.overlay} children={<SetedData />} />
+          <View style={styles.overlay} />
+          {/* <View style={styles.overlay} children={<SetedData />} /> */}
         </TouchableWithoutFeedback>
 
         {/* {isSheetOpen && <PlayerList />} */}
@@ -136,6 +165,12 @@ const styles = StyleSheet.create({
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: "rgba(0, 0, 0, 0)",
+  },
+  imageStyle: {
+    height: 100,
+    width: 120,
+    resizeMode: "contain",
+    marginLeft: 10,
   },
 });
 

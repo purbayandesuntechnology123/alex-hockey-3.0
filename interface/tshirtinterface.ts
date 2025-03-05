@@ -11,7 +11,7 @@ export interface colorObj {
   id: string;
   color: string;
 }
-
+     
 export interface tshirtDataObj {
     id?: string;
     frontImage: any;
@@ -19,5 +19,13 @@ export interface tshirtDataObj {
     tshirtFrontOption?: {
       template: string;
       chestStripingName: string
+      frontChest: {
+        frontChestImage?: any;
+        chestImageSetting: {
+          horizontal: number,
+          vertical: number,
+          scale: number
+        }
+      }
     };
   }

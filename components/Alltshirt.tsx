@@ -1,7 +1,13 @@
 import { themeColor } from "@/constants/colors";
+import { imageLink } from "@/constants/image";
 import { useAppDispatch } from "@/redux/hooks";
-import { setTshirtId } from "@/redux/slices/tshirtDataSlice";
+import {
+  addNewTshirt,
+  removeTshirt,
+  setTshirtId,
+} from "@/redux/slices/tshirtDataSlice";
 import { RootState } from "@/redux/store";
+import { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import React, { useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useSelector } from "react-redux";
@@ -20,23 +26,94 @@ const AllTshirt = () => {
     console.log("tshirt selected", item);
     dispatch(setTshirtId(item.id));
   };
+
+  const handleAddNewTshirt = () => {
+    const generateRandomId = () => {
+      return (
+        Math.random().toString(36).substring(2, 15) +
+        Math.random().toString(36).substring(2, 15)
+      );
+    };
+
+    const newId = generateRandomId();
+
+    const newTshirt = {
+      id: newId,
+      frontImage: imageLink.tshirtFront, // Change as needed
+      backImage: imageLink.tshirtBack, // Change as needed
+      tshirtFrontOption: {
+        template: "Plain",
+        chestStripingName: "None",
+        frontChest: {
+          frontChestImage: null,
+          chestImageSetting: {
+            horizontal: 0,
+            vertical: 0,
+            scale: 1.0,
+          },
+        },
+      },
+    };
+    dispatch(addNewTshirt(newTshirt));
+  };
+
+  // console.log("tshirtId", tshirtId);
+  const handleRemoveTshirt = (idToRemove: string) => {
+    dispatch(removeTshirt({ id: idToRemove }));
+  };
+
   return (
-    <View>
-      {tshirtData.map((item, index) => (
-        <TouchableOpacity key={index} onPress={() => handleTshirtSelect(item)}>
-          <Image source={item.frontImage} style={styles.imageStyle} />
-        </TouchableOpacity>
-      ))}
-      <Text style={{ color: themeColor.white }}>test</Text>
+    <View style={{ flex: 1 }} >
+      {/* <TouchableOpacity
+        style={{
+          borderWidth: 1,
+          backgroundColor: themeColor.gray,
+          padding: 10,
+        }}
+        onPress={() => handleRemoveTshirt(tshirtId)}
+      >
+        <Text style={{ color: themeColor.white }}>Remove</Text>
+      </TouchableOpacity> */}
+      <BottomSheetScrollView>
+        <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 5 }}>
+          <TouchableOpacity
+            onPress={() => handleAddNewTshirt()}
+            style={styles.shirtHeader}
+          >
+            <Image source={imageLink.tshirtFront} style={styles.imageStyle} />
+          </TouchableOpacity>
+          {tshirtData.map((item, index) => (
+            <TouchableOpacity
+              key={index}
+              onPress={() => handleTshirtSelect(item)}
+              style={[
+                styles.shirtHeader,
+                item.id === tshirtId && styles.activeCard,
+              ]}
+            >
+              <Image source={item.frontImage} style={styles.imageStyle} />
+            </TouchableOpacity>
+          ))}
+        </View>
+      </BottomSheetScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   imageStyle: {
-    height: 100,
+    height: 80,
     width: 100,
     resizeMode: "contain",
+  },
+  shirtHeader: {
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: themeColor.gray,
+    padding: 2,
+  },
+  activeCard: {
+    borderColor: themeColor.primary,
   },
 });
 
