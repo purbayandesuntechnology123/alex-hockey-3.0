@@ -52,6 +52,7 @@ const AllTshirt = () => {
             scale: 1.0,
           },
         },
+        sleeveStriping: "None",
       },
     };
     dispatch(addNewTshirt(newTshirt));
@@ -63,7 +64,7 @@ const AllTshirt = () => {
   };
 
   return (
-    <View style={{ flex: 1 }} >
+    <View style={{ flex: 1 }}>
       {/* <TouchableOpacity
         style={{
           borderWidth: 1,

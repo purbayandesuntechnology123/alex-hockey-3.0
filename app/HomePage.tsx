@@ -68,7 +68,7 @@ const HomePage = () => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       {/* <ColorPickerModal /> */}
-      <StatusBar    
+      <StatusBar
         translucent
         backgroundColor="transparent"
         barStyle="dark-content"
@@ -81,36 +81,45 @@ const HomePage = () => {
             onPressFirst={handleCart}
             onPressSecond={handleFlip}
             containerStyle={{ marginTop: 10 }}
-          />   
+          />
         </View>
-        <View      
+        <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
           {isFront ? (
             <View style={{ height: 300, width: "100%" }}>
               <Image source={imageLink.tshirtFront} style={styles.tshirt} />
               {/* commented because of development in progress */}
-              {/* {
-                selectedItem?.tshirtFrontOption?.frontChest.frontChestImage? 
-              <View
-                style={{
-                  position: "absolute",
-                  height: 300,
-                  width: "100%",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Image
-                  source={{
-                    uri: selectedItem?.tshirtFrontOption?.frontChest
-                      ?.frontChestImage,
+              {/* {selectedItem?.tshirtFrontOption?.frontChest.frontChestImage ? (
+                <View
+                  style={{
+                    position: "absolute",
+                    height: 300,
+                    width: "100%",
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
-                  style={styles.imageStyle}
-                />
-              </View>
-              : null
-              }   */}
+                >
+                  <Image
+                    source={{
+                      uri: selectedItem?.tshirtFrontOption?.frontChest
+                        ?.frontChestImage,
+                    }}
+                    style={[
+                      styles.imageStyle,
+                      {
+                        marginLeft:        
+                          selectedItem.tshirtFrontOption.frontChest
+                            .chestImageSetting.horizontal * 4,
+                        marginBottom:
+                          selectedItem.tshirtFrontOption.frontChest
+                            .chestImageSetting.vertical * 8,
+                        transform:[{ scale: selectedItem.tshirtFrontOption.frontChest.chestImageSetting.scale}]
+                      },
+                    ]}
+                  />
+                </View>
+              ) : null} */}
             </View>
           ) : (
             <Image source={imageLink.tshirtBack} style={styles.tshirt} />
@@ -167,10 +176,9 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0)",
   },
   imageStyle: {
-    height: 100,
-    width: 120,
+    height: 60,
+    width: 60,
     resizeMode: "contain",
-    marginLeft: 10,
   },
 });
 

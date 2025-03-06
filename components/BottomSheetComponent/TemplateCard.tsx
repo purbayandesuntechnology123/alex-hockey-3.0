@@ -2,7 +2,7 @@ import { themeColor } from "@/constants/colors";
 import { getName } from "@/constants/commonFunction";
 import { imageLink } from "@/constants/image";
 import { useAppDispatch } from "@/redux/hooks";
-import { setTemplateTypeFront, setTshirtcolor } from "@/redux/slices/tshirtDataSlice";
+import { setTemplateTypeFront } from "@/redux/slices/tshirtDataSlice";
 import { RootState } from "@/redux/store";
 import { BottomSheetScrollView, BottomSheetView } from "@gorhom/bottom-sheet";
 import React, { useMemo, useState } from "react";

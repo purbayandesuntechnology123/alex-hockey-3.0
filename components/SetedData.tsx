@@ -39,6 +39,12 @@ const SetedData = () => {
             {selectedItem?.tshirtFrontOption?.chestStripingName}
           </RNText>
         ) : null}
+        {selectedItem?.tshirtFrontOption?.chestStripingName ? (
+          <RNText style={{ color: themeColor.primary }}>
+            sleeve Striping:===
+            {selectedItem?.tshirtFrontOption?.sleeveStriping}
+          </RNText>
+        ) : null}
         {/* {
           selectedItem?.tshirtFrontOption?.frontChestImage ?
           <Image source={{uri: selectedItem?.tshirtFrontOption?.frontChestImage}} style={styles.imageStyle} />
