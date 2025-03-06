@@ -32,6 +32,7 @@ const initialState: TshirtState = {
             scale: 1.0,
           },
         },
+        sleeveStriping: "None",
       },
     },
     {
@@ -49,6 +50,7 @@ const initialState: TshirtState = {
             scale: 1.0,
           },
         },
+        sleeveStriping: "None",
       },
     },
     {
@@ -66,6 +68,7 @@ const initialState: TshirtState = {
             scale: 1.0,
           },
         },
+        sleeveStriping: "None",
       },
     },
   ],
@@ -96,6 +99,19 @@ const tshirtDataSlice = createSlice({
         }
       }
     },
+    setSleeveStripingTypeFront: (
+      state,
+      action: PayloadAction<{ tshirtId: string; data: string }>
+    ) => {
+      const tshirt = state.tshirtData.find(
+        (tshirt) => tshirt.id === action.payload.tshirtId
+      );
+      if (tshirt) {
+        if (tshirt.tshirtFrontOption) {
+          tshirt.tshirtFrontOption.sleeveStriping = action.payload.data;
+        }
+      }
+    },
     setChestStripingTypeFront: (
       state,
       action: PayloadAction<{ tshirtId: string; data: string }>
@@ -118,12 +134,44 @@ const tshirtDataSlice = createSlice({
       );
       if (tshirt) {
         if (tshirt.tshirtFrontOption) {
-          tshirt.tshirtFrontOption.frontChest.frontChestImage = action.payload.data;
+          tshirt.tshirtFrontOption.frontChest.frontChestImage =
+            action.payload.data;
         }
       }
     },
-    setFrontChestsettingScale: ( state, action: PayloadAction<any> ) => {
+    setFrontChestSettingHorizontal: (state, action: PayloadAction<any>) => {
+      const tshirt = state.tshirtData.find(
+        (tshirt) => tshirt.id === action.payload.tshirtId
+      );
+      if (tshirt) {
+        if (tshirt.tshirtFrontOption?.frontChest.chestImageSetting) {
+          tshirt.tshirtFrontOption.frontChest.chestImageSetting.horizontal =
+            action.payload.data;
+        }
+      }
+    },
+    setFrontChestSettingVertical: (state, action: PayloadAction<any>) => {
+      const tshirt = state.tshirtData.find(
+        (tshirt) => tshirt.id ===  state.tshirtId
+      );
+      if (tshirt) {
+        if (tshirt.tshirtFrontOption?.frontChest.chestImageSetting) {
+          tshirt.tshirtFrontOption.frontChest.chestImageSetting.vertical =
+            action.payload.data;
+        }
+      }
+    },
 
+    setFrontChestSettingScale: (state, action: PayloadAction<any>) => {
+      const tshirt = state.tshirtData.find(
+        (tshirt) => tshirt.id === action.payload.tshirtId
+      );
+      if (tshirt) {
+        if (tshirt.tshirtFrontOption?.frontChest.chestImageSetting) {
+          tshirt.tshirtFrontOption.frontChest.chestImageSetting.scale =
+            action.payload.data;
+        }
+      }
     },
     setTshirtId: (state, action: PayloadAction<string>) => {
       state.tshirtId = action.payload;
@@ -142,6 +190,10 @@ export const {
   setChestStripingTypeFront,
   setTshirtColor,
   setFrontChestImage,
+  setFrontChestSettingHorizontal,
+  setFrontChestSettingVertical,
+  setFrontChestSettingScale,
+  setSleeveStripingTypeFront,
 } = tshirtDataSlice.actions;
 
 export default tshirtDataSlice.reducer;

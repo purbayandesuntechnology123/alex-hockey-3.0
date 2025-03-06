@@ -2,11 +2,56 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput } from "react-native";
 import Slider from "@react-native-community/slider";
 import { Feather } from "@expo/vector-icons";
+import { useSelector } from "react-redux";
+import {
+  setFrontChestSettingHorizontal,
+  setFrontChestSettingScale,
+  setFrontChestSettingVertical,
+} from "@/redux/slices/tshirtDataSlice";
+import { useAppDispatch } from "@/redux/hooks";
 
 const CrestSettingCard = () => {
-  const [horizontalPosition, setHorizontalPosition] = useState(0);
-  const [verticalPosition, setVerticalPosition] = useState(0);
-  const [scale, setScale] = useState(1.0);
+  const dispatch = useAppDispatch();
+
+  const { tshirtId, tshirtData } = useSelector(
+    (state) => state.tshirtStoreValue
+  );
+  const selectedItem = tshirtData.find((item) => item.id === tshirtId);
+
+  const [horizontalPosition, setHorizontalPosition] = useState(
+    selectedItem.tshirtFrontOption.frontChest.chestImageSetting.horizontal || 0
+  );
+  const [verticalPosition, setVerticalPosition] = useState(
+    selectedItem.tshirtFrontOption.frontChest.chestImageSetting.vertical || 0
+  );
+  const [scale, setScale] = useState(
+    selectedItem.tshirtFrontOption.frontChest.chestImageSetting.scale || 1.0
+  );
+
+  const handleHorizontalPosition = (val) => {
+    // setHorizontalPosition(val)
+    const payload = {
+      tshirtId: tshirtId,
+      data: val,
+    };
+    dispatch(setFrontChestSettingHorizontal(payload));
+  };
+
+  const handleVerticalPosition = (val) => {
+    const payload = {
+      tshirtId: tshirtId,
+      data: val,
+    };
+    dispatch(setFrontChestSettingVertical(payload));
+  };
+
+  const handleScale = (val) => {
+    const payload = {
+      tshirtId: tshirtId,
+      data: val,
+    };
+    dispatch(setFrontChestSettingScale(payload));
+  };
 
   return (
     <View style={styles.container}>
@@ -27,7 +72,7 @@ const CrestSettingCard = () => {
             minimumValue={-10}
             maximumValue={10}
             value={horizontalPosition}
-            onValueChange={setHorizontalPosition}
+            onValueChange={(val) => handleHorizontalPosition(val)}
             thumbTintColor="#fff"
             minimumTrackTintColor="#FFFFFF"
             maximumTrackTintColor="#999999"
@@ -36,7 +81,9 @@ const CrestSettingCard = () => {
         </View>
         <View style={styles.input}>
           <Text style={{ color: "#fff", textAlign: "center", fontSize: 12 }}>
-            {horizontalPosition.toFixed(0)}
+            {selectedItem.tshirtFrontOption.frontChest.chestImageSetting.horizontal.toFixed(
+              0
+            ) || horizontalPosition.toFixed(0)}
           </Text>
         </View>
       </View>
@@ -58,7 +105,9 @@ const CrestSettingCard = () => {
             minimumValue={-10}
             maximumValue={10}
             value={verticalPosition}
-            onValueChange={setVerticalPosition}
+            onValueChange={(val) => {
+              handleVerticalPosition(val);
+            }}
             thumbTintColor="#fff"
             minimumTrackTintColor="#FFFFFF"
             maximumTrackTintColor="#999999"
@@ -67,7 +116,9 @@ const CrestSettingCard = () => {
         </View>
         <View style={styles.input}>
           <Text style={{ color: "#fff", textAlign: "center", fontSize: 12 }}>
-            {verticalPosition.toFixed(0)}
+            {selectedItem.tshirtFrontOption.frontChest.chestImageSetting.vertical.toFixed(
+              1
+            ) || verticalPosition.toFixed(0)}
           </Text>
         </View>
       </View>
@@ -89,7 +140,9 @@ const CrestSettingCard = () => {
             minimumValue={0.5}
             maximumValue={2.0}
             value={scale}
-            onValueChange={setScale}
+            onValueChange={(val) => {
+              handleScale(val);
+            }}
             thumbTintColor="#fff"
             minimumTrackTintColor="#FFFFFF"
             maximumTrackTintColor="#999999"
@@ -98,7 +151,9 @@ const CrestSettingCard = () => {
         </View>
         <View style={styles.input}>
           <Text style={{ color: "#fff", textAlign: "center", fontSize: 12 }}>
-            {scale.toFixed(1)}
+            {selectedItem.tshirtFrontOption.frontChest.chestImageSetting.scale.toFixed(
+              1
+            ) || scale.toFixed(1)}
           </Text>
         </View>
       </View>
@@ -114,7 +169,7 @@ const styles = StyleSheet.create({
     // width: "100%",
     // alignSelf: "center",
     // marginTop: 50,,
-    marginBottom: 20
+    marginBottom: 20,
   },
   controlRow: {
     flexDirection: "row",

@@ -13,6 +13,12 @@ import BottomSheetHeader from "./BottomSheetHeader";
 import TshirtButtonColor from "./TshirtButtonColor";
 import { useNavigation } from "@react-navigation/native";
 import { useRouter } from "expo-router";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { useAppDispatch } from "@/redux/hooks";
+import { setSleeveStripingTypeFront } from "@/redux/slices/tshirtDataSlice";
+import { getSleevStriping } from "@/constants/commonFunction";
+import { themeColor } from "@/constants/colors";
 
 interface SleeveStripingCardProps {
   isTemplateFilterOpen?: boolean;
@@ -39,9 +45,19 @@ const SleeveStripingCard: React.FC<SleeveStripingCardProps> = ({
   setIsSleeveStripingOpened,
 }) => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  const { tshirtData, tshirtId } = useSelector(
+    (state: RootState) => state.tshirtStoreValue
+  );
   const [filterType, setFilterType] = useState<boolean>(false);
-  const handleTshirtTypePress = () => {
+  const handleTshirtTypePress = (item: string) => {
     // setIsTemplateFilterOpen(true);
+    const payload = {
+      tshirtId: tshirtId,
+      data: item,
+    };
+    dispatch(setSleeveStripingTypeFront(payload));
   };
 
   const handleSleeveStripingBackClick = () => {
@@ -75,8 +91,11 @@ const SleeveStripingCard: React.FC<SleeveStripingCardProps> = ({
               {row.map((item, index) => (
                 <TouchableOpacity
                   key={index}
-                  style={styles.menuImgHeader}
-                  //   onPress={() => handleTshirtTypePress(item)}
+                  style={[styles.menuImgHeader, 
+                    item.tshirtType === getSleevStriping(tshirtData, tshirtId) &&
+                      styles.activeTemplateType,
+                  ]}
+                  onPress={() => handleTshirtTypePress(item.tshirtType)}
                 >
                   <Image source={item.image} style={styles.imageStyle} />
                   {item.tshirtType && (
@@ -147,6 +166,10 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     paddingHorizontal: 25,
   },
+  activeTemplateType: {
+      borderWidth: 1,
+      borderColor: themeColor.primary,
+    },
 });
 
 export default SleeveStripingCard;

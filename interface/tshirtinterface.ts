@@ -27,5 +27,6 @@ export interface tshirtDataObj {
           scale: number
         }
       }
+      sleeveStriping: string
     };
   }
