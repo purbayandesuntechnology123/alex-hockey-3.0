@@ -51,6 +51,12 @@ const AllTshirt = () => {
             vertical: 0,
             scale: 1.0,
           },
+          wordmark: {
+            text: "",
+            textTyle: "Single",
+            textDirection: "xaxis",   
+            fontFamily: ""
+          },
         },
         sleeveStriping: "None",
       },

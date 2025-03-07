@@ -31,6 +31,12 @@ const initialState: TshirtState = {
             vertical: 0,
             scale: 1.0,
           },
+          wordmark: {
+            text: "",
+            textTyle: "Single",
+            textDirection: "horizontal",
+            fontFamily: "Anaheim",
+          },
         },
         sleeveStriping: "None",
       },
@@ -49,6 +55,12 @@ const initialState: TshirtState = {
             vertical: 0,
             scale: 1.0,
           },
+          wordmark: {
+            text: "",
+            textTyle: "Single",
+            textDirection: "horizontal",
+            fontFamily: "Anaheim",
+          },
         },
         sleeveStriping: "None",
       },
@@ -66,6 +78,12 @@ const initialState: TshirtState = {
             horizontal: 0,
             vertical: 0,
             scale: 1.0,
+          },
+          wordmark: {
+            text: "",
+            textTyle: "Single",
+            textDirection: "horizontal",
+            fontFamily: "Anaheim",
           },
         },
         sleeveStriping: "None",
@@ -152,7 +170,7 @@ const tshirtDataSlice = createSlice({
     },
     setFrontChestSettingVertical: (state, action: PayloadAction<any>) => {
       const tshirt = state.tshirtData.find(
-        (tshirt) => tshirt.id ===  state.tshirtId
+        (tshirt) => tshirt.id === state.tshirtId
       );
       if (tshirt) {
         if (tshirt.tshirtFrontOption?.frontChest.chestImageSetting) {
@@ -173,6 +191,38 @@ const tshirtDataSlice = createSlice({
         }
       }
     },
+
+    // wordmark set name start
+    setFrontChestWordmarkName: (state, action: PayloadAction<any>) => {
+      const tshirt = state.tshirtData.find(
+        (tshirt) => tshirt.id === state.tshirtId
+      );
+      if (tshirt) {
+        if (tshirt.tshirtFrontOption?.frontChest) {
+          console.log("wordmark text===>", action.payload.data);
+          tshirt.tshirtFrontOption.frontChest.wordmark.text =
+            action.payload.data;
+        }
+      }
+    },
+    // wordmark set name end
+
+    // fontFamily name set start
+
+    setWordmarkFontFamilyName: (state, action: PayloadAction<any>) => {
+      const tshirt = state.tshirtData.find(
+        (tshirt) => tshirt.id === state.tshirtId
+      );
+      if (tshirt) {
+        if (tshirt.tshirtFrontOption?.frontChest?.wordmark) {
+          console.log("wordmark fontFamily===>", action.payload.data);
+          tshirt.tshirtFrontOption.frontChest.wordmark.fontFamily =
+            action.payload.data;
+        }
+      }
+    },
+    // fontFamily name set end
+
     setTshirtId: (state, action: PayloadAction<string>) => {
       state.tshirtId = action.payload;
     },
@@ -194,6 +244,8 @@ export const {
   setFrontChestSettingVertical,
   setFrontChestSettingScale,
   setSleeveStripingTypeFront,
+  setFrontChestWordmarkName,
+  setWordmarkFontFamilyName,
 } = tshirtDataSlice.actions;
 
 export default tshirtDataSlice.reducer;

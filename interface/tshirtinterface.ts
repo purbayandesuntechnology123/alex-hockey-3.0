@@ -25,6 +25,12 @@ export interface tshirtDataObj {
           horizontal: number,
           vertical: number,
           scale: number
+        },
+        wordmark: {
+          text: string,
+          textTyle: string,
+          textDirection: string,
+          fontFamily: string,     
         }
       }
       sleeveStriping: string
