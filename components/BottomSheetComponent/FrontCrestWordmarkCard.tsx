@@ -14,6 +14,15 @@ import CustomSwitch from "../CustomSwitch";
 import TshirtButtonColor from "./TshirtButtonColor";
 import index from "@/app/registration";
 import { BottomSheetScrollView } from "@gorhom/bottom-sheet";
+import { useAppDispatch } from "@/redux/hooks";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import {
+  setFrontChestWordmarkName,
+  setWordmarkFontFamilyName,
+} from "@/redux/slices/tshirtDataSlice";
+import { themeColor } from "@/constants/colors";
+import { getFontFamilyName } from "@/constants/commonFunction";
 
 const fontType = [
   {
@@ -60,15 +69,57 @@ const data = {
 };
 
 const FrontCrestWordmarkCard = () => {
+  const dispatch = useAppDispatch();
+
+  const { tshirtId, tshirtData } = useSelector(
+    (state: RootState) => state.tshirtStoreValue
+  );
   const [fontTypeName, setFontTypeName] = useState("Single");
   const [textDirection, setTextDirection] = useState("xaxis");
   const [fronttext, setFrontText] = useState<string>("");
+
+  const selectedData = tshirtData.find((item) => item.id === tshirtId);
+  const frontText = selectedData?.tshirtFrontOption?.frontChest?.wordmark?.text;
 
   const handleFontTypeClick = (item: string) => {
     setFontTypeName(item);
   };
 
+  const handleName = (txt: any) => {
+    // setFrontText(txt);
+    const payload = {
+      tshirtId: tshirtId,
+      data: txt,
+    };
+
+    if (txt === "") {
+      dispatch(setWordmarkFontFamilyName(payload));
+    }
+    dispatch(setFrontChestWordmarkName(payload));
+  };
+
+  const handleFonFamilyPress = (txt: string) => {
+    // console.log("txt====>", txt);
+    const payload = {
+      tshirtId: tshirtId,
+      data: txt,
+    };
+    dispatch(setWordmarkFontFamilyName(payload));
+    // setWordmarkFontFamilyName
+  };
+
   // console.log("fontTypeName", fontTypeName);
+
+  const handleAxisData = (axisType: string) => {
+    setTextDirection(axisType);
+    const payload = {
+      tshirtId: tshirtId,
+      data: axisType,
+    };
+    // this will be used later
+    // dispatch(setFrontChestWordmarkName(payload));
+  };
+
   return (
     <View style={styles.container}>
       <View
@@ -101,8 +152,8 @@ const FrontCrestWordmarkCard = () => {
           style={styles.smallInput}
           placeholder=""
           maxLength={8}
-          value={fronttext}
-          onChangeText={setFrontText}
+          value={frontText}
+          onChangeText={(txt) => handleName(txt)}
         />
         <View
           style={{
@@ -116,7 +167,7 @@ const FrontCrestWordmarkCard = () => {
             gap: 20,
           }}
         >
-          <TouchableOpacity onPress={() => setTextDirection("xaxis")}>
+          <TouchableOpacity onPress={() => handleAxisData("xaxis")}>
             <View
               style={{
                 padding: 2,
@@ -131,7 +182,7 @@ const FrontCrestWordmarkCard = () => {
               />
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => setTextDirection("yaxis")}>
+          <TouchableOpacity onPress={() => handleAxisData("yaxis")}>
             <View
               style={{
                 padding: 4,
@@ -146,7 +197,7 @@ const FrontCrestWordmarkCard = () => {
               />
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => setTextDirection("zaxis")}>
+          <TouchableOpacity onPress={() => handleAxisData("zaxis")}>
             <View
               style={{
                 padding: 4,
@@ -186,14 +237,14 @@ const FrontCrestWordmarkCard = () => {
           {data.rows.map((row, rowIndex) => (
             <View key={rowIndex} style={{ flexDirection: "row", gap: 6 }}>
               {row.map((item, index) => (
-                <View
-                  style={{
-                    height: 74,
-                    width: 102,
-                    backgroundColor: "#7B7C8A",
-                    borderRadius: 6,
-                    paddingVertical: 5,
-                  }}
+                <TouchableOpacity
+                  style={[
+                    styles.fontHeader,
+                    item.fontFamilyName ===
+                      getFontFamilyName(tshirtData, tshirtId) &&
+                      styles.activeTemplateType,
+                  ]}
+                  onPress={() => handleFonFamilyPress(item.fontFamilyName)}
                 >
                   <View style={{ flex: 1, justifyContent: "center" }}>
                     <Text
@@ -203,7 +254,7 @@ const FrontCrestWordmarkCard = () => {
                         color: "#fff",
                       }}
                     >
-                      {fronttext}
+                      {frontText}
                     </Text>
                   </View>
                   <Text
@@ -211,7 +262,7 @@ const FrontCrestWordmarkCard = () => {
                   >
                     {item?.fontFamilyName}
                   </Text>
-                </View>
+                </TouchableOpacity>
               ))}
             </View>
           ))}
@@ -245,6 +296,17 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#fff",
     backgroundColor: "#3E3E3E",
+  },
+  fontHeader: {
+    height: 74,
+    width: 102,
+    backgroundColor: "#7B7C8A",
+    borderRadius: 6,
+    paddingVertical: 5,
+  },
+  activeTemplateType: {
+    borderWidth: 1,
+    borderColor: themeColor.primary,
   },
 });
 
