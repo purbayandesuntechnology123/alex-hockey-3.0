@@ -28,9 +28,9 @@ export interface tshirtDataObj {
         },
         wordmark: {
           text: string,
-          textTyle: string,
+          textStyle: string,
           textDirection: string,
-          fontFamily: string,     
+          fontFamily: string,
         }
       }
       sleeveStriping: string

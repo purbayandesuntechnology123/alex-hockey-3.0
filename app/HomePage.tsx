@@ -89,6 +89,7 @@ const HomePage = () => {
           {isFront ? (
             <View style={{ height: 300, width: "100%" }}>
               <Image source={imageLink.tshirtFront} style={styles.tshirt} />
+              {/* <TshirtSVG bodyColor="red" sleeveColor="black" /> */}
               {/* commented because of development in progress */}
               {/* {selectedItem?.tshirtFrontOption?.frontChest.frontChestImage ? (
                 <View
