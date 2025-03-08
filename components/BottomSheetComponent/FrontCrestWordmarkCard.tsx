@@ -72,7 +72,7 @@ const FrontCrestWordmarkCard = () => {
   const dispatch = useAppDispatch();
 
   const { tshirtId, tshirtData } = useSelector(
-    (state: RootState) => state.tshirtStoreValue
+    (state) => state.tshirtStoreValue
   );
   const [fontTypeName, setFontTypeName] = useState("Single");
   const [textDirection, setTextDirection] = useState("xaxis");
@@ -81,11 +81,11 @@ const FrontCrestWordmarkCard = () => {
   const selectedData = tshirtData.find((item) => item.id === tshirtId);
   const frontText = selectedData?.tshirtFrontOption?.frontChest?.wordmark?.text;
 
-  const handleFontTypeClick = (item: string) => {
+  const handleFontTypeClick = (item) => {
     setFontTypeName(item);
   };
 
-  const handleName = (txt: any) => {
+  const handleName = (txt) => {
     // setFrontText(txt);
     const payload = {
       tshirtId: tshirtId,
@@ -98,7 +98,7 @@ const FrontCrestWordmarkCard = () => {
     dispatch(setFrontChestWordmarkName(payload));
   };
 
-  const handleFonFamilyPress = (txt: string) => {
+  const handleFonFamilyPress = (txt) => {
     // console.log("txt====>", txt);
     const payload = {
       tshirtId: tshirtId,
@@ -110,7 +110,7 @@ const FrontCrestWordmarkCard = () => {
 
   // console.log("fontTypeName", fontTypeName);
 
-  const handleAxisData = (axisType: string) => {
+  const handleAxisData = (axisType) => {
     setTextDirection(axisType);
     const payload = {
       tshirtId: tshirtId,
@@ -118,7 +118,7 @@ const FrontCrestWordmarkCard = () => {
     };
     // this will be used later
     // dispatch(setFrontChestWordmarkName(payload));
-  };
+  };    
 
   return (
     <View style={styles.container}>

@@ -33,7 +33,7 @@ const initialState: TshirtState = {
           },
           wordmark: {
             text: "",
-            textTyle: "Single",
+            textStyle: "Single",
             textDirection: "horizontal",
             fontFamily: "Anaheim",
           },
@@ -57,7 +57,7 @@ const initialState: TshirtState = {
           },
           wordmark: {
             text: "",
-            textTyle: "Single",
+            textStyle: "Single",
             textDirection: "horizontal",
             fontFamily: "Anaheim",
           },
@@ -81,7 +81,7 @@ const initialState: TshirtState = {
           },
           wordmark: {
             text: "",
-            textTyle: "Single",
+            textStyle: "Single",
             textDirection: "horizontal",
             fontFamily: "Anaheim",
           },
@@ -162,7 +162,7 @@ const tshirtDataSlice = createSlice({
         (tshirt) => tshirt.id === action.payload.tshirtId
       );
       if (tshirt) {
-        if (tshirt.tshirtFrontOption?.frontChest.chestImageSetting) {
+        if (tshirt.tshirtFrontOption?.frontChest.frontChestImage) {
           tshirt.tshirtFrontOption.frontChest.chestImageSetting.horizontal =
             action.payload.data;
         }
@@ -207,8 +207,22 @@ const tshirtDataSlice = createSlice({
     },
     // wordmark set name end
 
-    // fontFamily name set start
+    // font text style start
+    setWordmarkFontStyleName: (state, action: PayloadAction<any>) => {
+      const tshirt = state.tshirtData.find(
+        (tshirt) => tshirt.id === state.tshirtId
+      );
+      if (tshirt) {
+        if (tshirt.tshirtFrontOption?.frontChest?.wordmark) {
+          console.log("wordmark textStyle Name===>", action.payload.data);
+          tshirt.tshirtFrontOption.frontChest.wordmark.textStyle =
+            action.payload.data;
+        }
+      }
+    },
+    // font text style end
 
+    // fontFamily name set start
     setWordmarkFontFamilyName: (state, action: PayloadAction<any>) => {
       const tshirt = state.tshirtData.find(
         (tshirt) => tshirt.id === state.tshirtId

@@ -23,10 +23,15 @@ import FrontCrestPatternCard from "./BottomSheetComponent/FrontCrestPatternCard"
 import SleeveNumberCard from "./BottomSheetComponent/SleeveNumberCard";
 import SleeveStripingCard from "./BottomSheetComponent/SleeveStripingCard";
 import AllTshirt from "./Alltshirt";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 // import CrestSettingCard from "./BottomSheetComponent/CrestSettingCard";
 // import WordmarkSettingCard from "./BottomSheetComponent/WordmarkSettingCard";
 
 const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
+  const { tshirtData, tshirtId } = useSelector(
+    (state: RootState) => state.tshirtStoreValue
+  );
   const [tshirtType, setTshirtType] = useState<{ tshirtType: string } | null>(
     null
   );
@@ -47,6 +52,8 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
     useState<boolean>(false);
 
   const [isOpenAlltshirt, setIsOpenAlltshirt] = useState<boolean>(false);
+
+  const selectedItem = tshirtData.find((item) => item.id === tshirtId);
 
   // Callbacks
   const handleSheetChanges = useCallback((index: number) => {
@@ -112,7 +119,9 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
     if (isWordmark) {
       setIsWordmarkSetting(true);
     } else {
-      SetIsCrestSetting(true);
+      if (selectedItem?.tshirtFrontOption?.frontChest.frontChestImage) {
+        SetIsCrestSetting(true);
+      }
     }
   };
 
@@ -145,7 +154,7 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
         backgroundStyle={{ backgroundColor: "#1D1F24" }}
         onChange={handleSheetChanges}
         enableContentPanningGesture={false}
-        enablePanDownToClose={false}  
+        enablePanDownToClose={false}
         enableDynamicSizing={false}
       >
         {isTemplateOpened ? (
@@ -266,7 +275,7 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
         ) : (
           <View style={{ flex: 1 }}>
             {isOpenAlltshirt ? (
-              <View style={{flex: 1}}>
+              <View style={{ flex: 1 }}>
                 <BottomSheetHeader
                   title="Select Tshirt"
                   leftIconName={iconLink.leftIcon}

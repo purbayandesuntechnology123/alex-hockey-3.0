@@ -53,7 +53,7 @@ const AllTshirt = () => {
           },
           wordmark: {
             text: "",
-            textTyle: "Single",
+            textStyle: "Single",
             textDirection: "xaxis",   
             fontFamily: ""
           },
