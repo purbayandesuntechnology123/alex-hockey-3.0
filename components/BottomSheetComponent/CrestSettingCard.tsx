@@ -9,26 +9,28 @@ import {
   setFrontChestSettingVertical,
 } from "@/redux/slices/tshirtDataSlice";
 import { useAppDispatch } from "@/redux/hooks";
+import { RootState } from "@/redux/store";
 
 const CrestSettingCard = () => {
   const dispatch = useAppDispatch();
 
   const { tshirtId, tshirtData } = useSelector(
-    (state) => state.tshirtStoreValue
+    (state: RootState) => state.tshirtStoreValue
   );
-  const selectedItem = tshirtData.find((item) => item.id === tshirtId);
+  const selectedItem = tshirtData.find((item: any) => item.id === tshirtId);
 
   const [horizontalPosition, setHorizontalPosition] = useState(
-    selectedItem.tshirtFrontOption.frontChest.chestImageSetting.horizontal || 0
+    selectedItem?.tshirtFrontOption?.frontChest.chestImageSetting.horizontal ||
+      0
   );
   const [verticalPosition, setVerticalPosition] = useState(
-    selectedItem.tshirtFrontOption.frontChest.chestImageSetting.vertical || 0
+    selectedItem?.tshirtFrontOption?.frontChest.chestImageSetting.vertical || 0
   );
   const [scale, setScale] = useState(
-    selectedItem.tshirtFrontOption.frontChest.chestImageSetting.scale || 1.0
+    selectedItem?.tshirtFrontOption?.frontChest.chestImageSetting.scale || 1.0
   );
 
-  const handleHorizontalPosition = (val) => {
+  const handleHorizontalPosition = (val: number) => {
     // setHorizontalPosition(val)
     const payload = {
       tshirtId: tshirtId,
@@ -37,7 +39,7 @@ const CrestSettingCard = () => {
     dispatch(setFrontChestSettingHorizontal(payload));
   };
 
-  const handleVerticalPosition = (val) => {
+  const handleVerticalPosition = (val: number) => {
     const payload = {
       tshirtId: tshirtId,
       data: val,
@@ -45,7 +47,7 @@ const CrestSettingCard = () => {
     dispatch(setFrontChestSettingVertical(payload));
   };
 
-  const handleScale = (val) => {
+  const handleScale = (val: number) => {
     const payload = {
       tshirtId: tshirtId,
       data: val,
@@ -81,7 +83,7 @@ const CrestSettingCard = () => {
         </View>
         <View style={styles.input}>
           <Text style={{ color: "#fff", textAlign: "center", fontSize: 12 }}>
-            {selectedItem.tshirtFrontOption.frontChest.chestImageSetting.horizontal.toFixed(
+            {selectedItem?.tshirtFrontOption?.frontChest.chestImageSetting.horizontal.toFixed(
               0
             ) || horizontalPosition.toFixed(0)}
           </Text>
@@ -116,7 +118,7 @@ const CrestSettingCard = () => {
         </View>
         <View style={styles.input}>
           <Text style={{ color: "#fff", textAlign: "center", fontSize: 12 }}>
-            {selectedItem.tshirtFrontOption.frontChest.chestImageSetting.vertical.toFixed(
+            {selectedItem?.tshirtFrontOption?.frontChest.chestImageSetting.vertical.toFixed(
               1
             ) || verticalPosition.toFixed(0)}
           </Text>
@@ -151,7 +153,7 @@ const CrestSettingCard = () => {
         </View>
         <View style={styles.input}>
           <Text style={{ color: "#fff", textAlign: "center", fontSize: 12 }}>
-            {selectedItem.tshirtFrontOption.frontChest.chestImageSetting.scale.toFixed(
+            {selectedItem?.tshirtFrontOption?.frontChest.chestImageSetting.scale.toFixed(
               1
             ) || scale.toFixed(1)}
           </Text>

@@ -7,6 +7,7 @@ import {
   setTshirtId,
 } from "@/redux/slices/tshirtDataSlice";
 import { RootState } from "@/redux/store";
+import { Ionicons } from "@expo/vector-icons";
 import { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import React, { useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -23,7 +24,7 @@ const AllTshirt = () => {
   // console.log("tshirtId=====>",tshirtId);
 
   const handleTshirtSelect = (item: any) => {
-    console.log("tshirt selected", item);
+    // console.log("tshirt selected", item);
     dispatch(setTshirtId(item.id));
   };
 
@@ -58,7 +59,7 @@ const AllTshirt = () => {
             fontFamily: "",
             chestWordmarkSetting: {
               vertical: 0,
-              horizontal: 1,
+              scale: 1,
               arching: 1.0,
             },
           },
@@ -90,9 +91,10 @@ const AllTshirt = () => {
         <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 5 }}>
           <TouchableOpacity
             onPress={() => handleAddNewTshirt()}
-            style={styles.shirtHeader}
+            style={[styles.shirtHeader, { justifyContent: "center", alignItems: "center", height: 90, width: 105, padding: 2}]}
           >
-            <Image source={imageLink.tshirtFront} style={styles.imageStyle} />
+            <Ionicons name="add" color={themeColor.white} size={45} />
+            {/* <Image source={imageLink.tshirtFront} style={styles.imageStyle} /> */}
           </TouchableOpacity>
           {tshirtData.map((item, index) => (
             <TouchableOpacity
