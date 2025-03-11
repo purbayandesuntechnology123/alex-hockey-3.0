@@ -20,6 +20,7 @@ import { RootState } from "@/redux/store";
 import {
   setFrontChestWordmarkName,
   setWordmarkFontFamilyName,
+  setWordmarkFontStyleName,
 } from "@/redux/slices/tshirtDataSlice";
 import { themeColor } from "@/constants/colors";
 import { getFontFamilyName } from "@/constants/commonFunction";
@@ -81,8 +82,15 @@ const FrontCrestWordmarkCard = () => {
   const selectedData = tshirtData.find((item) => item.id === tshirtId);
   const frontText = selectedData?.tshirtFrontOption?.frontChest?.wordmark?.text;
 
+  // console.log("selectedData====>",selectedData?.tshirtFrontOption?.frontChest?.wordmark?.textStyle)
+
   const handleFontTypeClick = (item) => {
     setFontTypeName(item);
+    const payload = {
+      tshirtId: tshirtId,
+      data: item
+    }
+    dispatch(setWordmarkFontStyleName(payload))
   };
 
   const handleName = (txt) => {

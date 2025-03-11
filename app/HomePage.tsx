@@ -1,3 +1,4 @@
+import React, { useRef, useState } from "react";
 import ColorPickerModal from "@/components/ColorPickerModal";
 import SetedData from "@/components/SetedData";
 // import { useBottomSheet } from "../components/CustomBottomSheet";
@@ -7,7 +8,7 @@ import { iconLink, imageLink } from "@/constants/image";
 import { RootState } from "@/redux/store";
 import BottomSheet from "@gorhom/bottom-sheet";
 import { useRouter } from "expo-router";
-import React, { useRef, useState } from "react";
+import ChestText from "@/components/ChestComponent/ChestText";
 // import PlayerList from "@/components/BottomSheetComponent/PlayerList";
 import {
   Image,
@@ -88,10 +89,11 @@ const HomePage = () => {
         >
           {isFront ? (
             <View style={{ height: 300, width: "100%" }}>
-              <Image source={imageLink.tshirtFront} style={styles.tshirt} />
+              <Image source={selectedItem?.frontImage} style={styles.tshirt} />
+              {/* <Image source={imageLink.tshirtFront} style={styles.tshirt} /> */}
               {/* <TshirtSVG bodyColor="red" sleeveColor="black" /> */}
               {/* commented because of development in progress */}
-              {/* {selectedItem?.tshirtFrontOption?.frontChest.frontChestImage ? (
+              {selectedItem?.tshirtFrontOption?.frontChest.frontChestImage ? (
                 <View
                   style={{
                     position: "absolute",
@@ -120,7 +122,8 @@ const HomePage = () => {
                     ]}
                   />
                 </View>
-              ) : null} */}
+              ) : null}
+              <ChestText selectedItem={selectedItem} />
             </View>
           ) : (
             <Image source={imageLink.tshirtBack} style={styles.tshirt} />

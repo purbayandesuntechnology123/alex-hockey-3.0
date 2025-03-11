@@ -55,7 +55,12 @@ const AllTshirt = () => {
             text: "",
             textStyle: "Single",
             textDirection: "xaxis",   
-            fontFamily: ""
+            fontFamily: "",
+            chestWordmarkSetting: {
+              vertical: 0,
+              horizontal: 1,
+              arching: 1.0,
+            },
           },
         },
         sleeveStriping: "None",

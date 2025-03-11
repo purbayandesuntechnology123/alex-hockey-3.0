@@ -149,7 +149,7 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
     >
       <BottomSheet
         ref={ref}
-        snapPoints={["85%", "85%"]}
+        snapPoints={["95%", "95%"]}
         // snapPoints={isMenuSettingOpen ? ["95%", "95%"] : ["95%", "95%"]}
         backgroundStyle={{ backgroundColor: "#1D1F24" }}
         onChange={handleSheetChanges}

@@ -31,6 +31,11 @@ export interface tshirtDataObj {
           textStyle: string,
           textDirection: string,
           fontFamily: string,
+          chestWordmarkSetting: {
+            vertical: number,
+            scale: number,
+            arching: number,
+          },
         }
       }
       sleeveStriping: string
