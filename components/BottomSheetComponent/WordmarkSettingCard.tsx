@@ -2,11 +2,41 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput } from "react-native";
 import Slider from "@react-native-community/slider";
 import { Feather } from "@expo/vector-icons";
+import { useAppDispatch } from "@/redux/hooks";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { setFrontChestWordmarkScale, setFrontChestWordmarkVerticalPosition } from "@/redux/slices/tshirtDataSlice";
 
 const WordmarkSettingCard = () => {
+  const dispatch = useAppDispatch();
+
+  const { tshirtData, tshirtId } = useSelector(
+    (state: RootState) => state.tshirtStoreValue
+  );
+
+  const selectedItem = tshirtData?.find((item) => item.id === tshirtId);
+  const wordmarkSettingData = selectedItem?.tshirtFrontOption?.frontChest?.wordmark?.chestWordmarkSetting;
+
   const [horizontalPosition, setHorizontalPosition] = useState(0);
-  const [verticalPosition, setVerticalPosition] = useState(0);
+  const [verticalPosition, setVerticalPosition] = useState(wordmarkSettingData?.vertical || 0);
   const [scale, setScale] = useState(1.0);
+
+  const handleVertical = (val: number) => {
+    // setVerticalPosition(val);
+    const payload = {
+      tshirtId: tshirtId,
+      data: val,
+    };
+    dispatch(setFrontChestWordmarkVerticalPosition(payload));
+  };
+
+  const handleScale = (val: number) => {
+    const payload = {
+      tshirtId: tshirtId,
+      data: val,
+    }
+    dispatch(setFrontChestWordmarkScale(payload))
+  }
 
   return (
     <View style={styles.container}>
@@ -27,7 +57,7 @@ const WordmarkSettingCard = () => {
             minimumValue={-10}
             maximumValue={10}
             value={verticalPosition}
-            onValueChange={setVerticalPosition}
+            onValueChange={(val) => handleVertical(val)}
             thumbTintColor="#fff"
             minimumTrackTintColor="#FFFFFF"
             maximumTrackTintColor="#999999"
@@ -36,7 +66,7 @@ const WordmarkSettingCard = () => {
         </View>
         <View style={styles.input}>
           <Text style={{ color: "#fff", textAlign: "center", fontSize: 12 }}>
-            {verticalPosition.toFixed(0)}
+            {wordmarkSettingData?.vertical.toFixed(0)}
           </Text>
         </View>
       </View>
@@ -55,10 +85,10 @@ const WordmarkSettingCard = () => {
           <Text style={{ color: "#fff" }}>A</Text>
           <Slider
             style={styles.slider}
-            minimumValue={0.5}
+            minimumValue={1}
             maximumValue={2.0}
             value={scale}
-            onValueChange={setScale}
+            onValueChange={(val)=> handleScale(val)}
             thumbTintColor="#fff"
             minimumTrackTintColor="#FFFFFF"
             maximumTrackTintColor="#999999"
@@ -67,7 +97,7 @@ const WordmarkSettingCard = () => {
         </View>
         <View style={styles.input}>
           <Text style={{ color: "#fff", textAlign: "center", fontSize: 12 }}>
-            {scale.toFixed(1)}
+            {wordmarkSettingData?.scale.toFixed(1)}
           </Text>
         </View>
       </View>

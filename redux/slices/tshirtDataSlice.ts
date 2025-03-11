@@ -36,6 +36,11 @@ const initialState: TshirtState = {
             textStyle: "Single",
             textDirection: "horizontal",
             fontFamily: "Anaheim",
+            chestWordmarkSetting: {
+              vertical: 0,
+              scale: 1,
+              arching: 1.0,
+            },
           },
         },
         sleeveStriping: "None",
@@ -60,6 +65,11 @@ const initialState: TshirtState = {
             textStyle: "Single",
             textDirection: "horizontal",
             fontFamily: "Anaheim",
+            chestWordmarkSetting: {
+              vertical: 0,
+              scale: 1,
+              arching: 1.0,
+            },
           },
         },
         sleeveStriping: "None",
@@ -84,6 +94,11 @@ const initialState: TshirtState = {
             textStyle: "Single",
             textDirection: "horizontal",
             fontFamily: "Anaheim",
+            chestWordmarkSetting: {
+              vertical: 0,
+              scale: 1,
+              arching: 1.0,
+            },
           },
         },
         sleeveStriping: "None",
@@ -198,7 +213,7 @@ const tshirtDataSlice = createSlice({
         (tshirt) => tshirt.id === state.tshirtId
       );
       if (tshirt) {
-        if (tshirt.tshirtFrontOption?.frontChest) {
+        if (tshirt.tshirtFrontOption?.template) {
           console.log("wordmark text===>", action.payload.data);
           tshirt.tshirtFrontOption.frontChest.wordmark.text =
             action.payload.data;
@@ -213,7 +228,7 @@ const tshirtDataSlice = createSlice({
         (tshirt) => tshirt.id === state.tshirtId
       );
       if (tshirt) {
-        if (tshirt.tshirtFrontOption?.frontChest?.wordmark) {
+        if (tshirt.tshirtFrontOption?.frontChest?.wordmark.text) {
           console.log("wordmark textStyle Name===>", action.payload.data);
           tshirt.tshirtFrontOption.frontChest.wordmark.textStyle =
             action.payload.data;
@@ -237,6 +252,42 @@ const tshirtDataSlice = createSlice({
     },
     // fontFamily name set end
 
+    // setFrontChestSettingVertical: (state, action: PayloadAction<any>) => {
+    //   const tshirt = state.tshirtData.find(
+    //     (tshirt) => tshirt.id === state.tshirtId
+    //   );
+    //   if (tshirt) {
+    //     if (tshirt.tshirtFrontOption?.frontChest.chestImageSetting) {
+    //       tshirt.tshirtFrontOption.frontChest.chestImageSetting.vertical =
+    //         action.payload.data;
+    //     }
+    //   }
+    // },
+
+    // wordmarkSetting start
+
+    // wordmark set vertical position start
+    setFrontChestWordmarkVerticalPosition: (state, action: PayloadAction<any>) => {
+      const tshirt = state.tshirtData.find((tshirt) => tshirt.id === state.tshirtId);
+      if(tshirt) {
+        if(tshirt.tshirtFrontOption?.frontChest?.wordmark?.text){
+          tshirt.tshirtFrontOption.frontChest.wordmark.chestWordmarkSetting.vertical = action.payload.data;
+        }
+      }
+    },
+    // wordmark set vertical position end
+
+    setFrontChestWordmarkScale: (state, action: PayloadAction<any>) => {
+      const tshirt = state.tshirtData.find((tshirt) => tshirt.id === state.tshirtId);
+      if(tshirt) {
+        if(tshirt.tshirtFrontOption?.frontChest?.wordmark?.text){
+          tshirt.tshirtFrontOption.frontChest.wordmark.chestWordmarkSetting.scale = action.payload.data;
+        }
+      }
+    },
+
+    // wordmarkSetting end
+
     setTshirtId: (state, action: PayloadAction<string>) => {
       state.tshirtId = action.payload;
     },
@@ -259,7 +310,10 @@ export const {
   setFrontChestSettingScale,
   setSleeveStripingTypeFront,
   setFrontChestWordmarkName,
+  setWordmarkFontStyleName,
   setWordmarkFontFamilyName,
+  setFrontChestWordmarkVerticalPosition,
+  setFrontChestWordmarkScale
 } = tshirtDataSlice.actions;
 
 export default tshirtDataSlice.reducer;

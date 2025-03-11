@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   text: {
-    fontSize: 40,
+    fontSize: 20,
     fontWeight: "bold",
     // color: "white", // Change this to your desired text color
   },
