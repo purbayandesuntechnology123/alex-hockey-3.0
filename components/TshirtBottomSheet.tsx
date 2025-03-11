@@ -141,7 +141,7 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
   };
 
   //   Front crest action end
-  console.log("tshirtType", tshirtType);
+  // console.log("tshirtType", tshirtType);
   //   console.log("isTemplateOpened", isTemplateOpened);
   return (
     <GestureHandlerRootView

@@ -39,7 +39,7 @@ const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
   onTabRightPress,
   children,
 }) => {
-  console.log("isWordmark", isWordmark);
+  // console.log("isWordmark", isWordmark);
   return (
     <View
       style={[

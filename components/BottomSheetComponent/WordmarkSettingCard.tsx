@@ -97,13 +97,14 @@ const WordmarkSettingCard = () => {
         </View>
         <View style={styles.input}>
           <Text style={{ color: "#fff", textAlign: "center", fontSize: 12 }}>
-            {wordmarkSettingData?.scale.toFixed(1)}
+            {wordmarkSettingData?.scale?.toFixed(1) || 1.0}
           </Text>
         </View>
       </View>
 
-      {/* Horizontal Position */}
-      <View style={styles.controlRow}>
+      {/* commented for now because of feature is not available ( we have to create custome) */}
+      {/* Horizontal Position start */}
+      {/* <View style={styles.controlRow}>
         <Text style={styles.label}>Arching</Text>
         <View
           style={{
@@ -131,7 +132,8 @@ const WordmarkSettingCard = () => {
             {horizontalPosition.toFixed(1)}
           </Text>
         </View>
-      </View>
+      </View> */}
+      {/* horizontal position end here */}
     </View>
   );
 };

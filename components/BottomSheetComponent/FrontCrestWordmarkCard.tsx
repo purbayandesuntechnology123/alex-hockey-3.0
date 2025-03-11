@@ -77,7 +77,7 @@ const FrontCrestWordmarkCard = () => {
   );
   const [fontTypeName, setFontTypeName] = useState("Single");
   const [textDirection, setTextDirection] = useState("xaxis");
-  const [fronttext, setFrontText] = useState<string>("");
+  const [fronttext, setFrontText] = useState<string>("");             
 
   const selectedData = tshirtData.find((item) => item.id === tshirtId);
   const frontText = selectedData?.tshirtFrontOption?.frontChest?.wordmark?.text;
@@ -88,7 +88,7 @@ const FrontCrestWordmarkCard = () => {
     setFontTypeName(item);
     const payload = {
       tshirtId: tshirtId,
-      data: item
+      data: item,
     }
     dispatch(setWordmarkFontStyleName(payload))
   };
