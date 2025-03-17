@@ -111,13 +111,19 @@ const HomePage = () => {
                     style={[
                       styles.imageStyle,
                       {
-                        marginLeft:        
+                        marginLeft:
                           selectedItem.tshirtFrontOption.frontChest
                             .chestImageSetting.horizontal * 4,
                         marginBottom:
                           selectedItem.tshirtFrontOption.frontChest
                             .chestImageSetting.vertical * 8,
-                        transform:[{ scale: selectedItem.tshirtFrontOption.frontChest.chestImageSetting.scale}]
+                        transform: [
+                          {
+                            scale:
+                              selectedItem.tshirtFrontOption.frontChest
+                                .chestImageSetting.scale,
+                          },
+                        ],
                       },
                     ]}
                   />
@@ -129,14 +135,16 @@ const HomePage = () => {
             <Image source={imageLink.tshirtBack} style={styles.tshirt} />
           )}
         </View>
-        {!isSheetOpen && (
-          <TshirtButton
-            leftIconName={iconLink.file}
-            rightIconName={iconLink.appstore}
-            onPressSecond={openBottomSheet}
-            containerStyle={{ marginVertical: 10 }}
-          />
-        )}
+        <View style={{ zIndex: 0 }}>
+          {!isSheetOpen && (
+            <TshirtButton
+              leftIconName={iconLink.file}
+              rightIconName={iconLink.appstore}
+              onPressSecond={openBottomSheet}
+              containerStyle={{ marginVertical: 10 }}
+            />
+          )}
+        </View>
 
         {/* Overlay to close on outside click */}
         <TouchableWithoutFeedback onPress={handleCloseSheet}>
