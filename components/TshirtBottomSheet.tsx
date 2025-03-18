@@ -171,15 +171,19 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
                 isTemplateFilterOpen ? { tintColor: "#FD8204" } : {}
               }
             />
-            <BottomSheetView style={styles.contentContainer}>
+            <BottomSheetScrollView
+              style={[styles.contentContainer, { gap: 5 }]}
+            >
               <TemplateCard
                 isTemplateFilterOpen={isTemplateFilterOpen}
                 setIsTemplateFilterOpen={setIsTemplateFilterOpen}
               />
               {!isTemplateFilterOpen ? (
-                <TshirtButtonColor containerStyle={{ marginHorizontal: 0 }} />
+                <TshirtButtonColor
+                  containerStyle={{ marginHorizontal: 0, marginTop: 5 }}
+                />
               ) : null}
-            </BottomSheetView>
+            </BottomSheetScrollView>
           </BottomSheetView>
         ) : IsChestStriping ? (
           <View style={{ flex: 1 }}>
@@ -296,9 +300,9 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
                   onPressSecond={handlemenuSeting}
                   containerStyle={{ marginHorizontal: 10, marginBottom: 5 }}
                 />
-                <BottomSheetView style={styles.contentContainer}>
+                <BottomSheetScrollView style={styles.contentContainer}>
                   <TshirtMenuCard setTshirtType={setTshirtType} />
-                </BottomSheetView>
+                </BottomSheetScrollView>
               </>
             ) : (
               <>

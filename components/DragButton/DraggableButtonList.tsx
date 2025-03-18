@@ -1,4 +1,5 @@
 import { themeColor } from "@/constants/colors";
+import { wordmarkColor } from "@/interface/tshirtinterface";
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import DraggableFlatList, {
@@ -7,13 +8,14 @@ import DraggableFlatList, {
 // import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export interface ButtonItem {
-  id: string;
+  id: number;
   label?: string;
   color: string;
+  canChange: boolean;
 }
 
 interface DraggableButtonListProps {
-  data: ButtonItem[];
+  data: wordmarkColor[];
   onReorder: (newData: ButtonItem[]) => void;
   onPress: (id: string) => void;
 }
@@ -22,14 +24,14 @@ const DraggableButtonList: React.FC<DraggableButtonListProps> = ({
   data,
   onReorder,
   onPress,
-}) => {
+}) => {   
   // console.log("color===>",data)
 
   const [listData, setListData] = useState<ButtonItem[]>(data);
 
   useEffect(() => {
     setListData(data);
-  }, [data]);
+  }, [data]);  
 
   const renderItem = ({
     item,
@@ -45,32 +47,32 @@ const DraggableButtonList: React.FC<DraggableButtonListProps> = ({
       ]}
       onPress={() => {
         const index = getIndex();
-        if (index !== undefined) {
+        if (index !== undefined) {     
             onPress(index.toString());
         }
       }}
       onLongPress={drag}
       activeOpacity={0.8}
-    >
+    >   
       <Text style={styles.buttonText}>
         {item?.id}
       </Text>
-    </TouchableOpacity>
-  );
+    </TouchableOpacity>    
+  );          
 
   return (
     // <GestureHandlerRootView style={{ flex: 1 }}>
     <View style={styles.container}>
-      <DraggableFlatList
+      <DraggableFlatList     
         data={listData}
-        keyExtractor={(item) => item.id}   
+        keyExtractor={(item) => item.id.toString()}
         renderItem={renderItem}
         onDragEnd={({ data }) => {
           setListData(data);
           onReorder(data);
         }}
         horizontal={true}
-        contentContainerStyle={styles.listContent}
+        contentContainerStyle={styles.listContent}       
       />
     </View>    
     // </GestureHandlerRootView>
