@@ -57,6 +57,12 @@ const AllTshirt = () => {
             textStyle: "Single",
             textDirection: "xaxis",   
             fontFamily: "",
+            wordmarkColor: [
+              { id: 1, color: "#9BB8D3", canChange: true},
+              { id: 2, color: "#69B3E7", canChange: true},
+              { id: 3, color: "#0C2340", canChange: true},
+              { id: 4, color: "#FFFF", canChange: false},
+            ],
             chestWordmarkSetting: {
               vertical: 0,
               scale: 1,

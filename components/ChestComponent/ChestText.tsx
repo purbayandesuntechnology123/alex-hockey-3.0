@@ -20,9 +20,9 @@ const ChestText = ({ selectedItem }) => {
     if (value === "Single") {
       return 0;
     } else if (value === "Double") {
-      return 1;
+      return 0.7;
     } else if (value === "Triple") {
-      return 1.5;
+      return 1.2;
     }
   };
   return (
@@ -71,10 +71,12 @@ const ChestText = ({ selectedItem }) => {
         </RNText>
       ) : (
         <TextStroke
-          stroke={getStrokeNum(
-            selectedItem?.tshirtFrontOption?.frontChest?.wordmark?.textStyle
-          )}
-          color="gray"
+          stroke={
+            getStrokeNum(
+              selectedItem?.tshirtFrontOption?.frontChest?.wordmark?.textStyle
+            ) ?? 0
+          }
+          color="gray"   
         >
           <RNText
             style={{
@@ -92,7 +94,6 @@ const ChestText = ({ selectedItem }) => {
           </RNText>
         </TextStroke>
       )}
-      {/*  */}
     </View>
   );
 };

@@ -5,6 +5,7 @@ import {
   TshirtState,
 } from "@/interface/tshirtinterface";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Alert } from "react-native";
 
 const initialState: TshirtState = {
   countNum: 5,
@@ -36,6 +37,12 @@ const initialState: TshirtState = {
             textStyle: "Single",
             textDirection: "horizontal",
             fontFamily: "Anaheim",
+            wordmarkColor: [
+              { id: 1, color: "#9BB8D3", canChange: true },
+              { id: 2, color: "#69B3E7", canChange: true },
+              { id: 3, color: "#0C2340", canChange: true },
+              { id: 4, color: "#FFFF", canChange: false },
+            ],
             chestWordmarkSetting: {
               vertical: 0,
               scale: 1,
@@ -65,6 +72,12 @@ const initialState: TshirtState = {
             textStyle: "Single",
             textDirection: "horizontal",
             fontFamily: "Anaheim",
+            wordmarkColor: [
+              { id: 1, color: "#9BB8D3", canChange: true },
+              { id: 2, color: "#69B3E7", canChange: true },
+              { id: 3, color: "#0C2340", canChange: true },
+              { id: 4, color: "#FFFF", canChange: false },
+            ],
             chestWordmarkSetting: {
               vertical: 0,
               scale: 1,
@@ -94,6 +107,12 @@ const initialState: TshirtState = {
             textStyle: "Single",
             textDirection: "horizontal",
             fontFamily: "Anaheim",
+            wordmarkColor: [
+              { id: 1, color: "#9BB8D3", canChange: true },
+              { id: 2, color: "#69B3E7", canChange: true },
+              { id: 3, color: "#0C2340", canChange: true },
+              { id: 4, color: "#FFFF", canChange: false },
+            ],
             chestWordmarkSetting: {
               vertical: 0,
               scale: 1,
@@ -267,24 +286,49 @@ const tshirtDataSlice = createSlice({
     // wordmarkSetting start
 
     // wordmark set vertical position start
-    setFrontChestWordmarkVerticalPosition: (state, action: PayloadAction<any>) => {
-      const tshirt = state.tshirtData.find((tshirt) => tshirt.id === state.tshirtId);
-      if(tshirt) {
-        if(tshirt.tshirtFrontOption?.frontChest?.wordmark?.text){
-          tshirt.tshirtFrontOption.frontChest.wordmark.chestWordmarkSetting.vertical = action.payload.data;
+    setFrontChestWordmarkVerticalPosition: (
+      state,
+      action: PayloadAction<any>
+    ) => {
+      const tshirt = state.tshirtData.find(
+        (tshirt) => tshirt.id === state.tshirtId
+      );
+      if (tshirt) {
+        if (tshirt.tshirtFrontOption?.frontChest?.wordmark?.text) {
+          tshirt.tshirtFrontOption.frontChest.wordmark.chestWordmarkSetting.vertical =
+            action.payload.data;
         }
       }
     },
     // wordmark set vertical position end
 
     setFrontChestWordmarkScale: (state, action: PayloadAction<any>) => {
-      const tshirt = state.tshirtData.find((tshirt) => tshirt.id === state.tshirtId);
-      if(tshirt) {
-        if(tshirt.tshirtFrontOption?.frontChest?.wordmark?.text){
-          tshirt.tshirtFrontOption.frontChest.wordmark.chestWordmarkSetting.scale = action.payload.data;
+      const tshirt = state.tshirtData.find(
+        (tshirt) => tshirt.id === state.tshirtId
+      );
+      if (tshirt) {
+        if (tshirt.tshirtFrontOption?.frontChest?.wordmark?.text) {
+          tshirt.tshirtFrontOption.frontChest.wordmark.chestWordmarkSetting.scale =
+            action.payload.data;
+        } else {
+          Alert.alert("Please type the text first");
+          console.log("select the test first")
         }
       }
     },
+    // wordmark set color start
+    setWordmarkColor: (state, action: PayloadAction<any>) => {
+      const tshirt = state.tshirtData.find(
+        (tshirt) => tshirt.id === state.tshirtId
+      );
+      if (tshirt) {
+        if (tshirt.tshirtFrontOption?.frontChest.wordmark.text) {
+          tshirt.tshirtFrontOption.frontChest.wordmark.wordmarkColor =
+            action.payload.data;
+        }
+      }
+    },
+    // wordmark set color end
 
     // wordmarkSetting end
 
@@ -313,7 +357,8 @@ export const {
   setWordmarkFontStyleName,
   setWordmarkFontFamilyName,
   setFrontChestWordmarkVerticalPosition,
-  setFrontChestWordmarkScale
+  setFrontChestWordmarkScale,
+  setWordmarkColor,
 } = tshirtDataSlice.actions;
 
 export default tshirtDataSlice.reducer;

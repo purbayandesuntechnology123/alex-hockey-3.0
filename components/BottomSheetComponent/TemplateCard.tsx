@@ -86,21 +86,24 @@ const filterTypes = [
 const TemplateCard: React.FC<TemplateCardProps> = ({
   isTemplateFilterOpen,
   setIsTemplateFilterOpen,
-}) => {   
-
+}) => {
   const dispatch = useAppDispatch();
 
-  const { tshirtData, tshirtId, buttonColor } = useSelector((state: RootState )=> state.tshirtStoreValue)
+  const { tshirtData, tshirtId, buttonColor } = useSelector(
+    (state: RootState) => state.tshirtStoreValue
+  );
 
   const [filterType, setFilterType] = useState<string>("");
-   const [currentColorIndex, setCurrectColorIndex] = useState<number>();
-  const [templateTshirtType, seTemplateTshirtType] = useState<string>(getName(tshirtData, tshirtId));
+  const [currentColorIndex, setCurrectColorIndex] = useState<number>();
+  const [templateTshirtType, setTemplateTshirtType] = useState<string>(
+    getName(tshirtData, tshirtId)
+  );
   const handleTshirtTypePress = (item: string) => {
-    // seTemplateTshirtType(item);
+    // setTemplateTshirtType(item);
     const payload = {
       tshirtId: tshirtId,
-      data: item
-    }
+      data: item,
+    };
     dispatch(setTemplateTypeFront(payload));
   };
 
@@ -108,10 +111,10 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
     // console.log("type", type);
     if (type !== filterType) {
       setFilterType(type);
-      filterByColorName(type);    
+      filterByColorName(type);
     } else {
       setFilterType("");
-      filterByColorName("");   
+      filterByColorName("");
     }
   };
 
@@ -159,7 +162,7 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
                       style={[
                         styles.menuImgHeader,
                         item.tshirtType === getName(tshirtData, tshirtId) &&
-                          styles.activeTemplateType,   
+                          styles.activeTemplateType,
                       ]}
                       onPress={() => handleTshirtTypePress(item.tshirtType)}
                     >
