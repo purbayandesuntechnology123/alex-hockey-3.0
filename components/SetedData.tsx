@@ -28,7 +28,7 @@ const SetedData = () => {
       <View style={{ borderWidth: 1, borderRadius: 8, padding: 10 }}>
         {selectedItem?.tshirtFrontOption?.template ? (
           <RNText style={{ color: themeColor.primary }}>
-            Temolate:=== {selectedItem?.tshirtFrontOption?.template}
+            Temolate:=== {selectedItem?.tshirtFrontOption?.template?.templateName}
           </RNText>
         ) : null}
 

@@ -6,7 +6,7 @@ export const getName = (tshirtData: any, tshirtId: string) => {
   }
   const tshirt = tshirtData.find((tshirt) => tshirt.id === tshirtId);
 
-  return tshirt?.tshirtFrontOption?.template || "";
+  return tshirt?.tshirtFrontOption?.template?.templateName || "";
 };
 
 export const getchestStriping = (tshirtData: any, tshirtId: string) => {

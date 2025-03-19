@@ -43,7 +43,15 @@ const AllTshirt = () => {
       frontImage: imageLink.tshirtFront, // Change as needed
       backImage: imageLink.tshirtBack, // Change as needed
       tshirtFrontOption: {
-        template: "Plain",
+        template: {
+          templateName: "Plain",
+          templateColor: [
+            { id: 1, color: "#9BB8D3", canChange: true },
+            { id: 2, color: "#69B3E7", canChange: true },
+            { id: 3, color: "#0C2340", canChange: true },
+            { id: 4, color: "#FFFF", canChange: false },
+          ]
+        },
         chestStripingName: "None",
         frontChest: {
           frontChestImage: null,
