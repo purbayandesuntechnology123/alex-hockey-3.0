@@ -11,7 +11,7 @@ export interface colorObj {
   color: string;
 }
 
-export interface wordmarkColor {
+export interface Color {
   id: number;
   color: string;
   canChange: boolean;
@@ -22,7 +22,10 @@ export interface tshirtDataObj {
   frontImage: any;
   backImage?: string;
   tshirtFrontOption?: {
-    template: string;
+    template: {
+      templateName: string,
+      templateColor: Color[],
+    };
     chestStripingName: string;
     frontChest: {
       frontChestImage?: any;
@@ -36,7 +39,7 @@ export interface tshirtDataObj {
         textStyle: string;
         textDirection: string;
         fontFamily: string;
-        wordmarkColor: wordmarkColor[];
+        wordmarkColor: Color[];
         chestWordmarkSetting: {
           vertical: number;
           scale: number;

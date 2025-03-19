@@ -149,8 +149,8 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
 
   // console.log("filteredData", filteredData);
   return (
-    <BottomSheetView style={{ flex: 1 }}>
-      <View style={{ flex: 1 }}>
+    <BottomSheetView style={{ flex: 1, paddingTop: 10, paddingHorizontal: 5 }}>
+      <View style={{ flex: 1, gap: 10, justifyContent: "space-between" }}>
         <View style={{ flex: 1 }}>
           <BottomSheetScrollView horizontal>
             <View style={{ gap: 5 }}>

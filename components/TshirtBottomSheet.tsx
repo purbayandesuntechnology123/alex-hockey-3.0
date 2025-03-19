@@ -25,6 +25,7 @@ import SleeveStripingCard from "./BottomSheetComponent/SleeveStripingCard";
 import AllTshirt from "./Alltshirt";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
+import TemplateSheet from "./Template/TemplateSheet";
 // import CrestSettingCard from "./BottomSheetComponent/CrestSettingCard";
 // import WordmarkSettingCard from "./BottomSheetComponent/WordmarkSettingCard";
 
@@ -59,6 +60,7 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
   const handleSheetChanges = useCallback((index: number) => {
     console.log("handleSheetChanges", index);
   }, []);
+
   useEffect(() => {
     if (tshirtType?.tshirtType === "Template") {
       setIsTemplateOpened(true);
@@ -158,33 +160,10 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
         enableDynamicSizing={false}
       >
         {isTemplateOpened ? (
-          //   <BottomSheetView style={styles.contentContainer}>
-          <BottomSheetView style={styles.contentContainer}>
-            <BottomSheetHeader
-              title="Template"
-              leftIconName={iconLink.leftIcon}
-              rightIconName={iconLink.adjust}
-              containerStyle={{ marginHorizontal: 10, marginBottom: 5 }}
-              onPressFirst={handleTemplateBackClick}
-              onPressSecond={handletemFilterClick}
-              rightIconStyle={
-                isTemplateFilterOpen ? { tintColor: "#FD8204" } : {}
-              }
-            />
-            <BottomSheetScrollView
-              style={[styles.contentContainer, { gap: 5 }]}
-            >
-              <TemplateCard
-                isTemplateFilterOpen={isTemplateFilterOpen}
-                setIsTemplateFilterOpen={setIsTemplateFilterOpen}
-              />
-              {!isTemplateFilterOpen ? (
-                <TshirtButtonColor
-                  containerStyle={{ marginHorizontal: 0, marginTop: 5 }}
-                />
-              ) : null}
-            </BottomSheetScrollView>
-          </BottomSheetView>
+          <TemplateSheet
+            setIsTemplateOpened={setIsTemplateOpened}
+            commonBack={commonBack}
+          />
         ) : IsChestStriping ? (
           <View style={{ flex: 1 }}>
             <BottomSheetHeader

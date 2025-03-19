@@ -31,6 +31,8 @@ const HomePage = () => {
 
   const selectedItem = tshirtData.find((item) => item.id === tshirtId);
 
+  // console.log("selectedItem====>",selectedItem?.tshirtFrontOption?.template)     
+
   const openBottomSheet = () => {
     setIsSheetOpen(true);
     bottomSheetRef.current?.expand();

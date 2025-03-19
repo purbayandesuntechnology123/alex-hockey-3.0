@@ -23,7 +23,15 @@ const initialState: TshirtState = {
       frontImage: imageLink.tshirtFront,
       backImage: imageLink.tshirtBack,
       tshirtFrontOption: {
-        template: "Plain",
+        template: {
+          templateName: "Plain",
+          templateColor: [
+            { id: 1, color: "#9BB8D3", canChange: true },
+            { id: 2, color: "#69B3E7", canChange: true },
+            { id: 3, color: "#0C2340", canChange: true },
+            { id: 4, color: "#FFFF", canChange: false },
+          ]
+        },
         chestStripingName: "None",
         frontChest: {
           frontChestImage: null,
@@ -58,7 +66,15 @@ const initialState: TshirtState = {
       frontImage: imageLink.chestStripping,
       backImage: imageLink.tshirtBack,
       tshirtFrontOption: {
-        template: "Plain",
+        template: {
+          templateName: "Plain",
+          templateColor: [
+            { id: 1, color: "#9BB8D3", canChange: true },
+            { id: 2, color: "#69B3E7", canChange: true },
+            { id: 3, color: "#0C2340", canChange: true },
+            { id: 4, color: "#FFFF", canChange: false },
+          ]
+        },
         chestStripingName: "None",
         frontChest: {
           frontChestImage: null,
@@ -93,7 +109,15 @@ const initialState: TshirtState = {
       frontImage: imageLink.chestStripping,
       backImage: imageLink.tshirtBack,
       tshirtFrontOption: {
-        template: "Modern",
+        template: {
+          templateName: "Plain",
+          templateColor: [
+            { id: 1, color: "#9BB8D3", canChange: true },
+            { id: 2, color: "#69B3E7", canChange: true },
+            { id: 3, color: "#0C2340", canChange: true },
+            { id: 4, color: "#FFFF", canChange: false },
+          ]
+        },
         chestStripingName: "None",
         frontChest: {
           frontChestImage: null,
@@ -138,6 +162,8 @@ const tshirtDataSlice = createSlice({
         (tshirt) => tshirt.id !== action.payload.id
       );
     },
+    
+    // template start
     setTemplateTypeFront: (
       state,
       action: PayloadAction<{ tshirtId: string; data: string }>
@@ -147,10 +173,20 @@ const tshirtDataSlice = createSlice({
       );
       if (tshirt) {
         if (tshirt.tshirtFrontOption) {
-          tshirt.tshirtFrontOption.template = action.payload.data;
+          tshirt.tshirtFrontOption.template.templateName = action.payload.data;
         }
       }
     },
+
+    setTemplateColor: (state, action: PayloadAction<any>) => {
+      const tshirt = state.tshirtData.find((tshirt) => tshirt.id === state.tshirtId);
+      if(tshirt){
+        if(tshirt.tshirtFrontOption?.template.templateName){
+          tshirt.tshirtFrontOption.template.templateColor = action.payload.data;
+        }
+      }
+    },
+
     setSleeveStripingTypeFront: (
       state,
       action: PayloadAction<{ tshirtId: string; data: string }>
@@ -232,7 +268,7 @@ const tshirtDataSlice = createSlice({
         (tshirt) => tshirt.id === state.tshirtId
       );
       if (tshirt) {
-        if (tshirt.tshirtFrontOption?.template) {
+        if (tshirt.tshirtFrontOption?.template?.templateName) {
           console.log("wordmark text===>", action.payload.data);
           tshirt.tshirtFrontOption.frontChest.wordmark.text =
             action.payload.data;
@@ -344,8 +380,9 @@ const tshirtDataSlice = createSlice({
 export const {
   addNewTshirt,
   removeTshirt,
-  setTemplateTypeFront,
   setTshirtId,
+  setTemplateTypeFront,
+  setTemplateColor,
   setChestStripingTypeFront,
   setTshirtColor,
   setFrontChestImage,
