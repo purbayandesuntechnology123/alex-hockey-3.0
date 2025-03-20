@@ -13,6 +13,11 @@ import {
 import TshirtButtonColor from "./TshirtButtonColor";
 import { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import BottomSheetHeader from "./BottomSheetHeader";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { useAppDispatch } from "@/redux/hooks";
+import { setSleeveNumber, setSleeveNumberStyleName } from "@/redux/slices/tshirtDataSlice";
+import { getSingleTshirt } from "@/constants/commonFunction";
 
 const fontType = [
   {
@@ -66,19 +71,45 @@ interface SleeveNumberCardProps {
 const SleeveNumberCard: React.FC<SleeveNumberCardProps> = ({
   setIsSleeveNumberOpened,
 }) => {
+
+  const dispatch = useAppDispatch();
+
+  const { tshirtId, tshirtById, tshirtData } = useSelector((state: RootState) => state.tshirtStoreValue);
   const [fontTypeName, setFontTypeName] = useState("Single");
-  const [sleeveText, setSleeveText] = useState<string>("");
+  // const [sleeveText, setSleeveText] = useState<string>("");
   const [selectedFontStyle, setSelectedFontStyle] = useState<string>("");
 
   const handleFontTypeClick = (item: string) => {
     setFontTypeName(item);
+    const payload = {
+      tshirtId: tshirtId,
+      data: item,
+    };
+    dispatch(setSleeveNumberStyleName(payload));
   };
 
   // console.log("fontTypeName", fontTypeName);
 
+  const selectedData = getSingleTshirt(tshirtData, tshirtId);
+
+  const sleeveText = selectedData?.tshirtFrontOption?.sleeveNumber?.number
+
+  // console.log("selectedData====>",selectedData?.tshirtFrontOption?.sleeveNumber?.textStyle);
+
   const handleSleeveNumberBackClick = () => {
     setIsSleeveNumberOpened(false);
   };
+
+
+  const handleNumber = (txt: string) => {
+    // console.log("txt number=====>", typeof Number(txt))
+    // setSleeveText(txt)
+    const payload = {
+      tshirtId: tshirtId,   
+      data: txt,
+    };
+    dispatch(setSleeveNumber(payload))
+  }
 
   return (
     <View style={styles.container}>
@@ -128,7 +159,7 @@ const SleeveNumberCard: React.FC<SleeveNumberCardProps> = ({
           maxLength={2}
           value={sleeveText}
           keyboardType="numeric"
-          onChangeText={setSleeveText}
+          onChangeText={(txt) => handleNumber(txt)}
         />
 
         <View style={{ flexDirection: "row", gap: 5, alignItems: "center" }}>
@@ -158,7 +189,7 @@ const SleeveNumberCard: React.FC<SleeveNumberCardProps> = ({
                 <TouchableOpacity
                   key={index}
                   onPress={() => setSelectedFontStyle(item.fontFamilyName)}
-                  disabled={sleeveText.length <= 0}
+                  disabled={sleeveText?.length <= 0}
                 >
                   <View
                     style={{

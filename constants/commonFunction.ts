@@ -37,3 +37,8 @@ export const getFontFamilyName = (tshirtData: any, tshirtId: string) => {
   const tshirt = tshirtData.find((tshirt) => tshirt.id === tshirtId);
   return tshirt?.tshirtFrontOption.frontChest?.wordmark?.fontFamily || "";
 };
+
+export const getSingleTshirt = (tshirtData: any, tshirtId: string) => {
+  const tshirt = tshirtData.find((tshirt: any) => tshirt.id === tshirtId);
+  return tshirt;
+}

@@ -11,6 +11,43 @@ const initialState: TshirtState = {
   countNum: 5,
   value: 0,
   tshirtId: "",
+  tshirtById: {
+    id: "",
+    frontImage: "",
+    backImage: "",
+    tshirtFrontOption: {
+      template: {
+        templateName: "",
+        templateColor: [],
+      },
+      chestStripingName: "",
+      frontChest: {
+        frontChestImage: null,
+        chestImageSetting: {
+          horizontal: 0,
+          vertical: 0,
+          scale: 1.0,
+        },
+        wordmark: {
+          text: "",
+          textStyle: "",
+          textDirection: "",
+          fontFamily: "",
+          wordmarkColor: [],
+          chestWordmarkSetting: {
+            vertical: 0,
+            scale: 1,
+            arching: 1.0,
+          },
+        },
+      },
+      sleeveNumber: {
+        number: "",
+        textStyle: "Single",
+      },
+      sleeveStriping: "",
+    },
+  },
   buttonColor: [
     { id: "1", color: "#9BB8D3" },
     { id: "2", color: "#69B3E7" },
@@ -30,7 +67,7 @@ const initialState: TshirtState = {
             { id: 2, color: "#69B3E7", canChange: true },
             { id: 3, color: "#0C2340", canChange: true },
             { id: 4, color: "#FFFF", canChange: false },
-          ]
+          ],
         },
         chestStripingName: "None",
         frontChest: {
@@ -57,6 +94,10 @@ const initialState: TshirtState = {
               arching: 1.0,
             },
           },
+        },
+        sleeveNumber: {
+          number: "",
+          textStyle: "Single",
         },
         sleeveStriping: "None",
       },
@@ -73,7 +114,7 @@ const initialState: TshirtState = {
             { id: 2, color: "#69B3E7", canChange: true },
             { id: 3, color: "#0C2340", canChange: true },
             { id: 4, color: "#FFFF", canChange: false },
-          ]
+          ],
         },
         chestStripingName: "None",
         frontChest: {
@@ -100,6 +141,10 @@ const initialState: TshirtState = {
               arching: 1.0,
             },
           },
+        },
+        sleeveNumber: {
+          number: "",
+          textStyle: "Single",
         },
         sleeveStriping: "None",
       },
@@ -116,7 +161,7 @@ const initialState: TshirtState = {
             { id: 2, color: "#69B3E7", canChange: true },
             { id: 3, color: "#0C2340", canChange: true },
             { id: 4, color: "#FFFF", canChange: false },
-          ]
+          ],
         },
         chestStripingName: "None",
         frontChest: {
@@ -143,6 +188,10 @@ const initialState: TshirtState = {
               arching: 1.0,
             },
           },
+        },
+        sleeveNumber: {
+          number: "",
+          textStyle: "Single",
         },
         sleeveStriping: "None",
       },
@@ -162,7 +211,7 @@ const tshirtDataSlice = createSlice({
         (tshirt) => tshirt.id !== action.payload.id
       );
     },
-    
+
     // template start
     setTemplateTypeFront: (
       state,
@@ -179,9 +228,11 @@ const tshirtDataSlice = createSlice({
     },
 
     setTemplateColor: (state, action: PayloadAction<any>) => {
-      const tshirt = state.tshirtData.find((tshirt) => tshirt.id === state.tshirtId);
-      if(tshirt){
-        if(tshirt.tshirtFrontOption?.template.templateName){
+      const tshirt = state.tshirtData.find(
+        (tshirt) => tshirt.id === state.tshirtId
+      );
+      if (tshirt) {
+        if (tshirt.tshirtFrontOption?.template.templateName) {
           tshirt.tshirtFrontOption.template.templateColor = action.payload.data;
         }
       }
@@ -292,6 +343,33 @@ const tshirtDataSlice = createSlice({
     },
     // font text style end
 
+    // set sleeve number start
+    setSleeveNumber: (state, action: PayloadAction<any>) => {
+      const tshirt = state.tshirtData.find(
+        (tshirt) => tshirt.id === state.tshirtId
+      );
+      if (tshirt) {
+        if (tshirt.tshirtFrontOption?.template?.templateName) {
+          tshirt.tshirtFrontOption.sleeveNumber.number = action.payload.data;
+        }
+      }
+    },
+    // set sleeve number end
+
+    // sleeve number style start
+    setSleeveNumberStyleName: (state, action: PayloadAction<any>) => {
+      const tshirt = state.tshirtData.find(
+        (tshirt) => tshirt.id === state.tshirtId
+      );
+      if (tshirt) {
+        if (tshirt.tshirtFrontOption?.sleeveNumber.number) {
+          console.log("wordmark textStyle Name===>", action.payload.data);
+          tshirt.tshirtFrontOption.sleeveNumber.textStyle = action.payload.data;
+        }
+      }
+    },
+    // sleeve number style end
+
     // fontFamily name set start
     setWordmarkFontFamilyName: (state, action: PayloadAction<any>) => {
       const tshirt = state.tshirtData.find(
@@ -348,7 +426,7 @@ const tshirtDataSlice = createSlice({
             action.payload.data;
         } else {
           Alert.alert("Please type the text first");
-          console.log("select the test first")
+          console.log("select the Tshirt first");
         }
       }
     },
@@ -371,6 +449,9 @@ const tshirtDataSlice = createSlice({
     setTshirtId: (state, action: PayloadAction<string>) => {
       state.tshirtId = action.payload;
     },
+    setSingleTshirt: (state, action: PayloadAction<tshirtDataObj>) => {
+      state.tshirtById = action.payload;
+    },
     setTshirtColor: (state, action: PayloadAction<colorObj[]>) => {
       state.buttonColor = action.payload;
     },
@@ -381,6 +462,7 @@ export const {
   addNewTshirt,
   removeTshirt,
   setTshirtId,
+  setSingleTshirt,
   setTemplateTypeFront,
   setTemplateColor,
   setChestStripingTypeFront,
@@ -396,6 +478,8 @@ export const {
   setFrontChestWordmarkVerticalPosition,
   setFrontChestWordmarkScale,
   setWordmarkColor,
+  setSleeveNumber,
+  setSleeveNumberStyleName,
 } = tshirtDataSlice.actions;
 
 export default tshirtDataSlice.reducer;

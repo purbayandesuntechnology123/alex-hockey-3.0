@@ -4,6 +4,7 @@ import { useAppDispatch } from "@/redux/hooks";
 import {
   addNewTshirt,
   removeTshirt,
+  setSingleTshirt,
   setTshirtId,
 } from "@/redux/slices/tshirtDataSlice";
 import { RootState } from "@/redux/store";
@@ -15,9 +16,11 @@ import { useSelector } from "react-redux";
 
 const AllTshirt = () => {
   const dispatch = useAppDispatch();
-  const { tshirtData, tshirtId } = useSelector(
+  const { tshirtData, tshirtId, tshirtById } = useSelector(
     (state: RootState) => state.tshirtStoreValue
   );
+  
+  console.log("tahirtById", tshirtById);
 
   const [tshirtType, setTshirtType] = useState<string>("");
 
@@ -26,6 +29,7 @@ const AllTshirt = () => {
   const handleTshirtSelect = (item: any) => {
     // console.log("tshirt selected", item);
     dispatch(setTshirtId(item.id));
+    dispatch(setSingleTshirt(item));
   };
 
   const handleAddNewTshirt = () => {
@@ -77,6 +81,10 @@ const AllTshirt = () => {
               arching: 1.0,
             },
           },
+        },
+        sleeveNumber: {
+          number: "",
+          textStyle: "Single",
         },
         sleeveStriping: "None",
       },

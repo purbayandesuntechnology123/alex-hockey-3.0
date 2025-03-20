@@ -2,6 +2,7 @@ export interface TshirtState {
   countNum: number;
   value: number;
   tshirtId: string;
+  tshirtById: tshirtDataObj;
   buttonColor: colorObj[];
   tshirtData: tshirtDataObj[];
 }
@@ -47,6 +48,10 @@ export interface tshirtDataObj {
         };
       };
     };
+    sleeveNumber: {
+      number: string,
+      textStyle: string,
+    },
     sleeveStriping: string;
   };
 }
