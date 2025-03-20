@@ -1,5 +1,6 @@
 import { themeColor } from "@/constants/colors";
-import { wordmarkColor } from "@/interface/tshirtinterface";
+import { Color } from "@/interface/tshirtinterface";
+// import { wordmarkColor } from "@/interface/tshirtinterface";
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import DraggableFlatList, {
@@ -15,7 +16,7 @@ export interface ButtonItem {
 }
 
 interface DraggableButtonListProps {
-  data: wordmarkColor[];
+  data: Color[];
   onReorder: (newData: ButtonItem[]) => void;
   onPress: (id: string) => void;
 }

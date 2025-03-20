@@ -1,6 +1,4 @@
 import React, { useRef, useState } from "react";
-import ColorPickerModal from "@/components/ColorPickerModal";
-import SetedData from "@/components/SetedData";
 // import { useBottomSheet } from "../components/CustomBottomSheet";
 import TshirtBottomSheet from "@/components/TshirtBottomSheet";
 import TshirtButton from "@/components/TshirtButton";
@@ -31,7 +29,7 @@ const HomePage = () => {
 
   const selectedItem = tshirtData.find((item) => item.id === tshirtId);
 
-  // console.log("selectedItem====>",selectedItem?.tshirtFrontOption?.template)     
+  // console.log("selectedItem====>",selectedItem?.tshirtFrontOption?.template)
 
   const openBottomSheet = () => {
     setIsSheetOpen(true);
@@ -70,7 +68,6 @@ const HomePage = () => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      {/* <ColorPickerModal /> */}
       <StatusBar
         translucent
         backgroundColor="transparent"
