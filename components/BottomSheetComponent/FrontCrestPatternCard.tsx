@@ -11,8 +11,11 @@ import {
 import BottomSheetHeader from "./BottomSheetHeader";
 import { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import Slider from "@react-native-community/slider";
+import { themeColor } from "@/constants/colors";
 
 interface FrontCrestPatternCardProps {
+  patterName: string;
+  handlePatternClick: (value: string) => void;
   setFrontCrestPattern: (value: boolean) => void;
 }
 const data = {
@@ -32,6 +35,8 @@ const data = {
   ],
 };
 const FrontCrestPatternCard: React.FC<FrontCrestPatternCardProps> = ({
+  patterName,
+  handlePatternClick,
   setFrontCrestPattern,
 }) => {
   const [leftVal, setLeftVal] = useState(1.0);
@@ -95,8 +100,11 @@ const FrontCrestPatternCard: React.FC<FrontCrestPatternCardProps> = ({
               {row.map((item, index) => (
                 <TouchableOpacity
                   key={index}
-                  style={styles.menuImgHeader}
-                  //   onPress={() => handleTshirtTypePress(item)}
+                  style={[
+                    styles.menuImgHeader,
+                    item.tshirtType === patterName && styles.selectedStyle,
+                  ]}
+                  onPress={() => handlePatternClick(item.tshirtType)}
                 >
                   <View style={{ alignItems: "center" }}>
                     <Image source={item.image} style={styles.imageStyle} />
@@ -157,6 +165,10 @@ const styles = StyleSheet.create({
   slider: {
     flex: 1,
     // marginHorizontal: -10,
+  },
+  selectedStyle: {
+    borderWidth: 1,
+    borderColor: themeColor.primary,
   },
 });
 

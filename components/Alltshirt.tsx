@@ -59,6 +59,10 @@ const AllTshirt = () => {
         chestStripingName: "None",
         frontChest: {
           frontChestImage: null,
+          imagePattern: {
+            patterName: "None",
+            patternOpacity: .5,
+          },
           chestImageSetting: {
             horizontal: 0,
             vertical: 0,

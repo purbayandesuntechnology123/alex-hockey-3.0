@@ -23,6 +23,10 @@ const initialState: TshirtState = {
       chestStripingName: "",
       frontChest: {
         frontChestImage: null,
+        imagePattern: {
+          patterName: "None",
+          patternOpacity: .5,
+        },
         chestImageSetting: {
           horizontal: 0,
           vertical: 0,
@@ -72,6 +76,10 @@ const initialState: TshirtState = {
         chestStripingName: "None",
         frontChest: {
           frontChestImage: null,
+          imagePattern: {
+            patterName: "None",
+            patternOpacity: .5,
+          },
           chestImageSetting: {
             horizontal: 0,
             vertical: 0,
@@ -119,6 +127,10 @@ const initialState: TshirtState = {
         chestStripingName: "None",
         frontChest: {
           frontChestImage: null,
+          imagePattern: {
+            patterName: "None",
+            patternOpacity: .5,
+          },
           chestImageSetting: {
             horizontal: 0,
             vertical: 0,
@@ -166,6 +178,10 @@ const initialState: TshirtState = {
         chestStripingName: "None",
         frontChest: {
           frontChestImage: null,
+          imagePattern: {
+            patterName: "None",
+            patternOpacity: .5,
+          },
           chestImageSetting: {
             horizontal: 0,
             vertical: 0,
@@ -278,6 +294,21 @@ const tshirtDataSlice = createSlice({
         }
       }
     },
+
+    setFrontChestPattern: (state, action: PayloadAction<any>) => {
+      const tshirt = state.tshirtData.find(
+        (tshirt) => tshirt.id === action.payload.tshirtId
+      );
+      if(tshirt) {
+        if(tshirt.tshirtFrontOption) {
+          tshirt.tshirtFrontOption.frontChest.imagePattern.patterName = action.payload.data;
+        }
+      }
+    },
+
+    setFrontChestPatternOpacity: (state, action: PayloadAction<any>) => {
+      const tshirt = state.tshirtData.find((tshirt) => tshirt.id === state.tshirtId);
+    },
     setFrontChestSettingHorizontal: (state, action: PayloadAction<any>) => {
       const tshirt = state.tshirtData.find(
         (tshirt) => tshirt.id === action.payload.tshirtId
@@ -363,12 +394,25 @@ const tshirtDataSlice = createSlice({
       );
       if (tshirt) {
         if (tshirt.tshirtFrontOption?.sleeveNumber.number) {
-          console.log("wordmark textStyle Name===>", action.payload.data);
           tshirt.tshirtFrontOption.sleeveNumber.textStyle = action.payload.data;
         }
       }
     },
     // sleeve number style end
+
+    // sleeves fontFamily name set start
+    setSleevesFontFamilyName: (state, action: PayloadAction<any>) => {
+      const tshirt = state.tshirtData.find(
+        (tshirt) => tshirt.id === state.tshirtId
+      );
+      if (tshirt) {
+          if (tshirt.tshirtFrontOption) {
+            tshirt.tshirtFrontOption.sleeveNumber.textStyle =
+              action.payload.data;
+          }
+      }
+    },
+    // sleeves fontFamily name set end
 
     // fontFamily name set start
     setWordmarkFontFamilyName: (state, action: PayloadAction<any>) => {
@@ -480,6 +524,8 @@ export const {
   setWordmarkColor,
   setSleeveNumber,
   setSleeveNumberStyleName,
+  setSleevesFontFamilyName,
+  setFrontChestPattern,
 } = tshirtDataSlice.actions;
 
 export default tshirtDataSlice.reducer;

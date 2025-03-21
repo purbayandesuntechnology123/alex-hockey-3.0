@@ -8,4 +8,8 @@ export const fontFamily = {
   700: "Poppins-Bold", //Bold
   800: "Poppins-ExtraBold", //ExtraBold
   900: "Poppins-Black",
+  ottawa: {
+    700: "Ottawa-Bold-Italic"
+  }
 };
+
