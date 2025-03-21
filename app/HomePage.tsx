@@ -18,6 +18,7 @@ import {
   StatusBar,
 } from "react-native";
 import { useSelector } from "react-redux";
+import TshirtFront from "@/components/Home/TshirtFront";
 
 const HomePage = () => {
   const router = useRouter();
@@ -87,49 +88,7 @@ const HomePage = () => {
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
           {isFront ? (
-            <View style={{ height: 300, width: "100%" }}>
-              <Image source={selectedItem?.frontImage} style={styles.tshirt} />
-              {/* <Image source={imageLink.tshirtFront} style={styles.tshirt} /> */}
-              {/* <TshirtSVG bodyColor="red" sleeveColor="black" /> */}
-              {/* commented because of development in progress */}
-              {selectedItem?.tshirtFrontOption?.frontChest.frontChestImage ? (
-                <View
-                  style={{
-                    position: "absolute",
-                    height: 300,
-                    width: "100%",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Image
-                    source={{
-                      uri: selectedItem?.tshirtFrontOption?.frontChest
-                        ?.frontChestImage,
-                    }}
-                    style={[
-                      styles.imageStyle,
-                      {
-                        marginLeft:
-                          selectedItem.tshirtFrontOption.frontChest
-                            .chestImageSetting.horizontal * 4,
-                        marginBottom:
-                          selectedItem.tshirtFrontOption.frontChest
-                            .chestImageSetting.vertical * 8,
-                        transform: [
-                          {
-                            scale:
-                              selectedItem.tshirtFrontOption.frontChest
-                                .chestImageSetting.scale,
-                          },
-                        ],
-                      },
-                    ]}
-                  />
-                </View>
-              ) : null}
-              <ChestText selectedItem={selectedItem} />
-            </View>
+            <TshirtFront />
           ) : (
             <Image source={imageLink.tshirtBack} style={styles.tshirt} />
           )}

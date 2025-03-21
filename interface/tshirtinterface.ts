@@ -30,6 +30,10 @@ export interface tshirtDataObj {
     chestStripingName: string;
     frontChest: {
       frontChestImage?: any;
+      imagePattern: {
+        patterName: string,
+        patternOpacity: number,
+      },
       chestImageSetting: {
         horizontal: number;
         vertical: number;

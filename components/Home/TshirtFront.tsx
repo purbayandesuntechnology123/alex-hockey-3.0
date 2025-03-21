@@ -3,6 +3,7 @@ import { Image, StyleSheet, View } from "react-native";
 import { useSelector } from "react-redux";
 import ChestText from "../ChestComponent/ChestText";
 import { RootState } from "@/redux/store";
+import { getFontChestImagePatterUrl } from "@/constants/commonFunction";
 
 const TshirtFront = () => {
   const { tshirtData, tshirtId } = useSelector(
@@ -25,29 +26,63 @@ const TshirtFront = () => {
             alignItems: "center",
           }}
         >
-          <Image
-            source={{
-              uri: selectedItem?.tshirtFrontOption?.frontChest?.frontChestImage,
-            }}
-            style={[
-              styles.imageStyle,
-              {
-                marginLeft:
-                  selectedItem.tshirtFrontOption.frontChest.chestImageSetting
-                    .horizontal * 4,
-                marginBottom:
-                  selectedItem.tshirtFrontOption.frontChest.chestImageSetting
-                    .vertical * 8,
-                transform: [
+          <View>
+            <View>
+              <Image
+                source={{
+                  uri: selectedItem?.tshirtFrontOption?.frontChest
+                    ?.frontChestImage,
+                }}
+                style={[
+                  styles.imageStyle,
                   {
-                    scale:
+                    marginLeft:
                       selectedItem.tshirtFrontOption.frontChest
-                        .chestImageSetting.scale,
+                        .chestImageSetting.horizontal * 4,
+                    marginBottom:
+                      selectedItem.tshirtFrontOption.frontChest
+                        .chestImageSetting.vertical * 8,
+                    transform: [
+                      {
+                        scale:
+                          selectedItem.tshirtFrontOption.frontChest
+                            .chestImageSetting.scale,
+                      },
+                    ],
                   },
-                ],
-              },
-            ]}
-          />
+                ]}
+              />
+            </View>
+            <View style={{ position: "absolute" }}>
+              <Image
+                source={getFontChestImagePatterUrl(
+                  selectedItem.tshirtFrontOption.frontChest.imagePattern
+                    .patterName
+                )}
+                style={[
+                  styles.imageStyle,
+                  {
+                    marginLeft:
+                      selectedItem.tshirtFrontOption.frontChest
+                        .chestImageSetting.horizontal * 4,
+                    marginBottom:
+                      selectedItem.tshirtFrontOption.frontChest
+                        .chestImageSetting.vertical * 8,
+                    transform: [
+                      {
+                        scale:
+                          selectedItem.tshirtFrontOption.frontChest
+                            .chestImageSetting.scale,
+                      },
+                    ],
+                    opacity: 0.2,
+                    // height: dpHeight,
+                    resizeMode: "cover",
+                  },
+                ]}
+              />
+            </View>
+          </View>
         </View>
       ) : null}
       <ChestText selectedItem={selectedItem} />

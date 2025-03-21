@@ -16,8 +16,16 @@ import BottomSheetHeader from "./BottomSheetHeader";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { useAppDispatch } from "@/redux/hooks";
-import { setSleeveNumber, setSleeveNumberStyleName } from "@/redux/slices/tshirtDataSlice";
-import { getSingleTshirt } from "@/constants/commonFunction";
+import {
+  setSleeveNumber,
+  setSleeveNumberStyleName,
+  setSleevesFontFamilyName,
+} from "@/redux/slices/tshirtDataSlice";
+import {
+  getSingleTshirt,
+  getSleevesFontFamilyName,
+} from "@/constants/commonFunction";
+import { fontFamily } from "@/constants/fontFamily";
 
 const fontType = [
   {
@@ -71,16 +79,21 @@ interface SleeveNumberCardProps {
 const SleeveNumberCard: React.FC<SleeveNumberCardProps> = ({
   setIsSleeveNumberOpened,
 }) => {
-
   const dispatch = useAppDispatch();
 
-  const { tshirtId, tshirtById, tshirtData } = useSelector((state: RootState) => state.tshirtStoreValue);
-  const [fontTypeName, setFontTypeName] = useState("Single");
+  const { tshirtId, tshirtById, tshirtData } = useSelector(
+    (state: RootState) => state.tshirtStoreValue
+  );
+
+  const selectedData = getSingleTshirt(tshirtData, tshirtId);
+
+  // const [fontTypeName, setFontTypeName] = useState("Single");
   // const [sleeveText, setSleeveText] = useState<string>("");
   const [selectedFontStyle, setSelectedFontStyle] = useState<string>("");
 
+  const fontTypeName = selectedData?.tshirtFrontOption?.sleeveNumber?.textStyle;
   const handleFontTypeClick = (item: string) => {
-    setFontTypeName(item);
+    // setFontTypeName(item);
     const payload = {
       tshirtId: tshirtId,
       data: item,
@@ -90,9 +103,9 @@ const SleeveNumberCard: React.FC<SleeveNumberCardProps> = ({
 
   // console.log("fontTypeName", fontTypeName);
 
-  const selectedData = getSingleTshirt(tshirtData, tshirtId);
+  const sleeveText = selectedData?.tshirtFrontOption?.sleeveNumber?.number;
 
-  const sleeveText = selectedData?.tshirtFrontOption?.sleeveNumber?.number
+  // console.log("fontTypeName",fontTypeName);
 
   // console.log("selectedData====>",selectedData?.tshirtFrontOption?.sleeveNumber?.textStyle);
 
@@ -100,16 +113,26 @@ const SleeveNumberCard: React.FC<SleeveNumberCardProps> = ({
     setIsSleeveNumberOpened(false);
   };
 
-
   const handleNumber = (txt: string) => {
     // console.log("txt number=====>", typeof Number(txt))
     // setSleeveText(txt)
     const payload = {
-      tshirtId: tshirtId,   
+      tshirtId: tshirtId,
       data: txt,
     };
-    dispatch(setSleeveNumber(payload))
-  }
+    dispatch(setSleeveNumber(payload));
+  };
+
+  const handleFonFamilyPress = (txt: string) => {
+    // console.log("txt====>", txt);
+    // setSelectedFontStyle(txt);
+    const payload = {
+      tshirtId: tshirtId,
+      data: txt,
+    };
+    dispatch(setSleevesFontFamilyName(payload));
+    // setWordmarkFontFamilyName
+  };
 
   return (
     <View style={styles.container}>
@@ -188,7 +211,7 @@ const SleeveNumberCard: React.FC<SleeveNumberCardProps> = ({
               {row.map((item, index) => (
                 <TouchableOpacity
                   key={index}
-                  onPress={() => setSelectedFontStyle(item.fontFamilyName)}
+                  onPress={() => handleFonFamilyPress(item.fontFamilyName)}
                   disabled={sleeveText?.length <= 0}
                 >
                   <View
@@ -200,7 +223,8 @@ const SleeveNumberCard: React.FC<SleeveNumberCardProps> = ({
                       paddingVertical: 5,
                       borderWidth: 1,
                       borderColor:
-                        item.fontFamilyName === selectedFontStyle
+                        item.fontFamilyName ===
+                        getSleevesFontFamilyName(tshirtData, tshirtId)
                           ? "#FD8204"
                           : undefined,
                     }}
@@ -211,6 +235,7 @@ const SleeveNumberCard: React.FC<SleeveNumberCardProps> = ({
                           textAlign: "center",
                           fontSize: 29,
                           color: "#fff",
+                          fontFamily: fontFamily.ottawa[700],
                         }}
                       >
                         {sleeveText}

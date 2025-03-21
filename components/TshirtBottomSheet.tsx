@@ -211,29 +211,34 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
                   <WordmarkSettingCard />
                 </BottomSheetView>
               </View>
-            ) : frontCrestPattern ? (
-              <View style={{ flex: 1 }}>
-                <FrontCrestPatternCard
-                  setFrontCrestPattern={setFrontCrestPattern}
-                />
-              </View>
+            // ) : frontCrestPattern ? (
+            //   <View style={{ flex: 1 }}>
+            //     <FrontCrestPatternCard
+            //       setFrontCrestPattern={setFrontCrestPattern}
+            //     />
+            //   </View>
             ) : (
               <View style={{ flex: 1 }}>
-                <BottomSheetHeader
-                  leftIconName={iconLink.leftIcon}
-                  rightIconName={iconLink.setting}
-                  title="front chest"
-                  isTab
-                  onPressFirst={handleFrontCrestBackClick}
-                  onPressSecond={handleFrontCrestSettingClick}
-                  isWordmark={isWordmark}
-                  containerStyle={{ marginHorizontal: 10, marginBottom: 5 }}
-                  onTabLeftPress={handleCrestImageClick}
-                  onTabRightPress={handleFrontCrestWordmarkClick}
-                />
+                {
+                  !frontCrestPattern ?
+                  <BottomSheetHeader
+                    leftIconName={iconLink.leftIcon}
+                    rightIconName={iconLink.setting}
+                    title="front chest"
+                    isTab
+                    onPressFirst={handleFrontCrestBackClick}
+                    onPressSecond={handleFrontCrestSettingClick}
+                    isWordmark={isWordmark}
+                    containerStyle={{ marginHorizontal: 10, marginBottom: 5 }}
+                    onTabLeftPress={handleCrestImageClick}
+                    onTabRightPress={handleFrontCrestWordmarkClick}
+                  />
+                  :  null
+                }     
                 <BottomSheetView style={styles.contentContainer}>
                   {!isWordmark ? (
                     <FrontCrestImageCard
+                    frontCrestPattern={frontCrestPattern}
                       setFrontCrestPattern={setFrontCrestPattern}
                     />
                   ) : (

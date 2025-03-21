@@ -16,6 +16,8 @@ const ChestText = ({ selectedItem }) => {
   const textStyle =
     selectedItem?.tshirtFrontOption?.frontChest?.wordmark?.textStyle;
 
+  // const imageUrl = "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05";
+
   const getStrokeNum = (value) => {
     if (value === "Single") {
       return 0;
@@ -76,7 +78,7 @@ const ChestText = ({ selectedItem }) => {
               selectedItem?.tshirtFrontOption?.frontChest?.wordmark?.textStyle
             ) ?? 0
           }
-          color="gray"   
+          color="gray"
         >
           <RNText
             style={{
