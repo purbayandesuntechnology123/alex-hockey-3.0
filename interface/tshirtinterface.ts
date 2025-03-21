@@ -31,7 +31,7 @@ export interface tshirtDataObj {
     frontChest: {
       frontChestImage?: any;
       imagePattern: {
-        patterName: string,
+        patternName: string,
         patternOpacity: number,
       },
       chestImageSetting: {

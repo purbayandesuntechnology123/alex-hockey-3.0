@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import ChestText from "../ChestComponent/ChestText";
 import { RootState } from "@/redux/store";
 import { getFontChestImagePatterUrl } from "@/constants/commonFunction";
+import HockeyJerseyFront from "../../assets/images/svg/HockeyJerseyFront";
 
 const TshirtFront = () => {
   const { tshirtData, tshirtId } = useSelector(
@@ -14,8 +15,12 @@ const TshirtFront = () => {
 
   // console.log("selectedItem forn common shirt component=====>", selectedItem);
   return (
-    <View style={{ height: 300, width: "100%" }}>
-      <Image source={selectedItem?.frontImage} style={styles.tshirt} />
+    <View style={{ height: 300, width: "100%", justifyContent: "center",
+      alignItems: "center", }}>
+      {/* <Image source={selectedItem?.frontImage} style={styles.tshirt} /> */}
+
+      <HockeyJerseyFront />
+      {/* <HockeyJerseyBack /> */}
       {selectedItem?.tshirtFrontOption?.frontChest.frontChestImage ? (
         <View
           style={{
@@ -56,8 +61,7 @@ const TshirtFront = () => {
             <View style={{ position: "absolute" }}>
               <Image
                 source={getFontChestImagePatterUrl(
-                  selectedItem.tshirtFrontOption.frontChest.imagePattern
-                    .patterName
+                  selectedItem.tshirtFrontOption.frontChest.imagePattern?.patternName
                 )}
                 style={[
                   styles.imageStyle,
@@ -75,7 +79,7 @@ const TshirtFront = () => {
                             .chestImageSetting.scale,
                       },
                     ],
-                    opacity: 0.2,
+                    opacity: 0.5,
                     // height: dpHeight,
                     resizeMode: "cover",
                   },
@@ -84,7 +88,7 @@ const TshirtFront = () => {
             </View>
           </View>
         </View>
-      ) : null}
+       ) : null}
       <ChestText selectedItem={selectedItem} />
     </View>
   );
@@ -99,7 +103,7 @@ const styles = StyleSheet.create({
   imageStyle: {
     height: 60,
     width: 60,
-    resizeMode: "contain",
+    // resizeMode: "contain",
   },
 });
 

@@ -54,6 +54,7 @@ const ChestText = ({ selectedItem }) => {
           ))}
       </View> */}
       {textStyle === "Shadow" ? (
+        // <SvgEffectsScreen />
         <RNText
           style={[
             styles.textWithShadow,

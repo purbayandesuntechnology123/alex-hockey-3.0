@@ -19,7 +19,7 @@ const AllTshirt = () => {
   const { tshirtData, tshirtId, tshirtById } = useSelector(
     (state: RootState) => state.tshirtStoreValue
   );
-  
+
   console.log("tahirtById", tshirtById);
 
   const [tshirtType, setTshirtType] = useState<string>("");
@@ -50,18 +50,22 @@ const AllTshirt = () => {
         template: {
           templateName: "Plain",
           templateColor: [
-            { id: 1, color: "#9BB8D3", canChange: true },
-            { id: 2, color: "#69B3E7", canChange: true },
-            { id: 3, color: "#0C2340", canChange: true },
-            { id: 4, color: "#FFFF", canChange: false },
-          ]
+            { id: 1, color: "#ffff", canChange: true },
+            { id: 2, color: "#ffff", canChange: true },
+            { id: 3, color: "#ffff", canChange: true },
+            { id: 4, color: "#ffff", canChange: false },
+            // { id: 1, color: "#9BB8D3", canChange: true },
+            // { id: 2, color: "#69B3E7", canChange: true },
+            // { id: 3, color: "#0C2340", canChange: true },
+            // { id: 4, color: "#FFFF", canChange: false },
+          ],
         },
         chestStripingName: "None",
         frontChest: {
           frontChestImage: null,
           imagePattern: {
-            patterName: "None",
-            patternOpacity: .5,
+            patternName: "None",
+            patternOpacity: 0.5,
           },
           chestImageSetting: {
             horizontal: 0,
@@ -71,13 +75,13 @@ const AllTshirt = () => {
           wordmark: {
             text: "",
             textStyle: "Single",
-            textDirection: "xaxis",   
+            textDirection: "xaxis",
             fontFamily: "",
             wordmarkColor: [
-              { id: 1, color: "#9BB8D3", canChange: true},
-              { id: 2, color: "#69B3E7", canChange: true},
-              { id: 3, color: "#0C2340", canChange: true},
-              { id: 4, color: "#FFFF", canChange: false},
+              { id: 1, color: "#9BB8D3", canChange: true },
+              { id: 2, color: "#69B3E7", canChange: true },
+              { id: 3, color: "#0C2340", canChange: true },
+              { id: 4, color: "#FFFF", canChange: false },
             ],
             chestWordmarkSetting: {
               vertical: 0,
@@ -117,7 +121,16 @@ const AllTshirt = () => {
         <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 5 }}>
           <TouchableOpacity
             onPress={() => handleAddNewTshirt()}
-            style={[styles.shirtHeader, { justifyContent: "center", alignItems: "center", height: 90, width: 105, padding: 2}]}
+            style={[
+              styles.shirtHeader,
+              {
+                justifyContent: "center",
+                alignItems: "center",
+                height: 90,
+                width: 105,
+                padding: 2,
+              },
+            ]}
           >
             <Ionicons name="add" color={themeColor.white} size={45} />
             {/* <Image source={imageLink.tshirtFront} style={styles.imageStyle} /> */}

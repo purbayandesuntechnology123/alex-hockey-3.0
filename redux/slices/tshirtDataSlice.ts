@@ -24,7 +24,7 @@ const initialState: TshirtState = {
       frontChest: {
         frontChestImage: null,
         imagePattern: {
-          patterName: "None",
+          patternName: "None",
           patternOpacity: .5,
         },
         chestImageSetting: {
@@ -77,7 +77,7 @@ const initialState: TshirtState = {
         frontChest: {
           frontChestImage: null,
           imagePattern: {
-            patterName: "None",
+            patternName: "None",
             patternOpacity: .5,
           },
           chestImageSetting: {
@@ -128,7 +128,7 @@ const initialState: TshirtState = {
         frontChest: {
           frontChestImage: null,
           imagePattern: {
-            patterName: "None",
+            patternName: "None",
             patternOpacity: .5,
           },
           chestImageSetting: {
@@ -179,7 +179,7 @@ const initialState: TshirtState = {
         frontChest: {
           frontChestImage: null,
           imagePattern: {
-            patterName: "None",
+            patternName: "None",
             patternOpacity: .5,
           },
           chestImageSetting: {
@@ -301,13 +301,18 @@ const tshirtDataSlice = createSlice({
       );
       if(tshirt) {
         if(tshirt.tshirtFrontOption) {
-          tshirt.tshirtFrontOption.frontChest.imagePattern.patterName = action.payload.data;
+          tshirt.tshirtFrontOption.frontChest.imagePattern.patternName = action.payload.data;
         }
       }
     },
 
     setFrontChestPatternOpacity: (state, action: PayloadAction<any>) => {
       const tshirt = state.tshirtData.find((tshirt) => tshirt.id === state.tshirtId);
+      if(tshirt){
+        if(tshirt.tshirtFrontOption?.frontChest.imagePattern.patternName){
+          tshirt.tshirtFrontOption.frontChest.imagePattern.patternOpacity = action.payload.data;
+        }
+      }
     },
     setFrontChestSettingHorizontal: (state, action: PayloadAction<any>) => {
       const tshirt = state.tshirtData.find(
@@ -526,6 +531,7 @@ export const {
   setSleeveNumberStyleName,
   setSleevesFontFamilyName,
   setFrontChestPattern,
+  setFrontChestPatternOpacity,
 } = tshirtDataSlice.actions;
 
 export default tshirtDataSlice.reducer;
