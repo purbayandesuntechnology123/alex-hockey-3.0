@@ -43,11 +43,16 @@ const initialState: TshirtState = {
             scale: 1,
             arching: 1.0,
           },
+          wordmarkPattern: {
+            patternName: "None",
+            patternOpacity: .5,
+          },
         },
       },
       sleeveNumber: {
         number: "",
         textStyle: "Single",
+        fontFamily: "NY Manhattan",
       },
       sleeveStriping: "",
     },
@@ -101,11 +106,16 @@ const initialState: TshirtState = {
               scale: 1,
               arching: 1.0,
             },
+            wordmarkPattern: {
+              patternName: "None",
+              patternOpacity: .5,
+            },
           },
         },
         sleeveNumber: {
           number: "",
           textStyle: "Single",
+          fontFamily: "NY Manhattan",
         },
         sleeveStriping: "None",
       },
@@ -152,11 +162,16 @@ const initialState: TshirtState = {
               scale: 1,
               arching: 1.0,
             },
+            wordmarkPattern: {
+              patternName: "None",
+              patternOpacity: .5,
+            },
           },
         },
         sleeveNumber: {
           number: "",
           textStyle: "Single",
+          fontFamily: "NY Manhattan",
         },
         sleeveStriping: "None",
       },
@@ -203,11 +218,16 @@ const initialState: TshirtState = {
               scale: 1,
               arching: 1.0,
             },
+            wordmarkPattern: {
+              patternName: "None",
+              patternOpacity: .5,
+            },
           },
         },
         sleeveNumber: {
           number: "",
           textStyle: "Single",
+          fontFamily: "NY Manhattan",
         },
         sleeveStriping: "None",
       },
@@ -306,6 +326,17 @@ const tshirtDataSlice = createSlice({
       }
     },
 
+    setWordmarkPattern: (state, action: PayloadAction<any>) => {
+      const tshirt = state.tshirtData.find(
+        (tshirt) => tshirt.id === action.payload.tshirtId
+      );
+      if(tshirt) {
+        if(tshirt.tshirtFrontOption) {
+          tshirt.tshirtFrontOption.frontChest.wordmark.wordmarkPattern.patternName = action.payload.data;
+        }
+      }
+    },
+
     setFrontChestPatternOpacity: (state, action: PayloadAction<any>) => {
       const tshirt = state.tshirtData.find((tshirt) => tshirt.id === state.tshirtId);
       if(tshirt){
@@ -393,7 +424,7 @@ const tshirtDataSlice = createSlice({
     // set sleeve number end
 
     // sleeve number style start
-    setSleeveNumberStyleName: (state, action: PayloadAction<any>) => {
+    setSleeveNumberFontStyleName: (state, action: PayloadAction<any>) => {
       const tshirt = state.tshirtData.find(
         (tshirt) => tshirt.id === state.tshirtId
       );
@@ -412,7 +443,7 @@ const tshirtDataSlice = createSlice({
       );
       if (tshirt) {
           if (tshirt.tshirtFrontOption) {
-            tshirt.tshirtFrontOption.sleeveNumber.textStyle =
+            tshirt.tshirtFrontOption.sleeveNumber.fontFamily =
               action.payload.data;
           }
       }
@@ -528,10 +559,11 @@ export const {
   setFrontChestWordmarkScale,
   setWordmarkColor,
   setSleeveNumber,
-  setSleeveNumberStyleName,
+  setSleeveNumberFontStyleName,
   setSleevesFontFamilyName,
   setFrontChestPattern,
   setFrontChestPatternOpacity,
+  setWordmarkPattern,
 } = tshirtDataSlice.actions;
 
 export default tshirtDataSlice.reducer;

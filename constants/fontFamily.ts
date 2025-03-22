@@ -10,6 +10,10 @@ export const fontFamily = {
   900: "Poppins-Black",
   ottawa: {
     700: "Ottawa-Bold-Italic"
+  },
+  island: {
+    700: "LongIsland-Shadow",
+    800: "LongIslandAntiqua",
   }
 };
 

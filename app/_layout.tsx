@@ -19,7 +19,9 @@ const _layout = () => {
     "Poppins-SemiBold": require("../assets/fonts/Poppins/Poppins-SemiBold.ttf"),
     "Poppins-ExtraLight": require("../assets/fonts/Poppins/Poppins-ExtraLight.ttf"),
     "Poppins-Thin": require("../assets/fonts/Poppins/Poppins-Thin.ttf"),
-    "Ottawa-Bold-Italic": require("../assets/fonts/Ottawa-Bold-Italic.ttf")
+    "Ottawa-Bold-Italic": require("../assets/fonts/Ottawa-Bold-Italic.ttf"),
+    "LongIsland-Shadow": require("../assets/fonts/LongIsland-Shadow.ttf"),
+    "LongIslandAntiqua": require("../assets/fonts/LongIslandAntiqua.ttf"),
   });
 
   useEffect(() => {

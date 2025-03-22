@@ -11,10 +11,10 @@ const HockeyJerseyBack = () => {
 
   const selectedData = getSingleTshirt(tshirtData, tshirtId);
 
-  const color = selectedData.tshirtFrontOption.template.templateColor;
+  const color = selectedData?.tshirtFrontOption?.template?.templateColor;
 
-  const firstColor = color[0].color;
-  const secondColor = color[1].color;
+  const firstColor = color ? color[0]?.color : "#ffff";
+  const secondColor = color ? color[1]?.color : "#ffff";
   const styles = {
     st0: { display: "none" },
     st1: { display: "inline", opacity: 0.05, enableBackground: "new" },

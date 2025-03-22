@@ -1,143 +1,108 @@
+import { getFontChestImagePatterUrl, getFontFamily } from '@/constants/commonFunction';
 import { fontFamily } from '@/constants/fontFamily';
 import { imageLink } from '@/constants/image';
-import React, { useState } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text, Dimensions, ScrollView } from 'react-native';
-import { Svg, Text as SvgText, Defs, Filter, FeDropShadow, ClipPath, Image } from 'react-native-svg';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Dimensions } from 'react-native';
+import { Svg, Text as SvgText, Defs, ClipPath, Image } from 'react-native-svg';
+import { useSelector } from 'react-redux';
 
 const { width } = Dimensions.get('window');
-const NATURE_IMAGE = 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05';
 
-export default function SvgEffectsScreen() {
-  const [outlineEnabled, setOutlineEnabled] = useState(true);
+const SvgEffectsScreen = ({ stroke, title, isOuterLine, fontfamilyName, fontSize=10, patterName }) => {
 
-  const toggleOutline = () => setOutlineEnabled(prev => !prev);
+  const { tshirtData, tshirtId } = useSelector(
+    (state) => state.tshirtStoreValue
+  );
+  const [outlineEnabled, setOutlineEnabled] = useState(isOuterLine);
+  const [currentTitle, setCurrentTitle] = useState(title);
+
+  const selectedItem = tshirtData.find((item) => item.id === tshirtId);
+
+  // Sync outlineEnabled state with isOuterLine prop
+  useEffect(() => {
+    setOutlineEnabled(isOuterLine);
+  }, [isOuterLine]);
+
+  // Sync currentTitle with title prop
+  useEffect(() => {
+    setCurrentTitle(selectedItem?.tshirtFrontOption?.frontChest?.wordmark?.text);
+  }, [selectedItem?.tshirtFrontOption?.frontChest?.wordmark?.text]);
 
   return (
     <View style={styles.container}>
-      {/* Common Definitions */}
-      {/* <Svg height="0">
-        <Defs>
-          <Filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-            <FeDropShadow dx="6" dy="6" stdDeviation="5" floodColor="rgba(0,0,0,0.7)" />
-          </Filter>
-        </Defs>
-      </Svg> */}
+      <View style={styles.section}>
+        <Svg height="70" width={width}>
+          {/* First layer: Text with shadow (only when outline enabled) */}
+          {outlineEnabled && (
+            <SvgText
+              fontSize={fontSize}
+              fontFamily={getFontFamily(fontfamilyName)}
+              x="51%"
+              y="51%"
+              textAnchor="middle"
+              alignmentBaseline="middle"
+              fill="none"
+              stroke="black"
+              strokeWidth={stroke}
+            >
+              {currentTitle}
+            </SvgText>
+          )}
 
-      {/* <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}> */}
-        {/* Image Background Text */}
-        <View style={styles.section}>
-          {/* <Text style={styles.sectionTitle}>Image Background Text</Text> */}
-          <Svg height="70" width={width}>
-            {/* First layer: Text with shadow (only when outline enabled) */}
-            {outlineEnabled && (
+          {/* Second layer: The clipped image */}
+          <Defs key={`defs-${currentTitle}`}>
+            <ClipPath id="imageClip" key={`clip-${currentTitle}`}>
               <SvgText
-                fontSize="40"
-                // fontWeight="bold"
-                fontFamily={fontFamily.ottawa[700]}
-                x="51%"
-                y="51%"
-                textAnchor="middle"
-                alignmentBaseline="middle"
-                fill="none"
-                stroke="black"
-                strokeWidth="1"
-                filter="url(#shadow)"
-              >
-                INDIA
-              </SvgText>
-            )}
-
-            {/* Second layer: The clipped image */}
-            <Defs>
-              <ClipPath id="imageClip">
-                <SvgText
-                  fontSize="55"
-                  // fontWeight="bold"
-                  fontFamily={fontFamily.ottawa[700]}
-                  x="50%"
-                  y="50%"
-                  textAnchor="middle"
-                  alignmentBaseline="middle"
-                  fill="white"
-                >
-                  INDIA
-                </SvgText>
-              </ClipPath>
-            </Defs>
-            <Image
-              x="0"
-              y="0"
-              width="100%"
-              height="100%"
-              preserveAspectRatio="none"
-              href={imageLink.pride2}
-              // href={{ uri: NATURE_IMAGE }}
-              clipPath="url(#imageClip)"
-            />
-
-            {/* Third layer: Text outline */}
-            {outlineEnabled && (
-              <SvgText
-                fontSize="40"
-                // fontWeight="bold"
-                fontFamily={fontFamily.ottawa[700]}
+                fontSize={fontSize}
+                fontFamily={getFontFamily(fontfamilyName)}
                 x="50%"
                 y="50%"
                 textAnchor="middle"
                 alignmentBaseline="middle"
-                fill="none"
-                stroke="black"
-                strokeWidth="1"
+                fill="white"
               >
-                INDIA
+                {currentTitle}
               </SvgText>
-            )}
-          </Svg>
-        </View>
+            </ClipPath>
+          </Defs>
+          <Image
+            key={`image-${currentTitle}`}
+            x="0"
+            y="0"
+            width="100%"
+            height="100%"
+            preserveAspectRatio="none"
+            href={getFontChestImagePatterUrl(patterName)}
+            clipPath="url(#imageClip)"
+          />
 
-        {/* <TouchableOpacity style={styles.button} onPress={toggleOutline}>
-          <Text style={styles.buttonText}>
-            {outlineEnabled ? "Disable" : "Enable"} Outline & Shadow
-          </Text>
-        </TouchableOpacity> */}
-      {/* </ScrollView> */}
+          {/* Third layer: Text outline */}
+          {outlineEnabled && (
+            <SvgText
+              fontSize={fontSize}
+              fontFamily={getFontFamily(fontfamilyName)}
+              x="50%"
+              y="50%"
+              textAnchor="middle"
+              alignmentBaseline="middle"
+              fill="none"
+              stroke="black"
+              strokeWidth={stroke}
+            >
+              {currentTitle}
+            </SvgText>
+          )}
+        </Svg>
+      </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
   },
-  scrollView: {
-    flex: 1,
-  },
-  scrollContent: {
-    // paddingTop: 20,
-    // paddingBottom: 30,
-  },
-  section: {
-    // marginBottom: 30,
-  },
-  sectionTitle: {
-    color: 'black',
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 10,
-  },
-  button: {
-    marginTop: 15,
-    backgroundColor: '#3498db',
-    padding: 10,
-    borderRadius: 5,
-    alignSelf: 'center',
-    minWidth: 200,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-    textAlign: 'center',
-  },
+  section: {},
 });
+
+export default SvgEffectsScreen;
