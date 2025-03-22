@@ -1,3 +1,4 @@
+import { fontFamily } from '@/constants/fontFamily';
 import { imageLink } from "./image";
 
 export const getName = (tshirtData: any, tshirtId: string) => {
@@ -47,7 +48,7 @@ export const getSingleTshirt = (tshirtData: any, tshirtId: string) => {
 // get sleeveNumber
 export const getSleevesFontFamilyName = (tshirtData: any, tshirtId: string) => {
  const sleevesNumber = tshirtData.find((tshirt: any) => tshirt.id === tshirtId);
- return sleevesNumber?.tshirtFrontOption?.sleeveNumber?.textStyle;
+ return sleevesNumber?.tshirtFrontOption?.sleeveNumber?.fontFamily;
 }
 
 // get front chest image patter
@@ -64,6 +65,26 @@ export const getFontChestImagePatterUrl = (patternName: string) => {
   } else if (patternName === "Pride 2") {
     return imageLink.pride2;
   } else {
-    return null;
+    return imageLink.none;
   }
 } 
+
+export const getFontFamily =(fontFamilyName: string) => {
+  if(fontFamilyName === "NY Manhattan"){
+    return fontFamily[400]
+  }else if(fontFamilyName === "Ottawa"){
+    return fontFamily.ottawa[700]
+  }else if(fontFamilyName === "NY Long Island"){
+    return fontFamily.island[800]
+  }else if(fontFamilyName === "NY Long Island2"){
+    return fontFamily.island[700]
+  }else if(fontFamilyName === "Anaheim"){
+    return fontFamily.ottawa[700]
+  }else if(fontFamilyName === "Atlanta"){
+    return fontFamily.island[800]
+  }else if(fontFamilyName === "Boston"){
+    return fontFamily.island[700]
+  }else {
+    return fontFamily[800]
+  }
+}

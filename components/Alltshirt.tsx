@@ -88,11 +88,16 @@ const AllTshirt = () => {
               scale: 1,
               arching: 1.0,
             },
+            wordmarkPattern: {
+              patternName: "None",
+              patternOpacity: .5,
+            },
           },
         },
         sleeveNumber: {
           number: "",
           textStyle: "Single",
+          fontFamily: "NY Manhattan",
         },
         sleeveStriping: "None",
       },

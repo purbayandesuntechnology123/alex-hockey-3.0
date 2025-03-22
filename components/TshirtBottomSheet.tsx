@@ -242,7 +242,10 @@ const TshirtBottomSheet = forwardRef<BottomSheet>((_, ref) => {
                       setFrontCrestPattern={setFrontCrestPattern}
                     />
                   ) : (
-                    <FrontCrestWordmarkCard />
+                    <FrontCrestWordmarkCard
+                    frontCrestPattern={frontCrestPattern}
+                      setFrontCrestPattern={setFrontCrestPattern}
+                      />
                   )}
                 </BottomSheetView>
               </View>

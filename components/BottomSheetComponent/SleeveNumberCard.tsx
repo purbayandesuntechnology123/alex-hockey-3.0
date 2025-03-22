@@ -18,10 +18,11 @@ import { RootState } from "@/redux/store";
 import { useAppDispatch } from "@/redux/hooks";
 import {
   setSleeveNumber,
-  setSleeveNumberStyleName,
+  setSleeveNumberFontStyleName,
   setSleevesFontFamilyName,
 } from "@/redux/slices/tshirtDataSlice";
 import {
+  getFontFamily,
   getSingleTshirt,
   getSleevesFontFamilyName,
 } from "@/constants/commonFunction";
@@ -98,7 +99,7 @@ const SleeveNumberCard: React.FC<SleeveNumberCardProps> = ({
       tshirtId: tshirtId,
       data: item,
     };
-    dispatch(setSleeveNumberStyleName(payload));
+    dispatch(setSleeveNumberFontStyleName(payload));
   };
 
   // console.log("fontTypeName", fontTypeName);
@@ -235,7 +236,7 @@ const SleeveNumberCard: React.FC<SleeveNumberCardProps> = ({
                           textAlign: "center",
                           fontSize: 29,
                           color: "#fff",
-                          fontFamily: fontFamily.ottawa[700],
+                          fontFamily: getFontFamily(item?.fontFamilyName),
                         }}
                       >
                         {sleeveText}

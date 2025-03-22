@@ -21,9 +21,11 @@ import {
   setFrontChestWordmarkName,
   setWordmarkFontFamilyName,
   setWordmarkFontStyleName,
+  setWordmarkPattern,
 } from "@/redux/slices/tshirtDataSlice";
 import { themeColor } from "@/constants/colors";
-import { getFontFamilyName } from "@/constants/commonFunction";
+import { getFontFamily, getFontFamilyName } from "@/constants/commonFunction";
+import FrontCrestPatternCard from "./FrontCrestPatternCard";
 
 const fontType = [
   {
@@ -69,7 +71,15 @@ const data = {
   ],
 };
 
-const FrontCrestWordmarkCard = () => {
+interface FrontCrestImageCardProps {
+  frontCrestPattern: boolean;
+  setFrontCrestPattern: (value: boolean) => void;
+}
+
+const FrontCrestWordmarkCard: React.FC<FrontCrestImageCardProps> = ({
+  frontCrestPattern,
+  setFrontCrestPattern,
+}) => {
   const dispatch = useAppDispatch();
 
   const { tshirtId, tshirtData } = useSelector(
@@ -83,6 +93,9 @@ const FrontCrestWordmarkCard = () => {
   const [fontTypeName, setFontTypeName] = useState("Single");
   const [textDirection, setTextDirection] = useState("xaxis");
   const [fronttext, setFrontText] = useState<string>("");
+  const patterName =
+    selectedData?.tshirtFrontOption?.frontChest?.wordmark.wordmarkPattern
+      .patternName;
 
   // console.log("selectedData====>",selectedData?.tshirtFrontOption?.frontChest?.wordmark)
 
@@ -130,163 +143,202 @@ const FrontCrestWordmarkCard = () => {
     // dispatch(setFrontChestWordmarkName(payload));
   };
 
+  const handleFrontCrestPatterClick = () => {
+    setFrontCrestPattern(true);
+  };
+
+  const handlePatternClick = (text: string) => {
+    // console.log("patter name===>",text)
+    const payload = {
+      tshirtId: tshirtId,
+      data: text,
+    };
+    dispatch(setWordmarkPattern(payload));
+  };
+
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          backgroundColor: "#3E3E3E",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          padding: 6,
-        }}
-      >
-        {fontType.map((item, index) => (
-          <TouchableOpacity
-            style={[
-              {
-                padding: 4,
-                backgroundColor:
-                  item.name === textStyle ? "#FD8204" : "#3E3E3E",
+      {!frontCrestPattern ? (
+        <View>
+          <View
+            style={{
+              backgroundColor: "#3E3E3E",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              padding: 6,
+            }}
+          >
+            {fontType.map((item, index) => (
+              <TouchableOpacity
+                style={[
+                  {
+                    padding: 4,
+                    backgroundColor:
+                      item.name === textStyle ? "#FD8204" : "#3E3E3E",
+                    borderRadius: 6,
+                  },
+                ]}
+                key={item?.id}
+                onPress={() => handleFontTypeClick(item?.name)}
+              >
+                <Text style={styles.headerTxt}>{item?.name}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+          <View style={{ marginVertical: 5, flexDirection: "row", gap: 5 }}>
+            <TextInput
+              style={styles.smallInput}
+              placeholder=""
+              maxLength={8}
+              value={frontText}
+              onChangeText={(txt) => handleName(txt)}
+            />
+            <View
+              style={{
+                backgroundColor: "#3E3E3E",
                 borderRadius: 6,
-              },
-            ]}
-            key={item?.id}
-            onPress={() => handleFontTypeClick(item?.name)}
-          >
-            <Text style={styles.headerTxt}>{item?.name}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-      <View style={{ marginVertical: 5, flexDirection: "row", gap: 5 }}>
-        <TextInput
-          style={styles.smallInput}
-          placeholder=""
-          maxLength={8}
-          value={frontText}
-          onChangeText={(txt) => handleName(txt)}
-        />
-        <View
-          style={{
-            backgroundColor: "#3E3E3E",
-            borderRadius: 6,
-            flexDirection: "row",
-            // flex: 1,
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: 4,
-            gap: 20,
-          }}
-        >
-          <TouchableOpacity onPress={() => handleAxisData("xaxis")}>
-            <View
-              style={{
-                padding: 2,
-                borderRadius: 2,
-                backgroundColor:
-                  textDirection === "xaxis" ? "#FD8204" : "#3E3E3E",
-              }}
-            >
-              <Image
-                source={iconLink?.leftIcon}
-                style={{ height: 15, width: 15, resizeMode: "contain" }}
-              />
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleAxisData("yaxis")}>
-            <View
-              style={{
+                flexDirection: "row",
+                // flex: 1,
+                justifyContent: "space-between",
+                alignItems: "center",
                 padding: 4,
-                borderRadius: 2,
-                backgroundColor:
-                  textDirection === "yaxis" ? "#FD8204" : "#3E3E3E",
+                gap: 20,
               }}
             >
-              <Image
-                source={iconLink?.arrow_y}
-                style={{ height: 15, width: 15, resizeMode: "contain" }}
-              />
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleAxisData("zaxis")}>
-            <View
-              style={{
-                padding: 4,
-                borderRadius: 2,
-                backgroundColor:
-                  textDirection === "zaxis" ? "#FD8204" : "#3E3E3E",
-              }}
-            >
-              <Image
-                source={iconLink?.arrow_z}
-                style={{ height: 15, width: 15, resizeMode: "contain" }}
-              />
-            </View>
-          </TouchableOpacity>
-        </View>
-        <View style={{ flexDirection: "row", gap: 5, alignItems: "center" }}>
-          <View
-            style={{ padding: 6, backgroundColor: "#3E3E3E", borderRadius: 6 }}
-          >
-            <Image
-              source={iconLink?.patternFile}
-              style={{ height: 15, width: 18, resizeMode: "contain" }}
-            />
-          </View>
-          <View
-            style={{ padding: 6, backgroundColor: "#3E3E3E", borderRadius: 6 }}
-          >
-            <Image
-              source={iconLink?.file}
-              style={{ height: 18, width: 18, resizeMode: "contain" }}
-            />
-          </View>
-        </View>
-      </View>
-      <BottomSheetScrollView horizontal>
-        <View style={{ gap: 5 }}>
-          {data.rows.map((row, rowIndex) => (
-            <View key={rowIndex} style={{ flexDirection: "row", gap: 6 }}>
-              {row.map((item, index) => (
-                <TouchableOpacity
-                  key={item.id}
-                  style={[
-                    styles.fontHeader,
-                    item.fontFamilyName ===
-                      getFontFamilyName(tshirtData, tshirtId) &&
-                      styles.activeTemplateType,
-                  ]}
-                  onPress={() => handleFonFamilyPress(item.fontFamilyName)}
+              <TouchableOpacity onPress={() => handleAxisData("xaxis")}>
+                <View
+                  style={{
+                    padding: 2,
+                    borderRadius: 2,
+                    backgroundColor:
+                      textDirection === "xaxis" ? "#FD8204" : "#3E3E3E",
+                  }}
                 >
-                  <View style={{ flex: 1, justifyContent: "center" }}>
-                    <Text
-                      style={{
-                        textAlign: "center",
-                        fontSize: 16,
-                        color: "#fff",
-                      }}
+                  <Image
+                    source={iconLink?.leftIcon}
+                    style={{ height: 15, width: 15, resizeMode: "contain" }}
+                  />
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => handleAxisData("yaxis")}>
+                <View
+                  style={{
+                    padding: 4,
+                    borderRadius: 2,
+                    backgroundColor:
+                      textDirection === "yaxis" ? "#FD8204" : "#3E3E3E",
+                  }}
+                >
+                  <Image
+                    source={iconLink?.arrow_y}
+                    style={{ height: 15, width: 15, resizeMode: "contain" }}
+                  />
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => handleAxisData("zaxis")}>
+                <View
+                  style={{
+                    padding: 4,
+                    borderRadius: 2,
+                    backgroundColor:
+                      textDirection === "zaxis" ? "#FD8204" : "#3E3E3E",
+                  }}
+                >
+                  <Image
+                    source={iconLink?.arrow_z}
+                    style={{ height: 15, width: 15, resizeMode: "contain" }}
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>
+            <View
+              style={{ flexDirection: "row", gap: 5, alignItems: "center" }}
+            >
+              <TouchableOpacity
+                style={{
+                  padding: 6,
+                  backgroundColor: "#3E3E3E",
+                  borderRadius: 6,
+                }}
+                onPress={handleFrontCrestPatterClick}
+              >
+                <Image
+                  source={iconLink?.patternFile}
+                  style={{ height: 15, width: 18, resizeMode: "contain" }}
+                />
+              </TouchableOpacity>
+              <View
+                style={{
+                  padding: 6,
+                  backgroundColor: "#3E3E3E",
+                  borderRadius: 6,
+                }}
+              >
+                <Image
+                  source={iconLink?.file}
+                  style={{ height: 18, width: 18, resizeMode: "contain" }}
+                />
+              </View>
+            </View>
+          </View>
+          <BottomSheetScrollView horizontal>
+            <View style={{ gap: 5 }}>
+              {data.rows.map((row, rowIndex) => (
+                <View key={rowIndex} style={{ flexDirection: "row", gap: 6 }}>
+                  {row.map((item, index) => (
+                    <TouchableOpacity
+                      key={item.id}
+                      style={[
+                        styles.fontHeader,
+                        item.fontFamilyName ===
+                          getFontFamilyName(tshirtData, tshirtId) &&
+                          styles.activeTemplateType,
+                      ]}
+                      onPress={() => handleFonFamilyPress(item.fontFamilyName)}
                     >
-                      {frontText}
-                    </Text>
-                  </View>
-                  <Text
-                    style={{ textAlign: "center", fontSize: 12, color: "#fff" }}
-                  >
-                    {item?.fontFamilyName}
-                  </Text>
-                </TouchableOpacity>
+                      <View style={{ flex: 1, justifyContent: "center" }}>
+                        <Text
+                          style={{
+                            textAlign: "center",
+                            fontSize: 16,
+                            color: "#fff",
+                            fontFamily: getFontFamily(item?.fontFamilyName),
+                          }}
+                        >
+                          {frontText}
+                        </Text>
+                      </View>
+                      <Text
+                        style={{
+                          textAlign: "center",
+                          fontSize: 12,
+                          color: "#fff",
+                        }}
+                      >
+                        {item?.fontFamilyName}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
               ))}
             </View>
-          ))}
+          </BottomSheetScrollView>
+          <TshirtButtonColor
+            containerStyle={{
+              marginHorizontal: 0,
+              borderRadius: 2,
+              height: 35,
+              marginVertical: 5,
+            }}
+          />
         </View>
-      </BottomSheetScrollView>
-      <TshirtButtonColor
-        containerStyle={{
-          marginHorizontal: 0,
-          borderRadius: 2,
-          height: 35,
-          marginVertical: 5,
-        }}
-      />
+      ) : (
+        <FrontCrestPatternCard
+          patterName={patterName}
+          handlePatternClick={handlePatternClick}
+          setFrontCrestPattern={setFrontCrestPattern}
+        />
+      )}
     </View>
   );
 };

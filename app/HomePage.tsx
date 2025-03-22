@@ -20,6 +20,7 @@ import {
 import { useSelector } from "react-redux";
 import TshirtFront from "@/components/Home/TshirtFront";
 import HockeyJerseyBack from "@/assets/images/svg/HockeyJerseyBack";
+import TshirtBack from "@/components/Home/TshirtBack";
 
 const HomePage = () => {
   const router = useRouter();
@@ -91,10 +92,8 @@ const HomePage = () => {
           {isFront ? (
             <TshirtFront />
           ) : (
-            <View style={{ height: 300, width: "100%", justifyContent: "center",
-                  alignItems: "center", }}>
-            <HockeyJerseyBack />
-            </View>
+            <TshirtBack />
+            // <HockeyJerseyBack />
             // <Image source={imageLink.tshirtBack} style={styles.tshirt} />
           )}
         </View>

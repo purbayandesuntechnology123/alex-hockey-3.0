@@ -14,7 +14,7 @@ import Slider from "@react-native-community/slider";
 import { themeColor } from "@/constants/colors";
 
 interface FrontCrestPatternCardProps {
-  patterName: string;
+  patterName: string | undefined;
   handlePatternClick: (value: string) => void;
   setFrontCrestPattern: (value: boolean) => void;
 }

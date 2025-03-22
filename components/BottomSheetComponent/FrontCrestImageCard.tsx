@@ -65,7 +65,7 @@ const FrontCrestImageCard: React.FC<FrontCrestImageCardProps> = ({
   const [pattern, setPattern] = useState(1.0);
 
   const patterName =
-    selectedData?.tshirtFrontOption?.frontChest?.imagePattern?.patterName;
+    selectedData?.tshirtFrontOption?.frontChest?.imagePattern?.patternName;
   //   const [isEnabled, setIsEnabled] = useState(false);
   //   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 

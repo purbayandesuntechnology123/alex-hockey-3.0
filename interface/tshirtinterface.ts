@@ -50,11 +50,16 @@ export interface tshirtDataObj {
           scale: number;
           arching: number;
         };
+        wordmarkPattern: {
+          patternName: string,
+          patternOpacity: number,
+        },
       };
     };
     sleeveNumber: {
       number: string,
       textStyle: string,
+      fontFamily: string,
     },
     sleeveStriping: string;
   };
